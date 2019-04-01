@@ -92,7 +92,6 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular") {
 
     ydf <- do.call(rbind, yy)
 
-## change color scheme
 
     ggplot(ydf, aes_(x=~position, y=~name, fill = ~character)) + geom_tile(color='grey') +
         geom_polygon(data=ydf, aes_(x=~x, y=~y, group=~factor(group)), fill='black') +
