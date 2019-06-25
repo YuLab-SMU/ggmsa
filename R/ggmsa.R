@@ -17,6 +17,8 @@
 ##' @importFrom ggplot2 geom_polygon
 ##' @importFrom ggplot2 xlab
 ##' @importFrom ggplot2 ylab
+##' @importFrom ggplot2 coord_fixed
+##' @importFrom magrittr %>%
 ##' @export
 ##' @author guangchuang yu
 ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular") {
@@ -98,11 +100,16 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular") {
     ydf <- do.call(rbind, yy)
 
 
-    ggplot(ydf, aes_(x=~position, y=~name, fill = ~color)) + geom_tile(color='grey') +
+    ggplot(ydf, aes_(x=~position, y=~name, fill = ~I(color))) + geom_tile(color='grey') +
         geom_polygon(data=ydf, aes_(x=~x, y=~y, group=~factor(group)), fill='black') +
         theme_minimal() + xlab(NULL) + ylab(NULL) +
-        theme(legend.position='none')
+        theme(legend.position='none') + coord_fixed()
 }
 
 ##' @import ggseqlogo
 logo_data <- getFromNamespace("logo_data", "ggseqlogo")
+
+
+##' @importFrom utils globalVariables
+utils::globalVariables('.')
+
