@@ -72,6 +72,10 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular") {
 
     y$ypos <- as.numeric(y$name)
 
+    ## todo: update with color scheme
+    col <- c('purple', 'orange', 'pink', 'green', 'grey', 'white', 'white')
+    names(col) <- c("A", "C", "G", "T", "U", "N", "-")
+    y$color <- col[y$character]
 
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
@@ -82,18 +86,19 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular") {
         } else {
             dd$y <- dd$y - min(dd$y) + d$ypos -.45
         }
-        dd$name = d$name
-        dd$position = d$position
+        dd$name <- d$name
+        dd$position <- d$position
         dd$group <- paste0(d$position, d$ypos)
-        dd$character = d$character
-        dd = dd[order(dd$order),]
+        dd$character <- d$character
+        dd$color <- d$color
+        dd <- dd[order(dd$order),]
         return(dd)
     })
 
     ydf <- do.call(rbind, yy)
 
 
-    ggplot(ydf, aes_(x=~position, y=~name, fill = ~character)) + geom_tile(color='grey') +
+    ggplot(ydf, aes_(x=~position, y=~name, fill = ~color)) + geom_tile(color='grey') +
         geom_polygon(data=ydf, aes_(x=~x, y=~y, group=~factor(group)), fill='black') +
         theme_minimal() + xlab(NULL) + ylab(NULL) +
         theme(legend.position='none')
