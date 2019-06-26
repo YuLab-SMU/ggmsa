@@ -15,3 +15,11 @@ color schemes
 + <http://www.jalview.org/help/html/colourSchemes/clustal.html>
 + <https://www.dnastar.com/manuals/MegAlignPro/15.2/en/topic/selecting-color-schemes>
 + ...
+
+fonts
+
++ <https://github.com/yixuan/fontr>
+
+ggtree support
+
++ re-write `ggtree::msaplot`
