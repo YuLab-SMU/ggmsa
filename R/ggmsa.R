@@ -79,11 +79,14 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
 
     ## todo: update with color scheme
     match.arg(color)
+    #data("col_scheme")
+    #data("col_df") 
+    
     #The algorithm of Clustal
     if(color == "Clustal"){
-      load("col_df.rda")
       alndf_up <- sapply(alndf, function(x) toupper(x))
       xx <- apply(alndf_up , 2, table)
+      
       col_convert <- lapply(xx, function(seq_column) {
         clustal <- rep("#ffffff", length(seq_column)) ##The white as the background
         names(clustal) <- names(seq_column)
@@ -115,9 +118,9 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
         y$color[ y[[2]] %in% k] <- col_k[y$character[ y[[2]] %in% k]] #y[[2]] == y$position
       }
     }
+    
     #The others color schemes
     else{
-      load("col_scheme.rda")
       col<- colorscheme[[color]]
       names(col) <- colorscheme[,1]  ## 20 AA
       y$color <- col[y$character]
