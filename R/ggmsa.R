@@ -78,106 +78,52 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
     y$ypos <- as.numeric(y$name)
 
     ## todo: update with color scheme
-    
-    ##color scheme1: Clustal X 
-    ##color scheme2: DNASTAR: Color by Chemistry.
-    ##color scheme3: DNASTAR: Shapely - This color scheme matches the RasMol amino acid and RasMol nucleotide color schemes.
-    ##color scheme4: DNASTAR: Zappo - This scheme colors residues according to their physico-chemical properties, and is also used in JalView.
-    ##color scheme5: DNASTAR: Taylor
-    
-    
-    if(!(color %in% c("Clustal", "Chemistry", "Shapely", "Zappo", "Taylor") )){
-      stop("The color scheme only have Clustal and Chemistry ....")
+    match.arg(color)
+    #The algorithm of Clustal
+    if(color == "Clustal"){
+      load("col_df.rda")
+      alndf_up <- sapply(alndf, function(x) toupper(x))
+      xx <- apply(alndf_up , 2, table)
+      col_convert <- lapply(xx, function(seq_column) {
+        clustal <- rep("#ffffff", length(seq_column)) ##The white as the background
+        names(clustal) <- names(seq_column)
+        r <- seq_column/sum(seq_column)
+        for (pos in seq_along(seq_column)) {
+          char <- names(seq_column)[pos]
+          i <- grep(char, col_df$re_position)
+          for (j in i) {
+            
+            if (col_df$type[j] == "combined"){
+              rr <- sum(r[strsplit(col_df$re_gp[j], '')[[1]]], na.rm=T)
+              if (rr > col_df$thred[j]) {
+                clustal[pos] <- col_df$colour[j]}
+            }
+            else{
+              rr1<-r[strsplit(col_df$re_gp[j], ',')[[1]]]
+              if (any(rr1> col_df$thred[j],na.rm = T) ) {
+                clustal[pos] <- col_df$colour[j]}
+            }
+            
+            break
+          }
+        }
+        return(clustal)
+      })
+      col_convert<- col_convert[!names(col_convert) %in% "name"]
+      for(k in seq_along(col_convert)){
+        col_k <- col_convert[[k]]
+        y$color[ y[[2]] %in% k] <- col_k[y$character[ y[[2]] %in% k]] #y[[2]] == y$position
+      }
     }
-    
-    col1 = c('#80a0f0', '#80a0f0','#80a0f0', '#80a0f0','#80a0f0', '#80a0f0','#80a0f0',
-             '#f01505', '#f01505',
-             '#c048c0', '#c048c0',
-             '#15c015', '#15c015', '#15c015','#15c015',
-             '#f08080',
-             '#f09048',
-             '#c0c000',
-             '#15a4a4','#15a4a4',
-             '#ffffff') 
-    
-    names(col1) = c("A", "I", "L", "M", "F", "W", "V",
-                    "K", "R",
-                    "E", "D",
-                    "N", "Q", "S", "T",
-                    "C",
-                    "G",
-                    "P",
-                    "H", "Y",
-                    "-")
-    
-    col2 = c("#ffff66", "#ffff66", "#ffff66",
-             "#ff6d6d", "#ff6d6d",
-             "#769dcc", "#769dcc", "#769dcc",
-             "#f2be3c", "#f2be3c", "#f2be3c", "#f2be3c", "#f2be3c", "#f2be3c", "#f2be3c",
-             "#74ce98", "#74ce98", "#74ce98", "#74ce98", "#74ce98",
-             "#ffffff")
-    names(col2) = c("F", "W","Y",
-                    "D", "E",
-                    "R", "H", "K",
-                    "A", "G", "I", "L","M", "P","V",
-                    "C", "N", "Q", "S", "T",
-                    "-")
-    
-    col3 = c("#c8c8c8",
-             "#145aff", "#145aff",
-             "#00dcdc", "#00dcdc",
-             "#e60a0a", "#e60a0a",
-             "#e6e600", "#e6e600",
-             "#ebebeb",
-             "#8282d2",
-             "#0f820f", "#0f820f", "#0f820f",
-             "#3232aa", "#3232aa",
-             "#dc9682",
-             "#fa9600", "#fa9600",
-             "#b45ab4",
-             "#ffffff")
-    names(col3)  = c("A",
-                     "R", "K",
-                     "N", "Q",
-                     "D", "E",
-                     "C", "M",
-                     "G",
-                     "H",
-                     "I", "L", "V",
-                     "F", "Y",
-                     "P",
-                     "S", "T",
-                     "W",
-                     "-")
-    
-    col4 = c("#ff7979", "#ff7979", "#ff7979", "#ff7979", "#ff7979",
-             "#f89f56", "#f89f56", "#f89f56",
-             "#cc00cc", "#cc00cc",
-             "#ffff00",
-             "#08c81a", "#08c81a", "#08c81a", "#08c81a",
-             "#c00000", "#c00000",
-             "#0070c0", "#0070c0", "#0070c0",
-             "#ffffff")
-    names(col4) = c("A", "I", "L", "M", "V",
-                    "F", "W", "Y",
-                    "G", "P",
-                    "C",
-                    "N", "Q", "S", "T",
-                    "D", "E",
-                    "R", "H", "K",
-                    "-")
-    
-    col5 = c("#ccff00", "#0000ff", "#cc00ff", "#ff0000", "#ffff00", "#ff0066", "#ff00cc", "#ff9900", "#0066ff", "#66ff00", 
-             "#66ff00", "#6600ff", "#00ff00", "#00ff66", "#ffcc00", "#ff3300", "#ff6600", "#00ccff", "#00ffcc", "#99ff00",
-             "#ffffff")
-    names(col5) = c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", 
-                    "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V",
-                    "-")
-    
-    color_scheme <- list( Clustal = col1, Chemistry = col2, Shapely = col3, Zappo = col4,Taylor = col5 )
-    col<- color_scheme[[color]]
-    y$color <- col[y$character]
-
+    #The others color schemes
+    else{
+      load("col_scheme.rda")
+      col<- colorscheme[[color]]
+      names(col) <- colorscheme[,1]  ## 20 AA
+      y$color <- col[y$character]
+    }
+ 
+       
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
         dd <- data_sp[[d$character]]
