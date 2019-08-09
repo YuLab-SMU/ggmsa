@@ -20,6 +20,7 @@
 ##' @importFrom ggplot2 ylab
 ##' @importFrom ggplot2 coord_fixed
 ##' @importFrom magrittr %>%
+##' @importFrom usethis use_data 
 ##' @export
 ##' @author guangchuang yu
 
@@ -79,7 +80,7 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
 
     ## todo: update with color scheme
     match.arg(color)
-    devtools::use_data("col_scheme.rda","col_df.rda", internal = TRUE)
+    usethis::use_data(internal = T)
     
     
     #The algorithm of Clustal
