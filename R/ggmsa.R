@@ -79,8 +79,8 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
 
     ## todo: update with color scheme
     match.arg(color)
-    #data("col_scheme")
-    #data("col_df") 
+    devtools::use_data("col_scheme.rda","col_df.rda", internal = TRUE)
+    
     
     #The algorithm of Clustal
     if(color == "Clustal"){
