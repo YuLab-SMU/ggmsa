@@ -6,7 +6,7 @@
 ##' @param start start position to plot
 ##' @param end end position to plot
 ##' @param font character font
-##' @param color color scheme. Must be one of "Clustal", "Chemistry", "Shapely", "Zappo" or "Taylor"
+##' @param color 5 amino acid color schemes, 4 nucleic acid color schemes. Note: Culstal is an amino acid color scheme
 ##' @return ggplot object
 ##' @importFrom tidyr gather
 ##' @importFrom treeio read.fasta
@@ -20,12 +20,11 @@
 ##' @importFrom ggplot2 ylab
 ##' @importFrom ggplot2 coord_fixed
 ##' @importFrom magrittr %>%
-##' @importFrom usethis use_data 
 ##' @export
 ##' @author guangchuang yu
 
-
-ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = c("Clustal", "Chemistry", "Shapely", "Zappo", "Taylor" )) {
+ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
+                                                                                     "Chemistry_Nucle","Shapely_Nucle","Zappo_Nucle","Taylor_Nucle" )) {
     aln <- read.fasta(fasta)
     alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
     alndf <- as.data.frame(alnmat)
@@ -80,51 +79,22 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
 
     ## todo: update with color scheme
     match.arg(color)
-    usethis::use_data(internal = T)
     
     
-    #The algorithm of Clustal
-    if(color == "Clustal"){
-      alndf_up <- sapply(alndf, function(x) toupper(x))
-      xx <- apply(alndf_up , 2, table)
-      
-      col_convert <- lapply(xx, function(seq_column) {
-        clustal <- rep("#ffffff", length(seq_column)) ##The white as the background
-        names(clustal) <- names(seq_column)
-        r <- seq_column/sum(seq_column)
-        for (pos in seq_along(seq_column)) {
-          char <- names(seq_column)[pos]
-          i <- grep(char, col_df$re_position)
-          for (j in i) {
-            
-            if (col_df$type[j] == "combined"){
-              rr <- sum(r[strsplit(col_df$re_gp[j], '')[[1]]], na.rm=T)
-              if (rr > col_df$thred[j]) {
-                clustal[pos] <- col_df$colour[j]}
-            }
-            else{
-              rr1<-r[strsplit(col_df$re_gp[j], ',')[[1]]]
-              if (any(rr1> col_df$thred[j],na.rm = T) ) {
-                clustal[pos] <- col_df$colour[j]}
-            }
-            
-            break
-          }
-        }
-        return(clustal)
-      })
-      col_convert<- col_convert[!names(col_convert) %in% "name"]
-      for(k in seq_along(col_convert)){
-        col_k <- col_convert[[k]]
-        y$color[ y[[2]] %in% k] <- col_k[y$character[ y[[2]] %in% k]] #y[[2]] == y$position
+    if (color == "Clustal"){
+      col_convert <- Clustal(color, alndf) #Get the corresponding color scheme.
+    
+      for(k in seq_along(col_convert)){ #Each column in a multiple sequence is represented by 'K'
+        col_k <- col_convert[[k]] #The AA color scheme of each column is stored in 'col_k'
+        
+        ##Assign the color scheme in col_k to the corresponding position in y$color
+        y$color[ y[[2]] %in% k] <- col_k[y$character[ y[[2]] %in% k]]  #y[[2]] == y$position 
+        
       }
     }
-    
-    #The others color schemes
     else{
-      col<- colorscheme[[color]]
-      names(col) <- colorscheme[,1]  ## 20 AA
-      y$color <- col[y$character]
+       col <- color_scheme_else(color) #Get the corresponding color scheme.
+       y$color <- col[y$character]
     }
  
        
@@ -161,3 +131,6 @@ logo_data <- getFromNamespace("logo_data", "ggseqlogo")
 
 ##' @importFrom utils globalVariables
 utils::globalVariables('.')
+
+
+
