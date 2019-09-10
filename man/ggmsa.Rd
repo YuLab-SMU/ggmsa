@@ -4,7 +4,10 @@
 \alias{ggmsa}
 \title{ggmsa}
 \usage{
-ggmsa(fasta, start = NULL, end = NULL, font = "helvetica_regular")
+ggmsa(fasta, start = NULL, end = NULL, font = "helvetica_regular",
+  color = c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA",
+  "Taylor_AA", "Chemistry_Nucle", "Shapely_Nucle", "Zappo_Nucle",
+  "Taylor_Nucle"))
 }
 \arguments{
 \item{fasta}{aligned fasta file}
@@ -14,6 +17,8 @@ ggmsa(fasta, start = NULL, end = NULL, font = "helvetica_regular")
 \item{end}{end position to plot}
 
 \item{font}{character font}
+
+\item{color}{5 amino acid color schemes, 4 nucleic acid color schemes. Note: Culstal is an amino acid color scheme}
 }
 \value{
 ggplot object
