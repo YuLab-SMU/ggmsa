@@ -23,18 +23,21 @@
 ##' @export
 ##' @author guangchuang yu
 
-ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
-                                                                                     "Chemistry_Nucle","Shapely_Nucle","Zappo_Nucle","Taylor_Nucle" )) {
+ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular",
+                  color = c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
+                            "Chemistry_Nucle","Shapely_Nucle","Zappo_Nucle","Taylor_Nucle" )) {
+    color <- match.arg(color)
+
     aln <- read.fasta(fasta)
     alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
     alndf <- as.data.frame(alnmat)
-
+    
     alndf$name = names(aln)
-
+    
     cn = colnames(alndf)
     cn <- cn[!cn %in% "name"]
     df <- gather(alndf, "position", "character", cn)
-
+    
     y <- df
     y$position = as.numeric(sub("V", "", y$position))
     y$character = toupper(y$character)
@@ -53,7 +56,8 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
 
     ## ggseqlogo::list_fonts()
 
-    data_sp = lapply(chars, function(n){
+    data_sp = lapply(seq_along(chars), function(i){
+        n = chars[i]
         if (n == '-') {
             d <- data.frame(x = c(0.05, 0.95, 0.95, 0.05),
                             y = c(0.05, 0.05, 0.2, 0.2),
@@ -72,29 +76,15 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color
         d$y <- d$y * .9/diff(range(d$y))
         return(d)
     })
-
     names(data_sp) = chars
 
     y$ypos <- as.numeric(y$name)
 
-    ## todo: update with color scheme
-    match.arg(color)
-    
-    
+       
     if (color == "Clustal"){
-      col_convert <- Clustal(color, alndf) #Get the corresponding color scheme.
-    
-      for(k in seq_along(col_convert)){ #Each column in a multiple sequence is represented by 'K'
-        col_k <- col_convert[[k]] #The AA color scheme of each column is stored in 'col_k'
-        
-        ##Assign the color scheme in col_k to the corresponding position in y$color
-        y$color[ y[[2]] %in% k] <- col_k[y$character[ y[[2]] %in% k]]  #y[[2]] == y$position 
-        
-      }
-    }
-    else{
-       col <- color_scheme_else(color) #Get the corresponding color scheme.
-       y$color <- col[y$character]
+        y <- color_Clustal(y)
+    } else {
+        y <- color_scheme(y, color)
     }
  
        
