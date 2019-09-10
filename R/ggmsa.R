@@ -6,6 +6,7 @@
 ##' @param start start position to plot
 ##' @param end end position to plot
 ##' @param font character font
+##' @param color 5 amino acid color schemes, 4 nucleic acid color schemes. Note: Culstal is an amino acid color scheme
 ##' @return ggplot object
 ##' @importFrom tidyr gather
 ##' @importFrom treeio read.fasta
@@ -21,7 +22,9 @@
 ##' @importFrom magrittr %>%
 ##' @export
 ##' @author guangchuang yu
-ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular") {
+
+ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
+                                                                                     "Chemistry_Nucle","Shapely_Nucle","Zappo_Nucle","Taylor_Nucle" )) {
     aln <- read.fasta(fasta)
     alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
     alndf <- as.data.frame(alnmat)
@@ -75,10 +78,26 @@ ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular") {
     y$ypos <- as.numeric(y$name)
 
     ## todo: update with color scheme
-    col <- c('purple', 'orange', 'pink', 'green', 'grey', 'white', 'white')
-    names(col) <- c("A", "C", "G", "T", "U", "N", "-")
-    y$color <- col[y$character]
-
+    match.arg(color)
+    
+    
+    if (color == "Clustal"){
+      col_convert <- Clustal(color, alndf) #Get the corresponding color scheme.
+    
+      for(k in seq_along(col_convert)){ #Each column in a multiple sequence is represented by 'K'
+        col_k <- col_convert[[k]] #The AA color scheme of each column is stored in 'col_k'
+        
+        ##Assign the color scheme in col_k to the corresponding position in y$color
+        y$color[ y[[2]] %in% k] <- col_k[y$character[ y[[2]] %in% k]]  #y[[2]] == y$position 
+        
+      }
+    }
+    else{
+       col <- color_scheme_else(color) #Get the corresponding color scheme.
+       y$color <- col[y$character]
+    }
+ 
+       
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
         dd <- data_sp[[d$character]]
@@ -112,4 +131,6 @@ logo_data <- getFromNamespace("logo_data", "ggseqlogo")
 
 ##' @importFrom utils globalVariables
 utils::globalVariables('.')
+
+
 
