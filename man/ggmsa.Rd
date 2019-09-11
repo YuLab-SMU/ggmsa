@@ -5,9 +5,7 @@
 \title{ggmsa}
 \usage{
 ggmsa(fasta, start = NULL, end = NULL, font = "helvetica_regular",
-  color = c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA",
-  "Taylor_AA", "Chemistry_Nucle", "Shapely_Nucle", "Zappo_Nucle",
-  "Taylor_Nucle"))
+  color = "Clustal")
 }
 \arguments{
 \item{fasta}{aligned fasta file}

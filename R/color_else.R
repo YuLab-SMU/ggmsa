@@ -6,12 +6,12 @@
 
 color_scheme_ <- function(color){
   if(grepl("AA", color)){
-    col<- color_scheme_AA[[color]]
-    names(col) <- color_scheme_AA[,1]  ##  The name of aminio acid.
+    col<- scheme_AA[[color]]
+    names(col) <- scheme_AA[,1]  ##  The name of aminio acid.
   }
   else{
-    col <- color_scheme_nucle[[color]]
-    names(col) <- color_scheme_nucle[,1] ## The name of bases.
+    col <- scheme_NT[[color]]
+    names(col) <- scheme_NT[,1] ## The name of bases.
   }
   return(col)
 }

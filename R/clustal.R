@@ -13,16 +13,16 @@ color_Clustal<- function(y) {
         r <- seq_column/sum(seq_column)
         for (pos in seq_along(seq_column)) {
             char <- names(seq_column)[pos]
-            i <- grep(char, col_df$re_position)
+            i <- grep(char, scheme_clustal$re_position)
             for (j in i) {
-                if (col_df$type[j] == "combined"){
-                    rr <- sum(r[strsplit(col_df$re_gp[j], '')[[1]]], na.rm=T)
-                    if (rr > col_df$thred[j]) {
-                        clustal[pos] <- col_df$colour[j]}
+                if (scheme_clustal$type[j] == "combined"){
+                    rr <- sum(r[strsplit(scheme_clustal$re_gp[j], '')[[1]]], na.rm=T)
+                    if (rr > scheme_clustal$thred[j]) {
+                        clustal[pos] <- scheme_clustal$colour[j]}
                     } else{
-                        rr1<-r[strsplit(col_df$re_gp[j], ',')[[1]]]
-                        if (any(rr1> col_df$thred[j],na.rm = T) ) {
-                            clustal[pos] <- col_df$colour[j]}
+                        rr1<-r[strsplit(scheme_clustal$re_gp[j], ',')[[1]]]
+                        if (any(rr1> scheme_clustal$thred[j],na.rm = T) ) {
+                            clustal[pos] <- scheme_clustal$colour[j]}
                     }
                 break
             }
