@@ -1,9 +1,7 @@
-#' The color scheme of Culstal
-#'
-#' This function is a algorithm to assign color for Multiple Sequence .
-#' @param color a data frame created manually for Clutal color assignment.
-#' @param alndf data frame of alignment 
-#' @keywords culstal
+##'  A color scheme of Culstal.This function is a algorithm to assign colors for Multiple Sequence.
+##'
+##' @param y A data frame, data of a tidy fasta,created by 'tidy_fasta()'.
+##' @keywords clustal
 
 color_Clustal<- function(y) {
     char_freq <- lapply(split(y, y$position), function(x) table(x$character))
