@@ -1,4 +1,19 @@
-
+##' The fasta is organized into a tidy data set by tidy_data().
+##'Each molecule(amino acid or nucleotide) will be  draw as sequence logo and assigned color according to color schemes. The information about sequence logos and colors is stored in a data frame. 
+##'
+##' @title Get the data of sequence logos and colors from MSA.
+##' @param fasta Aligned fasta file.
+##' @param start Start position to plot,Defaults = NULL.
+##' @param end End position to plot, Defaults = NULL.
+##' @param font Character font, Defaults is 'helvetica_regular'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
+##' @return A data frame
+##' @examples 
+##' data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Clustal' )
+##' data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Chemistry_AA' )
+##' data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Chemistry_NT' )
+##' @export
+##' @author guangchuang yu
 msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = "Clustal") {
     color <- match.arg(color, c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
                                 "Chemistry_NT","Shapely_NT","Zappo_NT","Taylor_NT" ))
