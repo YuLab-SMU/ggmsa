@@ -1,12 +1,12 @@
-##' plot multiple sequence alignment using ggplot2
+##' Plot multiple sequence alignment using ggplot2
 ##'
 ##'
 ##' @title ggmsa
-##' @param fasta aligned fasta file
-##' @param start start position to plot
-##' @param end end position to plot
-##' @param font character font
-##' @param color 5 amino acid color schemes, 4 nucleic acid color schemes. Note: Culstal is an amino acid color scheme
+##' @param fasta Aligned FASTA format file for representing either nucleotide sequences or peptide sequences.
+##' @param start Start position to plot, If font=NULL, only the background frame is drawn, and no character.
+##' @param end End position to plot,If font=NULL, only the background frame is drawn, and no character.
+##' @param font Character font, Defaults is 'helvetica_regular'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
 ##' @return ggplot object
 ##' @importFrom tidyr gather
 ##' @importFrom treeio read.fasta
@@ -20,6 +20,10 @@
 ##' @importFrom ggplot2 ylab
 ##' @importFrom ggplot2 coord_fixed
 ##' @importFrom magrittr %>%
+##' @examples 
+##' #plot multiple sequence alignment
+##' f <- system.file("extdata/sample.fasta", package="ggmsa")
+##' ggmsa(f, 164, 213, color="Chemistry_AA")
 ##' @export
 ##' @author guangchuang yu
 ggmsa <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = "Clustal") {
