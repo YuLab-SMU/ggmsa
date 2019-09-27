@@ -2,15 +2,17 @@
 % Please edit documentation in R/color_else.R
 \name{color_scheme_}
 \alias{color_scheme_}
-\title{The color scheme of Culstal}
+\title{A color scheme.This function assigns colors for Multiple Sequence .}
 \usage{
 color_scheme_(color)
 }
 \arguments{
-\item{color}{a data frame created manually for color assignment.}
+\item{color}{A data frame created manually for color assignment.}
+
+\item{y}{A data frame, data of a tidy fasta, created by 'tidy_fasta()'.}
 }
 \description{
-This function is a algorithm to assign color for Multiple Sequence .
+A color scheme.This function assigns colors for Multiple Sequence .
 }
 \keyword{color}
 \keyword{scheme}
