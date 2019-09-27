@@ -8,21 +8,26 @@ ggmsa(fasta, start = NULL, end = NULL, font = "helvetica_regular",
   color = "Clustal")
 }
 \arguments{
-\item{fasta}{aligned fasta file}
+\item{fasta}{Aligned FASTA format file for representing either nucleotide sequences or peptide sequences.}
 
-\item{start}{start position to plot}
+\item{start}{Start position to plot, If font=NULL, only the background frame is drawn, and no character.}
 
-\item{end}{end position to plot}
+\item{end}{End position to plot,If font=NULL, only the background frame is drawn, and no character.}
 
-\item{font}{character font}
+\item{font}{Character font, Defaults is 'helvetica_regular'.}
 
-\item{color}{5 amino acid color schemes, 4 nucleic acid color schemes. Note: Culstal is an amino acid color scheme}
+\item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
 }
 \value{
 ggplot object
 }
 \description{
-plot multiple sequence alignment using ggplot2
+Plot multiple sequence alignment using ggplot2
+}
+\examples{
+#plot multiple sequence alignment
+f <- system.file("extdata/sample.fasta", package="ggmsa")
+ggmsa(f, 164, 213, color="Chemistry_AA")
 }
 \author{
 guangchuang yu
