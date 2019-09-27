@@ -1,8 +1,8 @@
-#' The color scheme of Culstal
-#'
-#' This function is a algorithm to assign color for Multiple Sequence .
-#' @param color a data frame created manually for color assignment.
-#' @keywords color scheme
+##' A color scheme.This function assigns colors for Multiple Sequence .
+##' 
+##' @param color A data frame created manually for color assignment.
+##' @param y  A data frame, data of a tidy fasta, created by 'tidy_fasta()'.
+##' @keywords color scheme
 
 color_scheme_ <- function(color){
   if(grepl("AA", color)){
