@@ -2,16 +2,14 @@
 % Please edit documentation in R/clustal.R
 \name{color_Clustal}
 \alias{color_Clustal}
-\title{The color scheme of Culstal}
+\title{A color scheme of Culstal.This function is a algorithm to assign colors for Multiple Sequence.}
 \usage{
 color_Clustal(y)
 }
 \arguments{
-\item{color}{a data frame created manually for Clutal color assignment.}
-
-\item{alndf}{data frame of alignment}
+\item{y}{A data frame, data of a tidy fasta,created by 'tidy_fasta()'.}
 }
 \description{
-This function is a algorithm to assign color for Multiple Sequence .
+A color scheme of Culstal.This function is a algorithm to assign colors for Multiple Sequence.
 }
-\keyword{culstal}
+\keyword{clustal}
