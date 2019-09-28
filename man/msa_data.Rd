@@ -26,9 +26,8 @@ The fasta is organized into a tidy data set by tidy_data().
 Each molecule(amino acid or nucleotide) will be  draw as sequence logo and assigned color according to color schemes. The information about sequence logos and colors is stored in a data frame.
 }
 \examples{
-data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Clustal' )
+fasta <- system.file("extdata/sample.fasta", package="ggmsa")
 data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Chemistry_AA' )
-data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Chemistry_NT' )
 }
 \author{
 guangchuang yu

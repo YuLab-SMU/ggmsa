@@ -1,9 +1,4 @@
-##' A color scheme.This function assigns colors for Multiple Sequence .
-##' 
-##' @param color A data frame created manually for color assignment.
-##' @param y  A data frame, data of a tidy fasta, created by 'tidy_fasta()'.
-##' @keywords color scheme
-
+## @param color A data frame created manually for color assignment.
 color_scheme_ <- function(color){
   if(grepl("AA", color)){
     col<- scheme_AA[[color]]

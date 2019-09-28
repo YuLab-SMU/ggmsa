@@ -8,10 +8,9 @@
 ##' @param font Character font, Defaults is 'helvetica_regular'.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
 ##' @return A data frame
-##' @examples 
-##' data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Clustal' )
+##' @examples
+##' fasta <- system.file("extdata/sample.fasta", package="ggmsa")
 ##' data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Chemistry_AA' )
-##' data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Chemistry_NT' )
 ##' @export
 ##' @author guangchuang yu
 msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = "Clustal") {
