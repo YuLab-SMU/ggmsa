@@ -2,7 +2,7 @@
 % Please edit documentation in R/msa_data.R
 \name{msa_data}
 \alias{msa_data}
-\title{Get the data of sequence logos and colors from MSA.}
+\title{msa_data}
 \usage{
 msa_data(fasta, start = NULL, end = NULL, font = "helvetica_regular",
   color = "Clustal")
@@ -22,8 +22,8 @@ msa_data(fasta, start = NULL, end = NULL, font = "helvetica_regular",
 A data frame
 }
 \description{
-The fasta is organized into a tidy data set by tidy_data().
-Each molecule(amino acid or nucleotide) will be  draw as sequence logo and assigned color according to color schemes. The information about sequence logos and colors is stored in a data frame.
+This function parses FASTA file and convert it to a tidy data frame. 
+The function will also assign color to each molecule (amino acid or nucleotide) according to the selected color scheme. Sequence logo data for drawing alignment label will also be added if font != NULL. The output of msa_data() is the input of geom_msa().
 }
 \examples{
 fasta <- system.file("extdata/sample.fasta", package="ggmsa")

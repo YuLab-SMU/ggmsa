@@ -15,7 +15,7 @@ geom_msa(data, ...)
 A list
 }
 \description{
-Creat background frames and sequence labels as layers on ggplot.
+Multiple sequence alignment layer for ggplot2. It creats background frames with/without sequence labels.
 }
 \author{
 guangchuang yu

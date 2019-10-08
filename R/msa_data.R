@@ -1,7 +1,7 @@
-##' The fasta is organized into a tidy data set by tidy_data().
-##'Each molecule(amino acid or nucleotide) will be  draw as sequence logo and assigned color according to color schemes. The information about sequence logos and colors is stored in a data frame. 
+##' This function parses FASTA file and convert it to a tidy data frame. 
+##' The function will also assign color to each molecule (amino acid or nucleotide) according to the selected color scheme. Sequence logo data for drawing alignment label will also be added if font != NULL. The output of msa_data() is the input of geom_msa().
 ##'
-##' @title Get the data of sequence logos and colors from MSA.
+##' @title msa_data
 ##' @param fasta Aligned fasta file.
 ##' @param start Start position to plot,Defaults = NULL.
 ##' @param end End position to plot, Defaults = NULL.

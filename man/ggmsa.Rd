@@ -22,7 +22,7 @@ ggmsa(fasta, start = NULL, end = NULL, font = "helvetica_regular",
 ggplot object
 }
 \description{
-Plot multiple sequence alignment using ggplot2
+Plot multiple sequence alignment using ggplot2 with multiple color schemes supported.
 }
 \examples{
 #plot multiple sequence alignment

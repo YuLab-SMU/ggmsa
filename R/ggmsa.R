@@ -1,4 +1,4 @@
-##' Plot multiple sequence alignment using ggplot2
+##' Plot multiple sequence alignment using ggplot2 with multiple color schemes supported. 
 ##'
 ##'
 ##' @title ggmsa
