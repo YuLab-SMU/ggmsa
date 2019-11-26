@@ -44,7 +44,8 @@ msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", co
         }
         dd$name <- d$name
         dd$position <- d$position
-        dd$group <- paste0(d$position, d$ypos)
+        dd$group <- paste0("V", d$position, "L", d$ypos)
+        #dd$group <- paste0(d$position, d$ypos)
         dd$character <- d$character
         dd$color <- d$color
         dd <- dd[order(dd$order),]
