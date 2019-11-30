@@ -43,9 +43,9 @@ To do
 Supports visualizing multiple sequence alignment of DNA and protein sequences using ggpolt2 It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo. Multiple sequence alignment can easily be combined with other 'ggplot2' plots, such as aligning a phylogenetic tree produced by 'ggtree' with multiple sequence alignment.
 
 #Installation
-This R package (`r CRANpkg("ggmsa")`, current version: 0.0.1) is avalable via CRAN. The way to install the package is the following:
+This R package (`r CRANpkg("ggmsa")`, current version: `r packageVersion('ggmsa')`) is avalable via CRAN. The way to install the package is the following:
 
-```{r }
+```{r eval=FALSE}
 ## installing the package
 install.packages("ggmsa")
 ## ## loading the package
@@ -120,11 +120,11 @@ p + geom_facet(geom = ggmsa:::geom_msa, data = data,  panel = 'msa') + xlim_tree
 Cross-link with `r CRANpkg("ggseqlogo")`[@Wagih2017ggseqlogo] package. Bits of sequence letters can be indicated in the sequence logo. 
 ```{r fig.height=7, fig.width=10, message=FALSE, warning=FALSE}
 #nt <- system.file("extdata//LeaderRepeat_All.fa", package = "ggmsa")
-fasta_input <- read.table("/home/zhoulang/github/YuLab_SMU/ggmsa/inst/extdata/LeaderRepeat_All.fa", header = F, row.names = NULL)
+fasta_input <- read.table(system.file("extdata/LeaderRepeat_All.fa", package = "ggmsa"), header = F, row.names = NULL)
 #fasta_input <- read.table(nt, header = F, row.names = NULL)
 fasta_input <- as.vector(fasta_input$V1)
 fasta_tidy <- fasta_input[!grepl('>', fasta_input)]
-p1 <- ggmsa("/home/zhoulang/github/YuLab_SMU/ggmsa/inst/extdata/LeaderRepeat_All.fa", font = NULL, color = 'Chemistry_NT')
+p1 <- ggmsa(system.file("extdata/LeaderRepeat_All.fa", package = "ggmsa"), font = NULL, color = 'Chemistry_NT')
 #p1 <- ggmsa(nt, font = NULL, color = 'Chemistry_NT')
 library(ggseqlogo)
 p2 <- ggplot() + geom_logo(fasta_tidy) + ggplot2::coord_fixed(2.5) 
