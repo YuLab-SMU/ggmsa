@@ -61,7 +61,7 @@ msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", co
 
 
 tidy_fasta <- function(fasta, start, end) {
-    aln <- read.fasta(fasta)
+    aln <- read_fasta(fasta)
     alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
     alndf <- as.data.frame(alnmat)
     
