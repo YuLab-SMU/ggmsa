@@ -11,30 +11,43 @@ prepare_fasta <- function(fasta) {
     if (missingArg(fasta)) {
         stop("no input...")
     } else if (is(fasta, "character")) {
-        return(treeio::read.fasta(fasta))
-    } else if (is(fasta, "DNAbin") || is(fasta, "AAbin")) {
-        return(fasta)
+        type <- guess_sequence_type(readLines(fasta, n=2)[2])
+        res <- seqmagick::fa_read(fasta, type)
     } else if (!class(fasta) %in% supported_msa_class) {
         stop("multiple sequence alignment object no supported...")
-    } 
-
-    if (is(fasta, "DNAStringSet")) {
-        class <- "DNAbin"
-    } else if (is(fasta, "AAStringSet")) {
-        class <- "AAbin"
     }
 
-    structure(lapply(fasta, .BStringSet2bin, class = class),
-              class = class)
+    res <- switch(class(fasta),
+                  DNAbin = DNAbin2DNAStringSet(fasta),
+                  AAbin = AAbin2AAStringSet(fasta),
+                  DNAMultipleAlignment = DNAStringSet(fasta),
+                  RNAMultipleAlignment = RNAStringSet(fasta),
+                  ANAMultipleAlignment = AAStringSet(fasta)
+                  )
+    return(res)
+}
+        
 
-    ## to do, BStringSet, DNAMultipleAlignment, AAMultipleAlignment
+DNAbin2DNAstringSet <- function(fasta) {
+    seqs <- vapply(seq_along(fasta),
+                   function(i) paste0(as.character(fasta[[i]]), collapse=''),
+                   character(1))
+    names(seqs) <- names(fasta)
+
+     switch(class(fasta),
+            DNAbin = DNAStringSet(seqs),
+            AAbin = AAStringSet(seqs))
 }
 
-
-supported_msa_msa_class <- c("DNAStringSet",  "AAStringSet", "BStringSet", "DNAbin", "AAbin")
-
+AABin2DNAStringSet <- DNAbin2DNAStringSet
 
 
-##' @import treeio
-.BStringSet2bin <- getFromNamespace(".BStringSet2bin", "treeio")
+supported_msa_msa_class <- c("DNAStringSet",  "AAStringSet", "BStringSet",
+                             "DNAMultipleAlignment", "RNAMultipleAlignment", "AAMultipleAlignment",
+                             "DNAbin", "AAbin")
+
+
+
+##' @import seqmagick
+guess_sequence_type <- getFromNamespace("guess_sequence_type", "seqmagick")
 

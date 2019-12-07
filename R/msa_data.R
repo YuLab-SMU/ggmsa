@@ -62,7 +62,11 @@ msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", co
 
 tidy_fasta <- function(fasta, start, end) {
     aln <- prepare_fasta(fasta)
-    alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
+    alnmat <- lapply(seq_along(aln), function(i) {
+        base::strsplit(as.character(aln[[i]]), '')[[1]]
+    }) %>% do.call('rbind', .)
+    ## for DNAbin and AAbin
+    ## alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
     alndf <- as.data.frame(alnmat)
     
     alndf$name = names(aln)

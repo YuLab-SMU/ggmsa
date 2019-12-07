@@ -4,8 +4,13 @@
 \alias{ggmsa}
 \title{ggmsa}
 \usage{
-ggmsa(fasta, start = NULL, end = NULL, font = "helvetica_regular",
-  color = "Clustal")
+ggmsa(
+  fasta,
+  start = NULL,
+  end = NULL,
+  font = "helvetica_regular",
+  color = "Clustal"
+)
 }
 \arguments{
 \item{fasta}{Aligned FASTA format file for representing either nucleotide sequences or peptide sequences.}

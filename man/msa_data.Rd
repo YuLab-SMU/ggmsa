@@ -4,8 +4,13 @@
 \alias{msa_data}
 \title{msa_data}
 \usage{
-msa_data(fasta, start = NULL, end = NULL, font = "helvetica_regular",
-  color = "Clustal")
+msa_data(
+  fasta,
+  start = NULL,
+  end = NULL,
+  font = "helvetica_regular",
+  color = "Clustal"
+)
 }
 \arguments{
 \item{fasta}{Aligned fasta file.}
