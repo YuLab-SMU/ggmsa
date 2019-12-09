@@ -1,43 +1,43 @@
-##' read sequences
+##' preparing multiple sequence alignment
 ##'
 ##' This function supports both NT or AA sequences; It supports multiple input formats such as "DNAStringSet", "BStringSet", "AAStringSet", DNAbin", "AAbin" and a filepath.
-##' @title read_fasta
-##' @param fasta an XstringSet object frome Biostrings or a filepath
-##' @return DNAbin or AAbin object
+##' @title prepare_msa
+##' @param msa a multiple sequence alignment file or object
+##' @return BStringSet based object
 ##' @importFrom Biostrings DNAStringSet
 ##' @importFrom Biostrings RNAStringSet
 ##' @importFrom Biostrings AAStringSet
 ## @export
 ##' @author Lang Zhou
 ##' @noRd
-prepare_fasta <- function(fasta) {
-    if (methods::missingArg(fasta)) {
+prepare_msa <- function(msa) {
+    if (methods::missingArg(msa)) {
         stop("no input...")
-    } else if (methods::is(fasta, "character")) {
-        fasta <- seqmagick::fa_read(fasta)
-    } else if (!class(fasta) %in% supported_msa_class) {
+    } else if (methods::is(msa, "character")) {
+        msa <- seqmagick::fa_read(msa)
+    } else if (!class(msa) %in% supported_msa_class) {
         stop("multiple sequence alignment object no supported...")
     }
 
-    res <- switch(class(fasta),
-                  DNAbin = DNAbin2DNAStringSet(fasta),
-                  AAbin = AAbin2AAStringSet(fasta),
-                  DNAMultipleAlignment = DNAStringSet(fasta),
-                  RNAMultipleAlignment = RNAStringSet(fasta),
-                  ANAMultipleAlignment = AAStringSet(fasta),
-                  fasta ## DNAstringSet, RNAStringSet, AAString, BStringSet
+    res <- switch(class(msa),
+                  DNAbin = DNAbin2DNAStringSet(msa),
+                  AAbin = AAbin2AAStringSet(msa),
+                  DNAMultipleAlignment = DNAStringSet(msa),
+                  RNAMultipleAlignment = RNAStringSet(msa),
+                  ANAMultipleAlignment = AAStringSet(msa),
+                  msa ## DNAstringSet, RNAStringSet, AAString, BStringSet
                   )
     return(res)
 }
         
 
-DNAbin2DNAStringSet <- function(fasta) {
-    seqs <- vapply(seq_along(fasta),
-                   function(i) paste0(as.character(fasta[[i]]), collapse=''),
+DNAbin2DNAStringSet <- function(msa) {
+    seqs <- vapply(seq_along(msa),
+                   function(i) paste0(as.character(msa[[i]]), collapse=''),
                    character(1))
-    names(seqs) <- names(fasta)
+    names(seqs) <- names(msa)
 
-    switch(class(fasta),
+    switch(class(msa),
            DNAbin = DNAStringSet(seqs),
            AAbin = AAStringSet(seqs))
 }

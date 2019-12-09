@@ -2,7 +2,7 @@
 
 export(geom_msa)
 export(ggmsa)
-export(msa_data)
+export(tidy_msa)
 import(ggseqlogo)
 importFrom(Biostrings,AAStringSet)
 importFrom(Biostrings,DNAStringSet)

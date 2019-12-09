@@ -5,7 +5,7 @@
 \title{ggmsa}
 \usage{
 ggmsa(
-  fasta,
+  msa,
   start = NULL,
   end = NULL,
   font = "helvetica_regular",
@@ -13,7 +13,8 @@ ggmsa(
 )
 }
 \arguments{
-\item{fasta}{Aligned FASTA format file for representing either nucleotide sequences or peptide sequences.}
+\item{msa}{Multiple aligned sequence file or object for
+representing either nucleotide sequences or peptide sequences.}
 
 \item{start}{Start position to plot, If font=NULL, only the background frame is drawn, and no character.}
 

@@ -3,22 +3,21 @@
 ##'
 ##' @title msa_data
 ##' @param fasta Aligned fasta file.
-##' @param start Start position to plot,Defaults = NULL.
-##' @param end End position to plot, Defaults = NULL.
 ##' @param font Character font, Defaults is 'helvetica_regular'.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
 ##' @return A data frame
 ##' @examples
 ##' fasta <- system.file("extdata/sample.fasta", package="ggmsa")
 ##' data <- msa_data(fasta, 20, 120, font = 'helvetica_regular', color = 'Chemistry_AA' )
-##' @export
-##' @author guangchuang yu
-msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", color = "Clustal") {
+## @export
+##' @noRd
+##' @author Guangchuang Yu
+msa_data <- function(tidymsa, font = "helvetica_regular", color = "Clustal") {
     color <- match.arg(color, c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
                                 "Chemistry_NT","Shapely_NT","Zappo_NT","Taylor_NT" ))
 
-    y <- tidy_fasta(fasta, start, end)
-       
+    y <- tidymsa
+
     if (color == "Clustal"){
         y <- color_Clustal(y)
     } else {
@@ -30,7 +29,17 @@ msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", co
     }
 
     data_sp <- get_logo_data(unique(y$character), font)
-    
+
+    if (!'name' %in% names(y)) {
+        if ('label' %in% names(y)) {
+            ## y <- dplyr::rename(y, name = label)
+            names(y)[names(y) == 'label'] <- "name"
+        } else {
+            stop("unknown sequence name...")
+        }
+    }
+
+    y$name <- factor(y$name, levels = unique(y$name))
     y$ypos <- as.numeric(y$name)
 
     yy <- lapply(1:nrow(y), function(i) {
@@ -42,26 +51,43 @@ msa_data <- function(fasta, start=NULL, end=NULL, font = "helvetica_regular", co
         } else {
             dd$y <- dd$y - min(dd$y) + d$ypos -.45
         }
-        dd$name <- d$name
-        dd$position <- d$position
+        cn <- colnames(d)
+        cn <- cn[!cn %in% c('x','y', 'ypos')]
+        for (nn in cn) {
+            dd[[nn]] <- d[[nn]]
+        }
+        ## dd$name <- d$name
+        ## dd$position <- d$position
         dd$group <- paste0("V", d$position, "L", d$ypos)
         #dd$group <- paste0(d$position, d$ypos)
-        dd$character <- d$character
-        dd$color <- d$color
+        ## dd$character <- d$character
+        ## dd$color <- d$color
         dd <- dd[order(dd$order),]
         return(dd)
     })
 
     ydf <- do.call(rbind, yy)
     colnames(ydf)[colnames(ydf) == 'y'] <- 'yy'
+    ydf$y <- as.numeric(ydf$name)
 
     ydf <- cbind(label = ydf$name, ydf)
     return(ydf)
 }
 
-
-tidy_fasta <- function(fasta, start, end) {
-    aln <- prepare_fasta(fasta)
+##' Convert msa file/object to tidy data frame
+##'
+##'
+##' @title tidy_msa
+##' @param msa multiple sequence alignment file or
+##' sequence object in DNAStringSet, RNAStringSet, AAStringSet, BStringSet,
+##' DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin
+##' @param start start position to extract subset of alignment
+##' @param end end position to extract subset of alignemnt
+##' @return tibble data frame
+##' @export
+##' @author Guangchuang Yu
+tidy_msa <- function(msa, start = NULL, end = NULL) {
+    aln <- prepare_msa(msa)
     alnmat <- lapply(seq_along(aln), function(i) {
         base::strsplit(as.character(aln[[i]]), '')[[1]]
     }) %>% do.call('rbind', .)
@@ -78,7 +104,7 @@ tidy_fasta <- function(fasta, start, end) {
     y <- df
     y$position = as.numeric(sub("V", "", y$position))
     y$character = toupper(y$character)
-    
+     
     y$name = factor(y$name, levels=rev(names(aln)))
 
     
@@ -86,6 +112,7 @@ tidy_fasta <- function(fasta, start, end) {
     if (is.null(end)) end <- max(y$position)
     
     y <- y[y$position >=start & y$position <= end, ]
+
     return(y)
 }
 

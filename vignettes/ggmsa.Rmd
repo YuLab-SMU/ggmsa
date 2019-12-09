@@ -35,7 +35,7 @@ library(ggmsa)
 
 # Abstract
 
-Plot multiple sequence alignment using `r CRANpkg("ggpolt2")` with multiple color schemes supported.
+Plot multiple sequence alignment using `r CRANpkg("ggplot2")` with multiple color schemes supported.
 
 # Citation
 
@@ -43,7 +43,7 @@ To do
 
 # Introduction
 
-Supports visualizing multiple sequence alignment of DNA and protein sequences using ggpolt2 It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo. Multiple sequence alignment can easily be combined with other 'ggplot2' plots, such as aligning a phylogenetic tree produced by 'ggtree' with multiple sequence alignment.
+Supports visualizing multiple sequence alignment of DNA and protein sequences using ggplot2 It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo. Multiple sequence alignment can easily be combined with other 'ggplot2' plots, such as aligning a phylogenetic tree produced by 'ggtree' with multiple sequence alignment.
 
 # Installation
 
@@ -133,8 +133,10 @@ tree <- bionj(d)
 library(ggtree)
 p <- ggtree(tree ) + geom_tiplab()
 
-data = msa_data(x, 164, 213, font = NULL, color = "Chemistry_AA")
-p + geom_facet(geom = ggmsa:::geom_msa, data = data,  panel = 'msa') + xlim_tree(1)
+data = tidy_msa(x, 164, 213)
+p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
+               font = NULL, color = "Chemistry_AA") +
+    xlim_tree(1)
 ```
 
 ## Combining with sequence logo

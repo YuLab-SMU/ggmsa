@@ -1,6 +1,7 @@
 # ggmsa 0.0.2
 
-+ import `seqmagick` for parsing fasta (2019-12-09, Mon)
++ `tidy_msa` for converting msa file/object to tidy data frame (2019-12-09, Mon)
++ import `seqmagick` for parsing fasta 
 + bug fixed of `tidy_fasta` 
 
 # ggmsa 0.0.1
