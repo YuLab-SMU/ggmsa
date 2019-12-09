@@ -1,5 +1,5 @@
 ---
-title: "ggmsa: Plot multiple sequence alignment with multiple color schemes supported"
+title: "ggmsa: Plot multiple sequence alignment using ggplot2"
 output: 
   prettydoc::html_pretty:
     toc: true
@@ -143,16 +143,18 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 
 Cross-link with `r CRANpkg("ggseqlogo")`[@Wagih2017ggseqlogo] package. Bits of sequence letters can be indicated in the sequence logo.
 
-```{r fig.height=7, fig.width=10, message=FALSE, warning=FALSE}
+```{r fig.height=6, fig.width=13, message=FALSE, warning=FALSE}
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
 s <- readDNAStringSet(f)
 strings <- as.character(s)
 p1 <- ggmsa(s, font = NULL, color = 'Chemistry_NT')
 
 library(ggseqlogo)
-p2 <- ggplot() + geom_logo(strings) + ggplot2::coord_fixed(2.5) 
 library(cowplot)
-plot_grid(p1, p2, ncol = 1, align = 'v', rel_heights = c(2.8, 1))
+
+p2 <- axis_canvas(p1, axis='x')+ geom_logo(strings, 'probability') 
+pp <- insert_xaxis_grob(p1, p2, position="top", grid::unit(.05, "null"))
+ggdraw(pp)
 ```
 
 # References
