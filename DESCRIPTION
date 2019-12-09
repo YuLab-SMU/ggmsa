@@ -16,7 +16,8 @@ Imports:
 Suggests:
     Biostrings,
     knitr,
-    rmarkdown
+    rmarkdown,
+    seqmagick
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true

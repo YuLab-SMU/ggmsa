@@ -11,8 +11,7 @@ prepare_fasta <- function(fasta) {
     if (missingArg(fasta)) {
         stop("no input...")
     } else if (is(fasta, "character")) {
-        type <- guess_sequence_type(readLines(fasta, n=2)[2])
-        res <- seqmagick::fa_read(fasta, type)
+        res <- seqmagick::fa_read(fasta)
     } else if (!class(fasta) %in% supported_msa_class) {
         stop("multiple sequence alignment object no supported...")
     }
@@ -28,18 +27,19 @@ prepare_fasta <- function(fasta) {
 }
         
 
-DNAbin2DNAstringSet <- function(fasta) {
+DNAbin2DNAStringSet <- function(fasta) {
     seqs <- vapply(seq_along(fasta),
                    function(i) paste0(as.character(fasta[[i]]), collapse=''),
                    character(1))
     names(seqs) <- names(fasta)
 
-     switch(class(fasta),
-            DNAbin = DNAStringSet(seqs),
-            AAbin = AAStringSet(seqs))
+    switch(class(fasta),
+           DNAbin = DNAStringSet(seqs),
+           AAbin = AAStringSet(seqs))
 }
 
 AABin2DNAStringSet <- DNAbin2DNAStringSet
+
 
 
 supported_msa_msa_class <- c("DNAStringSet",  "AAStringSet", "BStringSet",
@@ -47,7 +47,4 @@ supported_msa_msa_class <- c("DNAStringSet",  "AAStringSet", "BStringSet",
                              "DNAbin", "AAbin")
 
 
-
-##' @import seqmagick
-guess_sequence_type <- getFromNamespace("guess_sequence_type", "seqmagick")
 
