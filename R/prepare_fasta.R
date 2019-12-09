@@ -4,14 +4,17 @@
 ##' @title read_fasta
 ##' @param fasta an XstringSet object frome Biostrings or a filepath
 ##' @return DNAbin or AAbin object
+##' @importFrom Biostrings DNAStringSet
+##' @importFrom Biostrings RNAStringSet
+##' @importFrom Biostrings AAStringSet
 ## @export
 ##' @author Lang Zhou
 ##' @noRd
 prepare_fasta <- function(fasta) {
-    if (missingArg(fasta)) {
+    if (methods::missingArg(fasta)) {
         stop("no input...")
-    } else if (is(fasta, "character")) {
-        res <- seqmagick::fa_read(fasta)
+    } else if (methods::is(fasta, "character")) {
+        fasta <- seqmagick::fa_read(fasta)
     } else if (!class(fasta) %in% supported_msa_class) {
         stop("multiple sequence alignment object no supported...")
     }
@@ -21,7 +24,8 @@ prepare_fasta <- function(fasta) {
                   AAbin = AAbin2AAStringSet(fasta),
                   DNAMultipleAlignment = DNAStringSet(fasta),
                   RNAMultipleAlignment = RNAStringSet(fasta),
-                  ANAMultipleAlignment = AAStringSet(fasta)
+                  ANAMultipleAlignment = AAStringSet(fasta),
+                  fasta ## DNAstringSet, RNAStringSet, AAString, BStringSet
                   )
     return(res)
 }
@@ -38,13 +42,13 @@ DNAbin2DNAStringSet <- function(fasta) {
            AAbin = AAStringSet(seqs))
 }
 
-AABin2DNAStringSet <- DNAbin2DNAStringSet
+AAbin2AAStringSet <- DNAbin2DNAStringSet
 
 
 
-supported_msa_msa_class <- c("DNAStringSet",  "AAStringSet", "BStringSet",
-                             "DNAMultipleAlignment", "RNAMultipleAlignment", "AAMultipleAlignment",
-                             "DNAbin", "AAbin")
+supported_msa_class <- c("DNAStringSet",  "RNAStringSet", "AAStringSet", "BStringSet",
+                         "DNAMultipleAlignment", "RNAMultipleAlignment", "AAMultipleAlignment",
+                         "DNAbin", "AAbin")
 
 
 
