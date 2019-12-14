@@ -8,6 +8,7 @@
 ##' @param end End position to plot,If font=NULL, only the background frame is drawn, and no character.
 ##' @param font Character font, Defaults is 'helvetica_regular'.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
+##' @param char_width characters width. Defaults is 0.9.
 ##' @return ggplot object
 ##' @importFrom tidyr gather
 ##' @importFrom treeio read.fasta
@@ -27,10 +28,10 @@
 ##' ggmsa(f, 164, 213, color="Chemistry_AA")
 ##' @export
 ##' @author guangchuang yu
-ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetica_regular", color = "Clustal") {
+ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetica_regular", color = "Clustal", char_width = 0.9) {
     data <- tidy_msa(msa, start = start, end = end)
 
-    ggplot() + geom_msa(data, font = font, color = color) + 
+    ggplot() + geom_msa(data, font = font, color = color, char_width = char_width) + 
         theme_minimal() + xlab(NULL) + ylab(NULL) +
         theme(legend.position='none') + coord_fixed()
 }
