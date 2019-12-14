@@ -5,6 +5,7 @@
 ##' @param fasta Aligned fasta file.
 ##' @param font Character font, Defaults is 'helvetica_regular'.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
+##' @param char_width characters width. Defaults is 0.9.
 ##' @return A data frame
 ##' @examples
 ##' fasta <- system.file("extdata/sample.fasta", package="ggmsa")
@@ -12,7 +13,7 @@
 ## @export
 ##' @noRd
 ##' @author Guangchuang Yu
-msa_data <- function(tidymsa, font = "helvetica_regular", color = "Clustal") {
+msa_data <- function(tidymsa, font = "helvetica_regular", color = "Clustal", char_width = 0.9) {
     color <- match.arg(color, c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
                                 "Chemistry_NT","Shapely_NT","Zappo_NT","Taylor_NT" ))
 
@@ -28,7 +29,7 @@ msa_data <- function(tidymsa, font = "helvetica_regular", color = "Clustal") {
         return(y)
     }
 
-    data_sp <- get_logo_data(unique(y$character), font)
+    data_sp <- polygon[unique(y$character)] ## calling internal outline polygons 
 
     if (!'name' %in% names(y)) {
         if ('label' %in% names(y)) {
@@ -45,11 +46,16 @@ msa_data <- function(tidymsa, font = "helvetica_regular", color = "Clustal") {
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
         dd <- data_sp[[d$character]]
-        dd$x <- dd$x - min(dd$x) + d$position -.45
+        if (!d$character == '-') {
+            dd$x <- dd$x * char_width/diff(range(dd$x))
+            dd$y <- dd$y * char_width/diff(range(dd$y))
+        } 
+        
+        dd$x <- dd$x - min(dd$x) + d$position - char_width/2
         if (d$character == '-') {
             dd$y <- dd$y - min(dd$y) + d$ypos - 0.1
         } else {
-            dd$y <- dd$y - min(dd$y) + d$ypos -.45
+            dd$y <- dd$y - min(dd$y) + d$ypos - char_width/2
         }
         cn <- colnames(d)
         cn <- cn[!cn %in% c('x','y', 'ypos')]
@@ -62,7 +68,7 @@ msa_data <- function(tidymsa, font = "helvetica_regular", color = "Clustal") {
         #dd$group <- paste0(d$position, d$ypos)
         ## dd$character <- d$character
         ## dd$color <- d$color
-        dd <- dd[order(dd$order),]
+        #dd <- dd[order(dd$order),]
         return(dd)
     })
 
@@ -115,36 +121,6 @@ tidy_msa <- function(msa, start = NULL, end = NULL) {
 
     return(y)
 }
-
-get_logo_data <- function(chars, font) {
-    ## ggseqlogo::list_fonts()
-    data_sp = lapply(chars, function(n){
-        if (n == '-') {
-            d <- data.frame(x = c(0.05, 0.95, 0.95, 0.05),
-                            y = c(0.05, 0.05, 0.2, 0.2),
-                            letter = '-',
-                            position = 1,
-                            order = 1:4,
-                            seq_group='-')
-            return(d)
-        }
-        d = logo_data(seqs = n,
-                      font = font,
-                      seq_group = n,
-                      seq_type = "auto")
-        
-        d$x <- d$x * .9/diff(range(d$x))
-        d$y <- d$y * .9/diff(range(d$y))
-        return(d)
-    })
-    names(data_sp) = chars
-    return(data_sp)
-}
-
-
-
-##' @import ggseqlogo
-logo_data <- getFromNamespace("logo_data", "ggseqlogo")
 
 
 ##' @importFrom utils globalVariables
