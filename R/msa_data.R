@@ -3,7 +3,7 @@
 ##'
 ##' @title msa_data
 ##' @param fasta Aligned fasta file.
-##' @param font font families, possible values are roboto_font, serif_font, and Montserrat_font. Defaults is roboto_font.Note: No quotes required！If you specify font = NULL, only the background box will be printed.
+##' @param font font families, possible values are 'roboto_font', 'serif_font', and 'Montserrat_font'. Defaults is 'roboto_font'. If you specify font = NULL, only the background box will be printed.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
 ##' @return A data frame
@@ -13,7 +13,7 @@
 ## @export
 ##' @noRd
 ##' @author Guangchuang Yu
-msa_data <- function(tidymsa, font = roboto_font, color = "Clustal", char_width = 0.9) {
+msa_data <- function(tidymsa, font = "roboto_font", color = "Clustal", char_width = 0.9) {
     color <- match.arg(color, c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
                                 "Chemistry_NT","Shapely_NT","Zappo_NT","Taylor_NT" ))
 
@@ -29,7 +29,8 @@ msa_data <- function(tidymsa, font = roboto_font, color = "Clustal", char_width 
         return(y)
     }
     
-    data_sp <- font[unique(y$character)] ## calling internal outline polygons 
+    font_f <- font_fam[[font]]
+    data_sp <- font_f[unique(y$character)] ## calling internal outline polygons 
 
     if (!'name' %in% names(y)) {
         if ('label' %in% names(y)) {
