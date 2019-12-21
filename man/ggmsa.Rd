@@ -4,7 +4,7 @@
 \alias{ggmsa}
 \title{ggmsa}
 \usage{
-ggmsa(msa, start = NULL, end = NULL, font = "roboto_font",
+ggmsa(msa, start = NULL, end = NULL, font = "helvetical",
   color = "Clustal", char_width = 0.9)
 }
 \arguments{
@@ -15,7 +15,7 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{end}{End position to plot,If font=NULL, only the background frame is drawn, and no character.}
 
-\item{font}{font families, possible values are 'roboto_font', 'serif_font', and 'Montserrat_font'. Defaults is 'roboto_font'. If you specify font = NULL, only the background box will be printed.}
+\item{font}{font families, possible values are 'helvetical', 'times', and 'mono'. Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.}
 
 \item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
 

@@ -13,7 +13,8 @@ Imports:
     magrittr,
     tidyr,
     treeio,
-    utils
+    utils,
+    fontr
 Suggests:
     ape,
     cowplot,
