@@ -5,7 +5,7 @@
 \title{ggmsa}
 \usage{
 ggmsa(msa, start = NULL, end = NULL, font = "helvetical",
-  color = "Clustal", char_width = 0.9)
+  color = "Clustal", char_width = 0.9, seq_logo = FALSE)
 }
 \arguments{
 \item{msa}{Multiple aligned sequence file or object for
@@ -20,6 +20,8 @@ representing either nucleotide sequences or peptide sequences.}
 \item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
 
 \item{char_width}{characters width. Defaults is 0.9.}
+
+\item{seq_logo}{If TRUE plot sequence logo for nucleotide sequences, if FALSE (the default) don't shouw it.}
 }
 \value{
 ggplot object

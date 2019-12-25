@@ -9,6 +9,7 @@
 ##' @param font font families, possible values are 'helvetical', 'times', and 'mono'. Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
+##' @param seq_logo If TRUE plot sequence logo for nucleotide sequences, if FALSE (the default) don't shouw it.
 ##' @return ggplot object
 ##' @importFrom tidyr gather
 ##' @importFrom treeio read.fasta
@@ -28,10 +29,10 @@
 ##' ggmsa(f, 164, 213, color="Chemistry_AA")
 ##' @export
 ##' @author guangchuang yu
-ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9) {
+ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9, seq_logo = FALSE) {
     data <- tidy_msa(msa, start = start, end = end)
 
-    ggplot() + geom_msa(data, font = font, color = color, char_width = char_width) + 
+    ggplot() + geom_msa(data, font = font, color = color, char_width = char_width, seq_logo = seq_logo,) + 
         theme_minimal() + xlab(NULL) + ylab(NULL) +
         theme(legend.position='none') + coord_fixed()
 }

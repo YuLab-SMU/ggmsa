@@ -5,12 +5,19 @@
 ##' @param font font families, possible values are 'helvetical', 'times', and 'mono'. Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
+##' @param seq_logo If TRUE plot sequence logo for nucleotide sequences, if FALSE (the default) don't shouw it.
 ##' @param ... additional parameter
 ##' @return A list
 ##' @importFrom utils modifyList
 ##' @export
 ##' @author guangchuang yu
-geom_msa <- function(data, font =  "helvetical", color = "Clustal", char_width = 0.9, ...) {
+geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 0.9, seq_logo = FALSE,  ...) {
+
+    motif_da <- motif(data, font = "helvetical", color = color)
+    ly_logo <- geom_polygon(aes_(x = ~x, y = ~y,  group = ~group, fill = ~color ),
+                            data = motif_da , inherit.aes = FALSE)
+
+    
     data <- msa_data(data, font = font, color = color, char_width = char_width )
     
     mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
@@ -23,7 +30,11 @@ geom_msa <- function(data, font =  "helvetical", color = "Clustal", char_width =
 
 
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
-        return(ly_bg)
+        if (seq_logo){
+            return(list(ly_bg, ly_logo))
+        }else{
+            return(ly_bg)
+        }
     }
 
     #data <- data[order(data$order),]
@@ -34,6 +45,11 @@ geom_msa <- function(data, font =  "helvetical", color = "Clustal", char_width =
 
     ly_label <- geom_polygon(aes_(x = ~x, y = ~yy,  group = ~group ),
                              data = data, inherit.aes = FALSE)
-    list(ly_bg, ly_label)
+    
+    if (seq_logo) {
+        list(ly_bg, ly_label, ly_logo)
+    }else{
+        list(ly_bg, ly_label)
+    }
 }
 
