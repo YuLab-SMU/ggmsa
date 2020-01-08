@@ -47,27 +47,22 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Clustal", char_width
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
         dd <- data_sp[[d$character]]
-        if (!d$character == '-') {
-          if (length(dd$x) <= 5){ #the character "I" (<= 5 points) will overstretch in the x-axis
-              dd$x <- dd$x * .2/diff(range(dd$x)) #Fixed x-axis width
-              dd$y <- dd$y * char_width/diff(range(dd$y))
-          } else{
-              dd$x <- dd$x * char_width/diff(range(dd$x))
-              dd$y <- dd$y * char_width/diff(range(dd$y))
-          }
-        } 
+        char_scale <- diff(range(dd$x))/diff(range(dd$y))#equal proportion
         
-        if (length(dd$x) <= 5){ 
-            dd$x <- dd$x - min(dd$x) + d$position - diff(range(dd$x))/2
-        } else{
-            dd$x <- dd$x - min(dd$x) + d$position - char_width/2
-        }
-        
-        if (d$character == '-') {
-            dd$y <- dd$y - min(dd$y) + d$ypos - 0.1
-        } else {
+        if ( diff(range(dd$x)) <= diff(range(dd$y)) ){#y-width = char_width, x-width scaled proportionally 
+            dd$x <- dd$x * (char_width * char_scale)/diff(range(dd$x))
+            dd$y <- dd$y * char_width/diff(range(dd$y))
+
+            dd$x <- dd$x - min(dd$x) + d$position - (char_width * char_scale)/2
             dd$y <- dd$y - min(dd$y) + d$ypos - char_width/2
-        }
+        }else{                                        #x-width = char_width, y-width scaled proportionally 
+            dd$x <- dd$x * char_width/diff(range(dd$x))
+            dd$y <- dd$y * char_width/(diff(range(dd$y)) * char_scale)
+          
+            dd$x <- dd$x - min(dd$x) + d$position - char_width/2
+            dd$y <- dd$y - min(dd$y) + d$ypos - (char_width/char_scale)/2
+         }
+        
         cn <- colnames(d)
         cn <- cn[!cn %in% c('x','y', 'ypos')]
         for (nn in cn) {
