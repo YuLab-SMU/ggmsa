@@ -10,7 +10,7 @@
 ##' @importFrom utils modifyList
 ##' @export
 ##' @author guangchuang yu
-geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 0.9 ) {
+geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 0.9, ... ) {
 
     data <- msa_data(data, font = font, color = color, char_width = char_width )
     mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
