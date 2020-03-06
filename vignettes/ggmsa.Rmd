@@ -52,7 +52,7 @@ This R package (`r CRANpkg("ggmsa")`, current version: `r packageVersion('ggmsa'
 ```{r eval=FALSE}
 ## installing the package
 install.packages("ggmsa")
-## ## loading the package
+## loading the package
 library("ggmsa")
 ```
 
@@ -141,20 +141,20 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 
 ## Combining with sequence logo
 
-Cross-link with `r CRANpkg("ggseqlogo")`[@Wagih2017ggseqlogo] package. Bits of sequence letters can be indicated in the sequence logo.
+Visualizing multiple sequence alignment with sequence logo.
 
 ```{r fig.height=6, fig.width=13, message=FALSE, warning=FALSE}
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-s <- readDNAStringSet(f)
-strings <- as.character(s)
-p1 <- ggmsa(s, font = NULL, color = 'Chemistry_NT')
+ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo(f)
+```
 
-library(ggseqlogo)
-library(cowplot)
+## Combining with GC content
 
-p2 <- axis_canvas(p1, axis='x')+ geom_logo(strings, 'probability') 
-pp <- insert_xaxis_grob(p1, p2, position="top", grid::unit(.05, "null"))
-ggdraw(pp)
+Visualizing multiple sequence alignment with GC content.
+
+```{r fig.height=6, fig.width=13, message=FALSE, warning=FALSE}
+f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_GC(f)
 ```
 
 # References
