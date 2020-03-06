@@ -61,7 +61,8 @@ content_GC<- function(data){
 ##' DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin
 ##' @param start start position to extract subset of alignment
 ##' @param end end position to extract subset of alignemnt
-##' @examples 
+##' @examples
+##' library(ggplot2) 
 ##' #plot GC content 
 ##' f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
 ##' ggmsa(f,font = NULL,color="Chemistry_NT") + geom_GC(f)

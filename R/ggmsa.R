@@ -22,6 +22,7 @@
 ##' @importFrom ggplot2 ylab
 ##' @importFrom ggplot2 coord_fixed
 ##' @importFrom magrittr %>%
+##' @importFrom stats setNames
 ##' @examples 
 ##' #plot multiple sequence alignment
 ##' f <- system.file("extdata/sample.fasta", package="ggmsa")
