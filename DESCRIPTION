@@ -1,6 +1,6 @@
 Package: ggmsa
 Title: Plot Multiple Sequence Alignment using 'ggplot2'
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: c( person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6485-8781")),
               person("Lang", "Zhou",      email = "nyzhoulang@gmail.com",    role = "aut"),
               person("Huina", "Huang",    email = "1185796994@qq.com",       role = "ctb"))
@@ -9,12 +9,12 @@ Depends: R (>= 3.5.0)
 Imports:
     Biostrings,
     ggplot2,
-    ggseqlogo,
     magrittr,
     tidyr,
     treeio,
     utils,
-    fontr
+    fontr,
+	stats
 Suggests:
     ape,
     cowplot,
