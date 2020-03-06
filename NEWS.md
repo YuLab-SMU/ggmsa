@@ -1,3 +1,9 @@
+# ggmsa 0.0.3
++ using a proportional scaling algorithm (2020-01-08, Wed)
++ adding a new function geom_seqlogo()(2020-02-14, Fri)
++ adding a new function geom_GC()(2020-02-28, Fri)
+
+
 # ggmsa 0.0.2
 
 + `tidy_msa` for converting msa file/object to tidy data frame (2019-12-09, Mon)
