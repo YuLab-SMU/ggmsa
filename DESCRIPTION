@@ -13,8 +13,7 @@ Imports:
     tidyr,
     treeio,
     utils,
-    fontr,
-	stats
+	  stats
 Suggests:
     ape,
     cowplot,

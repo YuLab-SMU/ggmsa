@@ -3,7 +3,6 @@
 importFrom(Biostrings,AAStringSet)
 importFrom(Biostrings,DNAStringSet)
 importFrom(Biostrings,RNAStringSet)
-importFrom(fontr,glyph_polygon)
 importFrom(ggplot2,aes_)
 importFrom(ggplot2,coord_fixed)
 importFrom(ggplot2,geom_polygon)

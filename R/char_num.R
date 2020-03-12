@@ -74,11 +74,11 @@ geom_GC <- function(msa, start=NULL, end=NULL){
     GC <-GC[GC$character == "GC",]
     col_num <- levels(factor(tidy$position))
     col_len <- length(col_num) + 2
-    ly_GC <- geom_point(data = GC,aes(x = col_len, ypos,size = GC$fre, color = GC$fre))
+    ly_GC <- geom_point(data = GC,aes(x = col_len, y = ypos,size = GC$fre, color = GC$fre))
     return(ly_GC)
 }
 
-
+utils::globalVariables('.')
 
 
 

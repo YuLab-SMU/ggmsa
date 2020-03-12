@@ -3,7 +3,6 @@
 ##' @title get_font_polygon
 ##' @param family The family of the font. font_families() can be used to list font families loaded by 'sysfonts'
 ##' @return A list
-##' @importFrom fontr glyph_polygon
 ##' @noRd
 ##' @author Lang Zhou
 get_font_polygon <- function(family){
