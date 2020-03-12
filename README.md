@@ -1,58 +1,56 @@
----
-output:
-  html_document:
-    keep_md: yes
-    self_contained: no
----
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-#  ggmsa: Plot multiple sequence alignment using ggplot2
+# ggmsa: Plot multiple sequence alignment using ggplot2
 
-**ggmsa** supports visualizing multiple sequence alignment of DNA and protein sequences using ggplot2. It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.
+**ggmsa** supports visualizing multiple sequence alignment of DNA and
+protein sequences using ggplot2. It supports a number of colour schemes,
+including Chemistry, Clustal, Shapely, Taylor and Zappo.
 
-##  Quick Example 
-Plot multiple sequence alignment(colour scheme = 'Chemistry').
+## Quick Example
 
-###  protein sequences
+Plot multiple sequence alignment(colour scheme = ‘Chemistry’).
 
-```r
+### protein sequences
+
+``` r
 library(ggmsa)
 library(ggplot2)
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
 ggmsa(protein_sequences, 164, 213, color = "Chemistry_AA")
 ```
 
-![](README_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
-###  DNA sequences
+### DNA sequences
 
-```r
+``` r
 nt_sequence <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
 ggmsa(nt_sequence, color = "Chemistry_NT")
 ```
 
-![](README_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-##  Visualizing multiple sequence alignment with sequence logo.
+## Visualizing multiple sequence alignment with sequence logo.
 
-```r
+``` r
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
 ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo(f)
 ```
 
-![](README_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-##  Visualizing multiple sequence alignment with GC content.
+## Visualizing multiple sequence alignment with GC content.
 
-```r
+``` r
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
 ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_GC(f)
 ```
 
-![](README_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-##  Visualizing multiple sequence alignment with ggtree.
+## Visualizing multiple sequence alignment with ggtree.
 
-```r
+``` r
 library(Biostrings)
 x <- readAAStringSet(protein_sequences)
 d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
@@ -67,4 +65,4 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
     xlim_tree(1)
 ```
 
-![](README_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->

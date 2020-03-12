@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 Makefile
 README.md
+README_files
+README.Rmd
