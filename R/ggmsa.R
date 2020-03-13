@@ -21,6 +21,7 @@
 ##' @importFrom ggplot2 xlab
 ##' @importFrom ggplot2 ylab
 ##' @importFrom ggplot2 coord_fixed
+##' @importFrom ggplot2 geom_point
 ##' @importFrom magrittr %>%
 ##' @importFrom stats setNames
 ##' @examples 

@@ -49,10 +49,10 @@ content_GC<- function(data){
     char_num <- do.call(rbind,lchar_num)
     char_num <- as.data.frame(char_num)
     char_num["ypos"] =  as.numeric(seq_num) 
-    char_num2 <- gather(char_num, character, fre, "A", "T", "C","G","GC")
+    char_num2 <- gather(char_num,character,fre, "A", "T", "C","G","GC")
     return(char_num2)
 }
-
+utils::globalVariables('fre')
 ##' Multiple sequence alignment layer for ggplot2. It plot points of GC content.
 
 ##' @title geom_GC
@@ -74,11 +74,11 @@ geom_GC <- function(msa, start=NULL, end=NULL){
     GC <-GC[GC$character == "GC",]
     col_num <- levels(factor(tidy$position))
     col_len <- length(col_num) + 2
-    ly_GC <- geom_point(data = GC,aes(x = col_len, y = ypos,size = GC$fre, color = GC$fre))
+    ly_GC <- geom_point(data = GC,aes_(x =~col_len, y =~ypos,size =~fre, color =~fre))
     return(ly_GC)
 }
 
-utils::globalVariables('.')
+
 
 
 
