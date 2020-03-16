@@ -27,11 +27,11 @@ CRANpkg <- function(pkg) {
 Biocpkg <- function(pkg) {
     sprintf("[%s](http://bioconductor.org/packages/%s)", pkg, pkg)
 }
+
+library(ggmsa)
+
 ```
 
-```{r echo=FALSE, results='hide', message=FALSE}
-library(ggmsa)
-```
 
 # Abstract
 

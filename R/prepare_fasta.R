@@ -8,7 +8,7 @@
 ##' @importFrom Biostrings RNAStringSet
 ##' @importFrom Biostrings AAStringSet
 ## @export
-##' @author Lang Zhou
+##' @author Lang Zhou and Guangchuang Yu
 ##' @noRd
 prepare_msa <- function(msa) {
     if (methods::missingArg(msa)) {

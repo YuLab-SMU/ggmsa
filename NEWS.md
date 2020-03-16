@@ -1,4 +1,6 @@
 # ggmsa 0.0.3
+
++ release of v=0.0.3 (2020-03-16, Mon)
 + using a proportional scaling algorithm (2020-01-08, Wed)
 + adding a new function geom_seqlogo()(2020-02-14, Fri)
 + adding a new function geom_GC()(2020-02-28, Fri)

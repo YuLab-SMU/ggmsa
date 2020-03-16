@@ -11,7 +11,6 @@
 ##' @param char_width characters width. Defaults is 0.9.
 ##' @return ggplot object
 ##' @importFrom tidyr gather
-##' @importFrom treeio read.fasta
 ##' @importFrom ggplot2 ggplot
 ##' @importFrom ggplot2 aes_
 ##' @importFrom ggplot2 theme
@@ -29,7 +28,7 @@
 ##' f <- system.file("extdata/sample.fasta", package="ggmsa")
 ##' ggmsa(f, 164, 213, color="Chemistry_AA")
 ##' @export
-##' @author guangchuang yu
+##' @author Guangchuang Yu
 ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9) {
     data <- tidy_msa(msa, start = start, end = end)
 

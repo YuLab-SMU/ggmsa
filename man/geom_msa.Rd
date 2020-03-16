@@ -24,5 +24,5 @@ A list
 Multiple sequence alignment layer for ggplot2. It creats background frames with/without sequence labels.
 }
 \author{
-guangchuang yu
+Guangchuang Yu
 }

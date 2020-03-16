@@ -39,5 +39,5 @@ f <- system.file("extdata/sample.fasta", package="ggmsa")
 ggmsa(f, 164, 213, color="Chemistry_AA")
 }
 \author{
-guangchuang yu
+Guangchuang Yu
 }

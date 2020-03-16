@@ -52,6 +52,7 @@ content_GC<- function(data){
     char_num2 <- gather(char_num,character,fre, "A", "T", "C","G","GC")
     return(char_num2)
 }
+
 utils::globalVariables('fre')
 ##' Multiple sequence alignment layer for ggplot2. It plot points of GC content.
 

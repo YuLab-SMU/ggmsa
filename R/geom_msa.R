@@ -9,7 +9,7 @@
 ##' @return A list
 ##' @importFrom utils modifyList
 ##' @export
-##' @author guangchuang yu
+##' @author Guangchuang Yu
 geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 0.9, ... ) {
 
     data <- msa_data(data, font = font, color = color, char_width = char_width )
