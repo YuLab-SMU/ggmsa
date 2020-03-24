@@ -2,7 +2,7 @@
 
 ##' @title plot motif
 ##' @param data  Multiple aligned sequence file or object for representing nucleotide sequences
-##' @param font font families, possible values are 'helvetical', 'times', and 'mono'. Defaults is 'helvetical'.
+##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'.
 ##' @param color A Color scheme. One of 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_NT'.
 ##' @return A data frame
 ##' @noRd
@@ -51,7 +51,7 @@ motif <- function(data, font =  "helvetical", color = "Chemistry_NT"){
 ##' DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin
 ##' @param start start position to extract subset of alignment
 ##' @param end end position to extract subset of alignemnt
-##' @param font font families, possible values are 'helvetical', 'times', and 'mono'. Defaults is 'helvetical'.
+##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. , and 'mono'. Defaults is 'helvetical'.
 ##' @param color A Color scheme. One of 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_NT'.
 ##' @return A list
 ##' @examples 
