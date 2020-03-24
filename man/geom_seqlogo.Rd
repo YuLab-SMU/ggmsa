@@ -21,7 +21,7 @@ DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin
 
 \item{end}{end position to extract subset of alignemnt}
 
-\item{font}{font families, possible values are 'helvetical', 'times', and 'mono'. Defaults is 'helvetical'.}
+\item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. , and 'mono'. Defaults is 'helvetical'.}
 
 \item{color}{A Color scheme. One of 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_NT'.}
 }
