@@ -17,9 +17,9 @@ ggmsa(
 \item{msa}{Multiple aligned sequence file or object for
 representing either nucleotide sequences or peptide sequences.}
 
-\item{start}{Start position to plot, If font=NULL, only the background frame is drawn, and no character.}
+\item{start}{a numeric.Start position to plot.}
 
-\item{end}{End position to plot,If font=NULL, only the background frame is drawn, and no character.}
+\item{end}{a numeric. End position to plot.}
 
 \item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.}
 
