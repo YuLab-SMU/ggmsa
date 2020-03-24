@@ -1,34 +1,48 @@
-##' Multiple sequence alignment layer for ggplot2. It plot sequence motifs.
+##' plot sequence motif for nucleotide sequences based 'ggolot2'
 
-##' @title geom_seqlogo
-##' @param msa  multiple sequence alignment file or
-##' sequence object in DNAStringSet, RNAStringSet, AAStringSet, BStringSet,
-##' DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin
-##' @param start a numeric, start position to extract subset of alignment
-##' @param end a numeric, end position to extract subset of alignemnt
-##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'helvetical'.
+##' @title ggmotif
+##' @param msa Multiple aligned sequence file or object for
+##' representing either nucleotide sequences or peptide sequences.
+##' @param start Start position to plot, If font=NULL, only the background frame is drawn, and no character.
+##' @param end End position to plot,If font=NULL, only the background frame is drawn, and no character.
+##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'.
 ##' @param color A Color scheme. One of 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_NT'.
-##' @return A list
+##' @return ggplot object
 ##' @examples 
-##' #plot multiple sequence alignment and sequence motifs
-##' f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
-##' ggmsa(f,font = NULL,color="Chemistry_NT") + geom_seqlogo(f)
+##' #plot sequence motif independently
+##' nt_sequence <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+##' ggmotif(nt_sequence, color = "Chemistry_NT")
 ##' @export
 ##' @author Lang Zhou
-geom_seqlogo <- function(msa, start = NULL, end = NULL, font = "helvetical", color = "Chemistry_NT") {
-    data <- tidy_msa(msa = msa, start = start, end = end)
-    motif_da <- motif(data, font = font, color = color)
-    ly_logo <- geom_polygon(aes_(x = ~x, y = ~y,  group = ~group, fill = ~color ),
-                            data = motif_da , inherit.aes = FALSE) 
-    return(ly_logo)
+ggmotif <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Chemistry_NT") {
+  
+    data <- tidy_msa(msa, start = start, end = end)
+  
+    ggplot() + geom_motif(data, font = font, color = color) + 
+        theme_minimal() + xlab(NULL) + ylab(NULL) + 
+        theme(legend.position='none') + theme(panel.grid = element_blank(), axis.text.y = element_blank()) + 
+        coord_fixed()
 }
 
 
-motif <- function(data, font =  "helvetical", color = "Chemistry_NT"){
+
+
+geom_motif <- function(data, font = "helvetical", color = "Chemistry_NT") {
+  
+    motif_da <- seq_motif(data, font = font, color = color)
+    ly_motif <- geom_polygon(aes_(x = ~x, y = ~y,  group = ~group, fill = ~I(color)),
+                             data = motif_da, inherit.aes = FALSE) 
+    return(ly_motif)
+}
+
+
+
+seq_motif <- function(data, font = "helvetical", color = "Chemistry_NT"){
+
     tidy <- data
     total_heigh <- getOption("total_heigh")
     logo_width <- getOption("logo_width")
-      
+  
     col_num <- levels(factor(tidy$position)) # the column number
     moti_da <- lapply(1:length(col_num), function(j){
         clo <- tidy[tidy$position == j, ] ## 计算每列碱基的频率
@@ -42,11 +56,10 @@ motif <- function(data, font =  "helvetical", color = "Chemistry_NT"){
             ds_$y <- ds_$y * ywidth[[i]]/diff(range(ds_$y)) #y根据其频率分配高度
             ymotif <- sum(ywidth[0:(i - 1)]) # 当前字符的下方所有字符所占高度
             ds_$x <- ds_$x - min(ds_$x) - logo_width/2 + j # j 为当前所在列数
-            ds_$y <- ds_$y - min(ds_$y) - ywidth[[i]]/2 + ymotif + ywidth[[i]]/2 + nrow(tidy[tidy$position == j, ]) + .5
+            ds_$y <- ds_$y - min(ds_$y) - ywidth[[i]]/2 + ymotif + ywidth[[i]]/2 
             ## ds_$y - min(ds_$y) - ywidth[[i]]/2 以0为中心
             ## + ymotif 加上位于其下方的motif字符的高度
             ## + ywidth[du[i]]/2 再加上自身高度
-            ## + nrow(tidy[tidy$position == j, ]) + .5 平移到最上方
             ds_$group <- paste0("P", j, "Char", names(motif_char[i]))
             ds_$color <- scheme_NT[names(motif_char[i]), color]
             return(ds_)
@@ -58,9 +71,20 @@ motif <- function(data, font =  "helvetical", color = "Chemistry_NT"){
     return(moti_da)
 }
 
-.onAttach <- function(libname, pkgname){
-  options(total_heigh = 4)
-  options(logo_width = 0.9)
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
