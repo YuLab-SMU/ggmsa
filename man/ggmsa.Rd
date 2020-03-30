@@ -34,9 +34,21 @@ ggplot object
 Plot multiple sequence alignment using ggplot2 with multiple color schemes supported.
 }
 \examples{
-#plot multiple sequence alignment
-f <- system.file("extdata/sample.fasta", package="ggmsa")
-ggmsa(f, 164, 213, color="Chemistry_AA")
+#plot multiple sequences by loading fasta format 
+fasta <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ggmsa(fasta, 164, 213, color="Chemistry_AA")
+
+#XMultipleAlignment objects can be used as input in the 'ggmsa'
+AAMultipleAlignment <- Biostrings::readAAMultipleAlignment(fasta)
+ggmsa(AAMultipleAlignment, 164, 213, color="Chemistry_AA")
+
+#XStringSet objects can be used as input in the 'ggmsa'
+AAStringSet <- Biostrings::readAAStringSet(fasta)
+ggmsa(AAStringSet, 164, 213, color="Chemistry_AA")
+
+#Xbin objects from 'seqmagick' can be used as input in the 'ggmsa'
+AAbin <- seqmagick::fa_read(fasta)
+ggmsa(AAbin, 164, 213, color="Chemistry_AA")
 }
 \author{
 Guangchuang Yu
