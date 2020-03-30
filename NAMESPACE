@@ -2,6 +2,7 @@
 
 export(available_colors)
 export(available_fonts)
+export(available_msa)
 export(geom_GC)
 export(geom_msa)
 export(geom_seed)
