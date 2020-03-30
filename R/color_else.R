@@ -9,3 +9,33 @@ color_scheme <- function(y, color) {
     }
   return(y)
 }
+
+
+##' This function lists font families currently available that can be used by 'ggmsa'
+##' 
+##' 
+##' @title List Font Families currently available
+##' @return A character vector of available font family names
+##' @examples available_fonts()
+##' @export
+##' @author Lang Zhou
+
+available_fonts <- function(){
+    message("font families currently available:" )
+    cat(names(font_fam))
+}
+
+##' This function lists color schemes currently available that can be used by 'ggmsa'
+##' 
+##' 
+##' @title List Color Schemes currently available
+##' @return A character vector of available color schemes
+##' @examples available_colors()
+##' @export
+##' @author Lang Zhou
+available_colors <- function(){
+    message("color schemes for nucleotide sequences currently available:")
+    cat(names(scheme_NT), "\n")
+    message("color schemes for AA sequences currently available:")
+    cat("Clustal", names(scheme_AA))
+}
