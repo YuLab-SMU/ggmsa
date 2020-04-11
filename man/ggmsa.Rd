@@ -10,7 +10,8 @@ ggmsa(
   end = NULL,
   font = "helvetical",
   color = "Clustal",
-  char_width = 0.9
+  char_width = 0.9,
+  none_bg = FALSE
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ representing either nucleotide sequences or peptide sequences.}
 \item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
 
 \item{char_width}{characters width. Defaults is 0.9.}
+
+\item{none_bg}{a logical value indicating whether backgroud should be produced. Defaults is FALSE}
 }
 \value{
 ggplot object

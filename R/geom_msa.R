@@ -5,21 +5,24 @@
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
+##' @param none_bg a logical value indicating whether backgroud should be produced.  Defaults is FALSE
 ##' @param ... additional parameter
 ##' @return A list
 ##' @importFrom utils modifyList
 ##' @export
 ##' @author Guangchuang Yu
-geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 0.9, ... ) {
+geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE,  ... ) {
 
     data <- msa_data(data, font = font, color = color, char_width = char_width )
+    
+
     mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
 
     if ('y' %in% colnames(data)) {
         mapping <- modifyList(mapping, aes_(y = ~y))
     } 
 
-    ly_bg <- geom_tile(mapping = mapping, data = data, color = 'grey', inherit.aes = FALSE)
+    ly_bg <- geom_tile(mapping = mapping, data = data,color = 'grey', inherit.aes = FALSE)
 
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
         return(ly_bg)
@@ -34,6 +37,11 @@ geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 
     ly_label <- geom_polygon(aes_(x = ~x, y = ~yy,  group = ~group ),
                              data = data, inherit.aes = FALSE)
     
+    if (none_bg) {
+        return(ly_label)
+    }
+    
     list(ly_bg, ly_label)
+
 }
 

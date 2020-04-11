@@ -9,6 +9,7 @@
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
+##' @param none_bg a logical value indicating whether backgroud should be produced. Defaults is FALSE
 ##' @return ggplot object
 ##' @importFrom tidyr gather
 ##' @importFrom ggplot2 ggplot
@@ -42,9 +43,9 @@
 ##' ggmsa(AAbin, 164, 213, color="Chemistry_AA")
 ##' @export
 ##' @author Guangchuang Yu
-ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9) {
+ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE) {
     data <- tidy_msa(msa, start = start, end = end)
 
-    ggplot() + geom_msa(data, font = font, color = color, char_width = char_width) + 
+    ggplot() + geom_msa(data, font = font, color = color, char_width = char_width, none_bg = none_bg) + 
         theme_minimal() + xlab(NULL) + ylab(NULL) + theme(legend.position='none') + coord_fixed()
 }
