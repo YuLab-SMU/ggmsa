@@ -43,9 +43,9 @@
 ##' ggmsa(AAbin, 164, 213, color="Chemistry_AA")
 ##' @export
 ##' @author Guangchuang Yu
-ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE) {
+ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE, posHighligthed = NULL) {
     data <- tidy_msa(msa, start = start, end = end)
 
-    ggplot() + geom_msa(data, font = font, color = color, char_width = char_width, none_bg = none_bg) + 
+    ggplot() + geom_msa(data, font = font, color = color, char_width = char_width, none_bg = none_bg, posHighligthed = posHighligthed) + 
         theme_minimal() + xlab(NULL) + ylab(NULL) + theme(legend.position='none') + coord_fixed()
 }

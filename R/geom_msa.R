@@ -11,18 +11,25 @@
 ##' @importFrom utils modifyList
 ##' @export
 ##' @author Guangchuang Yu
-geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE,  ... ) {
+geom_msa <- function(tidyData, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE, posHighligthed = NULL,  ... ) {
 
-    data <- msa_data(data, font = font, color = color, char_width = char_width )
-    
+    data <- msa_data(tidyData, font = font, color = color, char_width = char_width )
+    bg_data <- data
 
     mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
 
     if ('y' %in% colnames(data)) {
         mapping <- modifyList(mapping, aes_(y = ~y))
     } 
-
-    ly_bg <- geom_tile(mapping = mapping, data = data,color = 'grey', inherit.aes = FALSE)
+    
+    if (!is.null(posHighligthed)) {
+        none_bg = TRUE
+        bg_data <- bg_data[bg_data$position %in% posHighligthed,]
+        bg_data$postion <- as.factor(bg_data$position)
+        mapping <- modifyList(mapping, aes_(x = ~position, fill = ~character, width = 1))
+    } 
+    
+    ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE)
 
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
         return(ly_bg)
@@ -37,7 +44,7 @@ geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 
     ly_label <- geom_polygon(aes_(x = ~x, y = ~yy,  group = ~group ),
                              data = data, inherit.aes = FALSE)
     
-    if (none_bg) {
+    if (none_bg & is.null(posHighligthed) ) {
         return(ly_label)
     }
     
