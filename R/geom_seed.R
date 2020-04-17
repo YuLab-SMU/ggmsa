@@ -35,7 +35,7 @@ geom_seed <- function(msa, seed, star = F){
                             star_y = rep(y, times = nchar(seed)))
     
     if(star) {
-        ly_star <- geom_seedStar(data = starData, aes_(x = ~star_x, y = ~star_y))
+        ly_star <- geom_asterisk(data = starData, aes_(x = ~star_x, y = ~star_y))
         return(ly_star)
     }
     

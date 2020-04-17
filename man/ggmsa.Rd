@@ -11,7 +11,8 @@ ggmsa(
   font = "helvetical",
   color = "Clustal",
   char_width = 0.9,
-  none_bg = FALSE
+  none_bg = FALSE,
+  posHighligthed = NULL
 )
 }
 \arguments{
@@ -28,7 +29,9 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{char_width}{characters width. Defaults is 0.9.}
 
-\item{none_bg}{a logical value indicating whether backgroud should be produced. Defaults is FALSE}
+\item{none_bg}{a logical value indicating whether backgroud should be produced. Defaults is FALSE.}
+
+\item{posHighligthed}{A numeric vector of the position that need to be highlighted.}
 }
 \value{
 ggplot object
