@@ -13,12 +13,12 @@ content_GC<- function(data){
     tidy$ypos <- as.numeric(tidy$name)
     seq_num <- levels(factor(tidy$ypos)) # the sequence number
     lchar_num <- lapply(1:length(seq_num),function(j){
-      clo <- tidy[tidy$ypos == j, ] 
-      y <- prop.table(table(clo$character))
-      y["GC"] <- y["G"] + y["C"]
-      num <-setNames(rep(0,5), c("A", "T", "G", "C", "GC"))
-      num[names(y)] <- y
-      return(num)
+        clo <- tidy[tidy$ypos == j, ] 
+        y <- prop.table(table(clo$character))
+        y["GC"] <- y["G"] + y["C"]
+        num <-setNames(rep(0,5), c("A", "T", "G", "C", "GC"))
+        num[names(y)] <- y
+        return(num)
     })
   
     char_num <- do.call(rbind,lchar_num)
@@ -41,16 +41,18 @@ utils::globalVariables('fre')
 ##' library(ggplot2) 
 ##' #plot GC content 
 ##' f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
-##' ggmsa(f,font = NULL,color="Chemistry_NT") + geom_GC(f)
+##' ggmsa(f, font = NULL, color="Chemistry_NT") + geom_GC(f)
 ##' @export
 ##' @author Lang Zhou
 geom_GC <- function(msa, start=NULL, end=NULL){
     tidy <- tidy_msa(msa = msa, start = start, end = end)
+    GC_pos <- getOption("GC_pos")
+    
     GC <- content_GC(tidy)
     GC <-GC[GC$character == "GC",]
     col_num <- levels(factor(tidy$position))
-    col_len <- length(col_num) + 2
-    ly_GC <- geom_point(data = GC,aes_(x =~col_len, y =~ypos,size =~fre, color =~fre))
+    col_len <- length(col_num) + GC_pos
+    ly_GC <- geom_point(data = GC,aes_(x = ~col_len, y = ~ypos,size = ~fre, color = ~fre))
     return(ly_GC)
 }
 

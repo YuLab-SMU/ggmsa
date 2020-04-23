@@ -2,7 +2,7 @@
 ##' @importFrom grid gpar
 SeedStar <- function(x = NULL , y = NULL) {
   
-    char_width = .03
+    char_width <- getOption("asterisk_width")
     char_scale <- diff(range(star$x))/diff(range(star$y))
     star$x = star$x * (char_width * char_scale)/diff(range(star$x)) 
     star$y = star$y * char_width/diff(range(star$y))

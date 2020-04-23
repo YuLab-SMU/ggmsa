@@ -34,7 +34,7 @@ Multiple sequence alignment layer for ggplot2. It plot sequence motifs.
 \examples{
 #plot multiple sequence alignment and sequence motifs
 f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
-ggmsa(f,font = NULL,color="Chemistry_NT") + geom_seqlogo(f)
+ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo(f)
 }
 \author{
 Lang Zhou

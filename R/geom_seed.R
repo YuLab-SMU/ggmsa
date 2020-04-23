@@ -21,8 +21,9 @@ geom_seed <- function(msa, seed, star = F){
     seedPos <- seedResult[[1]]@start # start position of seed region
     seedLen <- seedResult[[1]]@width # length of seed region
     numSeq <- length(seedResult) # number of sequences
-    shadingLen <- .5 #shading width 
-
+    shadingLen <- getOption("shadingLen") #shading width 
+    shading_alpha <- getOption("shading_alpha")
+    
     x <- seedPos - .5 #the x coordinate of the lower left corner
     y <- 1 -.5 - shadingLen #the y coordinate of the lower left corner
     yy <- numSeq + .5 + shadingLen # #the y coordinate of the top right corner 
@@ -39,7 +40,7 @@ geom_seed <- function(msa, seed, star = F){
         return(ly_star)
     }
     
-    mapping <- aes_(x= ~x, y= ~y, group= ~t, fill = ~I('#bebebe'), alpha = .3)
+    mapping <- aes_(x= ~x, y= ~y, group= ~t, fill = ~I('#bebebe'), alpha = shading_alpha)
     ly_seed <- geom_polygon(data = shadingData, mapping = mapping)
     return(ly_seed)
  }

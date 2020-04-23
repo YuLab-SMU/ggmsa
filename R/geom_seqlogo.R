@@ -12,7 +12,7 @@
 ##' @examples 
 ##' #plot multiple sequence alignment and sequence motifs
 ##' f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
-##' ggmsa(f,font = NULL,color="Chemistry_NT") + geom_seqlogo(f)
+##' ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo(f)
 ##' @export
 ##' @author Lang Zhou
 geom_seqlogo <- function(msa, start = NULL, end = NULL, font = "helvetical", color = "Chemistry_NT") {
@@ -59,8 +59,12 @@ motif <- function(data, font =  "helvetical", color = "Chemistry_NT"){
 }
 
 .onAttach <- function(libname, pkgname){
-  options(total_heigh = 4)
-  options(logo_width = 0.9)
+    options(total_heigh = 4)
+    options(logo_width = 0.9)
+    options(asterisk_width = .03)
+    options(GC_pos = 2)
+    options(shadingLen = .5)
+    options(shading_alpha = .3)
 }
 
 
