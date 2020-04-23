@@ -12,7 +12,8 @@ ggmsa(
   color = "Clustal",
   char_width = 0.9,
   none_bg = FALSE,
-  posHighligthed = NULL
+  posHighligthed = NULL,
+  seq_name = NULL
 )
 }
 \arguments{
@@ -23,7 +24,7 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{end}{a numeric. End position to plot.}
 
-\item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.}
+\item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile}
 
 \item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
 
@@ -32,6 +33,10 @@ representing either nucleotide sequences or peptide sequences.}
 \item{none_bg}{a logical value indicating whether backgroud should be produced. Defaults is FALSE.}
 
 \item{posHighligthed}{A numeric vector of the position that need to be highlighted.}
+
+\item{seq_name}{a logical value indicating whether seqence names should be displayed.
+Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed.
+If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.}
 }
 \value{
 ggplot object
