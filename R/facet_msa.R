@@ -22,9 +22,11 @@ facet_data <- function(msaData, field) {
   
     msaData[msaData$position %% field == 0,]$facet <- 
         msaData[msaData$position %% field == 0,]$facet - 1 ##临界值调整
-  
-    msaData$x <- msaData$x - (msaData$facet * field) #分面对齐
-    msaData$position <- msaData$position - (msaData$facet * field)
+    #分面对齐
+    if ('x' %in% colnames(msaData)) { 
+        msaData$x <- msaData$x - (msaData$facet * field) #ly_label translation
+    } 
+    msaData$position <- msaData$position - (msaData$facet * field) #ly_bg translation
     return(msaData)
     #msa_facet <- facet_wrap(msaData$facet, nrow = num_facet)
 }
@@ -37,11 +39,16 @@ ggplot_add.facet_msa <- function(object, plot, object_name){
     msaData <- plot$layers[[1]]$data #调取msaData数据
     field <- object$field
     facetData <- facet_data(msaData, field)
-    num_facet <- levels(factor(facetData$facet))  ##分段数目
+    #num_facet <- max(facetData$facet) + 1  ##分段数目
     plot$layers[[1]]$data <- facetData #ly_bg
-    plot$layers[[2]]$data <- facetData #ly_label
-    
-    plot + facet_wrap(~facetData$facet, nrow = num_facet)
+    if (length(plot$layers) > 1) {
+        plot$layers[[2]]$data <- facetData #ly_label
+    }
+    plot + facet_wrap(~facetData$facet, ncol = 1)
     #ggplot_add(msa_facet, plot, object_name)
 
 }
+
+
+
+
