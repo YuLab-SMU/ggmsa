@@ -1,31 +1,33 @@
 ##' Multiple sequence alignment layer for ggplot2. It plot sequence motifs.
 
 ##' @title geom_seqlogo
-##' @param msa  multiple sequence alignment file or
-##' sequence object in DNAStringSet, RNAStringSet, AAStringSet, BStringSet,
-##' DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin
-##' @param start a numeric, start position to extract subset of alignment
-##' @param end a numeric, end position to extract subset of alignemnt
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'helvetical'.
 ##' @param color A Color scheme. One of 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_NT'.
 ##' @return A list
 ##' @examples 
 ##' #plot multiple sequence alignment and sequence motifs
 ##' f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
-##' ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo(f)
+##' ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo()
 ##' @export
 ##' @author Lang Zhou
-geom_seqlogo <- function(msa, start = NULL, end = NULL, font = "helvetical", color = "Chemistry_NT") {
-    data <- tidy_msa(msa = msa, start = start, end = end)
-    motif_da <- motif(data, font = font, color = color)
+geom_seqlogo <- function(font = "helvetical", color = "Chemistry_NT") {
+    structure(list(font = font, 
+                   color = color),
+              class = "seqlogo")
+}
+
+
+geom_seqlogo1 <- function(tidyData, font = "helvetical", color = "Chemistry_NT") {
+    #data <- tidy_msa(msa = msa, start = start, end = end)
+    motif_da <- motif(tidyData, font = font, color = color)
     ly_logo <- geom_polygon(aes_(x = ~x, y = ~y,  group = ~group, fill = ~color ),
-                            data = motif_da , inherit.aes = FALSE) 
+                            data = motif_da, inherit.aes = FALSE) 
     return(ly_logo)
 }
 
 
-motif <- function(data, font =  "helvetical", color = "Chemistry_NT"){
-    tidy <- data
+motif <- function(tidyData, font =  "helvetical", color = "Chemistry_NT"){
+    tidy <- tidyData
     total_heigh <- getOption("total_heigh")
     logo_width <- getOption("logo_width")
       
@@ -57,6 +59,7 @@ motif <- function(data, font =  "helvetical", color = "Chemistry_NT"){
     moti_da <- do.call(rbind, moti_da) 
     return(moti_da)
 }
+
 
 .onAttach <- function(libname, pkgname){
     options(total_heigh = 4)

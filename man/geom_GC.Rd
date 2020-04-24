@@ -4,16 +4,7 @@
 \alias{geom_GC}
 \title{geom_GC}
 \usage{
-geom_GC(msa, start = NULL, end = NULL)
-}
-\arguments{
-\item{msa}{multiple sequence alignment file or
-sequence object in DNAStringSet, RNAStringSet, AAStringSet, BStringSet,
-DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin}
-
-\item{start}{start position to extract subset of alignment}
-
-\item{end}{end position to extract subset of alignemnt}
+geom_GC()
 }
 \description{
 Multiple sequence alignment layer for ggplot2. It plot points of GC content.
@@ -22,7 +13,7 @@ Multiple sequence alignment layer for ggplot2. It plot points of GC content.
 library(ggplot2) 
 #plot GC content 
 f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
-ggmsa(f, font = NULL, color="Chemistry_NT") + geom_GC(f)
+ggmsa(f, font = NULL, color="Chemistry_NT") + geom_GC()
 }
 \author{
 Lang Zhou

@@ -4,11 +4,9 @@
 \alias{geom_seed}
 \title{geom_seed}
 \usage{
-geom_seed(msa, seed, star = F)
+geom_seed(seed, star = FALSE)
 }
 \arguments{
-\item{msa}{a multiple sequence alignment file or object}
-
 \item{seed}{character, like 'GAGGUAG' a miRNA seed sequence}
 
 \item{star}{a logical value indicating whether symbol of stars should be produced}
@@ -17,17 +15,14 @@ geom_seed(msa, seed, star = F)
 a ggplot layer
 }
 \description{
-highlight the seed in miRNA sequences(test)
-}
-\details{
-We're trying to develop this function.
+Highlighting the seed in miRNA sequences
 }
 \examples{
 miRNA_sequences <- system.file("extdata/seedSample.fa", package="ggmsa")
 ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT", none_bg = TRUE) + 
-geom_seed(miRNA_sequences, seed = "GAGGUAG") 
+geom_seed(seed = "GAGGUAG") 
 ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT") + 
-geom_seed(miRNA_sequences, seed = "GAGGUAG", star = TRUE)
+geom_seed(seed = "GAGGUAG", star = TRUE)
 }
 \author{
 Lang Zhou

@@ -9,6 +9,10 @@ html_preview: false
 
 #  ggmsa: Plot multiple sequence alignment using ggplot2
 
+[![CRAN_Release_Badge](https://www.r-pkg.org/badges/version-ago/ggmsa)](https://cran.r-project.org/package=ggmsa)
+[![CRAN_Download_Badge](https://cranlogs.r-pkg.org/badges/grand-total/ggmsa?color=green)](https://cran.r-project.org/package=ggmsa)
+
+
 **ggmsa** supports visualizing multiple sequence alignment of DNA and protein sequences using ggplot2. It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.
 
 ##  Quick Example 
@@ -31,13 +35,13 @@ ggmsa(nt_sequence, color = "Chemistry_NT")
 ##  Visualizing multiple sequence alignment with sequence logo.
 ```{r fig.height=6, fig.width=13, message=FALSE, warning=FALSE}
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo(f)
+ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo()
 ```
 
 ##  Visualizing multiple sequence alignment with GC content.
 ```{r fig.height=6, fig.width=13, message=FALSE, warning=FALSE}
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_GC(f)
+ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_GC()
 ```
 
 ##  Visualizing multiple sequence alignment with ggtree.
@@ -54,4 +58,14 @@ data = tidy_msa(x, 164, 213)
 p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
                font = NULL, color = "Chemistry_AA") +
     xlim_tree(1)
+```
+
+## Learn more
+
+For more details, please refer to the [online vignette](https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html)
+
+If you have installed it, you can also view the vignette on local.
+
+```r
+browseVignettes("ggstar")
 ```

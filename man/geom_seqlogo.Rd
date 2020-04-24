@@ -4,23 +4,9 @@
 \alias{geom_seqlogo}
 \title{geom_seqlogo}
 \usage{
-geom_seqlogo(
-  msa,
-  start = NULL,
-  end = NULL,
-  font = "helvetical",
-  color = "Chemistry_NT"
-)
+geom_seqlogo(font = "helvetical", color = "Chemistry_NT")
 }
 \arguments{
-\item{msa}{multiple sequence alignment file or
-sequence object in DNAStringSet, RNAStringSet, AAStringSet, BStringSet,
-DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin}
-
-\item{start}{a numeric, start position to extract subset of alignment}
-
-\item{end}{a numeric, end position to extract subset of alignemnt}
-
 \item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'helvetical'.}
 
 \item{color}{A Color scheme. One of 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_NT'.}
@@ -34,7 +20,7 @@ Multiple sequence alignment layer for ggplot2. It plot sequence motifs.
 \examples{
 #plot multiple sequence alignment and sequence motifs
 f <- system.file("extdata/LeaderRepeat_All.fa", package="ggmsa")
-ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo(f)
+ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo()
 }
 \author{
 Lang Zhou

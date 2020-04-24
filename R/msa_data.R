@@ -132,3 +132,15 @@ tidy_msa <- function(msa, start = NULL, end = NULL) {
 ##' @importFrom utils globalVariables
 utils::globalVariables('.')
 
+
+msa2tidy <- function(msaData) {
+  if ("order" %in% names(msaData)) {
+    msaData <- msaData[msaData$order == 1,]
+  }
+  df_tidy <- data.frame(name = msaData$name, 
+                        position = msaData$position, 
+                        character = msaData$character)
+  return(df_tidy)
+}
+
+

@@ -2,6 +2,9 @@
 
 # ggmsa: Plot multiple sequence alignment using ggplot2
 
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/ggmsa)](https://cran.r-project.org/package=ggmsa)
+[![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/ggmsa?color=green)](https://cran.r-project.org/package=ggmsa)
+
 **ggmsa** supports visualizing multiple sequence alignment of DNA and
 protein sequences using ggplot2. It supports a number of colour schemes,
 including Chemistry, Clustal, Shapely, Taylor and Zappo.
@@ -34,7 +37,7 @@ ggmsa(nt_sequence, color = "Chemistry_NT")
 
 ``` r
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo(f)
+ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo()
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
@@ -43,7 +46,7 @@ ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo(f)
 
 ``` r
 f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_GC(f)
+ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_GC()
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
@@ -66,3 +69,14 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+## Learn more
+
+For more details, please refer to the [online
+vignette](https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html)
+
+If you have installed it, you can also view the vignette on local.
+
+``` r
+browseVignettes("ggstar")
+```
