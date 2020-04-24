@@ -67,5 +67,5 @@ For more details, please refer to the [online vignette](https://cran.r-project.o
 If you have installed it, you can also view the vignette on local.
 
 ```r
-browseVignettes("ggstar")
+browseVignettes("ggmsa")
 ```

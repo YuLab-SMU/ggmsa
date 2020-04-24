@@ -78,5 +78,5 @@ vignette](https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html)
 If you have installed it, you can also view the vignette on local.
 
 ``` r
-browseVignettes("ggstar")
+browseVignettes("ggmsa")
 ```
