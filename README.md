@@ -70,7 +70,7 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-## Learn more
+# Learn more
 
 For more details, please refer to the [online
 vignette](https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html)
@@ -80,3 +80,9 @@ If you have installed it, you can also view the vignette on local.
 ``` r
 browseVignettes("ggmsa")
 ```
+
+# NEWS
+
+Latest version change informations:
+
+\-[NEWS](https://github.com/YuLab-SMU/ggmsa/blob/master/NEWS.md)

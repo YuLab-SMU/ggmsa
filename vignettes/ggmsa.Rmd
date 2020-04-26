@@ -156,7 +156,7 @@ ggmsa(protein_sequences, start = 320, end = 360, char_width = 0.5, color = "Chem
 
 **Background** can be specified by `none_bg`. If `none_bg = TRUE`, only the character will be plot.
 ```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, none_bg = TRUE, color = "Chemistry_AA")
+ggmsa(protein_sequences, start = 320, end = 360, none_bg = TRUE) + theme_void()
 ```
 
 **Position Highligthed** can be specified by `posHighligthed`. The `none_bg = FALSE` when you specified position Highligthed by  `posHighligthed`
@@ -208,7 +208,6 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 Visualizing multiple sequence alignment with sequence logo.
 
 ```{r fig.height=6, fig.width=13, message=FALSE, warning=FALSE}
-f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
 ggmsa(nt_sequences, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo()
 ```
 
@@ -227,7 +226,7 @@ We provide two methods for highlighting seed sequences.
 + The seed region is shaded
 
 ```{r fig.height = 2, fig.width = 10, warning=FALSE}
-ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT", none_bg = TRUE) + 
+ggmsa(miRNA_sequences, font = 'DroidSansMono', none_bg = TRUE) + 
    geom_seed(seed = "GAGGUAG") + theme_void()
 ```
 
