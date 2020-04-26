@@ -6,9 +6,9 @@
 ##' library(ggplot2) 
 ##' f <- system.file("extdata/sample.fasta", package="ggmsa")
 ##' # 2 fields
-##' ggmsa(f, end = 120, color="Chemistry_AA") + facet_msa(field = 60)
+##' ggmsa(f, end = 120, font = NULL, color="Chemistry_AA") + facet_msa(field = 60)
 ##' # 3 fields 
-##' ggmsa(f, end = 120, color="Chemistry_AA") + facet_msa(field = 40)
+##' ggmsa(f, end = 120, font = NULL,  color="Chemistry_AA") + facet_msa(field = 40)
 ##' @export
 ##' @author Lang Zhou
 facet_msa <- function(field) {
