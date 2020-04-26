@@ -105,7 +105,7 @@ tidy_msa <- function(msa, start = NULL, end = NULL) {
     }) %>% do.call('rbind', .)
     ## for DNAbin and AAbin
     ## alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
-    alndf <- as.data.frame(alnmat)
+    alndf <- as.data.frame(alnmat, stringsAsFactors = F)
     
     alndf$name = names(aln)
     
