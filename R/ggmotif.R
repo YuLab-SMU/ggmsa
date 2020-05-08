@@ -14,7 +14,7 @@
 ##' ggmotif(nt_sequence, color = "Chemistry_NT")
 ##' @export
 ##' @author Lang Zhou
-ggmotif <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Chemistry_NT") {
+ggmotif <- function(msa, start = NULL, end = NULL, font = "helvetical", color = "Chemistry_NT") {
   
     data <- tidy_msa(msa, start = start, end = end)
   
