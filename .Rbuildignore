@@ -4,3 +4,6 @@ Makefile
 README.md
 README_files
 README.Rmd
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

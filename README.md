@@ -1,19 +1,23 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # ggmsa: Plot multiple sequence alignment using ggplot2
 
+<!-- badges: start -->
+
 [![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/ggmsa)](https://cran.r-project.org/package=ggmsa)
 [![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/ggmsa?color=green)](https://cran.r-project.org/package=ggmsa)
+<!-- badges: end -->
 
-**ggmsa** supports visualizing multiple sequence alignment of DNA and
-protein sequences using ggplot2. It supports a number of colour schemes,
-including Chemistry, Clustal, Shapely, Taylor and Zappo.
+`ggmsa` supports visualizing multiple sequence alignment of nucleotide
+sequences and protein sequences using ggplot2. It supports a number of
+colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.
 
 ## Quick Example
 
 Plot multiple sequence alignment(colour scheme = ‘Chemistry’).
 
-### protein sequences
+### Protein Sequences
 
 ``` r
 library(ggmsa)
@@ -22,36 +26,27 @@ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
 ggmsa(protein_sequences, 164, 213, color = "Chemistry_AA")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](man/figures/unnamed-chunk-2-1.png)<!-- -->
 
-### DNA sequences
-
-``` r
-nt_sequence <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(nt_sequence, color = "Chemistry_NT")
-```
-
-![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
-
-## Visualizing multiple sequence alignment with sequence logo.
+### DNA Sequences
 
 ``` r
-f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_seqlogo()
+nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+ggmsa(nt_sequences,font = NULL, color = "Chemistry_NT")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/unnamed-chunk-3-1.png)<!-- -->
 
-## Visualizing multiple sequence alignment with GC content.
+### RNA Sequences
 
 ``` r
-f <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(f, font = NULL, color = "Chemistry_NT" ) + geom_GC()
+miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
+ggmsa(miRNA_sequences, color = "Chemistry_NT")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
-## Visualizing multiple sequence alignment with ggtree.
+## Visualizing Multiple Sequence Alignment With `ggtree`.
 
 ``` r
 library(Biostrings)
@@ -68,7 +63,7 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
     xlim_tree(1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
 # Learn more
 
@@ -80,9 +75,3 @@ If you have installed it, you can also view the vignette on local.
 ``` r
 browseVignettes("ggmsa")
 ```
-
-# NEWS
-
-Latest version change informations:
-
-\-[NEWS](https://github.com/YuLab-SMU/ggmsa/blob/master/NEWS.md)
