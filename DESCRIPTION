@@ -17,7 +17,7 @@ Imports:
 Suggests:
     ape,
     cowplot,
-    ggtree,
+    ggtree (>= 1.17.1),
     knitr,
     methods,
     seqmagick

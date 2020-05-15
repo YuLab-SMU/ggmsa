@@ -36,19 +36,19 @@
 ##' ggmsa(fasta, 164, 213, color="Chemistry_AA")
 ##' 
 ##' #XMultipleAlignment objects can be used as input in the 'ggmsa'
-##' AAMultipleAlignment <- Biostrings::readAAMultipleAlignment(fasta)
-##' ggmsa(AAMultipleAlignment, 164, 213, color="Chemistry_AA")
+##' #AAMultipleAlignment <- Biostrings::readAAMultipleAlignment(fasta)
+##' #ggmsa(AAMultipleAlignment, 164, 213, color="Chemistry_AA")
 ##' 
 ##' #XStringSet objects can be used as input in the 'ggmsa'
-##' AAStringSet <- Biostrings::readAAStringSet(fasta)
-##' ggmsa(AAStringSet, 164, 213, color="Chemistry_AA")
+##' #AAStringSet <- Biostrings::readAAStringSet(fasta)
+##' #ggmsa(AAStringSet, 164, 213, color="Chemistry_AA")
 ##' 
 ##' #Xbin objects from 'seqmagick' can be used as input in the 'ggmsa'
-##' AAbin <- seqmagick::fa_read(fasta)
-##' ggmsa(AAbin, 164, 213, color="Chemistry_AA")
+##' #AAbin <- seqmagick::fa_read(fasta)
+##' #ggmsa(AAbin, 164, 213, color="Chemistry_AA")
 ##' @export
 ##' @author Guangchuang Yu
-ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE, posHighligthed = NULL, seq_name = NULL) {
+ggmsa <- function(msa, start = NULL, end = NULL, font = "helvetical", color = "Clustal", char_width = 0.9, none_bg = FALSE, posHighligthed = NULL, seq_name = NULL) {
     data <- tidy_msa(msa, start = start, end = end)
     
     ggplot() + geom_msa(data, font = font, 
@@ -64,13 +64,24 @@ ggmsa <- function(msa, start=NULL, end=NULL, font = "helvetical", color = "Clust
 
 ##' @importFrom ggplot2 theme_minimal
 theme_msa <- function() {
-    list(xlab(NULL), 
-         ylab(NULL),
-         coord_fixed(),
-         theme_minimal() + 
-         theme(legend.position='none', 
-               strip.text = element_blank(), 
-               panel.spacing.y = unit(.4, "in"))
+     # start <- min(data$position)
+     # end <- max(data$position)
+     # x_label <- pretty(start:end)
+     # x_label[1] <- start
+     # x_label[length(x_label)] <- end
+     #x_label_df <- data.frame(x = x_label, y = 0)
+
+     list(
+     #geom_text(data = x_label_df, mapping = aes(x = x, y = y, label = x)),
+     #scale_x_continuous(breaks = x_label),
+     xlab(NULL), 
+     ylab(NULL),
+     coord_fixed(),
+     theme_minimal() + 
+     theme(legend.position='none',
+           strip.text = element_blank(),
+           panel.spacing.y = unit(.4, "in"))
+         
          )
 }
 

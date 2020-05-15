@@ -40,19 +40,37 @@ ggplot_add.GCcontent <- function(object, plot, object_name) {
 
 ##' @importFrom ggplot2 facet_wrap
 ##' @importFrom ggplot2 ggplot_add
+##' @importFrom ggplot2 scale_x_continuous
+##' @importFrom ggplot2 geom_text
 ##' @method ggplot_add facet_msa
 ##' @export
 ggplot_add.facet_msa <- function(object, plot, object_name){
-  msaData <- plot$layers[[1]]$data #调取msaData数据
-  field <- object$field
-  facetData <- facet_data(msaData, field)
-  #num_facet <- max(facetData$facet) + 1  ##分段数目
-  plot$layers[[1]]$data <- facetData #ly_bg
-  if (length(plot$layers) > 1) {
-    plot$layers[[2]]$data <- facetData #ly_label
-  }
-  plot + facet_wrap(~facetData$facet, ncol = 1)
-  #ggplot_add(msa_facet, plot, object_name)
+    msaData <- plot$layers[[1]]$data #调取msaData数据
+    field <- object$field
+    facetData <- facet_data(msaData, field)
+
+    facetData$x_text <- NA
+    start <- min(facetData$position)
+    end <- max(facetData$position)
+    x_label <- pretty(start:end)
+    x_label[1] <- start
+    #x_label[length(x_label)] <- end
+  
+    facetData[facetData$position %in% x_label,]$x_text <- 
+        facetData[facetData$position %in% x_label,]$position
+
+    facetData[!is.na(facetData$x_text),]$x_text <- 
+        facetData[!is.na(facetData$x_text),]$x_text + field * facetData[!is.na(facetData$x_text),]$facet
+  
+    plot$layers[[1]]$data <- facetData #ly_bg
+  
+    if (length(plot$layers) > 1) 
+        plot$layers[[2]]$data <- facetData #ly_label
+  
+    plot + 
+      geom_text(aes_(x = ~position, y = ~0, label = ~x_text), data = facetData, na.rm = T, color = "#6d6d6d", size = 3.2) + 
+      facet_wrap(~facetData$facet, ncol = 1) + scale_x_continuous(breaks = NULL)
+    #ggplot_add(msa_facet, plot, object_name)
   
 }
 

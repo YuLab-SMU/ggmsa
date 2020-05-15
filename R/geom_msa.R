@@ -20,16 +20,28 @@ geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 
     data <- msa_data(data, font = font, color = color, char_width = char_width )
     bg_data <- data
     
+    ##creat x label
+    # bg_data$x_text <- NA
+    # start <- min(tidyData$position)
+    # end <- max(tidyData$position)
+    # x_label <- pretty(start:end)
+    # x_label[1] <- start
+    # x_label[length(x_label)] <- end
+    # bg_data[bg_data$position %in% x_label,]$x_text <- 
+    #     bg_data[bg_data$position %in% x_label,]$position
+     
+    #ly_xText <- geom_text(mapping = aes_(x = ~position, y = ~0, label = ~x_text), data = bg_data, na.rm = TRUE)
+    
     mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
     
-    if  (!isTRUE(seq_name)) {
+    if  (!isTRUE(seq_name)) { #paramter 'seq_name' work
         if ('y' %in% colnames(data) | isFALSE(seq_name) ) {
             y <- as.numeric(bg_data$name)
             mapping <- modifyList(mapping, aes_(y = ~y))
         } 
     }
 
-    if (!is.null(posHighligthed)) {
+    if (!is.null(posHighligthed)) { #paramter 'posHighligthed' work
         none_bg = TRUE
         bg_data <- bg_data[bg_data$position %in% posHighligthed,]
         bg_data$postion <- as.factor(bg_data$position)
@@ -51,7 +63,7 @@ geom_msa <- function(data, font = "helvetical", color = "Clustal", char_width = 
     ly_label <- geom_polygon(aes_(x = ~x, y = ~yy,  group = ~group ),
                              data = data, inherit.aes = FALSE)
     
-    if (none_bg & is.null(posHighligthed) ) {
+    if (none_bg & is.null(posHighligthed)) { #paramter 'none_bg' work
         return(ly_label)
     }
     
