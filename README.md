@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggmsa: Plot multiple sequence alignment using ggplot2
+# ggmsa: Plot multiple sequence alignment using ggplot2 <img src="man/figures/logo.png" height="139" align="right" />
 
 <!-- badges: start -->
 
@@ -67,11 +67,13 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 
 # Learn more
 
-For more details, please refer to the [online
+For more details about the version in CRAN, please refer to the [online
 vignette](https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html)
 
-If you have installed it, you can also view the vignette on local.
+Moreover, check out the guides for learning new features with the
+current development version:
 
-``` r
-browseVignettes("ggmsa")
-```
+  - [Getting
+    Started](https://yulab-smu.github.io/ggmsa/articles/ggmsa.html)
+  - [Extensions
+    Plots](https://yulab-smu.github.io/ggmsa/articles/Extensions/extensions.html)
