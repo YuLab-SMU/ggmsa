@@ -22,6 +22,7 @@ geom_seed <- function(seed, star = FALSE) {
 ##' @importFrom stringr str_c
 ##' @importFrom stringr str_locate
 geom_seed1 <- function(tidyData, seed, star) {
+    get_asteriskScale(tidyData)
     #prepare <- prepare_msa(msa)
     #seedResult <- vmatchPattern(pattern = seed, subject = prepare)
     tidyData$y <- as.numeric(tidyData$name)
@@ -57,3 +58,14 @@ geom_seed1 <- function(tidyData, seed, star) {
     return(ly_seed)
  }
 
+
+get_asteriskScale <- function(tidyData) {
+    m <- max(tidyData$position)
+    seq_name <- factor(tidyData$name, levels = unique(tidyData$name))
+    n <- max(as.numeric(seq_name))
+    char_scale <- diff(range(star$x))/diff(range(star$y))
+    char_scale_2 <- char_scale * 3/2 * n/m
+  
+    return(options("char_scale_2" = char_scale_2))
+  
+}

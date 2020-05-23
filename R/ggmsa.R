@@ -59,29 +59,18 @@ ggmsa <- function(msa, start = NULL, end = NULL, font = "helvetical", color = "C
                         seq_name = seq_name) + 
                theme_msa()
                
- 
 }
 
 ##' @importFrom ggplot2 theme_minimal
 theme_msa <- function() {
-     # start <- min(data$position)
-     # end <- max(data$position)
-     # x_label <- pretty(start:end)
-     # x_label[1] <- start
-     # x_label[length(x_label)] <- end
-     #x_label_df <- data.frame(x = x_label, y = 0)
-
      list(
-     #geom_text(data = x_label_df, mapping = aes(x = x, y = y, label = x)),
-     #scale_x_continuous(breaks = x_label),
-     xlab(NULL), 
-     ylab(NULL),
-     coord_fixed(),
-     theme_minimal() + 
-     theme(legend.position='none',
-           strip.text = element_blank(),
-           panel.spacing.y = unit(.4, "in"))
-         
+         xlab(NULL), 
+         ylab(NULL),
+         coord_fixed(clip = "off"),
+         theme_minimal() + 
+         theme(legend.position='none',
+               strip.text = element_blank(),
+               panel.spacing.y = unit(.4, "in"))
          )
 }
 

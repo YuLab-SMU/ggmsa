@@ -55,7 +55,7 @@ d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
 library(ape)
 tree <- bionj(d)
 library(ggtree)
-p <- ggtree(tree ) + geom_tiplab()
+p <- ggtree(tree) + geom_tiplab()
 
 data = tidy_msa(x, 164, 213)
 p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',

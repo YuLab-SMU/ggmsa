@@ -3,6 +3,11 @@
 SeedStar <- function(x = NULL , y = NULL) {
   
     char_width <- getOption("asterisk_width")
+    char_scale_2 <- getOption("char_scale_2")
+    
+    x_width <- char_scale_2 * diff(range(star$y))
+    star$x = star$x * x_width/diff(range(star$x))
+    
     char_scale <- diff(range(star$x))/diff(range(star$y))
     star$x = star$x * (char_width * char_scale)/diff(range(star$x)) 
     star$y = star$y * char_width/diff(range(star$y))
@@ -51,11 +56,12 @@ Geomasterisk <- ggproto("Geomasterisk", Geom,
 ##' @param ... additional parameters
 ##' @importFrom ggplot2 layer
 ##' @return ggplot2 layer
-##' @export
+## @export
+##' @noRd
 ##' @author Lang Zhou
 ##' @examples
-##' library(ggplot2)
-##' ggplot(mtcars, aes(mpg, disp)) + geom_asterisk()
+##' #library(ggplot2)
+##' #ggplot(mtcars, aes(mpg, disp)) + geom_asterisk()
 geom_asterisk <- function(mapping = NULL, data = NULL, stat = "identity",
                            position = "identity", na.rm = FALSE, show.legend = NA,
                            inherit.aes = TRUE, ...) {
