@@ -26,7 +26,8 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile}
 
-\item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
+\item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT',
+"LETTER", "CN6". Defaults is 'Clustal'.}
 
 \item{char_width}{characters width. Defaults is 0.9.}
 
@@ -45,7 +46,7 @@ ggplot object
 Plot multiple sequence alignment using ggplot2 with multiple color schemes supported.
 }
 \examples{
-#plot multiple sequences by loading fasta format 
+#plot multiple sequences by loading fasta format
 fasta <- system.file("extdata", "sample.fasta", package = "ggmsa")
 ggmsa(fasta, 164, 213, color="Chemistry_AA")
 
