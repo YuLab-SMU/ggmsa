@@ -24,7 +24,7 @@ geom_GC1 <- function(tidyData){
     GC <-GC[GC$character == "GC",]
     col_num <- levels(factor(tidy$position))
     col_len <- length(col_num) + GC_pos
-    ly_GC <- geom_point(data = GC, aes_(x = ~col_len, y = ~ypos, size = ~fre, color = ~fre))
+    ly_GC <- geom_point(data = GC, aes_(x = ~col_len, y = ~ypos, size = ~fre, color = ~fre), na.rm = T)
     return(ly_GC)
 }
 ##' get GC content

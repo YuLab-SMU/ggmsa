@@ -172,3 +172,5 @@ If `seq_name = FALSE` the sequence name will not be displayed in any case.
 ```{r fig.height = 3, fig.width = 10, warning=FALSE}
 ggmsa(protein_sequences, 164, 213, font = NULL, color = "Chemistry_AA", seq_name = FALSE)
 ```
+
+#  Reference

@@ -23,13 +23,15 @@ facet_data <- function(msaData, field) {
     msaData[msaData$position %% field == 0,]$facet <- 
         msaData[msaData$position %% field == 0,]$facet - 1 ##临界值调整
     #分面对齐
-    if ('x' %in% colnames(msaData)) 
+    if ('x' %in% colnames(msaData))
         msaData$x <- msaData$x - (msaData$facet * field) #ly_label translation
 
     msaData$position <- msaData$position - (msaData$facet * field) #ly_bg translation
     return(msaData)
     #msa_facet <- facet_wrap(msaData$facet, nrow = num_facet)
 }
+
+
 
 
 

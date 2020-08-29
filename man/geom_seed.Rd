@@ -19,9 +19,9 @@ Highlighting the seed in miRNA sequences
 }
 \examples{
 miRNA_sequences <- system.file("extdata/seedSample.fa", package="ggmsa")
-ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT", none_bg = TRUE) + 
-geom_seed(seed = "GAGGUAG") 
-ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT") + 
+ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT", none_bg = TRUE) +
+geom_seed(seed = "GAGGUAG", star = FALSE)
+ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT") +
 geom_seed(seed = "GAGGUAG", star = TRUE)
 }
 \author{

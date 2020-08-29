@@ -3,7 +3,7 @@
 ##' @param y A data frame, data of a tidy fasta,created by 'tidy_fasta()'.
 ##' @keywords clustal
 
-color_Clustal<- function(y) {
+color_Clustal <- function(y) {
     char_freq <- lapply(split(y, y$position), function(x) table(x$character))
     col_convert <- lapply(char_freq, function(seq_column) {
         clustal <- rep("#ffffff", length(seq_column)) ##The white as the background
@@ -14,7 +14,7 @@ color_Clustal<- function(y) {
             i <- grep(char, scheme_clustal$re_position)
             for (j in i) {
                 if (scheme_clustal$type[j] == "combined"){
-                    rr <- sum(r[strsplit(scheme_clustal$re_gp[j], '')[[1]]], na.rm=T)
+                    rr <- sum(r[strsplit(scheme_clustal$re_gp[j], '')[[1]]], na.rm = T)
                     if (rr > scheme_clustal$thred[j]) {
                         clustal[pos] <- scheme_clustal$colour[j]}
                     } else{
