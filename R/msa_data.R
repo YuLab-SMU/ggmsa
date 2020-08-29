@@ -4,7 +4,7 @@
 ##' @title msa_data
 ##' @param fasta Aligned fasta file.
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. . Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA','LETTER'，‘CN6’, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
 ##' @return A data frame
 ##' @examples
@@ -14,8 +14,8 @@
 ##' @noRd
 ##' @author Guangchuang Yu
 msa_data <- function(tidymsa, font = "helvetical", color = "Clustal", char_width = 0.9) {
-    color <- match.arg(color, c("Clustal","Chemistry_AA","Shapely_AA","Zappo_AA","Taylor_AA",
-                                "Chemistry_NT","Shapely_NT","Zappo_NT","Taylor_NT" ))
+    color <- match.arg(color, c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA", "Taylor_AA",
+                                "Chemistry_NT", "Shapely_NT", "Zappo_NT", "Taylor_NT", "LETTER", "CN6" ))
 
     y <- tidymsa
 
@@ -140,6 +140,8 @@ msa2tidy <- function(msaData) {
   df_tidy <- data.frame(name = msaData$name, 
                         position = msaData$position, 
                         character = msaData$character)
+  df_tidy$character <- as.character(df_tidy$character)
+  
   return(df_tidy)
 }
 
