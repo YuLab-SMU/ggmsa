@@ -82,28 +82,28 @@ seqlogo_data <- function(data, font = "helvetical", color = "Chemistry_NT", adap
 
     col_num <- as.numeric(levels(factor(tidy$position))) # the MSA column numbers
     moti_da <- lapply(col_num, function(j){
-        clo <- tidy[tidy$position == j, ] ## 计算每列碱基的频率
+        clo <- tidy[tidy$position == j, ] ## Calculate the char frequency in each column
         fre <- prop.table(table(clo$character))
-        ywidth <- sort(total_heigh * fre ) ## 总体高度为total_heigh，各字符高度按其频率分配
-        column_char_color <- unique(clo[c("character", "color")]) ## 每列字体颜色
+        ywidth <- sort(total_heigh * fre ) ## total_heigh is overall hight，the height of each char is assigned.
+        column_char_color <- unique(clo[c("character", "color")]) ## calling color scheme
         font_f <- font_fam[[font]]
         motif_char <- font_f[names(ywidth)]
-        ds_ <- lapply(seq_along(motif_char), function(i){ ## 分配每列motif各字符高度及位置
+        ds_ <- lapply(seq_along(motif_char), function(i){
             ds_ <- motif_char[[i]]
             names(ds_)[names(ds_) == "x"] <- "logo_x"
             names(ds_)[names(ds_) == "y"] <- "logo_y"
             ds_$char <- names(motif_char[i])
-            ds_$logo_x <- ds_$logo_x * logo_width/diff(range(ds_$logo_x)) #x固定为.9
-            ds_$logo_y <- ds_$logo_y * ywidth[[i]]/diff(range(ds_$logo_y)) #y根据其频率分配高度
-            ymotif <- sum(ywidth[0:(i - 1)]) # 当前字符的下方所有字符所占高度
-            ds_$logo_x <- ds_$logo_x - min(ds_$logo_x) - logo_width/2 + j # j 为当前所在列数
+            ds_$logo_x <- ds_$logo_x * logo_width/diff(range(ds_$logo_x)) #width = .9
+            ds_$logo_y <- ds_$logo_y * ywidth[[i]]/diff(range(ds_$logo_y)) #hight = overall hight * frequency
+            ymotif <- sum(ywidth[0:(i - 1)]) # sum-hight currently
+            ds_$logo_x <- ds_$logo_x - min(ds_$logo_x) - logo_width/2 + j #  moving char horizontally
             ds_$logo_y <- ds_$logo_y - min(ds_$logo_y) - ywidth[[i]]/2 + ymotif + ywidth[[i]]/2
             if (top) {
               ds_$logo_y <- ds_$logo_y + nrow(tidy[tidy$position == j, ]) + .5
             }
-            ## ds_$y - min(ds_$y) - ywidth[[i]]/2 以0为中心
-            ## + ymotif 加上位于其下方的motif字符的高度
-            ## + ywidth[[i]]/2 再加上自身高度
+            ## ds_$y - min(ds_$y) - ywidth[[i]]/2, Centered at zero
+            ## + ymotif, sum-hight that are below the char currently
+            ## + ywidth[[i]]/2, the char height currently
             ds_$group <- paste0("P", j, '-', "Char", names(motif_char[i]))
             ds_$color <- column_char_color[column_char_color$character == unique(ds_$char), "color"]
             #ds_$color <- as.character(ds_$color)
@@ -120,7 +120,6 @@ seqlogo_data <- function(data, font = "helvetical", color = "Chemistry_NT", adap
     moti_da <- moti_da[c("name", other_cn)]
     add_col <- tidy[,!names(tidy) %in% names(moti_da)]
     moti_da <- cbind(add_col[1,], moti_da, row.names = NULL)
-    #moti_da <- moti_da[,c(7, 1:6)]
     return(moti_da)
 }
 
