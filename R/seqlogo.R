@@ -106,9 +106,6 @@ seqlogo_data <- function(data, font = "helvetical", color = "Chemistry_NT", adap
             ## + ywidth[[i]]/2, the char height currently
             ds_$group <- paste0("P", j, '-', "Char", names(motif_char[i]))
             ds_$color <- column_char_color[column_char_color$character == unique(ds_$char), "color"]
-            #ds_$color <- as.character(ds_$color)
-            # ds_$group <- paste0("P", j, "Char", names(motif_char[i]))
-            # ds_$color <- scheme_NT[names(motif_char[i]), color]
             return(ds_)
          })
         ds <- do.call(rbind, ds_)
