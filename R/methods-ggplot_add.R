@@ -47,7 +47,7 @@ ggplot_add.GCcontent <- function(object, plot, object_name) {
 ##' @method ggplot_add facet_msa
 ##' @export
 ggplot_add.facet_msa <- function(object, plot, object_name){
-    msaData <- plot$layers[[1]]$data #调取msaData数据
+    msaData <- plot$layers[[1]]$data 
     field <- object$field
     facetData <- facet_data(msaData, field)
 

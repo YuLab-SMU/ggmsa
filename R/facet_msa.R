@@ -18,11 +18,11 @@ facet_msa <- function(field) {
 }
 
 facet_data <- function(msaData, field) {
-    msaData$facet <- msaData$position %/% field ##设置分面变量
+    msaData$facet <- msaData$position %/% field 
   
     msaData[msaData$position %% field == 0,]$facet <- 
-        msaData[msaData$position %% field == 0,]$facet - 1 ##临界值调整
-    #分面对齐
+        msaData[msaData$position %% field == 0,]$facet - 1 
+
     if ('x' %in% colnames(msaData))
         msaData$x <- msaData$x - (msaData$facet * field) #ly_label translation
 

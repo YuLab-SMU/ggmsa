@@ -43,7 +43,7 @@ available_msa <- function(){
     message("XStringSet objects from 'Biostrings' package:")
     cat(supported_msa_class[!grepl("bin", supported_msa_class)],'\n')
   
-    message("bin objects from 'seqmagick' package:")
+    message("bin objects:")
     cat(supported_msa_class[grepl("bin", supported_msa_class)])
   
 }
