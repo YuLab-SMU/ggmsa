@@ -5,34 +5,31 @@
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'helvetical'.
 ##' @param mapping aes mapping
 ##' If font = NULL, only plot the background tile.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'ï¼Œâ€˜CN6â€™, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'£¬¡®CN6¡¯, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
 ##' @param none_bg a logical value indicating whether backgroud should be produced.  Defaults is FALSE.
 ##' @param posHighligthed A numeric vector of the position that need to be highlighted.
 ##' @param seq_name a logical value indicating whether seqence names should be displayed.
 ##'  Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed.
 ##'  If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.
+##' @param order a numeric vector whose length is equal to the number of sequences.
+##' @param consensus_views a logical value that opeaning consensus views.
+##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
+##' @param disagreement a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).
 ##' @param ... additional parameter
 ##' @return A list
 ##' @importFrom utils modifyList
 ##' @export
 ##' @author Guangchuang Yu
-geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Clustal", char_width = 0.9, none_bg = FALSE, posHighligthed = NULL, seq_name = NULL, ... ) {
+geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Clustal", char_width = 0.9,
+                     none_bg = FALSE, posHighligthed = NULL, seq_name = NULL, consensus_views = FALSE,
+                     use_dot = FALSE, order = NULL, disagreement = FALSE, ... ) {
 
-    data <- msa_data(data, font = font, color = color, char_width = char_width )
+    data <- msa_data(data, font = font, color = color,
+                     char_width = char_width, consensus_views  = consensus_views,
+                     use_dot = use_dot, order = order, disagreement = disagreement)
     bg_data <- data
 
-    ##creat x label
-    # bg_data$x_text <- NA
-    # start <- min(tidyData$position)
-    # end <- max(tidyData$position)
-    # x_label <- pretty(start:end)
-    # x_label[1] <- start
-    # x_label[length(x_label)] <- end
-    # bg_data[bg_data$position %in% x_label,]$x_text <-
-    #     bg_data[bg_data$position %in% x_label,]$position
-
-    #ly_xText <- geom_text(mapping = aes_(x = ~position, y = ~0, label = ~x_text), data = bg_data, na.rm = TRUE)
     if(is.null(mapping)) {
         mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
     }
@@ -57,15 +54,16 @@ geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Clustal
         return(ly_bg)
     }
 
-    #data <- data[order(data$order),]
-
     if ('y' %in% colnames(data)) {
         data$yy = data$yy - as.numeric(data$name) + data$y
     }
 
-    ly_label <- geom_polygon(aes_(x = ~x, y = ~yy,  group = ~group),
-                             data = data, inherit.aes = FALSE)
+    label_mapping <- aes_(x = ~x, y = ~yy,  group = ~group)
+    if (consensus_views && !use_dot) {
+        label_mapping <- modifyList(label_mapping, aes_(fill = ~I(font_color)))
+    }
 
+    ly_label <- geom_polygon(mapping = label_mapping, data = data, inherit.aes = FALSE)
     if (none_bg & is.null(posHighligthed)) { #paramter 'none_bg' work
         return(ly_label)
     }

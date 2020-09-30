@@ -1,11 +1,15 @@
-##' This function parses FASTA file and convert it to a tidy data frame. 
+##' This function parses FASTA file and convert it to a tidy data frame.
 ##' The function will also assign color to each molecule (amino acid or nucleotide) according to the selected color scheme. Sequence logo data for drawing alignment label will also be added if font != NULL. The output of msa_data() is the input of geom_msa().
 ##'
 ##' @title msa_data
 ##' @param fasta Aligned fasta file.
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. . Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA','LETTER'ï¼Œâ€˜CN6â€™, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA','LETTER'£¬¡®CN6¡¯, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
+##' @param order a numeric vector whose length is equal to the number of sequences.
+##' @param consensus_views a logical value that opeaning consensus views.
+##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
+##' @param disagreement a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).
 ##' @return A data frame
 ##' @examples
 ##' fasta <- system.file("extdata/sample.fasta", package="ggmsa")
@@ -13,56 +17,74 @@
 ## @export
 ##' @noRd
 ##' @author Guangchuang Yu
-msa_data <- function(tidymsa, font = "helvetical", color = "Clustal", char_width = 0.9) {
+msa_data <- function(tidymsa, font = "helvetical", color = "Clustal", char_width = 0.9,
+                     consensus_views = FALSE, use_dot = FALSE, order = NULL, disagreement = FALSE) {
     color <- match.arg(color, c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA", "Taylor_AA",
                                 "Chemistry_NT", "Shapely_NT", "Zappo_NT", "Taylor_NT", "LETTER", "CN6" ))
 
     y <- tidymsa
 
+    ## add color
     if (color == "Clustal"){
         y <- color_Clustal(y)
-    } else {
-        y <- color_scheme(y, color)
+    }else {
+        if (consensus_views) {
+            consensus <- get_consensus(y)
+            tc <- color_scheme(y, color) %>% tidy_color(consensus, disagreement) #colors cleaned
+            y <- color_scheme(consensus, color) %>% rbind(tc) #add consensus sequence
+            if (use_dot){
+                y[is.na(y$color), "character"] <- "."
+            }else {
+                y$font_color <- "black"
+                y[is.na(y$color), "font_color"] <- "grey"
+            }
+        }else {
+            y <- color_scheme(y, color)
+        }
     }
+    y$name <- order_name(y$name, order = order, consensus_views = consensus_views)
+    y$ypos <- as.numeric(y$name)
 
     if (is.null(font)) {
-        return(y)
+      return(y)
     }
-    
-    font_f <- font_fam[[font]]
-    data_sp <- font_f[unique(y$character)] ## calling internal outline polygons 
 
+    ## calling internal polygons
+    font_f <- font_fam[[font]]
+    data_sp <- font_f[unique(y$character)]
+    ## To adapt to tree data
     if (!'name' %in% names(y)) {
         if ('label' %in% names(y)) {
             ## y <- dplyr::rename(y, name = label)
             names(y)[names(y) == 'label'] <- "name"
-        } else {
+        }else {
             stop("unknown sequence name...")
         }
     }
 
-    y$name <- factor(y$name, levels = unique(y$name))
-    y$ypos <- as.numeric(y$name)
-
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
         dd <- data_sp[[d$character]]
-        char_scale <- diff(range(dd$x))/diff(range(dd$y))#equal proportion
-        
-        if ( diff(range(dd$x)) <= diff(range(dd$y)) ){#y-width = char_width, x-width scaled proportionally 
-            dd$x <- dd$x * (char_width * char_scale)/diff(range(dd$x))
-            dd$y <- dd$y * char_width/diff(range(dd$y))
+        if(d$character == "."){ # '.' without zooming
+          dd$x <- dd$x - min(dd$x) + d$position - diff(range(dd$x))/2
+          dd$y <- dd$y - min(dd$y) + d$ypos- diff(range(dd$y))/2
+        }else {# other characters
+            char_scale <- diff(range(dd$x))/diff(range(dd$y))#equal proportion
 
-            dd$x <- dd$x - min(dd$x) + d$position - (char_width * char_scale)/2
-            dd$y <- dd$y - min(dd$y) + d$ypos - char_width/2
-        }else{                                        #x-width = char_width, y-width scaled proportionally 
-            dd$x <- dd$x * char_width/diff(range(dd$x))
-            dd$y <- dd$y * char_width/(diff(range(dd$y)) * char_scale)
-          
-            dd$x <- dd$x - min(dd$x) + d$position - char_width/2
-            dd$y <- dd$y - min(dd$y) + d$ypos - (char_width/char_scale)/2
-         }
-        
+            if(diff(range(dd$x)) <= diff(range(dd$y)) ) {#y_width = char_width, x-width scaled proportionally
+                dd$x <- dd$x * (char_width * char_scale)/diff(range(dd$x))
+                dd$y <- dd$y * char_width/diff(range(dd$y))
+
+                dd$x <- dd$x - min(dd$x) + d$position - (char_width * char_scale)/2
+                dd$y <- dd$y - min(dd$y) + d$ypos - char_width/2
+            }else {                                       #x_width = char_width, y-width scaled proportionally
+                dd$x <- dd$x * char_width/diff(range(dd$x))
+                dd$y <- dd$y * char_width/(diff(range(dd$y)) * char_scale)
+
+                dd$x <- dd$x - min(dd$x) + d$position - char_width/2
+                dd$y <- dd$y - min(dd$y) + d$ypos - (char_width/char_scale)/2
+            }
+        }
         cn <- colnames(d)
         cn <- cn[!cn %in% c('x','y', 'ypos')]
         for (nn in cn) {
