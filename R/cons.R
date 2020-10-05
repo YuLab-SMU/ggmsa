@@ -1,4 +1,4 @@
-tidy_color <- function(y, consensus, disagreement) { 
+tidy_color <- function(y, consensus, disagreement) {
     c <- lapply(unique(y$position), function(i) {
         msa_cloumn <- y[y$position == i, ]
         cons_char  <- consensus[consensus$position == i, "character"]
@@ -7,9 +7,9 @@ tidy_color <- function(y, consensus, disagreement) {
           msa_cloumn$color <- NA
         }
         if (disagreement) {
-            msa_cloumn[logic, "color"] <- NA 
+            msa_cloumn[logic, "color"] <- NA
         }else {
-            msa_cloumn[!logic, "color"] <- NA 
+            msa_cloumn[!logic, "color"] <- NA
         }
         msa_cloumn
     }) %>% do.call("rbind", .)
@@ -19,10 +19,10 @@ tidy_color <- function(y, consensus, disagreement) {
 
 get_consensus <- function(tidy) {
     cons <- lapply(unique(tidy$position), function(i) { #Iterate through each columns
-        msa_cloumn <- tidy[tidy$position == i, ] 
+        msa_cloumn <- tidy[tidy$position == i, ]
         cons <- data.frame(position = i)
         # if(ignore_gaps) {
-        #     msa_cloumn <- tidy[tidy$position == i&!tidy$character %in% "-", ] 
+        #     msa_cloumn <- tidy[tidy$position == i&!tidy$character %in% "-", ]
         # }
         #Gets the highest frequency characters
         fre <- table(msa_cloumn$character) %>% data.frame
@@ -35,8 +35,9 @@ get_consensus <- function(tidy) {
         }
         cons
         }) %>% do.call("rbind", .)
-  
+
         cons$name = "Consensus"
+        cons$character <- as.character(cons$character) #debug 'as.character'
         return(cons)
 }
 
@@ -61,4 +62,4 @@ order_name <- function(name, order = NULL, consensus_views = FALSE) {
     }
     return(name)
 }
-ggmsa(protein_sequences, 164, 213, color="Chemistry_AA", consensus_views = T, use_dot = T)
+

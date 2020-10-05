@@ -13,7 +13,11 @@ ggmsa(
   char_width = 0.9,
   none_bg = FALSE,
   posHighligthed = NULL,
-  seq_name = NULL
+  seq_name = NULL,
+  consensus_views = FALSE,
+  use_dot = FALSE,
+  order = NULL,
+  disagreement = FALSE
 )
 }
 \arguments{
@@ -26,7 +30,7 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile}
 
-\item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
+\item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER','CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
 
 \item{char_width}{characters width. Defaults is 0.9.}
 
@@ -34,9 +38,15 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{posHighligthed}{A numeric vector of the position that need to be highlighted.}
 
-\item{seq_name}{a logical value indicating whether seqence names should be displayed.
-Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed.
-If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.}
+\item{seq_name}{a logical value indicating whether seqence names should be displayed. Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed. If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.}
+
+\item{consensus_views}{a logical value that opeaning consensus views.}
+
+\item{use_dot}{a logical value. Displays characters as dots instead of fading their color in the consensus view.}
+
+\item{order}{a numeric vector whose length is equal to the number of sequences.}
+
+\item{disagreement}{a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).}
 }
 \value{
 ggplot object
@@ -45,7 +55,7 @@ ggplot object
 Plot multiple sequence alignment using ggplot2 with multiple color schemes supported.
 }
 \examples{
-#plot multiple sequences by loading fasta format 
+#plot multiple sequences by loading fasta format
 fasta <- system.file("extdata", "sample.fasta", package = "ggmsa")
 ggmsa(fasta, 164, 213, color="Chemistry_AA")
 

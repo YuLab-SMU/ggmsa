@@ -4,7 +4,7 @@
 ##' @title msa_data
 ##' @param fasta Aligned fasta file.
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. . Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA','LETTER'£¬¡®CN6¡¯, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA','LETTER','CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Clustal'.
 ##' @param char_width characters width. Defaults is 0.9.
 ##' @param order a numeric vector whose length is equal to the number of sequences.
 ##' @param consensus_views a logical value that opeaning consensus views.
@@ -51,7 +51,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Clustal", char_width
 
     ## calling internal polygons
     font_f <- font_fam[[font]]
-    data_sp <- font_f[unique(y$character)]
+    data_sp <- font_f[as.character(unique(y$character))] #debug 'as.character()'
     ## To adapt to tree data
     if (!'name' %in% names(y)) {
         if ('label' %in% names(y)) {
@@ -128,23 +128,23 @@ tidy_msa <- function(msa, start = NULL, end = NULL) {
     ## for DNAbin and AAbin
     ## alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
     alndf <- as.data.frame(alnmat, stringsAsFactors = F)
-    
+
     alndf$name = names(aln)
-    
+
     cn = colnames(alndf)
     cn <- cn[!cn %in% "name"]
     df <- gather(alndf, "position", "character", cn)
-    
+
     y <- df
     y$position = as.numeric(sub("V", "", y$position))
     y$character = toupper(y$character)
-     
+
     y$name = factor(y$name, levels=rev(names(aln)))
 
-    
+
     if (is.null(start)) start <- min(y$position)
     if (is.null(end)) end <- max(y$position)
-    
+
     y <- y[y$position >=start & y$position <= end, ]
 
     return(y)
@@ -159,11 +159,11 @@ msa2tidy <- function(msaData) {
   if ("order" %in% names(msaData)) {
     msaData <- msaData[msaData$order == 1,]
   }
-  df_tidy <- data.frame(name = msaData$name, 
-                        position = msaData$position, 
+  df_tidy <- data.frame(name = msaData$name,
+                        position = msaData$position,
                         character = msaData$character)
   df_tidy$character <- as.character(df_tidy$character)
-  
+
   return(df_tidy)
 }
 
