@@ -1,11 +1,12 @@
++ added a new patameter `ignore_gaps` used in consensus views.(2020-10-09m Fri)
 + debug in consensus views (2020-10-05, Mon)
 + added consensus views (2020-9-30, Wed)
-+ added new colors "LETTER" and "CN6" provided @ShixiangWang.[issues#8](https://github.com/YuLab-SMU/ggmsa/issues/8)
++ added new colors "LETTER" and "CN6" provided by ShixiangWang.[issues#8](https://github.com/YuLab-SMU/ggmsa/issues/8)
 
 # ggmsa 0.0.4
 
 + fixed warning message in **msa_data.R** (2020-4-26, Sun)
-+ added ggplot_add methods for `geom_*()` (2020-4-24, Fir)
++ added ggplot_add methods for `geom_*()` (2020-4-24, Fri)
 + added a parameter `seq_name` in `ggmsa()` (2020-4-23, Thu)
 + added a new function `facet_msa()` --> break down the MSA (2020-4-17, Fri)
 + added a parameter `posHighlighted` in `ggmsa()` (2020-4-17, Fri)
