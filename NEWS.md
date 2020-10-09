@@ -1,5 +1,7 @@
++ debug in consensus views (2020-10-05, Mon)
 + added consensus views (2020-9-30, Wed)
-+ added new colors "LETTER" and "CN6"
++ added new colors "LETTER" and "CN6" provided @ShixiangWang.[issues#8](https://github.com/YuLab-SMU/ggmsa/issues/8)
+
 # ggmsa 0.0.4
 
 + fixed warning message in **msa_data.R** (2020-4-26, Sun)
