@@ -13,19 +13,20 @@
 ##' @param order a numeric vector whose length is equal to the number of sequences.
 ##' @param consensus_views a logical value that opeaning consensus views.
 ##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
-##' @param disagreement a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).
+##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
+##' @param ignore_gaps a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.
 ##' @param ... additional parameter
 ##' @return A list
 ##' @importFrom utils modifyList
 ##' @export
 ##' @author Guangchuang Yu
-geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Clustal", char_width = 0.9,
+geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemistry_AA", char_width = 0.9,
                      none_bg = FALSE, posHighligthed = NULL, seq_name = NULL, consensus_views = FALSE,
-                     use_dot = FALSE, order = NULL, disagreement = FALSE, ... ) {
+                     use_dot = FALSE, order = NULL, disagreement = FALSE, ignore_gaps = FALSE, ... ) {
 
     data <- msa_data(data, font = font, color = color,
                      char_width = char_width, consensus_views  = consensus_views,
-                     use_dot = use_dot, order = order, disagreement = disagreement)
+                     use_dot = use_dot, order = order, disagreement = disagreement, ignore_gaps = ignore_gaps)
     bg_data <- data
 
     if(is.null(mapping)) {

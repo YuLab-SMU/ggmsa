@@ -17,13 +17,14 @@ tidy_color <- function(y, consensus, disagreement) {
 }
 
 
-get_consensus <- function(tidy) {
+get_consensus <- function(tidy, ignore_gaps = FALSE) {
     cons <- lapply(unique(tidy$position), function(i) { #Iterate through each columns
         msa_cloumn <- tidy[tidy$position == i, ]
         cons <- data.frame(position = i)
-        # if(ignore_gaps) {
-        #     msa_cloumn <- tidy[tidy$position == i&!tidy$character %in% "-", ]
-        # }
+        if(ignore_gaps) {
+            #msa_cloumn <- tidy[tidy$position == i&!tidy$character %in% "-", ]
+            msa_cloumn <- msa_cloumn[!msa_cloumn$character %in% "-",]
+        }
         #Gets the highest frequency characters
         fre <- table(msa_cloumn$character) %>% data.frame
         max_element <- fre[fre[2] == max(fre[2]),]

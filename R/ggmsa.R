@@ -15,7 +15,8 @@
 ##' @param order a numeric vector whose length is equal to the number of sequences.
 ##' @param consensus_views a logical value that opeaning consensus views.
 ##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
-##' @param disagreement a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).
+##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
+##' @param ignore_gaps a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.
 ##' @return ggplot object
 ##' @importFrom tidyr gather
 ##' @importFrom ggplot2 ggplot
@@ -51,14 +52,14 @@
 ##' @export
 ##' @author Guangchuang Yu
 ggmsa <- function(msa, start = NULL, end = NULL, font = "helvetical",
-                  color = "Clustal", char_width = 0.9, none_bg = FALSE,
+                  color = "Chemistry_AA", char_width = 0.9, none_bg = FALSE,
                   posHighligthed = NULL, seq_name = NULL, consensus_views = FALSE, use_dot = FALSE,
-                  order = NULL, disagreement = FALSE) {
+                  order = NULL, disagreement = FALSE, ignore_gaps = FALSE) {
     data <- tidy_msa(msa, start = start, end = end)
 
     ggplot() + geom_msa(data, font = font, color = color, char_width = char_width, none_bg = none_bg,
                         posHighligthed = posHighligthed, seq_name = seq_name, consensus_views = consensus_views,
-                        use_dot = use_dot, order = order, disagreement = disagreement) +
+                        use_dot = use_dot, order = order, disagreement = disagreement, ignore_gaps = ignore_gaps) +
                theme_msa()
 
 }

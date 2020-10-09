@@ -9,7 +9,8 @@
 ##' @param order a numeric vector whose length is equal to the number of sequences.
 ##' @param consensus_views a logical value that opeaning consensus views.
 ##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
-##' @param disagreement a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).
+##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
+##' @param ignore_gaps a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.
 ##' @return A data frame
 ##' @examples
 ##' fasta <- system.file("extdata/sample.fasta", package="ggmsa")
@@ -17,8 +18,8 @@
 ## @export
 ##' @noRd
 ##' @author Guangchuang Yu
-msa_data <- function(tidymsa, font = "helvetical", color = "Clustal", char_width = 0.9,
-                     consensus_views = FALSE, use_dot = FALSE, order = NULL, disagreement = FALSE) {
+msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", char_width = 0.9,
+                     consensus_views = FALSE, use_dot = FALSE, order = NULL, disagreement = FALSE, ignore_gaps = FALSE) {
     color <- match.arg(color, c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA", "Taylor_AA",
                                 "Chemistry_NT", "Shapely_NT", "Zappo_NT", "Taylor_NT", "LETTER", "CN6" ))
 
@@ -29,7 +30,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Clustal", char_width
         y <- color_Clustal(y)
     }else {
         if (consensus_views) {
-            consensus <- get_consensus(y)
+            consensus <- get_consensus(y, ignore_gaps = ignore_gaps)
             tc <- color_scheme(y, color) %>% tidy_color(consensus, disagreement) #colors cleaned
             y <- color_scheme(consensus, color) %>% rbind(tc) #add consensus sequence
             if (use_dot){
