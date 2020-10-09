@@ -9,7 +9,7 @@ ggmsa(
   start = NULL,
   end = NULL,
   font = "helvetical",
-  color = "Clustal",
+  color = "Chemistry_AA",
   char_width = 0.9,
   none_bg = FALSE,
   posHighligthed = NULL,
@@ -17,7 +17,8 @@ ggmsa(
   consensus_views = FALSE,
   use_dot = FALSE,
   order = NULL,
-  disagreement = FALSE
+  disagreement = FALSE,
+  ignore_gaps = FALSE
 )
 }
 \arguments{
@@ -46,7 +47,9 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{order}{a numeric vector whose length is equal to the number of sequences.}
 
-\item{disagreement}{a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).}
+\item{disagreement}{a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).}
+
+\item{ignore_gaps}{a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.}
 }
 \value{
 ggplot object

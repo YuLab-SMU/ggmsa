@@ -8,7 +8,7 @@ geom_msa(
   data,
   font = "helvetical",
   mapping = NULL,
-  color = "Clustal",
+  color = "Chemistry_AA",
   char_width = 0.9,
   none_bg = FALSE,
   posHighligthed = NULL,
@@ -17,6 +17,7 @@ geom_msa(
   use_dot = FALSE,
   order = NULL,
   disagreement = FALSE,
+  ignore_gaps = FALSE,
   ...
 )
 }
@@ -44,7 +45,9 @@ If font = NULL, only plot the background tile.}
 
 \item{order}{a numeric vector whose length is equal to the number of sequences.}
 
-\item{disagreement}{a logical value. Displays  characters that disagreememt to consensus(excludes ambiguous disagreements).}
+\item{disagreement}{a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).}
+
+\item{ignore_gaps}{a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.}
 
 \item{...}{additional parameter}
 }
