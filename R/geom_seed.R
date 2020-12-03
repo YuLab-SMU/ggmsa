@@ -2,8 +2,8 @@
 ##'
 ##'
 ##' @title geom_seed
-##' @param seed character, like 'GAGGUAG' a miRNA seed sequence
-##' @param star a logical value indicating whether symbol of stars should be produced
+##' @param seed a character string.Specifying the miRNA seed sequence like 'GAGGUAG'.
+##' @param star a logical value indicating whether asterisks should be disaplayed.
 ##' @return a ggplot layer
 ##' @author Lang Zhou
 ##' @examples

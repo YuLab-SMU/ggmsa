@@ -1,16 +1,12 @@
 ##' plot sequence logo for MSA based 'ggolot2'
 
 ##' @title seqlogo
-##' @param msa Multiple sequence alignment file or object for
-##' representing either nucleotide sequences or peptide sequences.
+##' @param msa Multiple sequence alignment file or object for representing either nucleotide sequences or peptide sequences.
 ##' @param start Start position to plot.
 ##' @param end End position to plot.
-##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'.
-##' If font=NULL, only the background tiles is drawn.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, '
-##' Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
-##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.
-##' If FALSE, seqlogo overall height = 4,fixedly.
+##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font=NULL, only the background tiles is drawn.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, ' Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences. If FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top  A logical value. If TRUE, seqlogo is aligned to the top of MSA.
 ##' @return ggplot object
 ##' @examples
@@ -31,11 +27,9 @@ seqlogo <- function(msa, start = NULL, end = NULL, font = "helvetical", color = 
 
 ##' @title geom_seqlogo
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'helvetical'.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, '
-##' Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.
-##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.
-##' If FALSE, seqlogo overall height = 4,fixedly.
-##' @param top  A logical value. If TRUE, seqlogo is aligned to the top of MSA.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.If is FALSE, seqlogo overall height = 4,fixedly.
+##' @param top A logical value. If TRUE, seqlogo is aligned to the top of MSA.
 ##' @param ... additional parameter
 ##' @return A list
 ##' @examples
@@ -121,14 +115,7 @@ seqlogo_data <- function(data, font = "helvetical", color = "Chemistry_NT", adap
 }
 
 
-.onAttach <- function(libname, pkgname){
-    #options(total_heigh = 4)
-    options(logo_width = 0.9)
-    options(asterisk_width = .03)
-    options(GC_pos = 2)
-    options(shadingLen = .5)
-    options(shading_alpha = .3)
-}
+
 
 
 
