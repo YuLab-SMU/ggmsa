@@ -12,15 +12,17 @@ Imports:
     magrittr,
     tidyr,
     utils,
-	  stats,
-	  stringr
+	stats,
+	stringr,
+	aplot,
+	RColorBrewer
 Suggests:
     ape,
     cowplot,
     ggtree (>= 1.17.1),
     knitr,
     methods,
-    seqmagick
+    seqmagick,
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
