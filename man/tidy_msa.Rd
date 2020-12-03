@@ -7,9 +7,7 @@
 tidy_msa(msa, start = NULL, end = NULL)
 }
 \arguments{
-\item{msa}{multiple sequence alignment file or
-sequence object in DNAStringSet, RNAStringSet, AAStringSet, BStringSet,
-DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin}
+\item{msa}{multiple sequence alignment file or sequence object in DNAStringSet, RNAStringSet, AAStringSet, BStringSet, DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin}
 
 \item{start}{start position to extract subset of alignment}
 
@@ -19,7 +17,7 @@ DNAMultipleAlignment, RNAMultipleAlignment, AAMultipleAlignment, DNAbin or AAbin
 tibble data frame
 }
 \description{
-Convert msa file/object to tidy data frame
+Convert msa file/object to tidy data frame.
 }
 \author{
 Guangchuang Yu

@@ -16,26 +16,25 @@ ggmsa(
   seq_name = NULL,
   consensus_views = FALSE,
   use_dot = FALSE,
-  order = NULL,
-  disagreement = FALSE,
-  ignore_gaps = FALSE
+  disagreement = TRUE,
+  ignore_gaps = FALSE,
+  ref = NULL
 )
 }
 \arguments{
-\item{msa}{Multiple aligned sequence file or object for
-representing either nucleotide sequences or peptide sequences.}
+\item{msa}{Multiple aligned sequence files or objects representing either nucleotide sequences or AA sequences.}
 
-\item{start}{a numeric.Start position to plot.}
+\item{start}{a numeric vector. Start position to plot.}
 
-\item{end}{a numeric. End position to plot.}
+\item{end}{a numeric vector. End position to plot.}
 
-\item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile}
+\item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile.}
 
-\item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER','CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Clustal'.}
+\item{color}{a Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.}
 
-\item{char_width}{characters width. Defaults is 0.9.}
+\item{char_width}{a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.}
 
-\item{none_bg}{a logical value indicating whether backgroud should be produced. Defaults is FALSE.}
+\item{none_bg}{a logical value indicating whether background should be disaplayed. Defaults is FALSE.}
 
 \item{posHighligthed}{A numeric vector of the position that need to be highlighted.}
 
@@ -45,11 +44,11 @@ representing either nucleotide sequences or peptide sequences.}
 
 \item{use_dot}{a logical value. Displays characters as dots instead of fading their color in the consensus view.}
 
-\item{order}{a numeric vector whose length is equal to the number of sequences.}
-
 \item{disagreement}{a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).}
 
 \item{ignore_gaps}{a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.}
+
+\item{ref}{a character string. Specifying the reference sequence which should be one of input sequences when 'consensus_views' is TRUE.}
 }
 \value{
 ggplot object

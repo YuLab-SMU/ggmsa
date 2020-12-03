@@ -7,17 +7,17 @@
 facet_msa(field)
 }
 \arguments{
-\item{field}{a numeric vector of the field size}
+\item{field}{a numeric vector of the field size.}
 }
 \description{
 The MSA would be plot in a field that you set.
 }
 \examples{
-library(ggplot2) 
+library(ggplot2)
 f <- system.file("extdata/sample.fasta", package="ggmsa")
 # 2 fields
 ggmsa(f, end = 120, font = NULL, color="Chemistry_AA") + facet_msa(field = 60)
-# 3 fields 
+# 3 fields
 ggmsa(f, end = 120, font = NULL,  color="Chemistry_AA") + facet_msa(field = 40)
 }
 \author{

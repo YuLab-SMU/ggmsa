@@ -7,9 +7,9 @@
 geom_seed(seed, star = FALSE)
 }
 \arguments{
-\item{seed}{character, like 'GAGGUAG' a miRNA seed sequence}
+\item{seed}{a character string.Specifying the miRNA seed sequence like 'GAGGUAG'.}
 
-\item{star}{a logical value indicating whether symbol of stars should be produced}
+\item{star}{a logical value indicating whether asterisks should be disaplayed.}
 }
 \value{
 a ggplot layer
