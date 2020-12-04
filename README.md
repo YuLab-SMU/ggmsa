@@ -13,9 +13,19 @@
 sequences and protein sequences using ggplot2. It supports a number of
 colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.
 
+## Install development vertion
+
+The development version from github:
+
+``` r
+if (!requireNamespace("devtools", quietly=TRUE))
+    install.packages("devtools")
+devtools::install_github("YuLab-SMU/ggmsa")
+```
+
 ## Quick Example
 
-Plot multiple sequence alignment(colour scheme = ‘Chemistry’).
+Plot multiple sequence alignment.
 
 ### Protein Sequences
 
@@ -23,10 +33,10 @@ Plot multiple sequence alignment(colour scheme = ‘Chemistry’).
 library(ggmsa)
 library(ggplot2)
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-ggmsa(protein_sequences, 164, 213, color = "Chemistry_AA")
+ggmsa(protein_sequences, 164, 213, char_width = 0.5, color = "Chemistry_AA", seq_name = T)
 ```
 
-![](man/figures/unnamed-chunk-2-1.png)<!-- -->
+![](man/figures/unnamed-chunk-3-1.png)<!-- -->
 
 ### DNA Sequences
 
@@ -35,7 +45,7 @@ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
 ggmsa(nt_sequences,font = NULL, color = "Chemistry_NT")
 ```
 
-![](man/figures/unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
 ### RNA Sequences
 
@@ -44,7 +54,7 @@ miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
 ggmsa(miRNA_sequences, color = "Chemistry_NT")
 ```
 
-![](man/figures/unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
 ## Visualizing Multiple Sequence Alignment With `ggtree`.
 
@@ -55,7 +65,7 @@ d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
 library(ape)
 tree <- bionj(d)
 library(ggtree)
-p <- ggtree(tree ) + geom_tiplab()
+p <- ggtree(tree) + geom_tiplab()
 
 data = tidy_msa(x, 164, 213)
 p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
@@ -63,7 +73,7 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
     xlim_tree(1)
 ```
 
-![](man/figures/unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/unnamed-chunk-6-1.png)<!-- -->
 
 # Learn more
 

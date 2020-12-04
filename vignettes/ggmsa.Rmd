@@ -50,6 +50,13 @@ install.packages("ggmsa")
 library("ggmsa")
 ```
 
+The development version from github:
+```{r eval=FALSE}
+if (!requireNamespace("devtools", quietly=TRUE))
+    install.packages("devtools")
+devtools::install_github("YuLab-SMU/ggmsa")
+```
+
 ## Load sample data
 
 Three sample data are shipped with the ggmsa package. Note that ggmsa supports not only fasta files but other objects as well. `available_msa()`can be used to list MSA objects currently available.
@@ -76,7 +83,16 @@ Several classic color schemes for MSA are shipped in the package. In the same wa
  available_colors()
 ```
 
-### Clustal X Colour Scheme(Default)
+```{r echo=FALSE, out.width = '70%'}
+knitr::include_graphics("man/figures/NT_color.png")
+```
+
+```{r echo=FALSE, out.width = '90%'}
+knitr::include_graphics("man/figures/AA_color.png")
+```
+
+
+### Clustal X Colour Scheme
 
 This is an emulation of the default colourscheme used for alignments in [Clustal X](http://www.jalview.org/help/html/colourSchemes/clustal.html), a graphical interface for the ClustalW multiple sequence alignment program. Each residue in the alignment is assigned a colour if the amino acid profile of the alignment at that position meets some minimum criteria specific for the residue type.
 
@@ -84,7 +100,7 @@ This is an emulation of the default colourscheme used for alignments in [Clustal
 ggmsa(protein_sequences, start = 320, end = 360, color = "Clustal")
 ```
 
-### Color by Chemistry
+### Color by Chemistry(Default)
 
 Amino acids are colored according to their side chain chemistry:
 
@@ -114,6 +130,16 @@ This scheme colors residues according to their physico-chemical properties, and 
 
 ```{r fig.height = 3, fig.width = 10, warning=FALSE}
 ggmsa(protein_sequences, start = 320, end = 360, color = "Zappo_AA")
+```
+
+### Color by LETTER
+
+Thanks to [ShixiangWang](https://github.com/YuLab-SMU/ggmsa/pull/9/commits/c736dbbf3ecd64a8ce921b9474a699fcd44ec7b3) for the color scheme suggestions.
+
+[https://en.wikipedia.org/wiki/Help:Distinguishable_colors](https://en.wikipedia.org/wiki/Help:Distinguishable_colors) 
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, color = "LETTER")
 ```
 
 ## Font

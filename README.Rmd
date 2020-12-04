@@ -20,8 +20,17 @@ knitr::opts_chunk$set(
 
 `ggmsa` supports visualizing multiple sequence alignment of nucleotide sequences and protein sequences using ggplot2. It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.
 
+##  Install development vertion
+The development version from github:
+
+```{r eval=FALSE}
+if (!requireNamespace("devtools", quietly=TRUE))
+    install.packages("devtools")
+devtools::install_github("YuLab-SMU/ggmsa")
+```
+
 ##  Quick Example 
-Plot multiple sequence alignment(colour scheme = 'Chemistry').
+Plot multiple sequence alignment.
 
 ###  Protein Sequences
 
@@ -29,7 +38,7 @@ Plot multiple sequence alignment(colour scheme = 'Chemistry').
 library(ggmsa)
 library(ggplot2)
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-ggmsa(protein_sequences, 164, 213, color = "Chemistry_AA")
+ggmsa(protein_sequences, 164, 213, char_width = 0.5, color = "Chemistry_AA", seq_name = T)
 ```
 
 ###  DNA Sequences
