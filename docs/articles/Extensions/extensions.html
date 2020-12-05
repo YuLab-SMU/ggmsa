@@ -87,7 +87,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Extensions</h1>
             
-            <h4 class="date">2020-12-04</h4>
+            <h4 class="date">2020-12-05</h4>
       
       
       <div class="hidden name"><code>extensions.Rmd</code></div>
@@ -103,7 +103,9 @@
 <p>loading sample data as following:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"> <span class="no">protein_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"sample.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
  <span class="no">miRNA_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"seedSample.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
- <span class="no">nt_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"LeaderRepeat_All.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)</pre></body></html></div>
+ <span class="no">nt_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"LeaderRepeat_All.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
+ <span class="no">tp53_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"tp53.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
+ <span class="no">tp53_genes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"TP53_genes.xlsx"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)</pre></body></html></div>
 <div id="plot-sequence-logo-geom_seqlogo" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plot-sequence-logo-geom_seqlogo" class="anchor"></a>Plot sequence logo <code>geom_seqlogo()</code>
@@ -217,7 +219,41 @@
 <div id="cross-link-with-gggenes-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cross-link-with-gggenes-package" class="anchor"></a>Cross-link with <a href="https://cran.r-project.org/package=gggenes">gggenes</a> package</h2>
-<p>TODO</p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Biostrings</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ape</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggtree</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gggenes</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggnewscale</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">RColorBrewer</span>)
+<span class="co">#tree</span>
+<span class="no">tp53</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readAAStringSet</a></span>(<span class="no">tp53_sequences</span>)
+<span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">as.dist</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/stringDist.html">stringDist</a></span>(<span class="no">tp53</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"hamming"</span>)/<span class="fu">width</span>(<span class="no">tp53</span>)[<span class="fl">1</span>])
+<span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/bionj.html">bionj</a></span>(<span class="no">d</span>)
+<span class="no">p_tp53</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span>(<span class="no">tree</span>, <span class="kw">branch.length</span> <span class="kw">=</span> <span class="st">'none'</span>) + <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tiplab.html">geom_tiplab</a></span>()
+
+<span class="co">#msa</span>
+<span class="no">data_53</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/tidy_msa.html">tidy_msa</a></span>(<span class="no">tp53</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">200</span>)
+<span class="co">#genes</span>
+<span class="no">TP53_arrow</span> <span class="kw">&lt;-</span> <span class="kw pkg">readxl</span><span class="kw ns">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span>(<span class="no">tp53_genes</span>)
+<span class="no">TP53_arrow</span>$<span class="no">direction</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
+<span class="no">TP53_arrow</span>[<span class="no">TP53_arrow</span>$<span class="no">strand</span> <span class="kw">==</span> <span class="st">"reverse"</span>,<span class="st">"direction"</span>] <span class="kw">&lt;-</span> -<span class="fl">1</span>
+
+<span class="co">#color</span>
+<span class="no">mapping</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/reexports.html">aes</a></span>(<span class="kw">xmin</span> <span class="kw">=</span> <span class="no">start</span>, <span class="kw">xmax</span> <span class="kw">=</span> <span class="no">end</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">gene</span>, <span class="kw">forward</span> <span class="kw">=</span> <span class="no">direction</span>)
+<span class="no">my_pal</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Set3"</span>)))
+
+<span class="co">#tree + genes + msa</span>
+<span class="no">p_tp53</span> + <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/facet-plot.html">geom_facet</a></span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="no">geom_motif</span>,
+                    <span class="kw">mapping</span> <span class="kw">=</span> <span class="no">mapping</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">TP53_arrow</span>,
+                    <span class="kw">panel</span> <span class="kw">=</span> <span class="st">'genes'</span>,  <span class="kw">on</span> <span class="kw">=</span> <span class="st">'TP53'</span>,
+                    <span class="kw">arrowhead_height</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/reexports.html">unit</a></span>(<span class="fl">3</span>, <span class="st">"mm"</span>),
+                    <span class="kw">arrowhead_width</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/reexports.html">unit</a></span>(<span class="fl">1</span>, <span class="st">"mm"</span>)) +
+  <span class="fu">scale_fill_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu">my_pal</span>(<span class="fl">10</span>)) +
+  <span class="fu"><a href="https://rdrr.io/pkg/ggnewscale/man/new_scale.html">new_scale_fill</a></span>() +
+  <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/facet-plot.html">geom_facet</a></span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="no">geom_msa</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data_53</span>,
+             <span class="kw">panel</span> <span class="kw">=</span> <span class="st">'msa'</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="kw">NULL</span>,
+             <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>) + <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/xlim_tree.html">xlim_tree</a></span>(<span class="fl">3.5</span>)</pre></body></html></div>
+<p><img src="extensions_files/figure-html/unnamed-chunk-14-1.png" width="1344"></p>
 </div>
 </div>
   </div>

@@ -41,7 +41,8 @@ loading sample data as following:
  protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
  miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
  nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
- 
+ tp53_sequences <- system.file("extdata", "tp53.fa", package = "ggmsa")
+ tp53_genes <- system.file("extdata", "TP53_genes.xlsx", package = "ggmsa")
 ```
 
 ##  Plot sequence logo `geom_seqlogo()` 
@@ -154,6 +155,39 @@ data <- tidy_msa(x, 164, 213)
 
 
 ##  Cross-link with `r CRANpkg("gggenes")` package
-TODO
+```{r fig.height=4, fig.width=14, message=FALSE, warning=FALSE}
+library(Biostrings)
+library(ape)
+library(ggtree)
+library(gggenes)
+library(ggnewscale)
+library(RColorBrewer)
+#tree
+tp53 <- readAAStringSet(tp53_sequences)
+d <- as.dist(stringDist(tp53, method = "hamming")/width(tp53)[1])
+tree <- bionj(d)
+p_tp53 <- ggtree(tree, branch.length = 'none') + geom_tiplab()
 
+#msa
+data_53 <- tidy_msa(tp53, start = 0, end = 200)
+#genes
+TP53_arrow <- readxl::read_xlsx(tp53_genes)
+TP53_arrow$direction <- 1
+TP53_arrow[TP53_arrow$strand == "reverse","direction"] <- -1
 
+#color
+mapping = aes(xmin = start, xmax = end, fill = gene, forward = direction)
+my_pal <- colorRampPalette(rev(brewer.pal(n = 10, name = "Set3")))
+
+#tree + genes + msa
+p_tp53 + geom_facet(geom = geom_motif,
+                    mapping = mapping, data = TP53_arrow,
+                    panel = 'genes',  on = 'TP53',
+                    arrowhead_height = unit(3, "mm"),
+                    arrowhead_width = unit(1, "mm")) +
+  scale_fill_manual(values = my_pal(10)) +
+  new_scale_fill() +
+  geom_facet(geom = geom_msa, data = data_53,
+             panel = 'msa', font = NULL,
+             color = "Chemistry_AA") + xlim_tree(3.5)
+```
