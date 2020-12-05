@@ -1,7 +1,10 @@
-+ added a new patameter `ignore_gaps` used in consensus views.(2020-10-09m Fri)
++ rewrite the function `facet_msa()`.(2020-12-03, Thu)
++ Debug: tree + geom_facet(geom——msa()) does not work.(2020-12-03, Thu)
++ added a new annotational function `geom_msaBar()`.(2020-12-03, Thu)
++ added a new patameter `ignore_gaps` used in consensus views.(2020-10-09, Fri)
 + debug in consensus views (2020-10-05, Mon)
 + added consensus views (2020-9-30, Wed)
-+ added new colors "LETTER" and "CN6" provided by ShixiangWang.[issues#8](https://github.com/YuLab-SMU/ggmsa/issues/8)
++ added new colors `LETTER` and `CN6` provided by ShixiangWang.[issues#8](https://github.com/YuLab-SMU/ggmsa/issues/8)
 
 # ggmsa 0.0.4
 
