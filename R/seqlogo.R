@@ -4,7 +4,7 @@
 ##' @param msa Multiple sequence alignment file or object for representing either nucleotide sequences or peptide sequences.
 ##' @param start Start position to plot.
 ##' @param end End position to plot.
-##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font=NULL, only the background tiles is drawn.
+##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'DroidSansMono'. If font=NULL, only the background tiles is drawn.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, ' Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences. If FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top  A logical value. If TRUE, seqlogo is aligned to the top of MSA.
@@ -15,7 +15,7 @@
 ##' seqlogo(nt_sequence, color = "Chemistry_NT")
 ##' @export
 ##' @author Lang Zhou
-seqlogo <- function(msa, start = NULL, end = NULL, font = "helvetical", color = "Chemistry_NT", adaptive = FALSE, top = FALSE) {
+seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = FALSE) {
     data <- tidy_msa(msa, start = start, end = end)
     ggplot() + geom_logo(data, font = font, color = color, adaptive = adaptive, top = top) +
         theme_minimal() + xlab(NULL) + ylab(NULL) +
@@ -26,7 +26,7 @@ seqlogo <- function(msa, start = NULL, end = NULL, font = "helvetical", color = 
 ##' Multiple sequence alignment layer for ggplot2. It plot sequence motifs.
 
 ##' @title geom_seqlogo
-##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'helvetical'.
+##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'DroidSansMono'.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.If is FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top A logical value. If TRUE, seqlogo is aligned to the top of MSA.
@@ -47,7 +47,7 @@ geom_seqlogo <- function(font = "DroidSansMono", color = "Chemistry_NT", adaptiv
 }
 
 
-geom_logo <- function(data, font = "helvetical", color = "Chemistry_NT", adaptive = FALSE, top = TRUE, ...) {
+geom_logo <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE, ...) {
     mapping  <- aes_(x = ~logo_x, y = ~logo_y,  group = ~group, fill = ~I(color))
     logo_data <- seqlogo_data(data, font = font, color = color, adaptive = adaptive, top = top )
 
@@ -55,7 +55,7 @@ geom_logo <- function(data, font = "helvetical", color = "Chemistry_NT", adaptiv
     return(ly_logo)
 }
 
-seqlogo_data <- function(data, font = "helvetical", color = "Chemistry_NT", adaptive = FALSE, top = TRUE){
+seqlogo_data <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE){
     tidy <- data
 
     if (color == "Clustal") {

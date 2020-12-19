@@ -8,7 +8,7 @@ seqlogo(
   msa,
   start = NULL,
   end = NULL,
-  font = "helvetical",
+  font = "DroidSansMono",
   color = "Chemistry_NT",
   adaptive = FALSE,
   top = FALSE
@@ -21,7 +21,7 @@ seqlogo(
 
 \item{end}{End position to plot.}
 
-\item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font=NULL, only the background tiles is drawn.}
+\item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'DroidSansMono'. If font=NULL, only the background tiles is drawn.}
 
 \item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, ' Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.}
 
