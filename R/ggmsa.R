@@ -11,6 +11,7 @@
 ##' @param none_bg a logical value indicating whether background should be disaplayed. Defaults is FALSE.
 ##' @param posHighligthed A numeric vector of the position that need to be highlighted.
 ##' @param seq_name a logical value indicating whether seqence names should be displayed. Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed. If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.
+##' @param border a character string. The border color.
 ##' @param consensus_views a logical value that opeaning consensus views.
 ##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
 ##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
@@ -52,12 +53,12 @@
 ##' @author Guangchuang Yu
 ggmsa <- function(msa, start = NULL, end = NULL, font = "helvetical",
                   color = "Chemistry_AA", char_width = 0.9, none_bg = FALSE,
-                  posHighligthed = NULL, seq_name = NULL, consensus_views = FALSE, use_dot = FALSE,
+                  posHighligthed = NULL, seq_name = NULL, border = NULL, consensus_views = FALSE, use_dot = FALSE,
                   disagreement = TRUE, ignore_gaps = FALSE, ref = NULL) {
     data <- tidy_msa(msa, start = start, end = end)
 
     ggplot() + geom_msa(data, font = font, color = color, char_width = char_width, none_bg = none_bg,
-                        posHighligthed = posHighligthed, seq_name = seq_name, consensus_views = consensus_views,
+                        posHighligthed = posHighligthed, seq_name = seq_name, border = border, consensus_views = consensus_views,
                         use_dot = use_dot, disagreement = disagreement, ignore_gaps = ignore_gaps, ref = ref) +
                theme_msa()
 

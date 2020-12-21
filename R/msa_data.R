@@ -21,7 +21,7 @@
 msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", char_width = 0.9,
                      consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL) {
     color <- match.arg(color, c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA", "Taylor_AA",
-                                "Chemistry_NT", "Shapely_NT", "Zappo_NT", "Taylor_NT", "LETTER", "CN6" ))
+                                "Chemistry_NT", "Shapely_NT", "Zappo_NT", "Taylor_NT", "LETTER", "CN6", "Hydrophobicity" ))
 
     y <- tidymsa
 

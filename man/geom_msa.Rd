@@ -13,6 +13,7 @@ geom_msa(
   none_bg = FALSE,
   posHighligthed = NULL,
   seq_name = NULL,
+  border = NULL,
   consensus_views = FALSE,
   use_dot = FALSE,
   disagreement = TRUE,
@@ -38,6 +39,8 @@ If font = NULL, only plot the background tile.}
 \item{posHighligthed}{A numeric vector of the position that need to be highlighted.}
 
 \item{seq_name}{a logical value indicating whether seqence names should be displayed. Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed. If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.}
+
+\item{border}{a character string. The border color.}
 
 \item{consensus_views}{a logical value that opeaning consensus views.}
 

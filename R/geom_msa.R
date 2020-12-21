@@ -10,6 +10,7 @@
 ##' @param none_bg a logical value indicating whether background should be disaplayed. Defaults is FALSE.
 ##' @param posHighligthed A numeric vector of the position that need to be highlighted.
 ##' @param seq_name a logical value indicating whether seqence names should be displayed. Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed. If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.
+##' @param border a character string. The border color.
 ##' @param consensus_views a logical value that opeaning consensus views.
 ##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
 ##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
@@ -21,7 +22,7 @@
 ##' @export
 ##' @author Guangchuang Yu
 geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemistry_AA", char_width = 0.9,
-                     none_bg = FALSE, posHighligthed = NULL, seq_name = NULL, consensus_views = FALSE,
+                     none_bg = FALSE, posHighligthed = NULL, seq_name = NULL, border = NULL, consensus_views = FALSE,
                      use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL, ... ) {
 
     data <- msa_data(data, font = font, color = color,
@@ -46,8 +47,11 @@ geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemist
         bg_data$postion <- as.factor(bg_data$position)
         mapping <- modifyList(mapping, aes_(x = ~position, fill = ~character, width = 1))
     }
-
-    ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE)
+    if(is.null(border)){
+        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE)
+    }else{
+        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = border, inherit.aes = FALSE)
+    }
 
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
         return(ly_bg)
