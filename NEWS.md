@@ -1,5 +1,7 @@
++ added a new view called `by_conservation`.(2020-12-22, Tue)
++ added a new color scheme `Hydrophobicity` and a new paramter `border`.(2020-12-21, Mon)
 + rewrite the function `facet_msa()`.(2020-12-03, Thu)
-+ Debug: tree + geom_facet(geom——msa()) does not work.(2020-12-03, Thu)
++ Debug: tree + geom_facet(geom_msa()) does not work.(2020-12-03, Thu)
 + added a new annotational function `geom_msaBar()`.(2020-12-03, Thu)
 + added a new patameter `ignore_gaps` used in consensus views.(2020-10-09, Fri)
 + debug in consensus views (2020-10-05, Mon)
