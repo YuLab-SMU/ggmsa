@@ -7,6 +7,7 @@
 ##' If font = NULL, only plot the background tile.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER','CN6',, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param char_width a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.
+##' @param by_conservation a logical value. The most conserved regions have the brightest colors.
 ##' @param none_bg a logical value indicating whether background should be disaplayed. Defaults is FALSE.
 ##' @param posHighligthed A numeric vector of the position that need to be highlighted.
 ##' @param seq_name a logical value indicating whether seqence names should be displayed. Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed. If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.
@@ -22,12 +23,12 @@
 ##' @export
 ##' @author Guangchuang Yu
 geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemistry_AA", char_width = 0.9,
-                     none_bg = FALSE, posHighligthed = NULL, seq_name = NULL, border = NULL, consensus_views = FALSE,
-                     use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL, ... ) {
+                     none_bg = FALSE, by_conservation = FALSE, posHighligthed = NULL, seq_name = NULL, border = NULL,
+                     consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL, ... ) {
 
-    data <- msa_data(data, font = font, color = color,
-                     char_width = char_width, consensus_views  = consensus_views,
-                     use_dot = use_dot, disagreement = disagreement, ignore_gaps = ignore_gaps, ref = ref)
+    data <- msa_data(data, font = font, color = color,char_width = char_width, by_conservation = by_conservation,
+                     consensus_views  = consensus_views,use_dot = use_dot, disagreement = disagreement,
+                     ignore_gaps = ignore_gaps, ref = ref)
     bg_data <- data
 
     if(is.null(mapping)) {

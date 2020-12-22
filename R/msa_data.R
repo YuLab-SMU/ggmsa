@@ -6,6 +6,7 @@
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. . Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA','LETTER','CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Chemistry_AA.
 ##' @param char_width a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.
+##' @param by_conservation a logical value. The most conserved regions have the brightest colors.
 ##' @param consensus_views a logical value that opeaning consensus views.
 ##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
 ##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
@@ -18,7 +19,7 @@
 ## @export
 ##' @noRd
 ##' @author Guangchuang Yu
-msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", char_width = 0.9,
+msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", char_width = 0.9, by_conservation = FALSE,
                      consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL) {
     color <- match.arg(color, c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA", "Taylor_AA",
                                 "Chemistry_NT", "Shapely_NT", "Zappo_NT", "Taylor_NT", "LETTER", "CN6", "Hydrophobicity" ))
@@ -46,8 +47,12 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", char_
         }
     }
 
+    if (by_conservation){
+        y <- color_visibility(y)
+    }
+
     if (is.null(font)) {
-      return(y)
+        return(y)
     }
 
     ## calling internal polygons

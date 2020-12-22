@@ -11,6 +11,7 @@ geom_msa(
   color = "Chemistry_AA",
   char_width = 0.9,
   none_bg = FALSE,
+  by_conservation = FALSE,
   posHighligthed = NULL,
   seq_name = NULL,
   border = NULL,
@@ -35,6 +36,8 @@ If font = NULL, only plot the background tile.}
 \item{char_width}{a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.}
 
 \item{none_bg}{a logical value indicating whether background should be disaplayed. Defaults is FALSE.}
+
+\item{by_conservation}{a logical value. The most conserved regions have the brightest colors.}
 
 \item{posHighligthed}{A numeric vector of the position that need to be highlighted.}
 
