@@ -13,7 +13,7 @@
 sequences and protein sequences using ggplot2. It supports a number of
 colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.
 
-## Install development vertion
+## Install development version
 
 The development version from github:
 
