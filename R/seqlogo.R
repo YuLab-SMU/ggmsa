@@ -5,7 +5,7 @@
 ##' @param start Start position to plot.
 ##' @param end End position to plot.
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'DroidSansMono'. If font=NULL, only the background tiles is drawn.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, ' Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6','Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences. If FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top  A logical value. If TRUE, seqlogo is aligned to the top of MSA.
 ##' @return ggplot object
@@ -27,7 +27,7 @@ seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color
 
 ##' @title geom_seqlogo
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'DroidSansMono'.
-##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.If is FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top A logical value. If TRUE, seqlogo is aligned to the top of MSA.
 ##' @param ... additional parameter
@@ -78,7 +78,7 @@ seqlogo_data <- function(data, font = "DroidSansMono", color = "Chemistry_NT", a
     moti_da <- lapply(col_num, function(j){
         clo <- tidy[tidy$position == j, ] ## Calculate the char frequency in each column
         fre <- prop.table(table(clo$character))
-        ywidth <- sort(total_heigh * fre ) ## total_heigh is overall hight，the height of each char is assigned.
+        ywidth <- sort(total_heigh * fre ) ## total_heigh is overall hight, the height of each char is assigned.
         column_char_color <- unique(clo[c("character", "color")]) ## calling color scheme
         font_f <- font_fam[[font]]
         motif_char <- font_f[names(ywidth)]
