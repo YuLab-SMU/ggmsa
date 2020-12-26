@@ -61,7 +61,7 @@ seqlogo_data <- function(data, font = "DroidSansMono", color = "Chemistry_NT", a
     if (color == "Clustal") {
         tidy <- color_Clustal(tidy)
     } else{
-        tidy <- color_scheme(tidy, color)
+        tidy <- color_scheme(tidy, color, custom_color = NULL)
     }
 
     if (adaptive) {

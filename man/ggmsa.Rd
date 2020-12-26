@@ -10,6 +10,7 @@ ggmsa(
   end = NULL,
   font = "helvetical",
   color = "Chemistry_AA",
+  custom_color = NULL,
   char_width = 0.9,
   none_bg = FALSE,
   by_conservation = FALSE,
@@ -33,6 +34,8 @@ ggmsa(
 \item{font}{font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile.}
 
 \item{color}{a Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.}
+
+\item{custom_color}{A data frame with two cloumn called "names" and "color".Customize the color scheme.}
 
 \item{char_width}{a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.}
 
