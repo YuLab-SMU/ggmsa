@@ -9,6 +9,7 @@ geom_seqlogo(
   color = "Chemistry_NT",
   adaptive = TRUE,
   top = TRUE,
+  custom_color = NULL,
   ...
 )
 }
@@ -20,6 +21,8 @@ geom_seqlogo(
 \item{adaptive}{A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.If is FALSE, seqlogo overall height = 4,fixedly.}
 
 \item{top}{A logical value. If TRUE, seqlogo is aligned to the top of MSA.}
+
+\item{custom_color}{A data frame with two cloumn called "names" and "color".Customize the color scheme.}
 
 \item{...}{additional parameter}
 }

@@ -11,7 +11,8 @@ seqlogo(
   font = "DroidSansMono",
   color = "Chemistry_NT",
   adaptive = FALSE,
-  top = FALSE
+  top = FALSE,
+  custom_color = NULL
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ seqlogo(
 \item{adaptive}{A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences. If FALSE, seqlogo overall height = 4,fixedly.}
 
 \item{top}{A logical value. If TRUE, seqlogo is aligned to the top of MSA.}
+
+\item{custom_color}{A data frame with two cloumn called "names" and "color".Customize the color scheme.}
 }
 \value{
 ggplot object

@@ -6,6 +6,7 @@
 ##' @param end End position to plot.
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'DroidSansMono'. If font=NULL, only the background tiles is drawn.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6','Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
 ##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences. If FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top  A logical value. If TRUE, seqlogo is aligned to the top of MSA.
 ##' @return ggplot object
@@ -15,9 +16,9 @@
 ##' seqlogo(nt_sequence, color = "Chemistry_NT")
 ##' @export
 ##' @author Lang Zhou
-seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = FALSE) {
+seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = FALSE, custom_color = NULL) {
     data <- tidy_msa(msa, start = start, end = end)
-    ggplot() + geom_logo(data, font = font, color = color, adaptive = adaptive, top = top) +
+    ggplot() + geom_logo(data, font = font, color = color, adaptive = adaptive, top = top, custom_color = custom_color) +
         theme_minimal() + xlab(NULL) + ylab(NULL) +
         theme(legend.position = 'none') + theme(panel.grid = element_blank(), axis.text.y = element_blank()) +
         coord_fixed()
@@ -28,6 +29,7 @@ seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color
 ##' @title geom_seqlogo
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. Defaults is 'DroidSansMono'.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
 ##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.If is FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top A logical value. If TRUE, seqlogo is aligned to the top of MSA.
 ##' @param ... additional parameter
@@ -38,30 +40,31 @@ seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color
 ##' ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo()
 ##' @export
 ##' @author Lang Zhou
-geom_seqlogo <- function(font = "DroidSansMono", color = "Chemistry_NT", adaptive = TRUE, top = TRUE, ...) {
+geom_seqlogo <- function(font = "DroidSansMono", color = "Chemistry_NT", adaptive = TRUE, top = TRUE, custom_color = NULL, ...) {
     structure(list(font = font,
                    color = color,
                    adaptive = adaptive,
-                   top = top),
+                   top = top,
+                   custom_color = custom_color),
               class = "seqlogo")
 }
 
 
-geom_logo <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE, ...) {
+geom_logo <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE, custom_color = NULL,...) {
     mapping  <- aes_(x = ~logo_x, y = ~logo_y,  group = ~group, fill = ~I(color))
-    logo_data <- seqlogo_data(data, font = font, color = color, adaptive = adaptive, top = top )
+    logo_data <- seqlogo_data(data, font = font, color = color, adaptive = adaptive, top = top, custom_color = custom_color)
 
     ly_logo <- geom_polygon(mapping = mapping, data = logo_data, inherit.aes = FALSE)
     return(ly_logo)
 }
 
-seqlogo_data <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE){
+seqlogo_data <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE, custom_color = NULL){
     tidy <- data
 
     if (color == "Clustal") {
         tidy <- color_Clustal(tidy)
     } else{
-        tidy <- color_scheme(tidy, color, custom_color = NULL)
+        tidy <- color_scheme(tidy, color, custom_color)
     }
 
     if (adaptive) {
