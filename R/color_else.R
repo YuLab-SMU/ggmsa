@@ -5,14 +5,16 @@
 ##' @param color a Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
 
-color_scheme <- function(y, color, custom_color) {
+color_scheme <- function(y, color = "Chemistry_AA", custom_color = NULL) {
     if (!is.null(custom_color)){
-        row.names(custom_color) <- custom_color$names
-        scheme_AA$custom_color <- custom_color[row.names(scheme_AA), "color"]
+        my_cutstom[["names"]] <- as.character(my_cutstom[["names"]]) #Elimination factor interference
+        my_cutstom[["color"]] <- as.character(my_cutstom$col) #Fuzzy matching the string "colors" or "colours"
+        row.names(custom_color) <- custom_color[["names"]]
+        scheme_AA$custom_color <- custom_color[row.names(scheme_AA), "color"] %>% as.character()
         y$color <- scheme_AA[y$character, "custom_color"]
     }else{
         if(grepl("NT", color)){
-        y$color <- scheme_NT[y$character, color]
+            y$color <- scheme_NT[y$character, color]
         } else{
             y$color <- scheme_AA[y$character, color]
         }
