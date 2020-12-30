@@ -66,7 +66,7 @@ get_consensus <- function(tidy, ignore_gaps = FALSE, ref = NULL) {
 }
 
 
-order_name <- function(name, consensus_views = FALSE, ref = NULL) {
+order_name <- function(name, order = NULL, consensus_views = FALSE, ref = NULL) {
     name_uni <- unique(name)
     if(consensus_views & is.null(ref)){
         #placed 'consensus' at the top
@@ -77,13 +77,13 @@ order_name <- function(name, consensus_views = FALSE, ref = NULL) {
         name <- factor(name, levels = name_levels)
     }
     #adjust the msa order according to 'order'
-    # if(!is.null(order)) {
-    #     if(!length(name_uni) == length(order)) {
-    #     stop("The 'order' length does not match the number of names")
-    #   }
-    #   name_levels <- levels(name)[order]
-    #   name <- factor(name, levels = name_levels)
-    # }
+    if(!is.null(order)) {
+        if(!length(name_uni) == length(order)) {
+        stop("The 'order' length does not match the number of names")
+      }
+      name_levels <- levels(name)[order]
+      name <- factor(name, levels = name_levels)
+    }
     return(name)
 }
 

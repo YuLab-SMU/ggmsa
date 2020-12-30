@@ -6,6 +6,7 @@
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'. . Defaults is 'helvetical'. If you specify font = NULL, only the background box will be printed.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA','LETTER','CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'.Defaults is 'Chemistry_AA.
 ##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
+##' @param order vectors.Specified sequences order.
 ##' @param char_width a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.
 ##' @param by_conservation a logical value. The most conserved regions have the brightest colors.
 ##' @param consensus_views a logical value that opeaning consensus views.
@@ -20,7 +21,7 @@
 ## @export
 ##' @noRd
 ##' @author Guangchuang Yu
-msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custom_color = NULL, char_width = 0.9, by_conservation = FALSE,
+msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custom_color = NULL, order = NULL, char_width = 0.9, by_conservation = FALSE,
                      consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL) {
     if (is.null(custom_color)) {
         color <- match.arg(color, c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA", "Taylor_AA","Chemistry_NT",
@@ -53,6 +54,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
         y <- color_visibility(y)
     }
 
+    y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
     if (is.null(font)) {
         return(y)
     }
@@ -70,7 +72,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
         }
     }
 
-    y$name <- order_name(y$name, consensus_views = consensus_views, ref = ref)
+    #y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
     y$ypos <- as.numeric(y$name)
 
     yy <- lapply(1:nrow(y), function(i) {
