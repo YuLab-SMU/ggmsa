@@ -22,9 +22,11 @@ Suggests:
     ggtree (>= 1.17.1),
     knitr,
     methods,
+    prettydoc,
+    rmarkdown,
     seqmagick,
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
