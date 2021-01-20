@@ -33,6 +33,22 @@ bar_theme <- function(tidy){
         )
 }
 
+facet_scale <- function(facetData, field) {
+    facet0_pos <- facetData[facetData$facet == 0,"position"]
+    msa_start <- min(facet0_pos)
+    facet0_xl_scale <- pretty(min(facet0_pos):max(facet0_pos)) ## x labels of facet 0
+    facet0_xl_scale[1] <- msa_start ## assign the start postion to the first label
+    xl_scale <- facet0_xl_scale
+    #print(facet0_xl_scale)
+    for(i in max(facetData$facet) %>% seq_len) {
+        scale_i <- facet0_xl_scale + field * i
+        if(msa_start > 1) scale_i[1] <- scale_i[1] + 1
+        #print(scale_i)
+        xl_scale <- xl_scale %>% c(scale_i)
+    }
+    return(xl_scale)
+}
+
 .onAttach <- function(libname, pkgname){
     #options(total_heigh = 4)
     options(logo_width = 0.9)
