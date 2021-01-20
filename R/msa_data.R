@@ -54,7 +54,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
         y <- color_visibility(y)
     }
 
-    y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
+    #y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
     if (is.null(font)) {
         return(y)
     }
@@ -63,7 +63,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
     font_f <- font_fam[[font]]
     data_sp <- font_f[as.character(unique(y$character))] #debug using'as.character()'
     ## To adapt to tree data
-    if (!'name' %in% names(y)) {
+    if (!'name' %in% names(y) & !consensus_views) {
         if ('label' %in% names(y)) {
             ## y <- dplyr::rename(y, name = label)
             names(y)[names(y) == 'label'] <- "name"
@@ -73,6 +73,14 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
     }
 
     #y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
+    if(!is.factor(y$name) & !consensus_views){
+        lev <- unique(y[c("name","y")])
+        lev <- lev[order(lev$y), "name"] # y is the order of the nodes in the tree
+        y$name <- factor(y$name, levels = lev)
+    } else if(consensus_views) {
+        y$name <- order_name(y$name, consensus_views = consensus_views, ref = ref)
+    }
+
     y$ypos <- as.numeric(y$name)
 
     yy <- lapply(1:nrow(y), function(i) {
