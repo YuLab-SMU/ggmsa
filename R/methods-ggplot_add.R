@@ -76,7 +76,10 @@ ggplot_add.facet_msa <- function(object, plot, object_name){
     #   geom_text(aes_(x = ~position, y = ~-1, label = ~x_text), data = facetData, na.rm = T, color = "#6d6d6d", size = 3.2) +
     #   facet_wrap(~facetData$facet, ncol = 1) + scale_x_continuous(breaks = NULL)
     #ggplot_add(msa_facet, plot, object_name)
-    plot + facet_wrap(~facetData$facet, ncol = 1, scales = "free") + coord_cartesian() #+ scale_x_continuous(breaks = NULL)
+    xl_scale <- facet_scale(facetData, field)
+    plot + facet_wrap(~facetData$facet, ncol = 1, scales = "free") +
+        scale_x_continuous(expand = c(0,0), breaks = xl_scale, labels = xl_scale) +
+            coord_cartesian()
 
 }
 
