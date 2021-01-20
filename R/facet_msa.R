@@ -18,10 +18,17 @@ facet_msa <- function(field) {
 }
 
 facet_data <- function(msaData, field) {
-    msaData$facet <- msaData$position %/% field
 
-    msaData[msaData$position %% field == 0,]$facet <-
-        msaData[msaData$position %% field == 0,]$facet - 1
+    if(min(msaData$position) > 1){
+        pos_reset <- msaData$position - min(msaData$position)
+        pos_reset[pos_reset == 0] <- 1
+    }else {
+        pos_reset <- msaData$position
+    }
+    msaData$facet <- pos_reset %/% field
+
+
+    msaData[(pos_reset %% field) == 0, "facet"] <- msaData[(pos_reset %% field) == 0, "facet"] - 1
 
     # if ('x' %in% colnames(msaData))
     #     msaData$x <- msaData$x - (msaData$facet * field) #ly_label translation
