@@ -19,6 +19,8 @@
 ##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
 ##' @param ignore_gaps a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.
 ##' @param ref a character string. Specifying the reference sequence which should be one of input sequences when 'consensus_views' is TRUE.
+##' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function,
+##' default is 'identity' meaning 'position_identity()'.
 ##' @param ... additional parameter
 ##' @return A list
 ##' @importFrom utils modifyList
@@ -26,12 +28,10 @@
 ##' @author Guangchuang Yu
 geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemistry_AA", custom_color = NULL, order = NULL, char_width = 0.9,
                      none_bg = FALSE, by_conservation = FALSE, posHighligthed = NULL, seq_name = NULL, border = NULL,
-                     consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL, ... ) {
-
+                     consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL, position="identity",... ) {
     data <- msa_data(data, font = font, color = color, custom_color = custom_color, order = order, char_width = char_width, by_conservation = by_conservation,
                      consensus_views  = consensus_views,use_dot = use_dot, disagreement = disagreement,ignore_gaps = ignore_gaps, ref = ref)
     bg_data <- data
-
     if(is.null(mapping)) {
         mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
     }
@@ -50,11 +50,10 @@ geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemist
         mapping <- modifyList(mapping, aes_(x = ~position, fill = ~character, width = 1))
     }
     if(is.null(border)){
-        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE)
+        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE, position = position)
     }else{
-        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = border, inherit.aes = FALSE)
+        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = border, inherit.aes = FALSE, position = position)
     }
-
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
         return(ly_bg)
     }
@@ -67,8 +66,7 @@ geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemist
     if (consensus_views && !use_dot) {
         label_mapping <- modifyList(label_mapping, aes_(fill = ~I(font_color)))
     }
-
-    ly_label <- geom_polygon(mapping = label_mapping, data = data, inherit.aes = FALSE)
+    ly_label <- geom_polygon(mapping = label_mapping, data = data, inherit.aes = FALSE, position=position)
     if (none_bg & is.null(posHighligthed)) { #paramter 'none_bg' work
         return(ly_label)
     }

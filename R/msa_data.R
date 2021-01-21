@@ -71,39 +71,56 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
             stop("unknown sequence name...")
         }
     }
-
     #y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
     if(!is.factor(y$name) & !consensus_views){
-        lev <- unique(y[c("name","y")])
+        lev <- unique(data.frame(y[,c("name","y")]))
         lev <- lev[order(lev$y), "name"] # y is the order of the nodes in the tree
         y$name <- factor(y$name, levels = lev)
     } else if(consensus_views) {
         y$name <- order_name(y$name, consensus_views = consensus_views, ref = ref)
     }
-
     y$ypos <- as.numeric(y$name)
-
+    # for ggtreeExtra
+    if ("new_position" %in% colnames(y)){
+        scale_n <- 5 * length(unique(y$name))/diff(range(y$new_position))
+        char_width <- char_width * diff(range(y$new_position))/diff(range(y$position))
+    }
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
         dd <- data_sp[[d$character]]
         if(d$character == "."){ # '.' without zooming
-          dd$x <- dd$x - min(dd$x) + d$position - diff(range(dd$x))/2
-          dd$y <- dd$y - min(dd$y) + d$ypos- diff(range(dd$y))/2
+          if ("new_position" %in% colnames(d)){
+              dd$x <- dd$x - min(dd$x) + d$new_position - diff(range(dd$x))/2
+          }else{
+              dd$x <- dd$x - min(dd$x) + d$position - diff(range(dd$x))/2
+          }
+          dd$y <- dd$y - min(dd$y) + d$ypos - diff(range(dd$y))/2
         }else {# other characters
             char_scale <- diff(range(dd$x))/diff(range(dd$y))#equal proportion
-
-            if(diff(range(dd$x)) <= diff(range(dd$y)) ) {#y_width = char_width, x-width scaled proportionally
-                dd$x <- dd$x * (char_width * char_scale)/diff(range(dd$x))
-                dd$y <- dd$y * char_width/diff(range(dd$y))
-
-                dd$x <- dd$x - min(dd$x) + d$position - (char_width * char_scale)/2
-                dd$y <- dd$y - min(dd$y) + d$ypos - char_width/2
-            }else {                                       #x_width = char_width, y-width scaled proportionally
+            if(diff(range(dd$x)) <= diff(range(dd$y))) {#y_width = char_width, x-width scaled proportionally
+                dd$x <- dd$x * (char_width * char_scale)/diff(range(dd$x)) 
+                # for ggtreeExtra 
+                if ("new_position" %in% colnames(d)){
+                    dd$y <- (dd$y * char_width)/diff(range(dd$y)) * scale_n
+                    dd$x <- dd$x - min(dd$x) + d$new_position - (char_width * char_scale)/2
+                    dd$y <- dd$y - min(dd$y) + d$ypos - scale_n * char_width/2
+                }else{
+                    dd$y <- (dd$y * char_width)/diff(range(dd$y))
+                    dd$x <- dd$x - min(dd$x) + d$position - (char_width * char_scale)/2
+                    dd$y <- dd$y - min(dd$y) + d$ypos - char_width/2
+                }
+            }else{                                       #x_width = char_width, y-width scaled proportionally
                 dd$x <- dd$x * char_width/diff(range(dd$x))
-                dd$y <- dd$y * char_width/(diff(range(dd$y)) * char_scale)
-
-                dd$x <- dd$x - min(dd$x) + d$position - char_width/2
-                dd$y <- dd$y - min(dd$y) + d$ypos - (char_width/char_scale)/2
+                # for ggtreeExtra
+                if ("new_position" %in% colnames(d)){
+                    dd$y <- dd$y * char_width/(diff(range(dd$y)) * char_scale) * scale_n
+                    dd$x <- dd$x - min(dd$x) + d$new_position - char_width/2
+                    dd$y <- dd$y - min(dd$y) + d$ypos - (scale_n * char_width/char_scale)/2
+                }else{
+                    dd$y <- dd$y * char_width/(diff(range(dd$y)) * char_scale)
+                    dd$x <- dd$x - min(dd$x) + d$position - char_width/2
+                    dd$y <- dd$y - min(dd$y) + d$ypos - (char_width/char_scale)/2
+                }
             }
         }
         cn <- colnames(d)
@@ -124,7 +141,6 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
     ydf <- do.call(rbind, yy)
     colnames(ydf)[colnames(ydf) == 'y'] <- 'yy'
     ydf$y <- as.numeric(ydf$name)
-
     ydf <- cbind(label = ydf$name, ydf)
     return(ydf)
 }

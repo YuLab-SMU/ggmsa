@@ -22,6 +22,7 @@ geom_msa(
   disagreement = TRUE,
   ignore_gaps = FALSE,
   ref = NULL,
+  position = "identity",
   ...
 )
 }
@@ -60,6 +61,9 @@ If font = NULL, only plot the background tile.}
 \item{ignore_gaps}{a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.}
 
 \item{ref}{a character string. Specifying the reference sequence which should be one of input sequences when 'consensus_views' is TRUE.}
+
+\item{position}{Position adjustment, either as a string, or the result of a call to a position adjustment function,
+default is 'identity' meaning 'position_identity()'.}
 
 \item{...}{additional parameter}
 }
