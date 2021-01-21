@@ -1,3 +1,4 @@
++ supports linking `ggtreeExtra`. (2021-01-21, Thu)
 + added a new view called `by_conservation`.(2020-12-22, Tue)
 + added a new color scheme `Hydrophobicity` and a new paramter `border`.(2020-12-21, Mon)
 + rewrite the function `facet_msa()`.(2020-12-03, Thu)
