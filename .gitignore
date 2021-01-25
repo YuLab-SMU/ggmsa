@@ -1,6 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+.Renviron
 .DS_Store
 inst/doc
 ggmsa.Rproj
