@@ -1,4 +1,13 @@
+# ggmsa 0.0.6
+
 + supports linking `ggtreeExtra`. (2021-01-21, Thu)
++ bugfix: reversed seqence in 'tree + geom_facet(font)' . (2021-01-21, Thu)
++ bugfix: partitioning error when the sequence starting point greater than 1. (2021-01-21, Thu)
++ bugfix: generates continuous x-axis labels for each panel. (2021-01-21, Thu)
++ supports customize colors `custom_color`. (2020-12-28, Mon)
+
+# ggmsa 0.0.5
+
 + added a new view called `by_conservation`.(2020-12-22, Tue)
 + added a new color scheme `Hydrophobicity` and a new paramter `border`.(2020-12-21, Mon)
 + rewrite the function `facet_msa()`.(2020-12-03, Thu)
