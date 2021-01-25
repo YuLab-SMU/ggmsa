@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # ggmsa: Plot multiple sequence alignment using ggplot2 <img src="man/figures/logo.png" height="139" align="right" />
@@ -74,6 +73,34 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 ```
 
 ![](man/figures/unnamed-chunk-6-1.png)<!-- -->
+
+## Visualizing Multiple Sequence Alignment using rectangular layout tree.
+
+ggmsa also enable to align MSA graphs to the tree with rectangular
+layout by linking
+[ggtreeExtra](https://github.com/YuLab-SMU/ggtreeExtra)(ver \>=
+1.1.3.991).
+
+``` r
+library(ggplot2)
+library(ggtree)
+library(ggtreeExtra)
+library(Biostrings)
+protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+
+x <- readAAStringSet(protein_sequences)
+d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
+library(ape)
+tree <- bionj(d)
+
+data = tidy_msa(x, 164, 213)
+
+p1 <- ggtree(tree, layout = "fan", open.angle=10, size=0.5) + geom_tiplab(size=1.3)
+
+p1 + geom_fruit(data = data, geom = geom_msa, offset = 1, pwidth = 5, font = NULL)
+```
+
+![](man/figures/unnamed-chunk-7-1.png)<!-- -->
 
 # Learn more
 
