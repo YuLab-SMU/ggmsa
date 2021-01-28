@@ -36,7 +36,7 @@ Plot multiple sequence alignment.
 
 ###  Protein Sequences
 
-```{r fig.height = 2, fig.width = 10, dpi=330}
+```{r fig.height = 2, fig.width = 10, dpi=300}
 library(ggmsa)
 library(ggplot2)
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
@@ -52,7 +52,7 @@ ggmsa(nt_sequences,font = NULL, color = "Chemistry_NT")
 
 ###  RNA Sequences
 
-```{r fig.height = 6, fig.width = 13, dpi=330}
+```{r fig.height = 6, fig.width = 13, dpi=300}
 miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
 ggmsa(miRNA_sequences, color = "Chemistry_NT")
 ```
@@ -78,7 +78,7 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 
 ggmsa also enable to align MSA graphs to the tree with rectangular layout by linking [ggtreeExtra](https://github.com/YuLab-SMU/ggtreeExtra)(ver >= 1.1.3.991).
 
-```{r fig.height=11, fig.width =11, message=FALSE, dpi=600, out.width="85%"}
+```{r fig.height=6, fig.width =6, message=FALSE, dpi=300}
 library(ggplot2)
 library(ggtree)
 library(ggtreeExtra)
@@ -92,8 +92,8 @@ tree <- bionj(d)
 
 data <- tidy_msa(x, 120, 200)
 
-p1 <- ggtree(tree, layout = 'circular') + geom_tiplab(align = TRUE, offset = 0.316, size = 3) 
-p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, pwidth = 0.7, font = NULL, border = NA)
+p1 <- ggtree(tree, layout = 'circular') + geom_tiplab(align = TRUE, offset = 0.545, size = 2) + xlim(NA, 1.2)
+p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, pwidth = 1.2, font = NULL, border = NA)
 ```
 
 #  Learn more

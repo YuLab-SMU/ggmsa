@@ -95,11 +95,11 @@ tree <- bionj(d)
 
 data <- tidy_msa(x, 120, 200)
 
-p1 <- ggtree(tree, layout = 'circular') + geom_tiplab(align = TRUE, offset = 0.316, size = 3) 
-p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, pwidth = 0.7, font = NULL, border = NA)
+p1 <- ggtree(tree, layout = 'circular') + geom_tiplab(align = TRUE, offset = 0.545, size = 2) + xlim(NA, 1.2)
+p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, pwidth = 1.2, font = NULL, border = NA)
 ```
 
-<img src="man/figures/unnamed-chunk-7-1.png" width="85%" />
+![](man/figures/unnamed-chunk-7-1.png)<!-- -->
 
 # Learn more
 
