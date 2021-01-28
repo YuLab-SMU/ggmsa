@@ -2,9 +2,8 @@
 output: 
   md_document:
     variant: gfm
-html_preview: false
+html_preview: TRUE
 ---
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
@@ -37,7 +36,7 @@ Plot multiple sequence alignment.
 
 ###  Protein Sequences
 
-```{r fig.height = 2, fig.width = 10}
+```{r fig.height = 2, fig.width = 10, dpi=330}
 library(ggmsa)
 library(ggplot2)
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
@@ -53,7 +52,7 @@ ggmsa(nt_sequences,font = NULL, color = "Chemistry_NT")
 
 ###  RNA Sequences
 
-```{r fig.height = 6, fig.width = 13}
+```{r fig.height = 6, fig.width = 13, dpi=330}
 miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
 ggmsa(miRNA_sequences, color = "Chemistry_NT")
 ```
@@ -79,23 +78,22 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 
 ggmsa also enable to align MSA graphs to the tree with rectangular layout by linking [ggtreeExtra](https://github.com/YuLab-SMU/ggtreeExtra)(ver >= 1.1.3.991).
 
-```{r fig.height=8, fig.width = 8, message=FALSE}
+```{r fig.height=11, fig.width =11, message=FALSE, dpi=600, out.width="85%"}
 library(ggplot2)
 library(ggtree)
 library(ggtreeExtra)
 library(Biostrings)
-protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-
-x <- readAAStringSet(protein_sequences)
-d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
 library(ape)
+sequences <- system.file("extdata", "sequence-link-tree.fasta", package = "ggmsa")
+
+x <- readAAStringSet(sequences)
+d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
 tree <- bionj(d)
 
-data = tidy_msa(x, 164, 213)
+data <- tidy_msa(x, 120, 200)
 
-p1 <- ggtree(tree, layout = "fan", open.angle=10, size=0.5) + geom_tiplab(size=1.3)
-
-p1 + geom_fruit(data = data, geom = geom_msa, offset = 1, pwidth = 5, font = NULL)
+p1 <- ggtree(tree, layout = 'circular') + geom_tiplab(align = TRUE, offset = 0.316, size = 3) 
+p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, pwidth = 0.7, font = NULL, border = NA)
 ```
 
 #  Learn more
