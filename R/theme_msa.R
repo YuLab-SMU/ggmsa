@@ -4,6 +4,7 @@ theme_msa <- function(){
     xlab(NULL),
     ylab(NULL),
     coord_fixed(),
+    scale_x_continuous(expand = c(0.01,0)),
     theme_minimal() +
         theme(legend.position = 'none',
             strip.text = element_blank(),
