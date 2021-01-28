@@ -86,21 +86,20 @@ library(ggplot2)
 library(ggtree)
 library(ggtreeExtra)
 library(Biostrings)
-protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-
-x <- readAAStringSet(protein_sequences)
-d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
 library(ape)
+sequences <- system.file("extdata", "sequence-link-tree.fasta", package = "ggmsa")
+
+x <- readAAStringSet(sequences)
+d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
 tree <- bionj(d)
 
-data = tidy_msa(x, 164, 213)
+data <- tidy_msa(x, 120, 200)
 
-p1 <- ggtree(tree, layout = "fan", open.angle=10, size=0.5) + geom_tiplab(size=1.3)
-
-p1 + geom_fruit(data = data, geom = geom_msa, offset = 1, pwidth = 5, font = NULL)
+p1 <- ggtree(tree, layout = 'circular') + geom_tiplab(align = TRUE, offset = 0.316, size = 3) 
+p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, pwidth = 0.7, font = NULL, border = NA)
 ```
 
-![](man/figures/unnamed-chunk-7-1.png)<!-- -->
+<img src="man/figures/unnamed-chunk-7-1.png" width="85%" />
 
 # Learn more
 
