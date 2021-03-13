@@ -15,7 +15,8 @@ Imports:
 	stats,
 	stringr,
 	aplot,
-	RColorBrewer
+	RColorBrewer,
+	ggalt
 Suggests:
     ape,
     cowplot,
