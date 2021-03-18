@@ -1,3 +1,6 @@
++ added a error message to remind that "sequences must have unique names".
++ added `ggSeqBundle()` to plot Sequence Bundles for MSAs based `ggolot2` (2021-03-18, Thu)
+
 # ggmsa 0.0.6
 
 + supports linking `ggtreeExtra`. (2021-01-21, Thu)
