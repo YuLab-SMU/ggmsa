@@ -98,8 +98,8 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
         }else {# other characters
             char_scale <- diff(range(dd$x))/diff(range(dd$y))#equal proportion
             if(diff(range(dd$x)) <= diff(range(dd$y))) {#y_width = char_width, x-width scaled proportionally
-                dd$x <- dd$x * (char_width * char_scale)/diff(range(dd$x)) 
-                # for ggtreeExtra 
+                dd$x <- dd$x * (char_width * char_scale)/diff(range(dd$x))
+                # for ggtreeExtra
                 if ("new_position" %in% colnames(d)){
                     dd$y <- (dd$y * char_width)/diff(range(dd$y)) * scale_n
                     dd$x <- dd$x - min(dd$x) + d$new_position - (char_width * char_scale)/2
@@ -164,8 +164,11 @@ tidy_msa <- function(msa, start = NULL, end = NULL) {
     ## alnmat <- lapply(seq_along(aln), function(i) as.character(aln[[i]])) %>% do.call('rbind',. )
     alndf <- as.data.frame(alnmat, stringsAsFactors = F)
 
-    alndf$name = names(aln)
-
+    if(unique(names(aln)) %>% length == length(aln)) {
+        alndf$name = names(aln)
+    }else{
+      stop("Sequences must have unique names")
+    }
     cn = colnames(alndf)
     cn <- cn[!cn %in% "name"]
     df <- gather(alndf, "position", "character", cn)
