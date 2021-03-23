@@ -21,19 +21,61 @@
 ##' @param ref a character string. Specifying the reference sequence which should be one of input sequences when 'consensus_views' is TRUE.
 ##' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function,
 ##' default is 'identity' meaning 'position_identity()'.
+##' @param show.legend logical. Should this layer be included in the legends?
 ##' @param ... additional parameter
 ##' @return A list
+##' @importFrom ggplot2 scale_fill_manual
 ##' @importFrom utils modifyList
 ##' @export
 ##' @author Guangchuang Yu
-geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemistry_AA", custom_color = NULL, order = NULL, char_width = 0.9,
-                     none_bg = FALSE, by_conservation = FALSE, posHighligthed = NULL, seq_name = NULL, border = NULL,
-                     consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL, position="identity",... ) {
-    data <- msa_data(data, font = font, color = color, custom_color = custom_color, order = order, char_width = char_width, by_conservation = by_conservation,
-                     consensus_views  = consensus_views,use_dot = use_dot, disagreement = disagreement,ignore_gaps = ignore_gaps, ref = ref)
+geom_msa <- function(data, font = "helvetical",
+                     mapping = NULL,
+                     color = "Chemistry_AA",
+                     custom_color = NULL,
+                     order = NULL,
+                     char_width = 0.9,
+                     none_bg = FALSE,
+                     by_conservation = FALSE,
+                     posHighligthed = NULL,
+                     seq_name = NULL,
+                     border = NULL,
+                     consensus_views = FALSE,
+                     use_dot = FALSE,
+                     disagreement = TRUE,
+                     ignore_gaps = FALSE,
+                     ref = NULL,
+                     position="identity",
+                     show.legend = FALSE,
+                     ... ) {
+
+    data <- msa_data(data,
+                     font = font,
+                     color = color,
+                     custom_color = custom_color,
+                     order = order,
+                     char_width = char_width,
+                     by_conservation = by_conservation,
+                     consensus_views  = consensus_views,
+                     use_dot = use_dot,
+                     disagreement = disagreement,
+                     ignore_gaps = ignore_gaps,
+                     ref = ref)
+
+    # get a seemly fill legend
+    xx <- data[,c("character","color")] %>% unique()
+    labs <- lapply(unique(xx$color) %>% seq_along, function(i) {
+        cols <- unique(xx$color)[i]
+        dup_char <- xx[xx$color == cols, "character"]
+        lab <- paste0(dup_char, collapse = ",")
+    }) %>% do.call("rbind",.) %>% as.vector()
+
+    cols <- xx$color %>% unique()
+    names(cols) <- cols
+    sacle_tile_cols <- scale_fill_manual(values = cols, breaks = cols, labels = labs)
+
     bg_data <- data
     if(is.null(mapping)) {
-        mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
+        mapping <- aes_(x = ~position, y = ~name, fill = ~color)
     }
 
     if  (!isTRUE(seq_name)) { #paramter 'seq_name' work
@@ -50,12 +92,12 @@ geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemist
         mapping <- modifyList(mapping, aes_(x = ~position, fill = ~character, width = 1))
     }
     if(is.null(border)){
-        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE, position = position)
+        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE, position = position, show.legend = show.legend)
     }else{
-        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = border, inherit.aes = FALSE, position = position)
+        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = border, inherit.aes = FALSE, position = position, show.legend = show.legend)
     }
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
-        return(ly_bg)
+        return(list(ly_bg, sacle_tile_cols))
     }
 
     if ('y' %in% colnames(data)) {
@@ -71,7 +113,7 @@ geom_msa <- function(data, font = "helvetical", mapping = NULL, color = "Chemist
         return(ly_label)
     }
 
-    list(ly_bg, ly_label)
+    list(ly_bg, ly_label, sacle_tile_cols)
 
 }
 
