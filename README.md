@@ -74,10 +74,10 @@ p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
 
 ![](man/figures/unnamed-chunk-6-1.png)<!-- -->
 
-## Visualizing Multiple Sequence Alignment using rectangular layout tree.
+## Visualizing Multiple Sequence Alignment using circular layout tree.
 
-ggmsa also enable to align MSA graphs to the tree with rectangular
-layout by linking
+ggmsa also allows MSA graphs to align to the tree with circular, fan, or
+radial layout by
 [ggtreeExtra](https://github.com/YuLab-SMU/ggtreeExtra)(ver \>=
 1.1.3.991).
 
