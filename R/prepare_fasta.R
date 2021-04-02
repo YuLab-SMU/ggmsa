@@ -29,11 +29,11 @@ prepare_msa <- function(msa) {
                   )
     return(res)
 }
-        
+
 
 DNAbin2DNAStringSet <- function(msa) {
     seqs <- vapply(seq_along(msa),
-                   function(i) paste0(as.character(msa[[i]]), collapse=''),
+                   function(i) paste0(as.character(msa[i]) %>% unlist, collapse=''),
                    character(1))
     names(seqs) <- names(msa)
 
