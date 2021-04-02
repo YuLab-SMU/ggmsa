@@ -96,3 +96,18 @@ ggplot_add.msaBar <- function(object, plot, object_name){
     plot <- plot + coord_cartesian()
     p_bar %>% insert_top(plot, height = 3)
 }
+
+
+##' @method ggplot_add nucleotideeHelix
+##' @export
+ggplot_add.nucleotideeHelix <- function(object, plot, object_name){
+    msa_data <- plot$layers[[1]]$data
+    tidy_data <- msa2tidy(msa_data)
+    seq_numbers <- levels(tidy_data$name) %>% length
+
+    helix_data <- object$helix_data
+    overlap = object$overlap
+
+    ly <- layer_helix(helix_data = helix_data, overlap = overlap, seq_numbers = seq_numbers)
+    ggplot_add(ly, plot, object_name)
+}

@@ -12,11 +12,12 @@ Imports:
     magrittr,
     tidyr,
     utils,
-	stats,
-	stringr,
-	aplot,
-	RColorBrewer,
-	ggalt
+	  stats,
+	  stringr,
+	  aplot,
+	  RColorBrewer,
+	  ggalt,
+	  ggforce
 Suggests:
     ape,
     cowplot,
