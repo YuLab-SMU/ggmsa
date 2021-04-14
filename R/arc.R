@@ -3,11 +3,17 @@
 ##' @title gghelix
 ##' @param helix_data a data frame. The file of nucleltide secondary structure and then read by ggmsa::readSSfile.
 ##' @param overlap Logicals. If TRUE, two structures data called predict and known must be given(eg:heilx_data = list(known = data1, predicted = data2)), plots the predicted helices that are known on top, predicted helices that are not known on the bottom, and finally plots unpredicted helices on top in black.
+##' @param color_by generate colors for helices by various rules, including integer counts and value ranges one of "length" and "value"
 ##' @return ggplot object
 ##' @export
 ##' @author Lang Zhou
-gghelix <- function(helix_data, overlap = FALSE){
-    ly <- layer_helix(helix_data = helix_data, overlap = overlap)
+gghelix <- function(helix_data, color_by = "length",overlap = FALSE){
+    if(is.data.frame(helix_data)) {
+        helix_tidy <- tidy_helix(helix_data, color_by = color_by)
+    }else {
+        helix_tidy <- tidy_list_helix(helix_data, color_by = color_by)
+    }
+    ly <- layer_helix(helix_data = helix_tidy, overlap = overlap)
     p <- ggplot() + ly + theme_helix()
     return(p)
 }
@@ -17,12 +23,14 @@ gghelix <- function(helix_data, overlap = FALSE){
 ##' @title geom_helix
 ##' @param helix_data a data frame. The file of nucleltide secondary structure and then read by ggmsa::readSSfile.
 ##' @param overlap Logicals. If TRUE, two structures data called predict and known must be given(eg:heilx_data = list(known = data1, predicted = data2)), plots the predicted helices that are known on top, predicted helices that are not known on the bottom, and finally plots unpredicted helices on top in black.
+##' @param color_by generate colors for helices by various rules, including integer counts and value ranges one of "length" and "value"
 ##' @param ... additional parameter
 ##' @return ggplot2 layers
 ##' @export
 ##' @author Lang Zhou
-geom_helix <- function(helix_data, overlap = FALSE, ...) {
+geom_helix <- function(helix_data, color_by = "length", overlap = FALSE,  ...) {
   structure(list(helix_data = helix_data,
+                 color_by = color_by,
                  overlap = overlap),
             class = "nucleotideeHelix")
 }
@@ -33,11 +41,10 @@ geom_helix <- function(helix_data, overlap = FALSE, ...) {
 ##' @importFrom utils read.delim
 ##' @param file A text file in connect format
 ##' @param type file type. one of "Helix, "Connect", "Vienna" and "Bpseq"
-##' @param color_by generate colors for helices by various rules, including integer counts, value ranges and basepair frequency. one of "Value", "Count" and "BasepairFrequency"
 ##' @return data frame
 ##' @export
 ##' @author Lang Zhou
-readSSfile <- function(file, type = NULL, color_by = NULL) {
+readSSfile <- function(file, type = NULL) {
     type <- match.arg(type, c("Helix", "Connect", "Vienna", "Bpseq"))
     load_data <- switch(type,
                         Helix = readHelix(file),
@@ -45,23 +52,55 @@ readSSfile <- function(file, type = NULL, color_by = NULL) {
                         Vienna = readVienna(file),
                         Bpseq = expandHelix(file))
 
-    data <- expandHelix(load_data)
-    if(!is.null(color_by)) {
-        color_by <- match.arg(color_by, c("Value", "Count", "BasepairFrequency"))
-        data <- switch(color_by,
-                       Value = colourByValue(data, get = TRUE, log = TRUE),
-                       Count = colourByCount(data, get = TRUE),
-                       BasepairFrequency = colourByBasepairFrequency(data, get = TRUE))
-    }
-
-    tidy_data <- tidy_helix(data)
-    return(tidy_data)
+    data <- collapseHelix(load_data)
+    return(data)
+    #data <- expandHelix(load_data)
+    # if(!is.null(color_by)) {
+    #     color_by <- match.arg(color_by, c("Value", "Count", "BasepairFrequency"))
+    #     data <- switch(color_by,
+    #                    Value = colourByValue(data, get = TRUE, log = TRUE),
+    #                    Count = colourByCount(data, get = TRUE),
+    #                    BasepairFrequency = colourByBasepairFrequency(data, get = TRUE))
+    # }
+    #
+    # tidy_data <- tidy_helix(data)
+    # return(tidy_data)
 }
 
-tidy_helix <- function(helix_data){
+tidy_list_helix <- function(helix_data, color_by = "length"){
+  known <- tidy_helix(helix_data$known, color_by = color_by)
+  predicted <-  tidy_helix(helix_data$predicted, color_by = color_by)
+  return(list(known = known, predicted = predicted))
+}
+
+tidy_helix <- function(helix_data, color_by = "length"){
+    helix_data <- color_helix(helix_data, color = color_by)
     names(helix_data)[c(1,2)] <- c("from","to")
     helix_data$x0 <- (helix_data$to + helix_data$from)/2
     helix_data$r <- (helix_data$to - helix_data$from)/2
+    return(helix_data)
+}
+
+color_helix <- function(helix_data, color){
+    color <- match.arg(color, c("length", "value"))
+    if(color == "length"){
+        data_color <- colorBy_length(helix_data)
+    }else {
+        data_color <- colorBy_value(helix_data)
+    }
+      data <- expandHelix(data_color)
+      return(data)
+}
+
+colorBy_length <- function(helix_data){
+    pal_lenght <- colorRampPalette(brewer.pal(name = "Paired", n = 12))
+    helix_data$col <- nrow(helix_data) %>% pal_lenght()
+    return(helix_data)
+}
+
+colorBy_value <- function(helix_data){
+    pal_value <- colorRampPalette(rev(brewer.pal(name = "Blues", n = 4)))
+    helix_data$col <- nrow(helix_data) %>% pal_value()
     return(helix_data)
 }
 
@@ -142,25 +181,29 @@ overlap_helix <- function(known, predicted){
 }
 
 ##' @importFrom ggplot2 theme_void
+##' @importFrom ggplot2 element_text
 ##' @importFrom grid arrow
 theme_helix <- function(){
     list(theme_void(),
          scale_y_continuous(breaks = 0),
          coord_fixed(),
-         theme(panel.grid.major.y = element_line(size = 1, arrow = arrow(length = unit(0.3, 'cm')))))
+         theme(panel.grid.major.y = element_line(size = 1, arrow = arrow(length = unit(0.3, 'cm'))),
+               panel.grid.major.x = element_line(color = "#eaeaea", size = 0.4),
+               axis.text.x = element_text())
+         )
   }
 
-##' @importFrom utils read.delim
+
 readHelix <- getFromNamespace("readHelix", "R4RNA")
-##' @importFrom utils read.delim
 readConnect <- getFromNamespace("readConnect", "R4RNA")
 readVienna <- getFromNamespace("readVienna", "R4RNA")
 readBpseq <- getFromNamespace("readBpseq", "R4RNA")
 
 expandHelix <- getFromNamespace("expandHelix", "R4RNA")
-colourByValue <- getFromNamespace("colourByValue", "R4RNA")
-colourByCount <- getFromNamespace("colourByCount", "R4RNA")
-colourByBasepairFrequency <- getFromNamespace("colourByBasepairFrequency", "R4RNA")
+collapseHelix <- getFromNamespace("collapseHelix", "R4RNA")
+# colourByValue <- getFromNamespace("colourByValue", "R4RNA")
+# colourByCount <- getFromNamespace("colourByCount", "R4RNA")
+# colourByBasepairFrequency <- getFromNamespace("colourByBasepairFrequency", "R4RNA")
 
 utils::globalVariables("read.delim")
 

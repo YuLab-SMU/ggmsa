@@ -4,14 +4,12 @@
 \alias{readSSfile}
 \title{readSSfile}
 \usage{
-readSSfile(file, type = NULL, color_by = NULL)
+readSSfile(file, type = NULL)
 }
 \arguments{
 \item{file}{A text file in connect format}
 
 \item{type}{file type. one of "Helix, "Connect", "Vienna" and "Bpseq"}
-
-\item{color_by}{generate colors for helices by various rules, including integer counts, value ranges and basepair frequency. one of "Value", "Count" and "BasepairFrequency"}
 }
 \value{
 data frame

@@ -106,8 +106,14 @@ ggplot_add.nucleotideeHelix <- function(object, plot, object_name){
     seq_numbers <- levels(tidy_data$name) %>% length
 
     helix_data <- object$helix_data
-    overlap = object$overlap
+    color_by <- object$color_by
+    overlap <- object$overlap
 
-    ly <- layer_helix(helix_data = helix_data, overlap = overlap, seq_numbers = seq_numbers)
+    if(is.data.frame(helix_data)) {
+        helix_tidy <- tidy_helix(helix_data, color_by = color_by)
+    }else {
+        helix_tidy <- tidy_list_helix(helix_data, color_by = color_by)
+    }
+    ly <- layer_helix(helix_data = helix_tidy, overlap = overlap, seq_numbers = seq_numbers)
     ggplot_add(ly, plot, object_name)
 }

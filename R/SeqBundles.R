@@ -95,7 +95,7 @@ theme_bundles <- function(df, lev_molecule){
         xlab("Position number"),
         scale_x_continuous(breaks = break_x, labels = break_x, minor_breaks = minor_x),
         scale_y_continuous(breaks = break_y, labels = lev_molecule, minor_breaks = minor_y),
-        theme(panel.grid.minor.y = element_line(color = "gray50", size = 0.4),
+        theme(panel.grid.minor.y = element_line(color = "#e8e0e0", size = 0.4),
               axis.line.x = element_line(color = "gray60", size = 0.8),
               panel.grid.major = element_blank(),
               axis.ticks.y = element_blank(),
