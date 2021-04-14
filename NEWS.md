@@ -1,3 +1,4 @@
++ added `gghelix()` and `geom_helix()`.(2021-04-1, Thu)
 + added option to show the fill legend.(2021-03-23, Tue)
 + added a error message to remind that "sequences must have unique names".(2021-03-18, Thu)
 + added `ggSeqBundle()` to plot Sequence Bundles for MSAs based `ggolot2` (2021-03-18, Thu)
