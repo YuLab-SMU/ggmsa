@@ -68,10 +68,13 @@ get_consensus <- function(tidy, ignore_gaps = FALSE, ref = NULL) {
 
 order_name <- function(name, order = NULL, consensus_views = FALSE, ref = NULL) {
     name_uni <- unique(name)
-    if(consensus_views & is.null(ref)){
+    if(is.null(ref)){
         #placed 'consensus' at the top
-        name_expect <- name_uni[!name_uni %in% "Consensus"] %>% rev
+        name_expect <- name_uni[!name_uni %in% "Consensus"] %>% rev %>% as.character
         name <- factor(name, levels = c(name_expect, "Consensus"))
+    }else {
+        name_expect <- name_uni[!name_uni %in% ref] %>% rev %>% as.character
+        name <- factor(name, levels = c(name_expect, ref))
     }
 
     # #adjust the msa order according to 'order'
