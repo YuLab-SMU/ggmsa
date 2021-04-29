@@ -8,9 +8,10 @@ ggplot_add.seqlogo <- function(object, plot, object_name) {
     adaptive <- object$adaptive
     top <- object$top
     logo_custom_color <- object[["custom_color"]]
+    show.legend <- object$show.legend
 
     ly_logo <- geom_logo(data  = logo_tidyData, font = logo_font, color = logo_color,
-                         adaptive = adaptive, top = top, custom_color = logo_custom_color)
+                         adaptive = adaptive, top = top, custom_color = logo_custom_color, show.legend = show.legend)
     ggplot_add(ly_logo, plot, object_name)
 }
 
@@ -33,9 +34,10 @@ ggplot_add.seed <- function(object, plot, object_name) {
 ##' @export
 ggplot_add.GCcontent <- function(object, plot, object_name) {
     msaData <- plot$layers[[1]]$data
+    show.legend <- object$show.legend
     GC_tidyData <- msa2tidy(msaData)
 
-    ly <- geom_GC1(GC_tidyData)
+    ly <- geom_GC1(GC_tidyData, show.legend = show.legend )
 
     ggplot_add(ly, plot, object_name)
 }

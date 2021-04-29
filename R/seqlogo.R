@@ -16,7 +16,7 @@
 ##' seqlogo(nt_sequence, color = "Chemistry_NT")
 ##' @export
 ##' @author Lang Zhou
-seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = FALSE, custom_color = NULL) {
+seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color = "Chemistry_AA", adaptive = FALSE, top = FALSE, custom_color = NULL) {
     data <- tidy_msa(msa, start = start, end = end)
     ggplot() + geom_logo(data, font = font, color = color, adaptive = adaptive, top = top, custom_color = custom_color) +
         theme_minimal() + xlab(NULL) + ylab(NULL) +
@@ -40,25 +40,26 @@ seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color
 ##' ggmsa(f,font = NULL,color = "Chemistry_NT") + geom_seqlogo()
 ##' @export
 ##' @author Lang Zhou
-geom_seqlogo <- function(font = "DroidSansMono", color = "Chemistry_NT", adaptive = TRUE, top = TRUE, custom_color = NULL, ...) {
+geom_seqlogo <- function(font = "DroidSansMono", color = "Chemistry_AA", adaptive = TRUE, top = TRUE, custom_color = NULL, show.legend = FALSE, ...) {
     structure(list(font = font,
                    color = color,
                    adaptive = adaptive,
                    top = top,
-                   custom_color = custom_color),
+                   custom_color = custom_color,
+                   show.legend = show.legend),
               class = "seqlogo")
 }
 
 
-geom_logo <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE, custom_color = NULL,...) {
+geom_logo <- function(data, font = "DroidSansMono", color = "Chemistry_AA", adaptive = FALSE, top = TRUE, custom_color = NULL, show.legend = FALSE, ...) {
     mapping  <- aes_(x = ~logo_x, y = ~logo_y,  group = ~group, fill = ~I(color))
     logo_data <- seqlogo_data(data, font = font, color = color, adaptive = adaptive, top = top, custom_color = custom_color)
 
-    ly_logo <- geom_polygon(mapping = mapping, data = logo_data, inherit.aes = FALSE)
+    ly_logo <- geom_polygon(mapping = mapping, data = logo_data, inherit.aes = FALSE, show.legend = show.legend)
     return(ly_logo)
 }
 
-seqlogo_data <- function(data, font = "DroidSansMono", color = "Chemistry_NT", adaptive = FALSE, top = TRUE, custom_color = NULL){
+seqlogo_data <- function(data, font = "DroidSansMono", color = "Chemistry_AA", adaptive = FALSE, top = TRUE, custom_color = NULL){
     tidy <- data
 
     if (color == "Clustal") {
