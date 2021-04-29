@@ -23,6 +23,7 @@ geom_msa(
   ignore_gaps = FALSE,
   ref = NULL,
   position = "identity",
+  show.legend = FALSE,
   ...
 )
 }
@@ -64,6 +65,8 @@ If font = NULL, only plot the background tile.}
 
 \item{position}{Position adjustment, either as a string, or the result of a call to a position adjustment function,
 default is 'identity' meaning 'position_identity()'.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?}
 
 \item{...}{additional parameter}
 }

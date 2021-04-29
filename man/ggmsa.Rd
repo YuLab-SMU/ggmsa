@@ -22,7 +22,8 @@ ggmsa(
   use_dot = FALSE,
   disagreement = TRUE,
   ignore_gaps = FALSE,
-  ref = NULL
+  ref = NULL,
+  show.legend = FALSE
 )
 }
 \arguments{
@@ -61,6 +62,8 @@ ggmsa(
 \item{ignore_gaps}{a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.}
 
 \item{ref}{a character string. Specifying the reference sequence which should be one of input sequences when 'consensus_views' is TRUE.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?}
 }
 \value{
 ggplot object

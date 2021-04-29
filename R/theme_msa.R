@@ -1,12 +1,14 @@
 ##' @importFrom ggplot2 theme_minimal
+##' @importFrom ggplot2 labs
 theme_msa <- function(){
   list(
     xlab(NULL),
     ylab(NULL),
+    labs(fill = "Fills"),
     coord_fixed(),
     scale_x_continuous(expand = c(0.01,0)),
     theme_minimal() +
-        theme(legend.position = 'none',
+        theme(
             strip.text = element_blank(),
             panel.spacing.y = unit(.4, "in"),
             panel.grid = element_blank())
