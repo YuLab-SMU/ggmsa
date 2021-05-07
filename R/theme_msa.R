@@ -49,6 +49,8 @@ facet_scale <- function(facetData, field) {
         #print(scale_i)
         xl_scale <- xl_scale %>% c(scale_i)
     }
+    max_pos <- facetData$position %>% max
+    xl_scale <- xl_scale[xl_scale <= max_pos]
     return(xl_scale)
 }
 
