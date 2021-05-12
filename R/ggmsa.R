@@ -8,7 +8,6 @@
 ##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile.
 ##' @param color a Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
-##' @param order vectors.Specified sequences order.
 ##' @param char_width a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.
 ##' @param by_conservation a logical value. The most conserved regions have the brightest colors.
 ##' @param none_bg a logical value indicating whether background should be disaplayed. Defaults is FALSE.
@@ -61,7 +60,6 @@ ggmsa <- function(msa,
                   font = "helvetical",
                   color = "Chemistry_AA",
                   custom_color = NULL,
-                  order = NULL,
                   char_width = 0.9,
                   none_bg = FALSE,
                   by_conservation = FALSE,
@@ -80,7 +78,6 @@ ggmsa <- function(msa,
     ggplot() + geom_msa(data, font = font,
                         color = color,
                         custom_color = custom_color,
-                        order = order,
                         char_width = char_width,
                         none_bg = none_bg,
                         by_conservation = by_conservation,
