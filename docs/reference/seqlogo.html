@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggmsa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Extensions/extensions.html"> Extensions</a>
+      <a href="../articles/guides/Annotations.html">Annotation</a>
+    </li>
+    <li>
+      <a href="../articles/guides/Color_schemes_And_Font_Families.html">Color Schemes and Font Families</a>
+    </li>
+    <li>
+      <a href="../articles/guides/MSA_theme.html">Theme</a>
+    </li>
+    <li>
+      <a href="../articles/guides/Other_Modules.html">Other Modules</a>
+    </li>
+    <li>
+      <a href="../articles/guides/View_modes.html">View Modes</a>
     </li>
   </ul>
 </li>
@@ -138,15 +150,16 @@
     <p>plot sequence logo for MSA based 'ggolot2'</p>
     </div>
 
-    <pre class="usage"><span class='fu'>seqlogo</span>(
-  <span class='no'>msa</span>,
-  <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>font</span> <span class='kw'>=</span> <span class='st'>"helvetical"</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"Chemistry_NT"</span>,
-  <span class='kw'>adaptive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>seqlogo</span><span class='op'>(</span>
+  <span class='va'>msa</span>,
+  start <span class='op'>=</span> <span class='cn'>NULL</span>,
+  end <span class='op'>=</span> <span class='cn'>NULL</span>,
+  font <span class='op'>=</span> <span class='st'>"DroidSansMono"</span>,
+  color <span class='op'>=</span> <span class='st'>"Chemistry_AA"</span>,
+  adaptive <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  top <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  custom_color <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,11 +178,11 @@
     </tr>
     <tr>
       <th>font</th>
-      <td><p>font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font=NULL, only the background tiles is drawn.</p></td>
+      <td><p>font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'DroidSansMono'. If font=NULL, only the background tiles is drawn.</p></td>
     </tr>
     <tr>
       <th>color</th>
-      <td><p>A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER'，‘CN6’, ' Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.</p></td>
+      <td><p>A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6','Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.</p></td>
     </tr>
     <tr>
       <th>adaptive</th>
@@ -179,16 +192,24 @@
       <th>top</th>
       <td><p>A logical value. If TRUE, seqlogo is aligned to the top of MSA.</p></td>
     </tr>
+    <tr>
+      <th>custom_color</th>
+      <td><p>A data frame with two cloumn called "names" and "color".Customize the color scheme.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>ggplot object</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Lang Zhou</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#plot sequence motif independently</span>
-<span class='no'>nt_sequence</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"LeaderRepeat_All.fa"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ggmsa"</span>)
-<span class='fu'>seqlogo</span>(<span class='no'>nt_sequence</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"Chemistry_NT"</span>)</div><div class='img'><img src='seqlogo-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>nt_sequence</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"LeaderRepeat_All.fa"</span>, package <span class='op'>=</span> <span class='st'>"ggmsa"</span><span class='op'>)</span>
+<span class='fu'>seqlogo</span><span class='op'>(</span><span class='va'>nt_sequence</span>, color <span class='op'>=</span> <span class='st'>"Chemistry_NT"</span><span class='op'>)</span>
+</div><div class='img'><img src='seqlogo-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -204,7 +225,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

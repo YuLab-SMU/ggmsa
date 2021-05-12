@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggmsa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Extensions/extensions.html"> Extensions</a>
+      <a href="../articles/guides/Annotations.html">Annotation</a>
+    </li>
+    <li>
+      <a href="../articles/guides/Color_schemes_And_Font_Families.html">Color Schemes and Font Families</a>
+    </li>
+    <li>
+      <a href="../articles/guides/MSA_theme.html">Theme</a>
+    </li>
+    <li>
+      <a href="../articles/guides/Other_Modules.html">Other Modules</a>
+    </li>
+    <li>
+      <a href="../articles/guides/View_modes.html">View Modes</a>
     </li>
   </ul>
 </li>
@@ -138,7 +150,7 @@
     <p>The MSA would be plot in a field that you set.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>facet_msa</span>(<span class='no'>field</span>)</pre>
+    <pre class="usage"><span class='fu'>facet_msa</span><span class='op'>(</span><span class='va'>field</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,12 +161,20 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Lang Zhou</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'ggplot2' was built under R version 3.6.3</span></div><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/sample.fasta"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ggmsa"</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/sample.fasta"</span>, package<span class='op'>=</span><span class='st'>"ggmsa"</span><span class='op'>)</span>
 <span class='co'># 2 fields</span>
-<span class='fu'><a href='ggmsa.html'>ggmsa</a></span>(<span class='no'>f</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>120</span>, <span class='kw'>font</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Chemistry_AA"</span>) + <span class='fu'>facet_msa</span>(<span class='kw'>field</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div><div class='output co'>#&gt; <span class='message'>Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></div><div class='img'><img src='facet_msa-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># 3 fields</span>
-<span class='fu'><a href='ggmsa.html'>ggmsa</a></span>(<span class='no'>f</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>120</span>, <span class='kw'>font</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Chemistry_AA"</span>) + <span class='fu'>facet_msa</span>(<span class='kw'>field</span> <span class='kw'>=</span> <span class='fl'>40</span>)</div><div class='output co'>#&gt; <span class='message'>Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></div><div class='img'><img src='facet_msa-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='ggmsa.html'>ggmsa</a></span><span class='op'>(</span><span class='va'>f</span>, end <span class='op'>=</span> <span class='fl'>120</span>, font <span class='op'>=</span> <span class='cn'>NULL</span>, color<span class='op'>=</span><span class='st'>"Chemistry_AA"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>facet_msa</span><span class='op'>(</span>field <span class='op'>=</span> <span class='fl'>60</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Scale for 'x' is already present. Adding another scale for 'x', which will</span>
+#&gt; <span class='message'>replace the existing scale.</span></div><div class='output co'>#&gt; <span class='message'>Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></div><div class='img'><img src='facet_msa-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># 3 fields</span>
+<span class='fu'><a href='ggmsa.html'>ggmsa</a></span><span class='op'>(</span><span class='va'>f</span>, end <span class='op'>=</span> <span class='fl'>120</span>, font <span class='op'>=</span> <span class='cn'>NULL</span>,  color<span class='op'>=</span><span class='st'>"Chemistry_AA"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>facet_msa</span><span class='op'>(</span>field <span class='op'>=</span> <span class='fl'>40</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Scale for 'x' is already present. Adding another scale for 'x', which will</span>
+#&gt; <span class='message'>replace the existing scale.</span></div><div class='output co'>#&gt; <span class='message'>Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span></div><div class='img'><img src='facet_msa-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -170,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

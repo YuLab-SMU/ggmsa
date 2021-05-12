@@ -1,8 +1,12 @@
 pandoc: '2.6'
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  extensions: Extensions/extensions.html
   ggmsa: ggmsa.html
-last_built: 2020-12-05T08:35Z
+  guides/Annotations: Annotations.html
+  guides/Color_schemes_And_Font_Families: Color_schemes_And_Font_Families.html
+  guides/MSA_theme: MSA_theme.html
+  guides/Other_Modules: Other_Modules.html
+  guides/View_modes: View_modes.html
+last_built: 2021-05-12T09:02Z
 

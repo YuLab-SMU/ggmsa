@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggmsa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -64,7 +64,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/Extensions/extensions.html"> Extensions</a>
+      <a href="articles/guides/Annotations.html">Annotation</a>
+    </li>
+    <li>
+      <a href="articles/guides/Color_schemes_And_Font_Families.html">Color Schemes and Font Families</a>
+    </li>
+    <li>
+      <a href="articles/guides/MSA_theme.html">Theme</a>
+    </li>
+    <li>
+      <a href="articles/guides/Other_Modules.html">Other Modules</a>
+    </li>
+    <li>
+      <a href="articles/guides/View_modes.html">View Modes</a>
     </li>
   </ul>
 </li>
@@ -84,79 +96,61 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-
 <div id="ggmsa-plot-multiple-sequence-alignment-using-ggplot2-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ggmsa-plot-multiple-sequence-alignment-using-ggplot2-" class="anchor"></a>ggmsa: Plot multiple sequence alignment using ggplot2 <img src="reference/figures/logo.png" height="139" align="right">
+<a href="#ggmsa-plot-multiple-sequence-alignment-using-ggplot2-" class="anchor"></a>ggmsa: Plot multiple sequence alignment using ggplot2 <img src="reference/figures/logo.png" height="140" align="right">
 </h1></div>
-<!-- badges: start -->
 
-<p><code>ggmsa</code> supports visualizing multiple sequence alignment of nucleotide sequences and protein sequences using ggplot2. It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.</p>
-<div id="install-development-vertion" class="section level2">
+<p><code>ggmsa</code> is designed for visualization and annotation of multiple sequence alignment. It implements functions to visualize publication-quality multiple sequence alignments (protein/DNA/RNA) in R extremely simple and powerful.</p>
+<p>For details, please visit <a href="http://yulab-smu.top/ggmsa/" class="uri">http://yulab-smu.top/ggmsa/</a></p>
+<div id="-installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#install-development-vertion" class="anchor"></a>Install development vertion</h2>
-<p>The development version from github:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"devtools"</span>, <span class="kw">quietly</span><span class="kw">=</span><span class="fl">TRUE</span>))
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"YuLab-SMU/ggmsa"</span>)</pre></div>
+<a href="#-installation" class="anchor"></a><span class="emoji" data-emoji="hammer">🔨</span> Installation</h2>
+<p>You can install <code>ggmsa</code> from CRAN using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages('ggmsa')</a></code>. Alternatively you can grab the development version from github using devtools:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"YuLab-SMU/ggmsa"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="quick-example" class="section level2">
+<div id="-quick-example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#quick-example" class="anchor"></a>Quick Example</h2>
-<p>Plot multiple sequence alignment.</p>
-<div id="protein-sequences" class="section level3">
-<h3 class="hasAnchor">
-<a href="#protein-sequences" class="anchor"></a>Protein Sequences</h3>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggmsa</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="no">protein_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"sample.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
-<span class="fu"><a href="reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="fl">164</span>, <span class="fl">213</span>, <span class="kw">char_width</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>, <span class="kw">seq_name</span> <span class="kw">=</span> <span class="no">T</span>)</pre></div>
-<p><img src="reference/figures/unnamed-chunk-3-1.png"><!-- --></p>
+<a href="#-quick-example" class="anchor"></a><span class="emoji" data-emoji="bulb">💡</span> Quick Example</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggmsa</span><span class="op">)</span>
+<span class="va">protein_sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample.fasta"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+<span class="fu"><a href="reference/ggmsa.html">ggmsa</a></span><span class="op">(</span><span class="va">protein_sequences</span>, start <span class="op">=</span> <span class="fl">221</span>, end <span class="op">=</span> <span class="fl">280</span>, char_width <span class="op">=</span> <span class="fl">0.5</span>, seq_name <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="reference/geom_seqlogo.html">geom_seqlogo</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="reference/geom_msaBar.html">geom_msaBar</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/REAMED-unnamed-chunk-5-1.png"><!-- --></p>
 </div>
-<div id="dna-sequences" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dna-sequences" class="anchor"></a>DNA Sequences</h3>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">nt_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"LeaderRepeat_All.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
-<span class="fu"><a href="reference/ggmsa.html">ggmsa</a></span>(<span class="no">nt_sequences</span>,<span class="kw">font</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_NT"</span>)</pre></div>
-<p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --></p>
-</div>
-<div id="rna-sequences" class="section level3">
-<h3 class="hasAnchor">
-<a href="#rna-sequences" class="anchor"></a>RNA Sequences</h3>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">miRNA_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"seedSample.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
-<span class="fu"><a href="reference/ggmsa.html">ggmsa</a></span>(<span class="no">miRNA_sequences</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_NT"</span>)</pre></div>
-<p><img src="reference/figures/unnamed-chunk-5-1.png"><!-- --></p>
-</div>
-</div>
-<div id="visualizing-multiple-sequence-alignment-with-ggtree" class="section level2">
+<div id="-learn-more" class="section level2">
 <h2 class="hasAnchor">
-<a href="#visualizing-multiple-sequence-alignment-with-ggtree" class="anchor"></a>Visualizing Multiple Sequence Alignment With <code>ggtree</code>.</h2>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Biostrings</span>)
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readAAStringSet</a></span>(<span class="no">protein_sequences</span>)
-<span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">as.dist</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/stringDist.html">stringDist</a></span>(<span class="no">x</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"hamming"</span>)/<span class="fu">width</span>(<span class="no">x</span>)[<span class="fl">1</span>])
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ape</span>)
-<span class="no">tree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/bionj.html">bionj</a></span>(<span class="no">d</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggtree</span>)
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span>(<span class="no">tree</span>) + <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tiplab.html">geom_tiplab</a></span>()
-
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="reference/tidy_msa.html">tidy_msa</a></span>(<span class="no">x</span>, <span class="fl">164</span>, <span class="fl">213</span>)
-<span class="no">p</span> + <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/facet-plot.html">geom_facet</a></span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="no">geom_msa</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>,  <span class="kw">panel</span> <span class="kw">=</span> <span class="st">'msa'</span>,
-               <span class="kw">font</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>) +
-    <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/xlim_tree.html">xlim_tree</a></span>(<span class="fl">1</span>)</pre></div>
-<p><img src="reference/figures/unnamed-chunk-6-1.png"><!-- --></p>
-</div>
-</div>
-<div id="learn-more" class="section level1">
-<h1 class="hasAnchor">
-<a href="#learn-more" class="anchor"></a>Learn more</h1>
-<p>For more details about the version in CRAN, please refer to the <a href="https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html">online vignette</a></p>
-<p>Moreover, check out the guides for learning new features with the current development version:</p>
+<a href="#-learn-more" class="anchor"></a><span class="emoji" data-emoji="books">📚</span> Learn more</h2>
+<p>Check out the guides for learning everything there is to know about all the different features:</p>
 <ul>
 <li><a href="https://yulab-smu.github.io/ggmsa/articles/ggmsa.html">Getting Started</a></li>
-<li><a href="https://yulab-smu.github.io/ggmsa/articles/Extensions/extensions.html">Extensions Plots</a></li>
+<li><a href="https://yulab-smu.github.io/ggmsa/articles/guides/Annotations.html">Annotations</a></li>
+<li><a href="https://yulab-smu.github.io/ggmsa/articles/guides/Color_schemes_And_Font_Families.html">Color Schemes and Font Families</a></li>
+<li><a href="https://yulab-smu.github.io/ggmsa/articles/guides/guides/MSA_theme.html">Theme</a></li>
+<li><a href="https://yulab-smu.github.io/ggmsa/articles/guides/guides/Other_Modules.html">Other Modules</a></li>
+<li><a href="https://yulab-smu.github.io/ggmsa/articles/guides/guides/View_modes.html">View Modes</a></li>
 </ul>
 </div>
-
+<div id="-author" class="section level2">
+<h2 class="hasAnchor">
+<a href="#-author" class="anchor"></a><span class="emoji" data-emoji="runner">🏃</span> Author</h2>
+<ul>
+<li><p><a href="https://guangchuangyu.github.io">GuangChuang Yu</a> Professor, PI</p></li>
+<li><p><a href="https://github.com/xiangpin">Shuangbin Xu</a> PhD Student</p></li>
+<li><p><a href="https://github.com/nyzhoulang">Lang Zhou</a> Master’s Student</p></li>
+</ul>
+<p><strong>YuLab</strong> <a href="https://yulab-smu.top/" class="uri">https://yulab-smu.top/</a></p>
+<p><strong>Department of Bioinformatics, School of Basic Medical Sciences, Southern Medical University</strong></p>
+</div>
+<div id="-contributing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#-contributing" class="anchor"></a><span class="emoji" data-emoji="sparkling_heart">💖</span> Contributing</h2>
+<p>We welcome any contributions! By participating in this project you agree to abide by the terms outlined in the <a href="http://yulab-smu.top/ggmsa/articles/CONDUCT.html">Contributor Code of Conduct</a>.</p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -185,8 +179,13 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=ggmsa"><img src="https://www.r-pkg.org/badges/version-ago/ggmsa" alt="CRAN_Release_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=ggmsa"><img src="https://cranlogs.r-pkg.org/badges/grand-total/ggmsa?color=green" alt="CRAN_Download_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=badger"><img src="https://www.r-pkg.org/badges/version/badger?color=blue"></a></li>
+<li><a href="https://github.com/YuLab-SMU/ggmsa"><img src="https://img.shields.io/badge/devel%20version-1.0.0-blue.svg"></a></li>
+<li><a href="https://cran.r-project.org/package=badger"><img src="http://cranlogs.r-pkg.org/badges/grand-total/badger?color=green"></a></li>
+<li><a href="https://cran.r-project.org/package=badger"><img src="http://cranlogs.r-pkg.org/badges/last-month/badger?color=green"></a></li>
+<li><a href="https://cran.r-project.org/web/checks/check_results_ggmsa.html"><img src="https://cranchecks.info/badges/summary/ggmsa" alt="CRAN checks"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
+<li><a href="https://cran.r-project.org/web/licenses/Artistic-2.0"><img src="https://img.shields.io/badge/license-Artistic--2.0-blue.svg" alt="License: Artistic-2.0"></a></li>
 </ul>
 </div>
 </div>
@@ -198,7 +197,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

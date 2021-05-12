@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ggmsa: Plot multiple sequence alignment using ggplot2 • ggmsa</title>
+<title>ggmsa: Getting Started • ggmsa</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="ggmsa: Plot multiple sequence alignment using ggplot2">
+<script src="../pkgdown.js"></script><meta property="og:title" content="ggmsa: Getting Started">
 <meta property="og:description" content="ggmsa">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggmsa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -64,7 +64,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Extensions/extensions.html"> Extensions</a>
+      <a href="../articles/guides/Annotations.html">Annotation</a>
+    </li>
+    <li>
+      <a href="../articles/guides/Color_schemes_And_Font_Families.html">Color Schemes and Font Families</a>
+    </li>
+    <li>
+      <a href="../articles/guides/MSA_theme.html">Theme</a>
+    </li>
+    <li>
+      <a href="../articles/guides/Other_Modules.html">Other Modules</a>
+    </li>
+    <li>
+      <a href="../articles/guides/View_modes.html">View Modes</a>
     </li>
   </ul>
 </li>
@@ -82,12 +94,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="ggmsa_files/kePrint-0.0.1/kePrint.js"></script><link href="ggmsa_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>ggmsa: Plot multiple sequence alignment using ggplot2</h1>
+      <h1 data-toc-skip>ggmsa: Getting Started</h1>
             
-            <h4 class="date">2020-12-05</h4>
+            <h4 class="date">2021-05-12</h4>
       
       
       <div class="hidden name"><code>ggmsa.Rmd</code></div>
@@ -99,26 +112,19 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>Plot multiple sequence alignment using <a href="https://cran.r-project.org/package=ggplot2">ggplot2</a> with multiple color schemes supported.</p>
-<p>Supports visualizing multiple sequence alignment of DNA and protein sequences using ggplot2 It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo. Multiple sequence alignment can easily be combined with other ‘ggplot2’ plots, such as aligning a phylogenetic tree produced by ‘ggtree’ with multiple sequence alignment.</p>
+<p>ggmsa is a package designed to plot multiple sequence alignments using <a href="https://cran.r-project.org/package=ggplot2">ggplot2</a> .</p>
+<p>This package implements functions to visualize publication-quality multiple sequence alignments (protein/DNA/RNA) in R extremely simple and powerful. It uses module design to annotate sequence alignments and allows to accept other datasets for diagrams combination.<a href="https://cran.r-project.org/package=ggmsa">ggmsa</a>, (current version: 1.0.0) is avalable via CRAN.</p>
+<p>In this tutorial, we’ll work through the basics of using ggmsa.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"ggmsa"</span><span class="op">)</span></code></pre></div>
+<p><img src="man/figures/workflow.png" width="50%"></p>
 </div>
-<div id="installation" class="section level1">
+<div id="importing-msa-data" class="section level1">
 <h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
-<p>This R package (<a href="https://cran.r-project.org/package=ggmsa">ggmsa</a>, current version: 0.0.4) is avalable via CRAN. The way to install the package is the following:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">## installing the package</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ggmsa"</span>)
-<span class="co">## loading the package</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ggmsa"</span>)</pre></body></html></div>
-<p>The development version from github:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"devtools"</span>, <span class="kw">quietly</span><span class="kw">=</span><span class="fl">TRUE</span>))
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"YuLab-SMU/ggmsa"</span>)</pre></body></html></div>
-<div id="load-sample-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-sample-data" class="anchor"></a>Load sample data</h2>
-<p>Three sample data are shipped with the ggmsa package. Note that ggmsa supports not only fasta files but other objects as well. <code><a href="../reference/available_msa.html">available_msa()</a></code>can be used to list MSA objects currently available.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"> <span class="fu"><a href="../reference/available_msa.html">available_msa</a></span>()
+<a href="#importing-msa-data" class="anchor"></a>Importing MSA data</h1>
+<p>We’ll start by importing some example data to use throughout this tutorial. Expect FASTA files, some of the objects in R can also as input. <code><a href="../reference/available_msa.html">available_msa()</a></code> can be used to list MSA objects currently available.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"> <span class="fu"><a href="../reference/available_msa.html">available_msa</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; files currently available:</span>
 <span class="co">#&gt; .fasta</span>
 <span class="co">#&gt; XStringSet objects from 'Biostrings' package:</span>
@@ -126,121 +132,226 @@
 <span class="co">#&gt; bin objects:</span>
 <span class="co">#&gt; DNAbin AAbin</span>
 
- <span class="no">protein_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"sample.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
- <span class="no">miRNA_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"seedSample.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)
- <span class="no">nt_sequences</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"LeaderRepeat_All.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmsa"</span>)</pre></body></html></div>
+ <span class="va">protein_sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample.fasta"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+ <span class="va">miRNA_sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"seedSample.fa"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+ <span class="va">nt_sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"LeaderRepeat_All.fa"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+ </code></pre></div>
 </div>
-</div>
-<div id="visualizing-multiple-sequence-alignments" class="section level1">
+<div id="basic-use-msa-visualization" class="section level1">
 <h1 class="hasAnchor">
-<a href="#visualizing-multiple-sequence-alignments" class="anchor"></a>Visualizing Multiple Sequence Alignments</h1>
+<a href="#basic-use-msa-visualization" class="anchor"></a>Basic use: MSA Visualization</h1>
 <p>The most simple code to use ggmsa:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">265</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">300</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span><span class="op">(</span><span class="va">protein_sequences</span>, <span class="fl">300</span>, <span class="fl">350</span>, color <span class="op">=</span> <span class="st">"Clustal"</span>, font <span class="op">=</span> <span class="st">"DroidSansMono"</span>, char_width <span class="op">=</span> <span class="fl">0.5</span>, seq_name <span class="op">=</span> <span class="cn">T</span> <span class="op">)</span></code></pre></div>
 <p><img src="ggmsa_files/figure-html/unnamed-chunk-5-1.png" width="960"></p>
-<div id="colour-schemes" class="section level2">
+<div id="color-schemes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#colour-schemes" class="anchor"></a>Colour Schemes</h2>
-<p>Several classic color schemes for MSA are shipped in the package. In the same ways, you can use <code><a href="../reference/available_msa.html">available_msa()</a></code> to list colour schemes currently available. Note that Amino acids and nucleotides have different colour schemes.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"> <span class="fu"><a href="../reference/available_colors.html">available_colors</a></span>()
+<a href="#color-schemes" class="anchor"></a>Color Schemes</h2>
+<p>ggmsa predefines several color schemes for rendering MSA are shipped in the package. In the same ways, using <code><a href="../reference/available_msa.html">available_msa()</a></code> to list color schemes currently available. Note that amino acids (protein) and nucleotides (DNA/RNA) have different names.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/available_colors.html">available_colors</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; color schemes for nucleotide sequences currently available:</span>
 <span class="co">#&gt; Chemistry_NT Shapely_NT Taylor_NT Zappo_NT</span>
 <span class="co">#&gt; color schemes for AA sequences currently available:</span>
-<span class="co">#&gt; Clustal Chemistry_AA Shapely_AA Zappo_AA Taylor_AA LETTER CN6</span></pre></body></html></div>
-<p><img src="man/figures/NT_color.png" width="70%"></p>
-<p><img src="man/figures/AA_color.png" width="90%"></p>
-<div id="clustal-x-colour-scheme" class="section level3">
-<h3 class="hasAnchor">
-<a href="#clustal-x-colour-scheme" class="anchor"></a>Clustal X Colour Scheme</h3>
-<p>This is an emulation of the default colourscheme used for alignments in <a href="http://www.jalview.org/help/html/colourSchemes/clustal.html">Clustal X</a>, a graphical interface for the ClustalW multiple sequence alignment program. Each residue in the alignment is assigned a colour if the amino acid profile of the alignment at that position meets some minimum criteria specific for the residue type.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Clustal"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-9-1.png" width="960"></p>
-</div>
-<div id="color-by-chemistrydefault" class="section level3">
-<h3 class="hasAnchor">
-<a href="#color-by-chemistrydefault" class="anchor"></a>Color by Chemistry(Default)</h3>
-<p>Amino acids are colored according to their side chain chemistry:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-10-1.png" width="960"></p>
-</div>
-<div id="color-by-shapely" class="section level3">
-<h3 class="hasAnchor">
-<a href="#color-by-shapely" class="anchor"></a>Color by Shapely</h3>
-<p>This color scheme matches the RasMol amino acid and RasMol nucleotide <a href="http://openrasmol.org/doc/rasmol.html#shapelycolours">color schemes</a>, which are, in turn, based on Robert Fletterick’s “Shapely models”.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Shapely_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-11-1.png" width="960"></p>
-</div>
-<div id="color-by-taylor" class="section level3">
-<h3 class="hasAnchor">
-<a href="#color-by-taylor" class="anchor"></a>Color by Taylor</h3>
-<p>This color scheme is taken from Taylor<span class="citation">(Taylor 1997)</span> and is also used in JalView<span class="citation">(Waterhouse et al. 2009)</span>.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Taylor_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-12-1.png" width="960"></p>
-</div>
-<div id="color-by-zappo" class="section level3">
-<h3 class="hasAnchor">
-<a href="#color-by-zappo" class="anchor"></a>Color by Zappo</h3>
-<p>This scheme colors residues according to their physico-chemical properties, and is also used in JalView<span class="citation">(Waterhouse et al. 2009)</span>.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Zappo_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-13-1.png" width="960"></p>
-</div>
-<div id="color-by-letter" class="section level3">
-<h3 class="hasAnchor">
-<a href="#color-by-letter" class="anchor"></a>Color by LETTER</h3>
-<p>Thanks to <a href="https://github.com/YuLab-SMU/ggmsa/pull/9/commits/c736dbbf3ecd64a8ce921b9474a699fcd44ec7b3">ShixiangWang</a> for the color scheme suggestions.</p>
-<p><a href="https://en.wikipedia.org/wiki/Help:Distinguishable_colors">https://en.wikipedia.org/wiki/Help:Distinguishable_colors</a></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"LETTER"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-14-1.png" width="960"></p>
-</div>
+<span class="co">#&gt; Clustal Chemistry_AA Shapely_AA Zappo_AA Taylor_AA LETTER CN6 Hydrophobicity</span></code></pre></div>
+<p><img src="man/figures/schemes.png" width="50%"></p>
 </div>
 <div id="font" class="section level2">
 <h2 class="hasAnchor">
 <a href="#font" class="anchor"></a>Font</h2>
-<p>Several classic font for MSA are shipped in the package. In the same ways, you can use <code><a href="../reference/available_fonts.html">available_fonts()</a></code> to list font currently available</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"> <span class="fu"><a href="../reference/available_fonts.html">available_fonts</a></span>()
+<p>Several predefined fonts are shipped ggmsa. Users can use <code><a href="../reference/available_fonts.html">available_fonts()</a></code> to list the font currently available.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/available_fonts.html">available_fonts</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; font families currently available:</span>
-<span class="co">#&gt; helvetical mono TimesNewRoman DroidSansMono</span></pre></body></html></div>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="st">"helvetical"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-16-1.png" width="960"></p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="st">"TimesNewRoman"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-17-1.png" width="960"></p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="st">"DroidSansMono"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-18-1.png" width="960"></p>
-<p>If you specify <code>font = NULL</code>, only tiles will be plot.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-19-1.png" width="960"></p>
-</div>
-<div id="other-params" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-params" class="anchor"></a>Other params</h2>
-<p><strong>Characters width</strong> can be specified by <code>char_width</code>. Defaults is 0.9.</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">char_width</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-20-1.png" width="960"></p>
-<p><strong>Background</strong> can be specified by <code>none_bg</code>. If <code>none_bg = TRUE</code>, only the character will be plot.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="fl">320</span>, <span class="kw">end</span> <span class="kw">=</span> <span class="fl">360</span>, <span class="kw">none_bg</span> <span class="kw">=</span> <span class="fl">TRUE</span>) + <span class="fu">theme_void</span>()</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-21-1.png" width="960"></p>
-<p><strong>Position Highligthed</strong> can be specified by <code>posHighligthed</code>. The <code>none_bg = FALSE</code> when you specified position Highligthed by <code>posHighligthed</code></p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="fl">164</span>, <span class="fl">213</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>,
-      <span class="kw">posHighligthed</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">185</span>, <span class="fl">190</span>))</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-22-1.png" width="960"></p>
-<p><strong>Sequence names</strong> Defaults is ‘NULL’ which indicates that the sequence name is displayed when <code>font = NULL</code>, but ‘font = char’ will not be displayed.</p>
-<p>If <code>seq_name = TRUE</code> the sequence name will be displayed when you need it.</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="fl">164</span>, <span class="fl">213</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>, <span class="kw">seq_name</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-23-1.png" width="960"></p>
-<p>If <code>seq_name = FALSE</code> the sequence name will not be displayed in any case.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span>(<span class="no">protein_sequences</span>, <span class="fl">164</span>, <span class="fl">213</span>, <span class="kw">font</span> <span class="kw">=</span> <span class="kw">NULL</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Chemistry_AA"</span>, <span class="kw">seq_name</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="ggmsa_files/figure-html/unnamed-chunk-24-1.png" width="960"></p>
+<span class="co">#&gt; helvetical mono TimesNewRoman DroidSansMono</span></code></pre></div>
 </div>
 </div>
-<div id="reference" class="section level1 unnumbered">
+<div id="msa-annotation" class="section level1">
 <h1 class="hasAnchor">
-<a href="#reference" class="anchor"></a>Reference</h1>
-<div id="refs" class="references">
-<div id="ref-Taylor1997Residual">
-<p>Taylor, W R. 1997. “Residual Colours: A Proposal for Aminochromography.” <em>Protein Eng</em> 10 (7): 743–46.</p>
+<a href="#msa-annotation" class="anchor"></a>MSA Annotation</h1>
+<p>ggmsa supports annotations for MSA. Similar to the ggplot2, it implements annotations by <code>geom</code> and users can perform annotation with <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> , like this: <code>ggmsa() + geom_*()</code>. Automatically generated annotations that containing colored labels and symbols are overlaid on MSAs to indicate potentially conserved or divergent regions.</p>
+<p>For example, visualizing multiple sequence alignment with <strong>sequence logo</strong> and <strong>bar chart</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span><span class="op">(</span><span class="va">protein_sequences</span>, <span class="fl">221</span>, <span class="fl">280</span>, seq_name <span class="op">=</span> <span class="cn">TRUE</span>, char_width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_seqlogo.html">geom_seqlogo</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Chemistry_AA"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_msaBar.html">geom_msaBar</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="ggmsa_files/figure-html/unnamed-chunk-9-1.png" width="1056"></p>
+<p>This table shows the annnotation layers supported by ggmsa as following:</p>
+<table class="table table">
+<thead><tr>
+<th style="text-align:left;">
+Annotation modules
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+geom_seqlogo()
+</td>
+<td style="text-align:left;">
+geometric layer
+</td>
+<td style="text-align:left;">
+automatically generated sequence logos for a MSA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+geom_GC()
+</td>
+<td style="text-align:left;">
+annotation module
+</td>
+<td style="text-align:left;">
+shows GC content with bubble chart
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+geom_seed()
+</td>
+<td style="text-align:left;">
+annotation module
+</td>
+<td style="text-align:left;">
+highlights seed region on miRNA sequences
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+geom_msaBar()
+</td>
+<td style="text-align:left;">
+annotation module
+</td>
+<td style="text-align:left;">
+shows sequences conservation by a bar chart
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+geom_helix()
+</td>
+<td style="text-align:left;">
+annotation module
+</td>
+<td style="text-align:left;">
+depicts RNA secondary structure as arc diagrams(need extra data)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="ref-Waterhouse2009Jalview">
-<p>Waterhouse, A. M., J. B. Procter, D. M. Martin, M Clamp, and G. J. Barton. 2009. “Jalview Version 2–a Multiple Sequence Alignment Editor and Analysis Workbench.” <em>Bioinformatics</em> 25 (9): 1189.</p>
+<div id="combination-plot" class="section level1">
+<h1 class="hasAnchor">
+<a href="#combination-plot" class="anchor"></a>Combination Plot</h1>
+<p>Other molecular datasets can be accepted and rendered by ggmsa (i.e. gene structure diagram, phylogenetic tree diagram, gene arrow maps). ggmsa allows users to align such associated graphs in MSA plot.</p>
+<div id="msa-tree" class="section level2">
+<h2 class="hasAnchor">
+<a href="#msa-tree" class="anchor"></a>MSA + Tree</h2>
+<p>The most important part of phylogenetic analysis is the visual inspection, annotation and exploration of phylogenetic trees. This is no surprise that aligning phylogenetic tree to the MSA plot. ggtree has called to plot phylogenetic trees.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/Biostrings">Biostrings</a></span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readAAStringSet</a></span><span class="op">(</span><span class="va">protein_sequences</span><span class="op">)</span>
+<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">as.dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/stringDist.html">stringDist</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"hamming"</span><span class="op">)</span><span class="op">/</span><span class="fu">width</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span>
+<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/bionj.html">bionj</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/treedata-book/">ggtree</a></span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tiplab.html">geom_tiplab</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/tidy_msa.html">tidy_msa</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">164</span>, <span class="fl">213</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/facet-plot.html">geom_facet</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="va">geom_msa</span>, data <span class="op">=</span> <span class="va">data</span>,  panel <span class="op">=</span> <span class="st">'msa'</span>,
+               font <span class="op">=</span> <span class="cn">NULL</span>, color <span class="op">=</span> <span class="st">"Chemistry_AA"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/xlim_tree.html">xlim_tree</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="ggmsa_files/figure-html/unnamed-chunk-11-1.png" width="960"></p>
 </div>
+<div id="multiple-graphs-msa-tree-gene-map" class="section level2">
+<h2 class="hasAnchor">
+<a href="#multiple-graphs-msa-tree-gene-map" class="anchor"></a>Multiple graphs: MSA + Tree + gene map</h2>
+<p>A notable example is integrated three associated panels. MSA plot, phylogenetic tree and gene map produced by ggmsa, ggtree and gggenes respectively.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#import data</span>
+<span class="va">tp53_sequences</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tp53.fa"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+<span class="va">tp53_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"TP53_genes.xlsx"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+
+<span class="co">#tree</span>
+<span class="va">tp53</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readAAStringSet</a></span><span class="op">(</span><span class="va">tp53_sequences</span><span class="op">)</span>
+<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">as.dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/stringDist.html">stringDist</a></span><span class="op">(</span><span class="va">tp53</span>, method <span class="op">=</span> <span class="st">"hamming"</span><span class="op">)</span><span class="op">/</span><span class="fu">width</span><span class="op">(</span><span class="va">tp53</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/bionj.html">bionj</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>
+<span class="va">p_tp53</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span><span class="op">(</span><span class="va">tree</span>, branch.length <span class="op">=</span> <span class="st">'none'</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tiplab.html">geom_tiplab</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#msa</span>
+<span class="va">data_53</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_msa.html">tidy_msa</a></span><span class="op">(</span><span class="va">tp53</span><span class="op">)</span>
+
+<span class="co">#gene maps</span>
+<span class="va">TP53_arrow</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="va">tp53_genes</span><span class="op">)</span>
+<span class="va">TP53_arrow</span><span class="op">$</span><span class="va">direction</span> <span class="op">&lt;-</span> <span class="fl">1</span>
+<span class="va">TP53_arrow</span><span class="op">[</span><span class="va">TP53_arrow</span><span class="op">$</span><span class="va">strand</span> <span class="op">==</span> <span class="st">"reverse"</span>,<span class="st">"direction"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span>
+
+<span class="co">#color</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
+<span class="va">mapping</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">start</span>, xmax <span class="op">=</span> <span class="va">end</span>, fill <span class="op">=</span> <span class="va">gene</span>, forward <span class="op">=</span> <span class="va">direction</span><span class="op">)</span>
+<span class="va">my_pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, name <span class="op">=</span> <span class="st">"Set3"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">#tree + gene maps + msa</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggnewscale</span><span class="op">)</span>
+<span class="va">p_tp53</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/facet-plot.html">geom_facet</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="va">geom_msa</span>, data <span class="op">=</span> <span class="va">data_53</span>,
+                     panel <span class="op">=</span> <span class="st">'msa'</span>, font <span class="op">=</span> <span class="cn">NULL</span>,
+                     border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/xlim_tree.html">xlim_tree</a></span><span class="op">(</span><span class="fl">3.5</span><span class="op">)</span> <span class="op">+</span> 
+          <span class="fu"><a href="https://rdrr.io/pkg/ggnewscale/man/new_scale.html">new_scale_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">my_pal</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+          <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/facet-plot.html">geom_facet</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="va">geom_motif</span>,
+                     mapping <span class="op">=</span> <span class="va">mapping</span>, data <span class="op">=</span> <span class="va">TP53_arrow</span>,
+                     panel <span class="op">=</span> <span class="st">'genes'</span>,  on <span class="op">=</span> <span class="st">'TP53'</span>,
+                     arrowhead_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">3</span>, <span class="st">"mm"</span><span class="op">)</span>,
+                     arrowhead_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="ggmsa_files/figure-html/unnamed-chunk-12-1.png" width="1344"></p>
+</div>
+</div>
+<div id="layout" class="section level1">
+<h1 class="hasAnchor">
+<a href="#layout" class="anchor"></a>Layout</h1>
+<p>Different layouts allow users to display more data in a given limited space. We offer two layouts to change MSA visualization styles.</p>
+<div id="broken-down-layout" class="section level2">
+<h2 class="hasAnchor">
+<a href="#broken-down-layout" class="anchor"></a>Broken down layout</h2>
+<p>The long sequence has be broken down and displayed in several lines by <code><a href="../reference/facet_msa.html">facet_msa()</a></code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"> <span class="co"># 4 fields</span>
+ <span class="fu"><a href="../reference/ggmsa.html">ggmsa</a></span><span class="op">(</span><span class="va">protein_sequences</span>, start <span class="op">=</span> <span class="fl">0</span>, end <span class="op">=</span> <span class="fl">400</span>, font <span class="op">=</span> <span class="cn">NULL</span>, color <span class="op">=</span> <span class="st">"Chemistry_AA"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/facet_msa.html">facet_msa</a></span><span class="op">(</span>field <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
+<p><img src="ggmsa_files/figure-html/unnamed-chunk-13-1.png" width="960"></p>
+</div>
+<div id="circular-layout" class="section level2">
+<h2 class="hasAnchor">
+<a href="#circular-layout" class="anchor"></a>Circular layout</h2>
+<p>A specific layout of the alignment can also be displayed by linking ggtreeExtra. <code>geom_fruit</code> will automatically align MSA graphs to the tree with a couple of layouts such as circular, fan andand radial.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/treedata-book/">ggtree</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/ggtreeExtra/">ggtreeExtra</a></span><span class="op">)</span>
+<span class="va">sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sequence-link-tree.fasta"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-io.html">readAAStringSet</a></span><span class="op">(</span><span class="va">sequences</span><span class="op">)</span>
+<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">as.dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biostrings/man/stringDist.html">stringDist</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"hamming"</span><span class="op">)</span><span class="op">/</span><span class="fu">width</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/bionj.html">bionj</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_msa.html">tidy_msa</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">120</span>, <span class="fl">200</span><span class="op">)</span>
+
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span><span class="op">(</span><span class="va">tree</span>, layout <span class="op">=</span> <span class="st">'circular'</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tiplab.html">geom_tiplab</a></span><span class="op">(</span>align <span class="op">=</span> <span class="cn">TRUE</span>, offset <span class="op">=</span> <span class="fl">0.545</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> 
+        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1.3</span><span class="op">)</span>
+<span class="va">p1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtreeExtra/man/geom_fruit.html">geom_fruit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, geom <span class="op">=</span> <span class="va">geom_msa</span>, offset <span class="op">=</span> <span class="fl">0</span>, 
+                pwidth <span class="op">=</span> <span class="fl">1.2</span>, font <span class="op">=</span> <span class="cn">NULL</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<p><img src="ggmsa_files/figure-html/unnamed-chunk-14-1.png" width="480"></p>
 </div>
 </div>
   </div>
@@ -260,7 +371,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
