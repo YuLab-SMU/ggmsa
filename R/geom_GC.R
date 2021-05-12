@@ -1,7 +1,7 @@
 ##' Multiple sequence alignment layer for ggplot2. It plot points of GC content.
 
 ##' @title geom_GC
-
+##' @param show.legend logical. Should this layer be included in the legends?
 ##' @examples
 ##' library(ggplot2)
 ##' #plot GC content
