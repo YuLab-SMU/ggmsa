@@ -1,0 +1,83 @@
+---
+title: "Theme"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    theme: hpstr
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{ggmsa}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
+ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+
+library(ggmsa)
+library(ggplot2)
+```
+
+##  Modify components of MSA theme
+
+In this package, there are various powerful parameters to customize the non-data components of MSA plots: i.e. font size, background, sequence names, legends and border. Some parameters can be used to give MSA plots a consistent customized look.   
+
+###  Characters width
+
+**Characters width** can be specified by `char_width`. Default is 0.9.
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, char_width = 0.5)
+```
+
+###  Background 
+
+If `none_bg = TRUE`, only show the character but not the colored **background.**.
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, none_bg = TRUE) + theme_void()
+```
+
+###  Sequence names
+
+ If `seq_name = TRUE`, **the sequence name** will be displayed.  
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, 164, 213, seq_name = TRUE)
+```
+
+### Legend
+
+If `show.legend = TRUE`, the **legend** of MSA plot will be displayed.  
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, 164, 213, font = NULL, show.legend = TRUE)
+```
+
+### Border
+
+Change or set colored block **border**. if `border = NA`, the border would be removed.
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, 164, 213, font = NULL, border = NA)
+```
+
+Or, modify the border color by assign the color to border, like this： `border = "white"`
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, 164, 213, font = NULL, border = "white")
+```
+
+### Position Highlighted
+
+Specified position can be highlighted  but the block colors only assign by ggplot2 automatically. 
+
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, 164, 213, posHighligthed = c(185, 190), char_width = 0.5)
+```
+
+
+

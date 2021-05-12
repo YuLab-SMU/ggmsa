@@ -1,0 +1,77 @@
+---
+title: "Other Modules"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    theme: hpstr
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{ggmsa}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
+ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+
+library(ggmsa)
+library(ggplot2)
+```
+
+
+ggmsa implements a couple of other modules to plot besides MSA. Such modules plot **sequence logos**, **sequence bundles** and **RNA secondary structure**, individually. 
+
+## Sequence logo
+
+The `seqlogo()` allows users to plot sequence logo by sequence alignment individual and logo diagrams can be rendered as output.
+
+```{r fig.height = 1.2, fig.width = 7}
+seqlogo(protein_sequences, start = 300, end = 350, color = "Chemistry_AA", font = "DroidSansMono")
+seqlogo(nt_sequences, color = "Chemistry_NT", font = "DroidSansMono")
+```
+
+## Sequence Bundles
+
+Plotting sequence alignment as sequence bundles for visualizing, discovering and exploring sequence motifs.
+
+```{r ,fig.height = 3, fig.width = 8, warning = FALSE}
+negative <-  system.file("extdata", "Gram-negative_AKL.fasta", package = "ggmsa")
+positive <-  system.file("extdata", "Gram-positive_AKL.fasta", package = "ggmsa")
+
+ggSeqBundle(negative, bundle_color = "red")
+ggSeqBundle(msa = c(negative,positive))
+```
+
+## RNA Secondary Structure
+
+ggmsa supports plotting RNA secondary structure as arc diagram by reference to R4RNA. The ‘overlapping structure diagram’ helps to compare RNA secondary structure between RFAM database (known) and base-pair predicted by T RANSAT. The structure shown above the horizontal sequence is the known structure, colored by P-value if correctly predicted by T RANSAT (best in dark blue and worst in light blue).
+
+In the following example, the overlapping structure diagram of the Cripavirus Internal Ribosomal Entry Site is shown. The structure shown above the horizontal sequence is known and  the structure below is predicted by T RANSAT:
+
+```{r fig.height = 4, fig.width = 7, warning = FALSE}
+transat_file <- system.file("extdata", "helix.txt", package = "R4RNA")
+known_file <- system.file("extdata", "vienna.txt", package = "R4RNA")
+connect_file <- system.file("extdata", "connect.txt", package = "R4RNA")
+
+known <- readSSfile(known_file, type = "Vienna")
+transat <- readSSfile(transat_file, type = "Helix")
+connect <- readSSfile(connect_file , type = "Connect")
+
+gghelix(known)
+
+gghelix(list(known = known, predicted = transat), overlap = FALSE)
+gghelix(list(known = known, predicted = transat), color_by = "value", overlap = TRUE)
+gghelix(list(known = known, predicted = connect), overlap = TRUE)
+```
+
+
+
+
+

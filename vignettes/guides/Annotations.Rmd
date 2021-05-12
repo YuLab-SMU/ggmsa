@@ -1,0 +1,114 @@
+---
+title: "Annotation"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    theme: hpstr
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{ggmsa}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
+ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+
+library(ggmsa)
+library(ggplot2)
+```
+
+##  Annotation Introduction
+
+For sequence annotations, ggmsa supports individual modules to annotate sequence alignments. Annotated modules can be called by a `+` prefix. Automatically generated annotations that containing colored labels and symbols are overlaid on MSAs to indicate potentially conserved or divergent regions.
+
+```{r  echo=FALSE, results='asis', warning=FALSE, message=FALSE}  
+
+x <- "geom_seqlogo()\tgeometric layer\tautomatically generated sequence logos for a MSA\n
+geom_GC()\tannotation module\tshows GC content with bubble chart\n
+geom_seed()\tannotation module\thighlights seed region on miRNA sequences\n
+geom_msaBar()\tannotation module\tshows sequences conservation by a bar chart\n
+geom_helix()\tannotation module\tdepicts RNA secondary structure as arc diagrams(need extra data)\n
+ "
+require(dplyr)
+xx <- strsplit(x, "\n\n")[[1]]
+y <- strsplit(xx, "\t") %>% do.call("rbind", .)
+y <- as.data.frame(y, stringsAsFactors = F)
+
+colnames(y) <- c("Annotation modules", "Type", "Description")
+
+require(kableExtra)
+knitr::kable(y, align = "l", booktabs = T, escape = T) %>% 
+    kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+  
+```
+
+
+##  geom_seqlogo
+
+Protein sequence logos annotation for MSA. Sequence logos play a major role in visualizing DNA, RNA and protein binding sites. In the following example, `geom_seqlogo()` module is used to display sequence logos between 300 and 350 sites.  The `+` can be used to link main function `ggmsa()` and `geom_seqlogo()` module.
+
+```{r  fig.height = 3, fig.width = 11, warning = FALSE}
+ggmsa(protein_sequences, 300, 350, char_width = 0.5, seq_name = T) + 
+    geom_seqlogo(color = "Chemistry_AA")
+```
+
+##  geom_GC
+
+`geom_GC()` module calculating the GC-content in DNA/RNA sequences. The sizes of bubbles are identical with GC-content.
+
+```{r fig.height = 5, fig.width = 11, warning = FALSE}
+nt_sequence <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+ggmsa(nt_sequence,font = NULL, color = "Chemistry_NT") + 
+    geom_seqlogo(color = "Chemistry_NT") + geom_GC() + theme(legend.position = "none")
+```
+
+##  geom_seed
+
+`geom_seed()` helps to identify microRNA seed region by **asterisks** or **shaded area**. The seed region is a conserved heptameric sequence that is mostly situated at positions 2-7 from the miRNA 5´-end.
+
+```{r seed1, fig.height = 3, fig.width = 8, warning = FALSE}
+ggmsa(miRNA_sequences, char_width = 0.5, color = "Chemistry_NT") + 
+    geom_seed(seed = "GAGGUAG", star = TRUE)
+```
+
+
+```{r seed2, fig.height = 3, fig.width = 8, warning = FALSE}
+ggmsa(miRNA_sequences, char_width = 0.5, seq_name = T, none_bg = TRUE) + 
+    geom_seed(seed = "GAGGUAG")
+```
+
+##  geom_msaBar
+
+`geom_msaBar` shows the highest frequency of amino acid residues at each position by a bar chart.
+
+```{r  fig.height = 2.5, fig.width = 11, warning = FALSE, message=FALSE}
+ggmsa(protein_sequences, 300, 350, char_width = 0.5, seq_name = T) + geom_msaBar()
+```
+
+##  geom_helix
+
+ggmsa supports plotting RNA secondary structure as arc diagram by reference to R4RNA. For example, adding a structure arc above diagram multiple sequence alignment helps to identify the base pair conservation and co-variation.
+
+```{r  fig.height = 3, fig.width = 8, warning = FALSE}
+known_file <- system.file("extdata", "vienna.txt", package = "R4RNA")
+known <- readSSfile(known_file, type = "Vienna" )
+cripavirus_msa <- system.file("extdata", "Cripavirus.fasta", package = "ggmsa")
+
+ggmsa(cripavirus_msa, font = NULL, color = "Chemistry_NT", seq_name = F, show.legend = T, border = "white") +
+  geom_helix(helix_data = known)
+```
+
+
+
+
+
+
+

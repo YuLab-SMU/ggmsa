@@ -1,5 +1,5 @@
 ---
-title: "ggmsa: Plot multiple sequence alignment using ggplot2"
+title: "ggmsa: Getting Started"
 output: 
   prettydoc::html_pretty:
     toc: true
@@ -35,31 +35,25 @@ library(ggplot2)
 
 #  Introduction
 
-Plot multiple sequence alignment using `r CRANpkg("ggplot2")` with multiple color schemes supported.
+ggmsa is a package designed to plot multiple sequence alignments using `r CRANpkg("ggplot2")` .
 
-Supports visualizing multiple sequence alignment of DNA and protein sequences using ggplot2 It supports a number of colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo. Multiple sequence alignment can easily be combined with other 'ggplot2' plots, such as aligning a phylogenetic tree produced by 'ggtree' with multiple sequence alignment.
+This package implements functions to visualize publication-quality multiple sequence alignments (protein/DNA/RNA) in R extremely simple and powerful. It uses module design to annotate sequence alignments and allows to accept other datasets for diagrams combination.`r CRANpkg("ggmsa")`, (current version: `r packageVersion('ggmsa')`) is avalable via CRAN. 
 
-#  Installation
+In this tutorial, we’ll work through the basics of using ggmsa.
 
-This R package (`r CRANpkg("ggmsa")`, current version: `r packageVersion('ggmsa')`) is avalable via CRAN. The way to install the package is the following:
-
-```{r eval=FALSE}
-## installing the package
-install.packages("ggmsa")
-## loading the package
+```{r}
 library("ggmsa")
 ```
 
-The development version from github:
-```{r eval=FALSE}
-if (!requireNamespace("devtools", quietly=TRUE))
-    install.packages("devtools")
-devtools::install_github("YuLab-SMU/ggmsa")
+
+```{r echo=FALSE, out.width='50%'}
+knitr::include_graphics("man/figures/workflow.png")
 ```
 
-## Load sample data
 
-Three sample data are shipped with the ggmsa package. Note that ggmsa supports not only fasta files but other objects as well. `available_msa()`can be used to list MSA objects currently available.
+#  Importing MSA data
+
+We’ll start by importing some example data to use throughout this tutorial. Expect FASTA files, some of the objects in R can also as input. `available_msa()` can be used to list MSA objects currently available.
 
 ```{r warning=FALSE}
  available_msa()
@@ -70,133 +64,162 @@ Three sample data are shipped with the ggmsa package. Note that ggmsa supports n
  
 ```
 
-# Visualizing Multiple Sequence Alignments
+# Basic use: MSA Visualization
 
 The most simple code to use ggmsa:
 ```{r fig.height = 2, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 265, end = 300)
+ggmsa(protein_sequences, 300, 350, color = "Clustal", font = "DroidSansMono", char_width = 0.5, seq_name = T )
 ```
 
-##  Colour Schemes
-Several classic color schemes for MSA are shipped in the package. In the same ways, you can use `available_msa()` to list  colour schemes currently available. Note that Amino acids and nucleotides have different colour schemes.
-```{r warning=FALSE}
- available_colors()
-```
+##  Color Schemes
 
-```{r echo=FALSE, out.width = '70%'}
-knitr::include_graphics("man/figures/NT_color.png")
-```
-
-```{r echo=FALSE, out.width = '90%'}
-knitr::include_graphics("man/figures/AA_color.png")
-```
-
-
-### Clustal X Colour Scheme
-
-This is an emulation of the default colourscheme used for alignments in [Clustal X](http://www.jalview.org/help/html/colourSchemes/clustal.html), a graphical interface for the ClustalW multiple sequence alignment program. Each residue in the alignment is assigned a colour if the amino acid profile of the alignment at that position meets some minimum criteria specific for the residue type.
-
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, color = "Clustal")
-```
-
-### Color by Chemistry(Default)
-
-Amino acids are colored according to their side chain chemistry:
-
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, color = "Chemistry_AA")
-```
-
-### Color by Shapely
-
-This color scheme matches the RasMol amino acid and RasMol nucleotide [color schemes](http://openrasmol.org/doc/rasmol.html#shapelycolours), which are, in turn, based on Robert Fletterick’s "Shapely models".
-
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, color = "Shapely_AA")
-```
-
-### Color by Taylor
-
-This color scheme is taken from Taylor[@Taylor1997Residual] and is also used in JalView[@Waterhouse2009Jalview].
-
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, color = "Taylor_AA")
-```
-
-### Color by Zappo
-
-This scheme colors residues according to their physico-chemical properties, and is also used in JalView[@Waterhouse2009Jalview].
-
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, color = "Zappo_AA")
-```
-
-### Color by LETTER
-
-Thanks to [ShixiangWang](https://github.com/YuLab-SMU/ggmsa/pull/9/commits/c736dbbf3ecd64a8ce921b9474a699fcd44ec7b3) for the color scheme suggestions.
-
-[https://en.wikipedia.org/wiki/Help:Distinguishable_colors](https://en.wikipedia.org/wiki/Help:Distinguishable_colors) 
-
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, color = "LETTER")
-```
-
-## Font
-
-Several classic font for MSA are shipped in the package. In the same ways, you can use `available_fonts()` to list  font currently available
+ggmsa predefines several color schemes for rendering MSA are shipped in the package. In the same ways, using `available_msa()` to list  color schemes currently available. Note that amino acids (protein) and nucleotides (DNA/RNA) have different names.
 
 ```{r warning=FALSE}
- available_fonts()
+available_colors()
 ```
 
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, font = "helvetical", color = "Chemistry_AA")
-```
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, font = "TimesNewRoman", color = "Chemistry_AA")
-```
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, font = "DroidSansMono", color = "Chemistry_AA")
+```{r echo=FALSE, out.width = '50%'}
+knitr::include_graphics("man/figures/schemes.png")
 ```
 
-If you specify `font = NULL`, only tiles will be plot.
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, font = NULL, color = "Chemistry_AA")
+##  Font
+
+Several predefined fonts are shipped ggmsa. Users can use `available_fonts()` to list the font currently available.
+
+```{r warning=FALSE}
+available_fonts()
 ```
 
+#  MSA Annotation
 
-## Other params
+ggmsa supports annotations for MSA. Similar to the ggplot2, it implements annotations by `geom` and users can perform annotation with `+` , like this: `ggmsa() + geom_*()`. Automatically generated annotations that containing colored labels and symbols are overlaid on MSAs to indicate potentially conserved or divergent regions.
 
-**Characters width** can be specified by `char_width`. Defaults is 0.9.
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, char_width = 0.5, color = "Chemistry_AA")
-```
+For example, visualizing multiple sequence alignment with **sequence logo** and **bar chart**:
 
-
-**Background** can be specified by `none_bg`. If `none_bg = TRUE`, only the character will be plot.
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, start = 320, end = 360, none_bg = TRUE) + theme_void()
-```
-
-**Position Highligthed** can be specified by `posHighligthed`. The `none_bg = FALSE` when you specified position Highligthed by  `posHighligthed`
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, 164, 213, color = "Chemistry_AA", 
-      posHighligthed = c(185, 190))
-```
-
-**Sequence names**  Defaults is 'NULL' which indicates that the sequence name is displayed when `font = NULL`, but 'font = char' will not be displayed.
-
-
-If `seq_name = TRUE` the sequence name will be displayed when you need it. 
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, 164, 213, color = "Chemistry_AA", seq_name = TRUE)
+```{r fig.height = 2.5, fig.width = 11, warning = FALSE, message = FALSE}
+ggmsa(protein_sequences, 221, 280, seq_name = TRUE, char_width = 0.5) + geom_seqlogo(color = "Chemistry_AA") + geom_msaBar()
 ```
 
 
-If `seq_name = FALSE` the sequence name will not be displayed in any case.
-```{r fig.height = 3, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, 164, 213, font = NULL, color = "Chemistry_AA", seq_name = FALSE)
+This table shows the annnotation layers supported by ggmsa as following:
+
+```{r  echo=FALSE, results='asis', warning=FALSE, message=FALSE}  
+
+x <- "geom_seqlogo()\tgeometric layer\tautomatically generated sequence logos for a MSA\n
+geom_GC()\tannotation module\tshows GC content with bubble chart\n
+geom_seed()\tannotation module\thighlights seed region on miRNA sequences\n
+geom_msaBar()\tannotation module\tshows sequences conservation by a bar chart\n
+geom_helix()\tannotation module\tdepicts RNA secondary structure as arc diagrams(need extra data)\n
+ "
+require(dplyr)
+xx <- strsplit(x, "\n\n")[[1]]
+y <- strsplit(xx, "\t") %>% do.call("rbind", .)
+y <- as.data.frame(y, stringsAsFactors = F)
+
+colnames(y) <- c("Annotation modules", "Type", "Description")
+
+require(kableExtra)
+
+knitr::kable(y, align = "l", booktabs = T, escape = T) %>% 
+    kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+  
 ```
 
-#  Reference
+# Combination Plot
+
+Other molecular datasets can be accepted and rendered by ggmsa (i.e. gene structure diagram, phylogenetic tree diagram, gene arrow maps). ggmsa allows users to align such associated graphs in MSA plot.
+
+## MSA + Tree
+
+The most important part of phylogenetic analysis is the visual inspection, annotation and exploration of phylogenetic trees. This is no surprise that aligning phylogenetic tree to the MSA plot. ggtree has called to plot phylogenetic trees.
+
+```{r fig.height=2, fig.width=10, message=FALSE, warning=FALSE}
+library(Biostrings)
+x <- readAAStringSet(protein_sequences)
+d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
+library(ape)
+tree <- bionj(d)
+library(ggtree)
+p <- ggtree(tree) + geom_tiplab()
+
+data = tidy_msa(x, 164, 213)
+p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
+               font = NULL, color = "Chemistry_AA") +
+    xlim_tree(1)
+```
+
+## Multiple graphs: MSA + Tree + gene map
+
+A notable example is integrated three associated panels. MSA plot, phylogenetic tree and gene map produced by ggmsa, ggtree and gggenes respectively.
+```{r fig.height=4, fig.width=14, message=FALSE, warning=FALSE}
+#import data
+tp53_sequences <-  system.file("extdata", "tp53.fa", package = "ggmsa")
+tp53_genes <- system.file("extdata", "TP53_genes.xlsx", package = "ggmsa")
+
+#tree
+tp53 <- readAAStringSet(tp53_sequences)
+d <- as.dist(stringDist(tp53, method = "hamming")/width(tp53)[1])
+tree <- bionj(d)
+p_tp53 <- ggtree(tree, branch.length = 'none') + geom_tiplab()
+#msa
+data_53 <- tidy_msa(tp53)
+
+#gene maps
+TP53_arrow <- readxl::read_xlsx(tp53_genes)
+TP53_arrow$direction <- 1
+TP53_arrow[TP53_arrow$strand == "reverse","direction"] <- -1
+
+#color
+library(RColorBrewer)
+mapping = aes(xmin = start, xmax = end, fill = gene, forward = direction)
+my_pal <- colorRampPalette(rev(brewer.pal(n = 10, name = "Set3")))
+
+#tree + gene maps + msa
+library(ggnewscale)
+p_tp53 + geom_facet(geom = geom_msa, data = data_53,
+                     panel = 'msa', font = NULL,
+                     border = NA) + xlim_tree(3.5) + 
+          new_scale_fill() +
+          scale_fill_manual(values = my_pal(10)) +
+          geom_facet(geom = geom_motif,
+                     mapping = mapping, data = TP53_arrow,
+                     panel = 'genes',  on = 'TP53',
+                     arrowhead_height = unit(3, "mm"),
+                     arrowhead_width = unit(1, "mm"))
+```
+
+#  Layout
+
+Different layouts allow users to display more data in a given limited space. We offer two layouts to change MSA visualization styles.
+
+##  Broken down layout
+
+The long sequence has be broken down and displayed in several lines by `facet_msa()`.
+
+```{r fig.height = 5, fig.width = 10, message=FALSE, warning=FALSE}
+ # 4 fields
+ ggmsa(protein_sequences, start = 0, end = 400, font = NULL, color = "Chemistry_AA") + facet_msa(field = 100)
+```
+
+## Circular layout
+
+A specific layout of the alignment can also be displayed by linking ggtreeExtra. `geom_fruit` will automatically align MSA graphs to the tree with a couple of layouts such as circular, fan andand radial.
+
+```{r fig.height=5, fig.width =5, message = FALSE, warning= FALSE}
+library(ggtree)
+library(ggtreeExtra)
+sequences <- system.file("extdata", "sequence-link-tree.fasta", package = "ggmsa")
+
+x <- readAAStringSet(sequences)
+d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
+tree <- bionj(d)
+data <- tidy_msa(x, 120, 200)
+
+p1 <- ggtree(tree, layout = 'circular') + 
+    geom_tiplab(align = TRUE, offset = 0.545, size = 2) + 
+        xlim(NA, 1.3)
+p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, 
+                pwidth = 1.2, font = NULL, border = NA)
+```
+
