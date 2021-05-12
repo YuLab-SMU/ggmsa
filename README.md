@@ -1,20 +1,33 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggmsa: Plot multiple sequence alignment using ggplot2 <img src="man/figures/logo.png" height="139" align="right" />
+# ggmsa: Plot multiple sequence alignment using ggplot2 <img src="man/figures/logo.png" height="140" align="right" />
 
+[![](https://www.r-pkg.org/badges/version/badger?color=blue)](https://cran.r-project.org/package=badger)
+[![](https://img.shields.io/badge/devel%20version-1.0.0-blue.svg)](https://github.com/YuLab-SMU/ggmsa)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/badger?color=green)](https://cran.r-project.org/package=badger)
+[![](http://cranlogs.r-pkg.org/badges/last-month/badger?color=green)](https://cran.r-project.org/package=badger)
+[![CRAN
+checks](https://cranchecks.info/badges/summary/ggmsa)](https://cran.r-project.org/web/checks/check_results_ggmsa.html)
+[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![License:
+Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
 <!-- badges: start -->
-
-[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/ggmsa)](https://cran.r-project.org/package=ggmsa)
-[![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/ggmsa?color=green)](https://cran.r-project.org/package=ggmsa)
+<!-- [![CRAN_Release_Badge](https://www.r-pkg.org/badges/version-ago/ggmsa)](https://cran.r-project.org/package=ggmsa)-->
+<!-- [![CRAN_Download_Badge](https://cranlogs.r-pkg.org/badges/grand-total/ggmsa?color=green)](https://cran.r-project.org/package=ggmsa)-->
 <!-- badges: end -->
 
-`ggmsa` supports visualizing multiple sequence alignment of nucleotide
-sequences and protein sequences using ggplot2. It supports a number of
-colour schemes, including Chemistry, Clustal, Shapely, Taylor and Zappo.
+`ggmsa` is designed for visualization and annotation of multiple
+sequence alignment. It implements functions to visualize
+publication-quality multiple sequence alignments (protein/DNA/RNA) in R
+extremely simple and powerful.
 
-## Install development version
+For details, please visit <http://yulab-smu.top/ggmsa/>
 
-The development version from github:
+## :hammer: Installation
+
+You can install `ggmsa` from CRAN using `install.packages('ggmsa')`.
+Alternatively you can grab the development version from github using
+devtools:
 
 ``` r
 if (!requireNamespace("devtools", quietly=TRUE))
@@ -22,94 +35,47 @@ if (!requireNamespace("devtools", quietly=TRUE))
 devtools::install_github("YuLab-SMU/ggmsa")
 ```
 
-## Quick Example
-
-Plot multiple sequence alignment.
-
-### Protein Sequences
+## :bulb: Quick Example
 
 ``` r
 library(ggmsa)
-library(ggplot2)
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-ggmsa(protein_sequences, 164, 213, char_width = 0.5, color = "Chemistry_AA", seq_name = T)
+ggmsa(protein_sequences, start = 221, end = 280, char_width = 0.5, seq_name = T) + geom_seqlogo() + geom_msaBar()
 ```
 
-![](man/figures/unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/REAMED-unnamed-chunk-5-1.png)<!-- -->
 
-### DNA Sequences
+## :books: Learn more
 
-``` r
-nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-ggmsa(nt_sequences,font = NULL, color = "Chemistry_NT")
-```
-
-![](man/figures/unnamed-chunk-4-1.png)<!-- -->
-
-### RNA Sequences
-
-``` r
-miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
-ggmsa(miRNA_sequences, color = "Chemistry_NT")
-```
-
-![](man/figures/unnamed-chunk-5-1.png)<!-- -->
-
-## Visualizing Multiple Sequence Alignment With `ggtree`.
-
-``` r
-library(Biostrings)
-x <- readAAStringSet(protein_sequences)
-d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
-library(ape)
-tree <- bionj(d)
-library(ggtree)
-p <- ggtree(tree) + geom_tiplab()
-
-data = tidy_msa(x, 164, 213)
-p + geom_facet(geom = geom_msa, data = data,  panel = 'msa',
-               font = NULL, color = "Chemistry_AA") +
-    xlim_tree(1)
-```
-
-![](man/figures/unnamed-chunk-6-1.png)<!-- -->
-
-## Visualizing Multiple Sequence Alignment using circular layout tree.
-
-ggmsa also allows MSA graphs to align to the tree with circular, fan, or
-radial layout by
-[ggtreeExtra](https://github.com/YuLab-SMU/ggtreeExtra)(ver \>=
-1.1.3.991).
-
-``` r
-library(ggplot2)
-library(ggtree)
-library(ggtreeExtra)
-library(Biostrings)
-library(ape)
-sequences <- system.file("extdata", "sequence-link-tree.fasta", package = "ggmsa")
-
-x <- readAAStringSet(sequences)
-d <- as.dist(stringDist(x, method = "hamming")/width(x)[1])
-tree <- bionj(d)
-
-data <- tidy_msa(x, 120, 200)
-
-p1 <- ggtree(tree, layout = 'circular') + geom_tiplab(align = TRUE, offset = 0.545, size = 2) + xlim(NA, 1.2)
-p1 + geom_fruit(data = data, geom = geom_msa, offset = 0, pwidth = 1.2, font = NULL, border = NA)
-```
-
-![](man/figures/unnamed-chunk-7-1.png)<!-- -->
-
-# Learn more
-
-For more details about the version in CRAN, please refer to the [online
-vignette](https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html)
-
-Moreover, check out the guides for learning new features with the
-current development version:
+Check out the guides for learning everything there is to know about all
+the different features:
 
   - [Getting
     Started](https://yulab-smu.github.io/ggmsa/articles/ggmsa.html)
-  - [Extensions
-    Plots](https://yulab-smu.github.io/ggmsa/articles/Extensions/extensions.html)
+  - [Annotations](https://yulab-smu.github.io/ggmsa/articles/guides/Annotations.html)
+  - [Color Schemes and Font
+    Families](https://yulab-smu.github.io/ggmsa/articles/guides/Color_schemes_And_Font_Families.html)
+  - [Theme](https://yulab-smu.github.io/ggmsa/articles/guides/guides/MSA_theme.html)
+  - [Other
+    Modules](https://yulab-smu.github.io/ggmsa/articles/guides/guides/Other_Modules.html)
+  - [View
+    Modes](https://yulab-smu.github.io/ggmsa/articles/guides/guides/View_modes.html)
+
+## :runner: Author
+
+  - [GuangChuang Yu](https://guangchuangyu.github.io) Professor, PI
+
+  - [Shuangbin Xu](https://github.com/xiangpin) PhD Student
+
+  - [Lang Zhou](https://github.com/nyzhoulang) Master’s Student
+
+**YuLab** <https://yulab-smu.top/>
+
+**Department of Bioinformatics, School of Basic Medical Sciences,
+Southern Medical University**
+
+## :sparkling_heart: Contributing
+
+We welcome any contributions\! By participating in this project you
+agree to abide by the terms outlined in the [Contributor Code of
+Conduct](http://yulab-smu.top/ggmsa/articles/CONDUCT.html).
