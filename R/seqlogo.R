@@ -32,6 +32,7 @@ seqlogo <- function(msa, start = NULL, end = NULL, font = "DroidSansMono", color
 ##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
 ##' @param adaptive A logical value indicating whether the overall height of seqlogo corresponds to the number of sequences.If is FALSE, seqlogo overall height = 4,fixedly.
 ##' @param top A logical value. If TRUE, seqlogo is aligned to the top of MSA.
+##' @param show.legend logical. Should this layer be included in the legends?
 ##' @param ... additional parameter
 ##' @return A list
 ##' @examples
