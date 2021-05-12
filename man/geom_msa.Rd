@@ -10,7 +10,6 @@ geom_msa(
   mapping = NULL,
   color = "Chemistry_AA",
   custom_color = NULL,
-  order = NULL,
   char_width = 0.9,
   none_bg = FALSE,
   by_conservation = FALSE,
@@ -38,8 +37,6 @@ If font = NULL, only plot the background tile.}
 \item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER','CN6',, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.}
 
 \item{custom_color}{A data frame with two cloumn called "names" and "color".Customize the color scheme.}
-
-\item{order}{vectors.Specified sequences order.}
 
 \item{char_width}{a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.}
 
@@ -77,5 +74,9 @@ A list
 Multiple sequence alignment layer for ggplot2. It creats background tiles with/without sequence characters.
 }
 \author{
-Guangchuang Yu
+Guangchuang Yu, Lang Zhou
+seq_name' work
+posHighligthed' work
+border' work
+none_bg' work
 }

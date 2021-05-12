@@ -6,10 +6,11 @@
 \usage{
 geom_seqlogo(
   font = "DroidSansMono",
-  color = "Chemistry_NT",
+  color = "Chemistry_AA",
   adaptive = TRUE,
   top = TRUE,
   custom_color = NULL,
+  show.legend = FALSE,
   ...
 )
 }
@@ -23,6 +24,8 @@ geom_seqlogo(
 \item{top}{A logical value. If TRUE, seqlogo is aligned to the top of MSA.}
 
 \item{custom_color}{A data frame with two cloumn called "names" and "color".Customize the color scheme.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?}
 
 \item{...}{additional parameter}
 }

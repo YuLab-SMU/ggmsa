@@ -9,7 +9,7 @@ seqlogo(
   start = NULL,
   end = NULL,
   font = "DroidSansMono",
-  color = "Chemistry_NT",
+  color = "Chemistry_AA",
   adaptive = FALSE,
   top = FALSE,
   custom_color = NULL
