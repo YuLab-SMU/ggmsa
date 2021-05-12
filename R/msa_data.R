@@ -20,9 +20,18 @@
 ##' data <- msa_data(fasta, 20, 120, font = "helvetical", color = 'Chemistry_AA' )
 ## @export
 ##' @noRd
-##' @author Guangchuang Yu
-msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custom_color = NULL, order = NULL, char_width = 0.9, by_conservation = FALSE,
-                     consensus_views = FALSE, use_dot = FALSE, disagreement = TRUE, ignore_gaps = FALSE, ref = NULL) {
+##' @author Guangchuang Yu, Lang Zhou
+msa_data <- function(tidymsa, font = "helvetical",
+                     color = "Chemistry_AA",
+                     custom_color = NULL,
+                     char_width = 0.9,
+                     by_conservation = FALSE,
+                     consensus_views = FALSE,
+                     use_dot = FALSE,
+                     disagreement = TRUE,
+                     ignore_gaps = FALSE,
+                     ref = NULL) {
+
     if (is.null(custom_color)) {
         color <- match.arg(color, c("Clustal", "Chemistry_AA", "Shapely_AA", "Zappo_AA", "Taylor_AA","Chemistry_NT",
                                     "Shapely_NT", "Zappo_NT", "Taylor_NT", "LETTER", "CN6", "Hydrophobicity" ))
@@ -41,8 +50,8 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
             if (use_dot){
                 y[is.na(y$color), "character"] <- "."
             }else {
-                y$font_color <- "black"
-                y[is.na(y$color), "font_color"] <- "grey"
+                y$font_color <- "#000000"
+                y[is.na(y$color), "font_color"] <- "#aaacaf"
             }
 
         }else {
@@ -54,7 +63,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
         y <- color_visibility(y)
     }
 
-    #y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
+
     if (is.null(font)) {
         return(y)
     }
@@ -62,6 +71,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
     ## calling internal polygons
     font_f <- font_fam[[font]]
     data_sp <- font_f[as.character(unique(y$character))] #debug using'as.character()'
+
     ## To adapt to tree data
     if (!'name' %in% names(y) & !consensus_views) {
         if ('label' %in% names(y)) {
@@ -71,7 +81,7 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
             stop("unknown sequence name...")
         }
     }
-    #y$name <- order_name(y$name, order = order, consensus_views = consensus_views, ref = ref)
+
     if(!is.factor(y$name) & !consensus_views){
         lev <- unique(data.frame(y[,c("name","y")]))
         lev <- lev[order(lev$y), "name"] # y is the order of the nodes in the tree
@@ -80,11 +90,13 @@ msa_data <- function(tidymsa, font = "helvetical", color = "Chemistry_AA", custo
         y$name <- order_name(y$name, consensus_views = consensus_views, ref = ref)
     }
     y$ypos <- as.numeric(y$name)
+
     # for ggtreeExtra
-    if ("new_position" %in% colnames(y)){
+    if ("new_position" %in% colnames(y)) {
         scale_n <- 5 * length(unique(y$name))/diff(range(y$new_position))
         char_width <- char_width * diff(range(y$new_position))/diff(range(y$position))
     }
+
     yy <- lapply(1:nrow(y), function(i) {
         d <- y[i, ]
         dd <- data_sp[[d$character]]
