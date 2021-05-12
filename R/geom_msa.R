@@ -7,7 +7,6 @@
 ##' If font = NULL, only plot the background tile.
 ##' @param color A Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER','CN6',, 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
-##' @param order vectors.Specified sequences order.
 ##' @param char_width a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.
 ##' @param by_conservation a logical value. The most conserved regions have the brightest colors.
 ##' @param none_bg a logical value indicating whether background should be disaplayed. Defaults is FALSE.
@@ -27,12 +26,11 @@
 ##' @importFrom ggplot2 scale_fill_manual
 ##' @importFrom utils modifyList
 ##' @export
-##' @author Guangchuang Yu
+##' @author Guangchuang Yu, Lang Zhou
 geom_msa <- function(data, font = "helvetical",
                      mapping = NULL,
                      color = "Chemistry_AA",
                      custom_color = NULL,
-                     order = NULL,
                      char_width = 0.9,
                      none_bg = FALSE,
                      by_conservation = FALSE,
@@ -44,7 +42,7 @@ geom_msa <- function(data, font = "helvetical",
                      disagreement = TRUE,
                      ignore_gaps = FALSE,
                      ref = NULL,
-                     position="identity",
+                     position = "identity",
                      show.legend = FALSE,
                      ... ) {
 
@@ -52,7 +50,6 @@ geom_msa <- function(data, font = "helvetical",
                      font = font,
                      color = color,
                      custom_color = custom_color,
-                     order = order,
                      char_width = char_width,
                      by_conservation = by_conservation,
                      consensus_views  = consensus_views,
@@ -61,8 +58,9 @@ geom_msa <- function(data, font = "helvetical",
                      ignore_gaps = ignore_gaps,
                      ref = ref)
 
-    # get a seemly fill legend
+    #legend work
     xx <- data[,c("character","color")] %>% unique()
+    xx <- xx[!is.na(xx$color),]
     labs <- lapply(unique(xx$color) %>% seq_along, function(i) {
         cols <- unique(xx$color)[i]
         dup_char <- xx[xx$color == cols, "character"]
@@ -73,29 +71,37 @@ geom_msa <- function(data, font = "helvetical",
     names(cols) <- cols
     sacle_tile_cols <- scale_fill_manual(values = cols, breaks = cols, labels = labs)
 
+
     bg_data <- data
+
+    #work to ggtreeExtra
     if(is.null(mapping)) {
-        mapping <- aes_(x = ~position, y = ~name, fill = ~color)
+        mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
     }
 
-    if  (!isTRUE(seq_name)) { #paramter 'seq_name' work
+    #'seq_name' work
+    if  (!isTRUE(seq_name)) {
         if ('y' %in% colnames(data) | isFALSE(seq_name) ) {
             y <- as.numeric(bg_data$name)
             mapping <- modifyList(mapping, aes_(y = ~y))
         }
     }
 
-    if (!is.null(posHighligthed)) { #paramter 'posHighligthed' work
+    #'posHighligthed' work
+    if (!is.null(posHighligthed)) {
         none_bg = TRUE
         bg_data <- bg_data[bg_data$position %in% posHighligthed,]
         bg_data$postion <- as.factor(bg_data$position)
-        mapping <- modifyList(mapping, aes_(x = ~position, fill = ~character, width = 1))
+        mapping <- modifyList(mapping, aes_(x = ~position, fill = ~color, width = 1))
     }
+
+    #'border' work
     if(is.null(border)){
         ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', inherit.aes = FALSE, position = position, show.legend = show.legend)
     }else{
         ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = border, inherit.aes = FALSE, position = position, show.legend = show.legend)
     }
+
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
         return(list(ly_bg, sacle_tile_cols))
     }
@@ -104,16 +110,27 @@ geom_msa <- function(data, font = "helvetical",
         data$yy = data$yy - as.numeric(data$name) + data$y
     }
 
-    label_mapping <- aes_(x = ~x, y = ~yy,  group = ~group)
+    label_mapping <- aes_(x = ~x, y = ~yy, group = ~group)
+
+    # use_dot work
     if (consensus_views && !use_dot) {
+        if(show.legend) {
+            stop("legends catn't be shown in the consensus view!")
+        }
         label_mapping <- modifyList(label_mapping, aes_(fill = ~I(font_color)))
     }
-    ly_label <- geom_polygon(mapping = label_mapping, data = data, inherit.aes = FALSE, position=position)
-    if (none_bg & is.null(posHighligthed)) { #paramter 'none_bg' work
+    ly_label <- geom_polygon(mapping = label_mapping, data = data, inherit.aes = FALSE, position = position)
+
+    #'none_bg' work
+    if (none_bg & is.null(posHighligthed)) {
         return(ly_label)
     }
 
-    list(ly_bg, ly_label, sacle_tile_cols)
+    if(consensus_views) {
+        return(list(ly_bg, ly_label))
+    }else {
+        return(list(ly_bg, ly_label, sacle_tile_cols))
+    }
 
 }
 
