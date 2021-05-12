@@ -46,8 +46,8 @@ ggplot_add.GCcontent <- function(object, plot, object_name) {
 ##' @importFrom ggplot2 facet_wrap
 ##' @importFrom ggplot2 ggplot_add
 ##' @importFrom ggplot2 scale_x_continuous
-##' @importFrom ggplot2 geom_text
 ##' @importFrom ggplot2 coord_cartesian
+##' @importFrom ggplot2 geom_blank
 ##' @method ggplot_add facet_msa
 ##' @export
 ggplot_add.facet_msa <- function(object, plot, object_name){
