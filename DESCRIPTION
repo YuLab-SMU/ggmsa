@@ -18,7 +18,8 @@ Imports:
 	  aplot,
 	  RColorBrewer,
 	  ggalt,
-	  ggforce
+	  ggforce,
+	  R4RNA
 Suggests:
     ape,
     cowplot,
@@ -28,12 +29,12 @@ Suggests:
     prettydoc,
     rmarkdown,
     seqmagick,
-    R4RNA,
     readxl,
     dplyr,
     ggnewscale,
     ggtreeExtra,
-    kableExtra
+    kableExtra,
+    gggenes
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
