@@ -31,7 +31,7 @@ library(ggplot2)
 Several classic color schemes for MSA are shipped in the package. In the same ways, you can use `available_volor()` to list  color schemes currently available. Note that Amino acids and nucleotides have different color schemes.
 
 ```{r echo=FALSE, out.width = '50%'}
-knitr::include_graphics("D:/r/YuLab_SMU/ggmsa/vignettes/man/figures/schemes.png")
+knitr::include_graphics("../man/figures/schemes.png")
 ```
 
 
