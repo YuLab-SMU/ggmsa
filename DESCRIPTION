@@ -19,18 +19,18 @@ Imports:
 	  RColorBrewer,
 	  ggalt,
 	  ggforce,
-	  R4RNA
+	  R4RNA,
+	  cowplot,
+	  dplyr,
+	  methods
 Suggests:
     ape,
-    cowplot,
     ggtree (>= 1.17.1),
     knitr,
-    methods,
     prettydoc,
     rmarkdown,
     seqmagick,
     readxl,
-    dplyr,
     ggnewscale,
     ggtreeExtra,
     kableExtra,
