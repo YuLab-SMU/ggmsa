@@ -18,7 +18,8 @@ SeqDiff object
 calculate difference of two aligned sequences
 }
 \examples{
-fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"), pattern="fas", full.names=TRUE)
+fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"),
+                  pattern="fas", full.names=TRUE)
 seqdiff(fas[1], reference=1)
 }
 \author{

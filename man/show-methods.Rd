@@ -19,7 +19,8 @@ message
 show method
 }
 \examples{
-fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"), pattern="fas", full.names=TRUE)
+fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"),
+                  pattern="fas", full.names=TRUE)
 x1 <- seqdiff(fas[1], reference=1)
 x1
 }

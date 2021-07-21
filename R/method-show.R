@@ -13,7 +13,8 @@
 ##'   show,SeqDiff-method
 ##' @usage show(object)
 ##' @examples
-##' fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"), pattern="fas", full.names=TRUE)
+##' fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"),
+##'                   pattern="fas", full.names=TRUE)
 ##' x1 <- seqdiff(fas[1], reference=1)
 ##' x1
 setMethod("show",signature(object="SeqDiff"),

@@ -20,11 +20,11 @@ Imports:
 	  ggalt,
 	  ggforce,
 	  R4RNA,
-	  cowplot,
+	  methods,
 	  dplyr,
-	  methods
 Suggests:
     ape,
+    cowplot,
     ggtree (>= 1.17.1),
     knitr,
     prettydoc,

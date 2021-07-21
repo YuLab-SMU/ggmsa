@@ -19,10 +19,11 @@
 ##' @importFrom ggplot2 ggplot_gtable
 ##' @importFrom ggplot2 ggplot_build
 ##' @importFrom grid unit.pmax
-##' @importFrom cowplot plot_grid
+##' @importFrom aplot plot_list
 ##' @author guangchuang yu
 ##' @examples
-##' fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"), pattern="fas", full.names=TRUE)
+##' fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"),
+##'                   pattern="fas", full.names=TRUE)
 ##' x1 <- seqdiff(fas[1], reference=1)
 ##' plot(x1)
 setMethod("plot", signature(x="SeqDiff"),
@@ -46,18 +47,19 @@ setMethod("plot", signature(x="SeqDiff"),
                   p2 <- p2 + xlim(xlim)
               }
 
-              gp1<- ggplot_gtable(ggplot_build(p1))
-              gp2<- ggplot_gtable(ggplot_build(p2))
-              maxWidth = unit.pmax(gp1$widths[2:3], gp2$widths[2:3])
-              gp1$widths[2:3] <- maxWidth
-              gp2$widths[2:3] <- maxWidth
+              # gp1<- ggplot_gtable(ggplot_build(p1))
+              # gp2<- ggplot_gtable(ggplot_build(p2))
+              # maxWidth = unit.pmax(gp1$widths[2:3], gp2$widths[2:3])
+              # gp1$widths[2:3] <- maxWidth
+              # gp2$widths[2:3] <- maxWidth
 
               ## pushViewport(viewport(layout = grid.layout(2, 1, heights = unit(c(0.7, 0.7), "null"))))
               ## gp2$vp = viewport(layout.pos.row = 2, layout.pos.col = 1)
               ## grid.draw(gp2)
               ## gp1$vp = viewport(layout.pos.row = 1, layout.pos.col = 1)
               ## grid.draw(gp1)
-              plot_grid(gp1, gp2, ncol=1, rel_heights=c(.7, .4))
+              ## plot_grid(gp1, gp2, ncol=1, rel_heights=c(.7, .4))
+              plot_list(list(p1, p2), ncol=1, heights=c(.7, .4))
           }
           )
 

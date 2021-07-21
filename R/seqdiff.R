@@ -12,7 +12,8 @@
 ##' @importFrom methods new
 ##' @author guangchuang yu
 ##' @examples
-##' fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"), pattern="fas", full.names=TRUE)
+##' fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"),
+##'                   pattern="fas", full.names=TRUE)
 ##' seqdiff(fas[1], reference=1)
 seqdiff <- function(fasta, reference=1) {
     sequence <- readBStringSet(fasta)
