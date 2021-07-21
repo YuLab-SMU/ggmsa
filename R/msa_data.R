@@ -201,8 +201,7 @@ tidy_msa <- function(msa, start = NULL, end = NULL) {
 }
 
 
-##' @importFrom utils globalVariables
-utils::globalVariables('.')
+
 
 
 ##' This function converts the msa_data to the tidy data.

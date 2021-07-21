@@ -103,7 +103,7 @@ theme_bundles <- function(df, lev_molecule){
   )
 }
 
-utils::globalVariables(c("name", "position_adj", "y_adj"))
+
 
 
 

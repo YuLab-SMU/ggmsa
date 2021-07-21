@@ -194,16 +194,5 @@ theme_helix <- function(){
   }
 
 
-readHelix <- getFromNamespace("readHelix", "R4RNA")
-readConnect <- getFromNamespace("readConnect", "R4RNA")
-readVienna <- getFromNamespace("readVienna", "R4RNA")
-readBpseq <- getFromNamespace("readBpseq", "R4RNA")
 
-expandHelix <- getFromNamespace("expandHelix", "R4RNA")
-collapseHelix <- getFromNamespace("collapseHelix", "R4RNA")
-# colourByValue <- getFromNamespace("colourByValue", "R4RNA")
-# colourByCount <- getFromNamespace("colourByCount", "R4RNA")
-# colourByBasepairFrequency <- getFromNamespace("colourByBasepairFrequency", "R4RNA")
-
-utils::globalVariables("read.delim")
 

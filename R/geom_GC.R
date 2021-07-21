@@ -56,5 +56,5 @@ content_GC<- function(data){
     return(char_num2)
 }
 
-utils::globalVariables('fre')
+
 
