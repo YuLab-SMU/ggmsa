@@ -7,8 +7,8 @@
 
 color_scheme <- function(y, color = "Chemistry_AA", custom_color = NULL) {
     if (!is.null(custom_color)){
-        my_cutstom[["names"]] <- as.character(my_cutstom[["names"]]) #Elimination factor interference
-        my_cutstom[["color"]] <- as.character(my_cutstom$col) #Fuzzy matching the string "colors" or "colours"
+        custom_color[["names"]] <- as.character(custom_color[["names"]]) #Elimination factor interference
+        custom_color[["color"]] <- as.character(custom_color$col) #Fuzzy matching the string "colors" or "colours"
         row.names(custom_color) <- custom_color[["names"]]
         scheme_AA$custom_color <- custom_color[row.names(scheme_AA), "color"] %>% as.character()
         y$color <- scheme_AA[y$character, "custom_color"]
