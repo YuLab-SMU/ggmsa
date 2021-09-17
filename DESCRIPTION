@@ -1,0 +1,48 @@
+Package: ggmsa
+Title: Plot Multiple Sequence Alignment using 'ggplot2'
+Version: 1.0.3
+Authors@R: c(person("Lang", "Zhou",      email = "nyzhoulang@gmail.com",    role = c("aut", "cre")),
+             person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "ths"), comment = c(ORCID = "0000-0002-6485-8781")),
+             person("Shuangbin", "Xu",   email = "xshuangbin@163.com",      role = "ctb"),
+             person("Huina", "Huang",    email = "1185796994@qq.com",       role = "ctb"))
+Description:  A visual exploration tool for multiple sequence alignment and associated data. 
+              Supports MSA of DNA, RNA, and protein sequences using 'ggplot2'. 
+              Multiple sequence alignment can easily be combined with other 'ggplot2' plots, 
+              such as phylogenetic tree produced by 'ggtree', boxplot, genome map and so on. 
+              More features:visualization of sequence logos, sequence bundles, RNA secondary structures and detection of sequence recombinations.
+Depends: R (>= 4.1.0)
+Imports:
+    Biostrings,
+    ggplot2,
+    magrittr,
+    tidyr,
+    utils,
+	  stats,
+	  stringr,
+	  aplot,
+	  RColorBrewer,
+	  ggalt,
+	  ggforce,
+	  methods,
+	  dplyr,
+	  R4RNA,
+	  grDevices,
+	  grid
+Suggests:
+    ggtreeExtra,
+    ggtree (>= 1.17.1),
+    ape,
+    cowplot,
+    knitr,
+    prettydoc,
+    rmarkdown,
+    seqmagick,
+    readxl,
+    ggnewscale,
+    kableExtra,
+    gggenes
+License: Artistic-2.0
+Encoding: UTF-8
+biocViews: Software, Visualization, Alignment, Annotation,MultipleSequenceAlignment
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr

@@ -1,0 +1,75 @@
+---
+title: "View Modes"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    theme: hpstr
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{ggmsa}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
+ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+
+library(ggmsa)
+library(ggplot2)
+```
+
+
+ggmsa also uses functional views to make MSA features prominent. For instance, for specific properties that predominate regions, there are two methods to highlight them.
+
+##  Consensus Views
+
+Using `consensus_views` option to executes Consensus View. We provide four parameters——`use_dot`, `disagreement`, `ignore_gaps` and `ref` to adjust the Consensus View executes.
+
++ `use_dot`: a logical value. Displays characters as dots instead of fading their color in the consensus view.
++ `disagreement`: a logical value. Displays characters that disagreement with consensus (excludes ambiguous disagreements).
++ `ignore_gaps`: a logical value. When selected TRUE, gaps in the column are treated as if that row didn't exist.
++ `ref`: a character string. Specifying the reference sequence which should be one of the input sequences.
+
+
+###  Example 1 
+
+When `disagreement = TRUE` and `use_dot = TRUE`, characters that agreememt to consensus have displayed as dot.
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ ggmsa(protein_sequences, 300, 350, char_width = 0.5, seq_name = TRUE, consensus_views = TRUE, disagreement = TRUE, use_dot = TRUE)
+```
+
+###  Example 2
+
+When `disagreement = FALSE` and `use_dot = FALSE`, characters that disagreement to consensus have faded their colors.
+
+```{r fig.height=3, fig.width=10, warning=FALSE}
+ ggmsa(protein_sequences, 300, 350, char_width = 0.5, seq_name = TRUE, consensus_views = TRUE, disagreement = FALSE, use_dot = FALSE)
+```
+
+
+###  Example 3
+
+Specifying one of the input sequences as the reference sequence. The reference sequence will be placed at the top.
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ ggmsa(protein_sequences, 300, 350, char_width = 0.5, seq_name = TRUE, consensus_views = TRUE ,use_dot = TRUE, ref = "PH4H_Rhizobium_loti")
+```
+
+
+##  By Conservation
+
+The existing color scheme is modified so that the most conserved position in each column has the most intense colors and the least conserved are the palest. For example, conserved hydrophobic columns are shown with predominately red residues and conserved hydrophilic columns with blue in the Hydrophobicity color scheme.
+
+```{r by_conse, fig.height = 4, fig.width = 11, warning = FALSE}
+ggmsa(protein_sequences, 300, 350, color = "Hydrophobicity", 
+      font = NULL, seq_name = TRUE ,border = "white", by_conservation = TRUE)
+```
+

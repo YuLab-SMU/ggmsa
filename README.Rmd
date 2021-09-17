@@ -1,0 +1,90 @@
+---
+output: 
+  md_document:
+    variant: gfm
+html_preview: TRUE
+---
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  fig.path = "man/figures/REAMED-",
+  message = FALSE,
+  warning = FALSE
+)
+```
+#  ggmsa:a visual exploration tool for multiple sequence alignment and associated data <img src="man/figures/logo.png" height="140" align="right" />
+
+```{r echo=FALSE, results="hide", message=FALSE}
+library(badger)
+```
+
+```{r, echo = FALSE, results='asis'}
+cat(
+	badge_devel("YuLab-SMU/ggmsa", "blue"),
+	badge_lifecycle("experimental", "orange"),
+	badge_license("Artistic-2.0")
+)
+```
+<!-- badges: start -->
+<!-- [![CRAN_Release_Badge](https://www.r-pkg.org/badges/version-ago/ggmsa)](https://cran.r-project.org/package=ggmsa)-->
+<!-- [![CRAN_Download_Badge](https://cranlogs.r-pkg.org/badges/grand-total/ggmsa?color=green)](https://cran.r-project.org/package=ggmsa)-->
+<!-- badges: end -->
+
+
+`ggmsa` is designed for visualization and annotation of multiple sequence alignment. It implements functions to visualize publication-quality multiple sequence alignments (protein/DNA/RNA) in R extremely simple and powerful. 
+
+For details, please visit <http://yulab-smu.top/ggmsa/>
+
+
+##  :hammer: Installation
+
+~~You can install `ggmsa` from CRAN using `install.packages('ggmsa')`. ~~
+
+Alternatively you can grab the development version from github using devtools:
+
+```{r eval=FALSE}
+if (!requireNamespace("devtools", quietly=TRUE))
+    install.packages("devtools")
+devtools::install_github("YuLab-SMU/ggmsa")
+```
+
+
+##  :bulb: Quick Example 
+
+```{r fig.height = 2.5, fig.width = 11, message=FALSE, warning=FALSE, dpi=300}
+library(ggmsa)
+protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ggmsa(protein_sequences, start = 221, end = 280, char_width = 0.5, seq_name = TRUE) + geom_seqlogo() + geom_msaBar()
+```
+
+
+##  :books: Learn more
+
+Check out the guides for learning everything there is to know about all the different features:
+
+- [Getting Started](https://yulab-smu.github.io/ggmsa/articles/ggmsa.html)
+- [Annotations](https://yulab-smu.github.io/ggmsa/articles/guides/Annotations.html)
+- [Color Schemes and Font Families](https://yulab-smu.github.io/ggmsa/articles/guides/Color_schemes_And_Font_Families.html)
+- [Theme](https://yulab-smu.github.io/ggmsa/articles/guides/guides/MSA_theme.html)
+- [Other Modules](https://yulab-smu.github.io/ggmsa/articles/guides/guides/Other_Modules.html)
+- [View Modes](https://yulab-smu.github.io/ggmsa/articles/guides/guides/View_modes.html)
+
+##  :runner: Author
+
+- [Guangchuang Yu](https://guangchuangyu.github.io)  Professor, PI 
+- [Lang Zhou](https://github.com/nyzhoulang)  Master's Student
+- [Shuangbin Xu](https://github.com/xiangpin)  PhD Student
+
+**YuLab**  <https://yulab-smu.top/>
+
+**Department of Bioinformatics, School of Basic Medical Sciences, Southern Medical University**
+
+
+
+## :sparkling_heart: Contributing
+
+We welcome any contributions! By participating in this project you agree to abide
+by the terms outlined in the [Contributor Code of Conduct](http://yulab-smu.top/ggmsa/articles/CONDUCT.html).
+
+

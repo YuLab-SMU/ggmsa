@@ -1,0 +1,137 @@
+---
+title: "Color Schemes and Font Families"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    theme: hpstr
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{ggmsa}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
+ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+
+library(ggmsa)
+library(ggplot2)
+```
+
+
+##  Colour Schemes
+
+Several classic color schemes for MSA are shipped in the package. In the same ways, you can use `available_volor()` to list  color schemes currently available. Note that Amino acids and nucleotides have different color schemes.
+
+```{r echo=FALSE, out.width = '50%'}
+knitr::include_graphics("../man/figures/schemes.png")
+```
+
+
+### Clustal X Colour Scheme
+
+This is an emulation of the default colors cheme used for alignments in [Clustal X](http://www.jalview.org/help/html/colourSchemes/clustal.html), a graphical interface for the ClustalW multiple sequence alignment program. Each residue in the alignment is assigned a color if the amino acid profile of the alignment at that position meets some minimum criteria specific for the residue type.
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, color = "Clustal", show.legend = TRUE)
+```
+
+### Color by Chemistry(Default)
+
+Amino acids are colored according to their side-chain chemistry:
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, color = "Chemistry_AA", show.legend = TRUE)
+```
+
+### Color by Shapely
+
+This color scheme matches the RasMol amino acid and RasMol nucleotide [color schemes](http://openrasmol.org/doc/rasmol.html#shapelycolours), which are, in turn, based on Robert Fletterick’s "Shapely models".
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, color = "Shapely_AA", show.legend = TRUE)
+```
+
+### Color by Taylor
+
+This color scheme is taken from Taylor and is also used in JalView.
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, color = "Taylor_AA", show.legend = TRUE)
+```
+
+### Color by Zappo
+
+This scheme colors residues according to their physicochemical properties, and is also used in JalView.
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, color = "Zappo_AA", show.legend = TRUE)
+```
+
+### Color by LETTER
+
+Thanks to [ShixiangWang](https://github.com/YuLab-SMU/ggmsa/pull/9/commits/c736dbbf3ecd64a8ce921b9474a699fcd44ec7b3) for the color scheme suggestions.
+
+[https://en.wikipedia.org/wiki/Help:Distinguishable_colors](https://en.wikipedia.org/wiki/Help:Distinguishable_colors) 
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, color = "LETTER", show.legend = TRUE)
+```
+
+### Color Customzation
+
+Customizing the color scheme is allowed. Users can create a data frame with two columns named `names` and `color`. This data frame includes symbols of character and coloring code (see below). 
+
+```{r  warning = FALSE, message = FALSE, fig.height = 2, fig.width = 5}
+library(RColorBrewer)
+library(pals)
+protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+my_pal <- colorRampPalette(rev(brewer.pal(n = 9, name = "Reds")))
+my_cutstom <- data.frame(names = c(LETTERS[1:26],"-"), 
+                         color = my_pal(27), 
+                         stringsAsFactors = FALSE)
+head(my_cutstom)
+pals::pal.bands(my_cutstom$color)
+```
+
+```{r custom, fig.height = 4, fig.width = 11, warning = FALSE, message = FALSE}
+ggmsa(protein_sequences, 300, 345, 
+      custom_color = my_cutstom, 
+      char_width = 0.5, 
+      border = "white",
+      show.legend = TRUE)
+```
+
+##  Font Families
+
+Several classic font fors MSA are shipped in the package. In the same ways, you can use `available_fonts()` to list  font currently available
+
+```{r warning=FALSE}
+ available_fonts()
+```
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, font = "helvetical")
+```
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, font = "TimesNewRoman")
+```
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, font = "DroidSansMono")
+```
+
+
+If specify `font = NULL`, only show colored blocks but not characters. 
+
+```{r fig.height = 3, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, start = 320, end = 360, font = NULL)
+```
+
+

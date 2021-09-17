@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Renviron
+.DS_Store
+inst/doc
+ggmsa.Rproj
+ggmsa.Rcheck
+.git
+docs/
+pkgdown/

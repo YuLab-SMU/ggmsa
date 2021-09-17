@@ -1,0 +1,128 @@
+---
+title: "ggmsa: Getting Started"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    theme: hpstr
+date: "`r Sys.Date()`"
+bibliography: ggmsa.bib
+vignette: >
+  %\VignetteIndexEntry{ggmsa}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+CRANpkg <- function(pkg) {
+    cran <- "https://cran.r-project.org/package"
+    fmt <- "[%s](%s=%s)"
+    sprintf(fmt, pkg, cran, pkg)
+}
+
+Biocpkg <- function(pkg) {
+    sprintf("[%s](http://bioconductor.org/packages/%s)", pkg, pkg)
+}
+# Packages -------------------------------------------------------------------
+library(ggmsa)
+library(ggplot2)
+```
+
+
+#  Introduction
+
+ggmsa is a package designed to plot multiple sequence alignments。
+
+This package implements functions to visualize publication-quality multiple sequence alignments (protein/DNA/RNA) in R extremely simple and powerful. It uses module design to annotate sequence alignments and allows to accept other datasets for diagrams combination.
+
+In this tutorial, we’ll work through the basics of using ggmsa.
+
+```{r}
+library("ggmsa")
+```
+
+
+```{r echo=FALSE, out.width='50%'}
+knitr::include_graphics("man/figures/workflow.png")
+```
+
+
+#  Importing MSA data
+
+We’ll start by importing some example data to use throughout this tutorial. Expect FASTA files, some of the objects in R can also as input. `available_msa()` can be used to list MSA objects currently available.
+
+```{r warning=FALSE}
+ available_msa()
+
+ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
+ miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
+ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+ 
+```
+
+# Basic use: MSA Visualization
+
+The most simple code to use ggmsa:
+```{r fig.height = 2, fig.width = 10, warning=FALSE}
+ggmsa(protein_sequences, 300, 350, color = "Clustal", font = "DroidSansMono", char_width = 0.5, seq_name = TRUE )
+```
+
+##  Color Schemes
+
+ggmsa predefines several color schemes for rendering MSA are shipped in the package. In the same ways, using `available_msa()` to list  color schemes currently available. Note that amino acids (protein) and nucleotides (DNA/RNA) have different names.
+
+```{r warning=FALSE}
+available_colors()
+```
+
+```{r echo=FALSE, out.width = '50%'}
+knitr::include_graphics("man/figures/schemes.png")
+```
+
+##  Font
+
+Several predefined fonts are shipped ggmsa. Users can use `available_fonts()` to list the font currently available.
+
+```{r warning=FALSE}
+available_fonts()
+```
+
+#  MSA Annotation
+
+ggmsa supports annotations for MSA. Similar to the ggplot2, it implements annotations by `geom` and users can perform annotation with `+` , like this: `ggmsa() + geom_*()`. Automatically generated annotations that containing colored labels and symbols are overlaid on MSAs to indicate potentially conserved or divergent regions.
+
+For example, visualizing multiple sequence alignment with **sequence logo** and **bar chart**:
+
+```{r fig.height = 2.5, fig.width = 11, warning = FALSE, message = FALSE}
+ggmsa(protein_sequences, 221, 280, seq_name = TRUE, char_width = 0.5) + geom_seqlogo(color = "Chemistry_AA") + geom_msaBar()
+```
+
+
+This table shows the annnotation layers supported by ggmsa as following:
+
+```{r  echo=FALSE, results='asis', warning=FALSE, message=FALSE}  
+library(kableExtra)
+x <- "geom_seqlogo()\tgeometric layer\tautomatically generated sequence logos for a MSA\n
+geom_GC()\tannotation module\tshows GC content with bubble chart\n
+geom_seed()\tannotation module\thighlights seed region on miRNA sequences\n
+geom_msaBar()\tannotation module\tshows sequences conservation by a bar chart\n
+geom_helix()\tannotation module\tdepicts RNA secondary structure as arc diagrams(need extra data)\n
+ "
+
+xx <- strsplit(x, "\n\n")[[1]]
+y <- strsplit(xx, "\t") %>% do.call("rbind", .)
+y <- as.data.frame(y, stringsAsFactors = FALSE)
+
+colnames(y) <- c("Annotation modules", "Type", "Description")
+
+knitr::kable(y, align = "l", booktabs = TRUE, escape = TRUE) %>% 
+    kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+  
+```
+
+
+
