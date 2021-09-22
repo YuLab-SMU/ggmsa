@@ -39,9 +39,7 @@ For details, please visit <http://yulab-smu.top/ggmsa/>
 
 ##  :hammer: Installation
 
-~~You can install `ggmsa` from CRAN using `install.packages('ggmsa')`. ~~
-
-Alternatively you can grab the development version from github using devtools:
+ you can grab the development version from github using devtools:
 
 ```{r eval=FALSE}
 if (!requireNamespace("devtools", quietly=TRUE))

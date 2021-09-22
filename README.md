@@ -20,11 +20,7 @@ For details, please visit <http://yulab-smu.top/ggmsa/>
 
 ## :hammer: Installation
 
-\~\~You can install `ggmsa` from CRAN using `install.packages('ggmsa')`.
-\~\~
-
-Alternatively you can grab the development version from github using
-devtools:
+you can grab the development version from github using devtools:
 
 ``` r
 if (!requireNamespace("devtools", quietly=TRUE))
@@ -37,7 +33,7 @@ devtools::install_github("YuLab-SMU/ggmsa")
 ``` r
 library(ggmsa)
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-ggmsa(protein_sequences, start = 221, end = 280, char_width = 0.5, seq_name = T) + geom_seqlogo() + geom_msaBar()
+ggmsa(protein_sequences, start = 221, end = 280, char_width = 0.5, seq_name = TRUE) + geom_seqlogo() + geom_msaBar()
 ```
 
 ![](man/figures/REAMED-unnamed-chunk-5-1.png)<!-- -->
@@ -69,7 +65,7 @@ the different features:
 **Department of Bioinformatics, School of Basic Medical Sciences,
 Southern Medical University**
 
-## :sparkling_heart: Contributing
+## :sparkling\_heart: Contributing
 
 We welcome any contributions! By participating in this project you agree
 to abide by the terms outlined in the [Contributor Code of
