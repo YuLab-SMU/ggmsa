@@ -1,0 +1,12 @@
+pandoc: 2.11.4
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  ggmsa: ggmsa.html
+  guides/Annotations: Annotations.html
+  guides/Color_schemes_And_Font_Families: Color_schemes_And_Font_Families.html
+  guides/MSA_theme: MSA_theme.html
+  guides/Other_Modules: Other_Modules.html
+  guides/View_modes: View_modes.html
+last_built: 2021-09-22T02:52Z
+
