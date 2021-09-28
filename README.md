@@ -2,7 +2,7 @@
 
 # ggmsa:a visual exploration tool for multiple sequence alignment and associated data <img src="man/figures/logo.png" height="140" align="right" />
 
-[![](https://img.shields.io/badge/devel%20version-1.0.3-blue.svg)](https://github.com/YuLab-SMU/ggmsa)
+[![](https://img.shields.io/badge/devel%20version-0.99.0-blue.svg)](https://github.com/YuLab-SMU/ggmsa)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
@@ -20,7 +20,17 @@ For details, please visit <http://yulab-smu.top/ggmsa/>
 
 ## :hammer: Installation
 
-you can grab the development version from github using devtools:
+The released version from `Bioconductor`
+
+``` r
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+## BiocManager::install("BiocUpgrade") ## you may need this
+BiocManager::install("ggmsa")
+```
+
+Alternatively, you can grab the development version from github using
+devtools:
 
 ``` r
 if (!requireNamespace("devtools", quietly=TRUE))
@@ -36,7 +46,7 @@ protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
 ggmsa(protein_sequences, start = 221, end = 280, char_width = 0.5, seq_name = TRUE) + geom_seqlogo() + geom_msaBar()
 ```
 
-![](man/figures/REAMED-unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/REAMED-unnamed-chunk-6-1.png)<!-- -->
 
 ## :books: Learn more
 
@@ -57,7 +67,7 @@ the different features:
 ## :runner: Author
 
 -   [Guangchuang Yu](https://guangchuangyu.github.io) Professor, PI
--   [Lang Zhou](https://github.com/nyzhoulang) Master’s Student
+-   [Lang Zhou](https://github.com/nyzhoulang) Master's Student
 -   [Shuangbin Xu](https://github.com/xiangpin) PhD Student
 
 **YuLab** <https://yulab-smu.top/>
@@ -65,7 +75,7 @@ the different features:
 **Department of Bioinformatics, School of Basic Medical Sciences,
 Southern Medical University**
 
-## :sparkling\_heart: Contributing
+## :sparkling_heart: Contributing
 
 We welcome any contributions! By participating in this project you agree
 to abide by the terms outlined in the [Contributor Code of
