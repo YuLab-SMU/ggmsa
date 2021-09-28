@@ -1,18 +1,22 @@
-# ggmsa 1.0.3
+# ggmsa 0.99.0 or 0.99.x (Prepare for submission to `Bioconductor`, 2021-09-22 Wed)
+
++ 0.99.1 update DESCRIPTION and NEWS files (2021-09-28, Tue)
+
+# ggmsa 0.0.10
 
 + update default color schemes in  lower part of the SeqDiff plot (2021-08-20, Fri)
 
-# ggmsa 1.0.2
+# ggmsa 0.0.9
 
 + import R4RNA to fix R check (2021-08-03, Tue)
 
-# ggmsa 1.0.1
+# ggmsa 0.0.8
 
 + bugfix: fix variable names error in color_scheme. (2021-07-29, Thu)
 + The migration of sequence recombination functionality from `seqcombo` package. (2021-07-20, Tue)
 
 
-# ggmsa 1.0.0
+# ggmsa 0.0.7
 
 + added `gghelix()` and `geom_helix()`.(2021-04-1, Thu)
 + added option to show the fill legend.(2021-03-23, Tue)
@@ -22,7 +26,7 @@
 # ggmsa 0.0.6
 
 + supports linking `ggtreeExtra`. (2021-01-21, Thu)
-+ bugfix: reversed seqence in 'tree + geom_facet(font)' . (2021-01-21, Thu)
++ bugfix: reversed sequence in 'tree + geom_facet(font)' . (2021-01-21, Thu)
 + bugfix: partitioning error when the sequence starting point greater than 1. (2021-01-21, Thu)
 + bugfix: generates continuous x-axis labels for each panel. (2021-01-21, Thu)
 + supports customize colors `custom_color`. (2020-12-28, Mon)
@@ -33,8 +37,8 @@
 + added a new color scheme `Hydrophobicity` and a new paramter `border`.(2020-12-21, Mon)
 + rewrite the function `facet_msa()`.(2020-12-03, Thu)
 + Debug: tree + geom_facet(geom_msa()) does not work.(2020-12-03, Thu)
-+ added a new annotational function `geom_msaBar()`.(2020-12-03, Thu)
-+ added a new patameter `ignore_gaps` used in consensus views.(2020-10-09, Fri)
++ added a new function `geom_msaBar()`.(2020-12-03, Thu)
++ added a new parameter `ignore_gaps` used in consensus views.(2020-10-09, Fri)
 + debug in consensus views (2020-10-05, Mon)
 + added consensus views (2020-9-30, Wed)
 + added new colors `LETTER` and `CN6` provided by ShixiangWang.[issues#8](https://github.com/YuLab-SMU/ggmsa/issues/8)
@@ -73,4 +77,5 @@
  
 # ggmsa 0.0.1
 
-+ initial CRAN release (2019-10-17, Thu)
++ initial CRAN release (2019-10-17, Thu) 
++ removed from CRAN on 2021-08-17
