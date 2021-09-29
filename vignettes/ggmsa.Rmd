@@ -1,9 +1,13 @@
 ---
-title: "ggmsa: Getting Started"
-output: 
-  prettydoc::html_pretty:
+title: "ggmsa-Getting Started"
+author: "Lang Zhou and GuangChuang Yu"
+output:
+  BiocStyle::html_document:
+    self_contained: yes
     toc: true
-    theme: hpstr
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
 date: "`r Sys.Date()`"
 bibliography: ggmsa.bib
 vignette: >
@@ -33,16 +37,26 @@ library(ggplot2)
 ```
 
 
+#  Install package
+```{r eval = FALSE}
+if (!require("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install("ggmsa")
+```
+
 #  Introduction
 
-ggmsa is a package designed to plot multiple sequence alignments。
+ggmsa is a package designed to plot multiple sequence alignments.
 
-This package implements functions to visualize publication-quality multiple sequence alignments (protein/DNA/RNA) in R extremely simple and powerful. It uses module design to annotate sequence alignments and allows to accept other datasets for diagrams combination.
+This package implements functions to visualize publication-quality 
+multiple sequence alignments (protein/DNA/RNA) in R extremely 
+simple and powerful. It uses module design to annotate sequence 
+alignments and allows to accept other data sets for diagrams combination.
 
 In this tutorial, we’ll work through the basics of using ggmsa.
 
-```{r}
-library("ggmsa")
+```{r results="hide", message=FALSE, warning=FALSE}
+library(ggmsa)
 ```
 
 
@@ -53,14 +67,20 @@ knitr::include_graphics("man/figures/workflow.png")
 
 #  Importing MSA data
 
-We’ll start by importing some example data to use throughout this tutorial. Expect FASTA files, some of the objects in R can also as input. `available_msa()` can be used to list MSA objects currently available.
+We’ll start by importing some example data to use throughout this 
+tutorial. Expect FASTA files, some of the objects in R can also 
+as input. `available_msa()` can be used to list MSA objects 
+currently available.
 
 ```{r warning=FALSE}
  available_msa()
 
- protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
- miRNA_sequences <- system.file("extdata", "seedSample.fa", package = "ggmsa")
- nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
+ protein_sequences <- system.file("extdata", "sample.fasta", 
+                                  package = "ggmsa")
+ miRNA_sequences <- system.file("extdata", "seedSample.fa", 
+                                package = "ggmsa")
+ nt_sequences <- system.file("extdata", "LeaderRepeat_All.fa", 
+                             package = "ggmsa")
  
 ```
 
@@ -68,12 +88,17 @@ We’ll start by importing some example data to use throughout this tutorial. Ex
 
 The most simple code to use ggmsa:
 ```{r fig.height = 2, fig.width = 10, warning=FALSE}
-ggmsa(protein_sequences, 300, 350, color = "Clustal", font = "DroidSansMono", char_width = 0.5, seq_name = TRUE )
+ggmsa(protein_sequences, 300, 350, color = "Clustal", 
+      font = "DroidSansMono", char_width = 0.5, seq_name = TRUE )
 ```
 
 ##  Color Schemes
 
-ggmsa predefines several color schemes for rendering MSA are shipped in the package. In the same ways, using `available_msa()` to list  color schemes currently available. Note that amino acids (protein) and nucleotides (DNA/RNA) have different names.
+ggmsa predefines several color schemes for rendering MSA 
+are shipped in the package. In the same ways, using 
+`available_msa()` to list color schemes currently available. 
+Note that amino acids (protein) and nucleotides (DNA/RNA) have 
+different names.
 
 ```{r warning=FALSE}
 available_colors()
@@ -85,7 +110,8 @@ knitr::include_graphics("man/figures/schemes.png")
 
 ##  Font
 
-Several predefined fonts are shipped ggmsa. Users can use `available_fonts()` to list the font currently available.
+Several predefined fonts are shipped ggmsa. 
+Users can use `available_fonts()` to list the font currently available.
 
 ```{r warning=FALSE}
 available_fonts()
@@ -93,12 +119,19 @@ available_fonts()
 
 #  MSA Annotation
 
-ggmsa supports annotations for MSA. Similar to the ggplot2, it implements annotations by `geom` and users can perform annotation with `+` , like this: `ggmsa() + geom_*()`. Automatically generated annotations that containing colored labels and symbols are overlaid on MSAs to indicate potentially conserved or divergent regions.
+ggmsa supports annotations for MSA. Similar to the ggplot2, 
+it implements annotations by `geom` and users can perform 
+annotation with `+` , like this: `ggmsa() + geom_*()`. 
+Automatically generated annotations that containing colored
+labels and symbols are overlaid on MSAs to indicate 
+potentially conserved or divergent regions.
 
-For example, visualizing multiple sequence alignment with **sequence logo** and **bar chart**:
+For example, visualizing multiple sequence alignment
+with **sequence logo** and **bar chart**:
 
 ```{r fig.height = 2.5, fig.width = 11, warning = FALSE, message = FALSE}
-ggmsa(protein_sequences, 221, 280, seq_name = TRUE, char_width = 0.5) + geom_seqlogo(color = "Chemistry_AA") + geom_msaBar()
+ggmsa(protein_sequences, 221, 280, seq_name = TRUE, char_width = 0.5) + 
+  geom_seqlogo(color = "Chemistry_AA") + geom_msaBar()
 ```
 
 
@@ -125,4 +158,8 @@ knitr::kable(y, align = "l", booktabs = TRUE, escape = TRUE) %>%
 ```
 
 
+#  Session Info
+```{r echo = FALSE}
+sessionInfo()
+```
 
