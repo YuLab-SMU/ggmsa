@@ -1,6 +1,7 @@
 # ggmsa 0.99.0 or 0.99.x (Prepare for submission to `Bioconductor`, 2021-09-22 Wed)
 
 + 0.99.1 update DESCRIPTION and NEWS files (2021-09-28, Tue)
++ 0.99.2 documenting the dataset in extdata/inst (2021-09-29, Wed)
 
 # ggmsa 0.0.10
 

@@ -100,7 +100,7 @@ ggmsa supports plotting RNA secondary structure as arc diagram by reference to R
 ```{r  fig.height = 3, fig.width = 8, warning = FALSE}
 known_file <- system.file("extdata", "vienna.txt", package = "R4RNA")
 known <- readSSfile(known_file, type = "Vienna" )
-cripavirus_msa <- system.file("extdata", "Cripavirus.fasta", package = "ggmsa")
+cripavirus_msa <- system.file("extdata", "Rfam", "RF00458.fasta", package = "ggmsa")
 
 ggmsa(cripavirus_msa, font = NULL, color = "Chemistry_NT", seq_name = FALSE, show.legend = TRUE, border = "white") +
   geom_helix(helix_data = known)
