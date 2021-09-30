@@ -10,9 +10,6 @@ A MSA fasta with 100 sequences and 36 positions.
 \source{
 \url{http://biovis.net/year/2013/info/redesign-contest}
 }
-\usage{
-system.file("extdata", "Gram-negative_AKL.fasta", package="ggmsa")
-}
 \description{
 Amino acids in the adenylate kinase lid (AKL) domain
 from Gram-negative bacteria.

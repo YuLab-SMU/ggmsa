@@ -10,7 +10,8 @@ available_colors()
 A character vector of available color schemes
 }
 \description{
-This function lists color schemes currently available that can be used by 'ggmsa'
+This function lists color schemes currently available that
+ can be used by 'ggmsa'
 }
 \examples{
 available_colors()

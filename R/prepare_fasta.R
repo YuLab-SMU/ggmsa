@@ -1,6 +1,8 @@
 ##' preparing multiple sequence alignment
 ##'
-##' This function supports both NT or AA sequences; It supports multiple input formats such as "DNAStringSet", "BStringSet", "AAStringSet", DNAbin", "AAbin" and a filepath.
+##' This function supports both NT or AA sequences; It supports multiple 
+##' input formats such as "DNAStringSet", "BStringSet", "AAStringSet", 
+##' DNAbin", "AAbin" and a filepath.
 ##' @title prepare_msa
 ##' @param msa a multiple sequence alignment file or object
 ##' @return BStringSet based object
@@ -33,7 +35,8 @@ prepare_msa <- function(msa) {
 
 DNAbin2DNAStringSet <- function(msa) {
     seqs <- vapply(seq_along(msa),
-                   function(i) paste0(as.character(msa[i]) %>% unlist, collapse=''),
+                   function(i) paste0(as.character(msa[i]) %>% unlist, 
+                                      collapse=''),
                    character(1))
     names(seqs) <- names(msa)
 
@@ -46,9 +49,15 @@ AAbin2AAStringSet <- DNAbin2DNAStringSet
 
 
 
-supported_msa_class <- c("DNAStringSet",  "RNAStringSet", "AAStringSet", "BStringSet",
-                         "DNAMultipleAlignment", "RNAMultipleAlignment", "AAMultipleAlignment",
-                         "DNAbin", "AAbin")
+supported_msa_class <- c("DNAStringSet",  
+                         "RNAStringSet", 
+                         "AAStringSet", 
+                         "BStringSet",
+                         "DNAMultipleAlignment", 
+                         "RNAMultipleAlignment", 
+                         "AAMultipleAlignment",
+                         "DNAbin", 
+                         "AAbin")
 
 
 

@@ -13,9 +13,12 @@ and then read by ggmsa::readSSfile.}
 \item{color_by}{generate colors for helices by various rules,
 including integer counts and value ranges one of "length" and "value"}
 
-\item{overlap}{Logicals. If TRUE, two structures data called predict and known must be given
-(eg:heilx_data = list(known = data1, predicted = data2)), plots the predicted helices that are known on top,
-predicted helices that are not known on the bottom, and finally plots unpredicted helices on top in black.}
+\item{overlap}{Logicals. If TRUE, two structures data called predict 
+and known must be given(eg:heilx_data = list(known = data1, 
+                                             predicted = data2)), 
+plots the predicted helices that are known on top,
+predicted helices that are not known on the bottom, and finally plots 
+unpredicted helices on top in black.}
 
 \item{...}{additional parameter}
 }
@@ -29,7 +32,8 @@ The layer of helix plot
 RF03120 <- system.file("extdata/Rfam/RF03120_SS.txt", package="ggmsa")
 RF03120_fas <- system.file("extdata/Rfam/RF03120.fasta", package="ggmsa")
 SS <- readSSfile(RF03120, type = "Vienna")
-ggmsa(RF03120_fas, font = NULL,border = NA, color = "Chemistry_NT", seq_name = FALSE) +
+ggmsa(RF03120_fas, font = NULL,border = NA, 
+    color = "Chemistry_NT", seq_name = FALSE) +
 geom_helix(SS)
 }
 \author{

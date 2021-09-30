@@ -1,24 +1,44 @@
-##' Plot multiple sequence alignment using ggplot2 with multiple color schemes supported.
+##' Plot multiple sequence alignment using ggplot2 with multiple color schemes 
+##' supported.
 ##'
 ##'
 ##' @title ggmsa
-##' @param msa Multiple aligned sequence files or objects representing either nucleotide sequences or AA sequences.
+##' @param msa Multiple aligned sequence files or objects representing either 
+##' nucleotide sequences or AA sequences.
 ##' @param start a numeric vector. Start position to plot.
 ##' @param end a numeric vector. End position to plot.
-##' @param font font families, possible values are 'helvetical', 'mono', and 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. If font = NULL, only plot the background tile.
-##' @param color a Color scheme. One of 'Clustal', 'Chemistry_AA', 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
-##' @param custom_color A data frame with two cloumn called "names" and "color".Customize the color scheme.
-##' @param char_width a numeric vector. Specifying the character width in the range of 0 to 1. Defaults is 0.9.
-##' @param by_conservation a logical value. The most conserved regions have the brightest colors.
-##' @param none_bg a logical value indicating whether background should be disaplayed. Defaults is FALSE.
-##' @param posHighligthed A numeric vector of the position that need to be highlighted.
-##' @param seq_name a logical value indicating whether seqence names should be displayed. Defaults is 'NULL' which indicates that the sequence name is displayed when 'font = null', but 'font = char' will not be displayed. If 'seq_name = TRUE' the sequence name will be displayed in any case. If 'seq_name = FALSE' the sequence name will not be displayed under any circumstances.
+##' @param font font families, possible values are 'helvetical', 'mono', and 
+##' 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. 
+##' If font = NULL, only plot the background tile.
+##' @param color a Color scheme. One of 'Clustal', 'Chemistry_AA', 
+##' 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 
+##' 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param custom_color A data frame with two column called "names" and 
+##' "color".Customize the color scheme.
+##' @param char_width a numeric vector. Specifying the character width in 
+##' the range of 0 to 1. Defaults is 0.9.
+##' @param by_conservation a logical value. The most conserved regions have 
+##' the brightest colors.
+##' @param none_bg a logical value indicating whether background should be
+##'  displayed. Defaults is FALSE.
+##' @param posHighligthed A numeric vector of the position that need to be
+##'  highlighted.
+##' @param seq_name a logical value indicating whether sequence names 
+##' should be displayed. Defaults is 'NULL' which indicates that the 
+##' sequence name is displayed when 'font = null', but 'font = char' 
+##' will not be displayed. If 'seq_name = TRUE' the sequence name will 
+##' be displayed in any case. If 'seq_name = FALSE' the sequence name 
+##' will not be displayed under any circumstances.
 ##' @param border a character string. The border color.
-##' @param consensus_views a logical value that opeaning consensus views.
-##' @param use_dot a logical value. Displays characters as dots instead of fading their color in the consensus view.
-##' @param disagreement a logical value. Displays characters that disagreememt to consensus(excludes ambiguous disagreements).
-##' @param ignore_gaps a logical value. When selected TRUE, gaps in column are treated as if that row didn't exist.
-##' @param ref a character string. Specifying the reference sequence which should be one of input sequences when 'consensus_views' is TRUE.
+##' @param consensus_views a logical value that opening consensus views.
+##' @param use_dot a logical value. Displays characters as dots instead 
+##' of fading their color in the consensus view.
+##' @param disagreement a logical value. Displays characters that 
+##' disagreememt to consensus(excludes ambiguous disagreements).
+##' @param ignore_gaps a logical value. When selected TRUE, gaps in column 
+##' are treated as if that row didn't exist.
+##' @param ref a character string. Specifying the reference sequence which 
+##' should be one of input sequences when 'consensus_views' is TRUE.
 ##' @param show.legend logical. Should this layer be included in the legends?
 ##' @return ggplot object
 ##' @importFrom tidyr gather

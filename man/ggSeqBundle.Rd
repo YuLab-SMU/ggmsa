@@ -18,7 +18,10 @@ ggSeqBundle(
 )
 }
 \arguments{
-\item{msa}{Multiple sequence alignment file(FASTA) or object for representing either nucleotide sequences or peptide sequences.Also receives multiple MSA files.eg:msa = c("Gram-negative_AKL.fasta", "Gram-positive_AKL.fasta").}
+\item{msa}{Multiple sequence alignment file(FASTA) or object for 
+representing either nucleotide sequences or peptide sequences.Also receives
+ multiple MSA files.
+ eg:msa = c("Gram-negative_AKL.fasta", "Gram-positive_AKL.fasta").}
 
 \item{line_widch}{The width of bundles at each site, default is 0.3.}
 
@@ -26,15 +29,24 @@ ggSeqBundle(
 
 \item{line_high}{The high of bundles at each site, default is 0.}
 
-\item{spline_shape}{A numeric vector of values between -1 and 1, which control the shape of the spline relative to the control points.From ggalt::geom_xspline().}
+\item{spline_shape}{A numeric vector of values between -1 and 1, which 
+control the shape of the spline relative to the control points.
+From ggalt::geom_xspline().}
 
-\item{size}{A numeric vector of values between o and 1, which control the size of each lines.}
+\item{size}{A numeric vector of values between o and 1, 
+which control the size of each lines.}
 
-\item{alpha}{A numeric vector of values between o and 1, which control the alpha of each lines.}
+\item{alpha}{A numeric vector of values between o and 1, 
+which control the alpha of each lines.}
 
-\item{bundle_color}{The colors of each sequence bundles.eg: bundle_color = c("#2ba0f5","#424242").}
+\item{bundle_color}{The colors of each sequence bundles.
+eg: bundle_color = c("#2ba0f5","#424242").}
 
-\item{lev_molecule}{Reassigning the Y-axis and displaying letter-coded amino acids/nucleotides arranged by physiochemical properties or others.eg:amino acids hydrophobicity lev_molecule = c("-","A", "V", "L", "I", "P", "F", "W", "M", "G", "S","T", "C", "Y", "N", "Q", "D", "E", "K","R", "H").}
+\item{lev_molecule}{Reassigning the Y-axis and displaying 
+letter-coded amino acids/nucleotides arranged by physiochemical 
+properties or others.eg:amino acids hydrophobicity 
+lev_molecule = c("-","A", "V", "L", "I", "P", "F", "W", "M", 
+   "G", "S","T", "C", "Y", "N", "Q", "D", "E", "K","R", "H").}
 }
 \value{
 ggplot object

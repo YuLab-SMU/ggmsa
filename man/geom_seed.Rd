@@ -7,9 +7,11 @@
 geom_seed(seed, star = FALSE)
 }
 \arguments{
-\item{seed}{a character string.Specifying the miRNA seed sequence like 'GAGGUAG'.}
+\item{seed}{a character string.Specifying the miRNA seed sequence
+like 'GAGGUAG'.}
 
-\item{star}{a logical value indicating whether asterisks should be disaplayed.}
+\item{star}{a logical value indicating whether asterisks should 
+be displayed.}
 }
 \value{
 a ggplot layer
@@ -19,9 +21,11 @@ Highlighting the seed in miRNA sequences
 }
 \examples{
 miRNA_sequences <- system.file("extdata/seedSample.fa", package="ggmsa")
-ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT", none_bg = TRUE) +
+ggmsa(miRNA_sequences, font = 'DroidSansMono', 
+      color = "Chemistry_NT", none_bg = TRUE) +
 geom_seed(seed = "GAGGUAG", star = FALSE)
-ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT") +
+ggmsa(miRNA_sequences, font = 'DroidSansMono', 
+      color = "Chemistry_NT") +
 geom_seed(seed = "GAGGUAG", star = TRUE)
 }
 \author{

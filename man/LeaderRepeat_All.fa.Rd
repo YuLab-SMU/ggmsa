@@ -7,9 +7,6 @@
 \format{
 A MSA fasta
 }
-\usage{
-system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
-}
 \description{
 DNA alignment sequences with 24 sequences and 56 positions.
 }

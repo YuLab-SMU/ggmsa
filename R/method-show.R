@@ -19,9 +19,11 @@
 ##' x1
 setMethod("show",signature(object="SeqDiff"),
           function(object) {
-              cat("sequence differences of", paste0(names(object@sequence), collapse=" and "), '\n')
+              message("sequence differences of", 
+                      paste0(names(object@sequence), collapse=" and "), 
+                      '\n')
               d <- object@diff$difference %>% table %>% as.data.frame
-              cat(sum(d$Freq), "sites differ:\n")
+              message(sum(d$Freq), " ", "sites differ:\n")
               freq <- d[,2]
               names(freq) <- d[,1]
               print(freq)

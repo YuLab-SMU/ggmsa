@@ -7,9 +7,6 @@
 \format{
 xlsx
 }
-\usage{
-system.file("extdata", "TP53_genes.xlsx", package = "ggmsa")
-}
 \description{
 The local genome map shows the 30000 sites around the TP53 gene.
 }

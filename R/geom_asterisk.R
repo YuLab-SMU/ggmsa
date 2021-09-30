@@ -4,8 +4,10 @@
 ##' @title a ggplot2 layer of asterisk as a polygon
 ##' @param mapping aes mapping
 ##' @param data a data frame
-##' @param stat the statistical transformation to use on the data for this layer, as a string.
-##' @param position position adjustment, either as a string, or the result of a call to a position adjustment function.
+##' @param stat the statistical transformation to use on the data 
+##' for this layer, as a string.
+##' @param position position adjustment, either as a string, 
+##' or the result of a call to a position adjustment function.
 ##' @param na.rm a logical value
 ##' @param show.legend a logical value
 ##' @param inherit.aes a logical value
@@ -18,12 +20,21 @@
 ##' @examples
 ##' #library(ggplot2)
 ##' #ggplot(mtcars, aes(mpg, disp)) + geom_asterisk()
-geom_asterisk <- function(mapping = NULL, data = NULL, stat = "identity",
-                          position = "identity", na.rm = FALSE, show.legend = NA,
+geom_asterisk <- function(mapping = NULL, 
+                          data = NULL, 
+                          stat = "identity",
+                          position = "identity", 
+                          na.rm = FALSE, 
+                          show.legend = NA,
                           inherit.aes = TRUE, ...) {
 
-  layer(geom = Geomasterisk, mapping = mapping, data = data, stat = stat,
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
+  layer(geom = Geomasterisk, 
+        mapping = mapping, 
+        data = data, 
+        stat = stat,
+        position = position,
+        show.legend = show.legend,
+        inherit.aes = inherit.aes,
         params = list(na.rm = na.rm, ...))
 }
 
@@ -65,7 +76,8 @@ Geomasterisk <- ggproto("Geomasterisk", Geom,
                                           SeedStar(data$x[i], data$y[i])
                                       })
                              class(grobs) <- "gList"
-                             ggplot2:::ggname("geom_asterisk", gTree(children = grobs))
+                             ggplot2:::ggname("geom_asterisk", 
+                                              gTree(children = grobs))
                          }
 
 )

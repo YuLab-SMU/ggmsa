@@ -10,8 +10,13 @@ ggplot_add.seqlogo <- function(object, plot, object_name) {
     logo_custom_color <- object[["custom_color"]]
     show.legend <- object$show.legend
 
-    ly_logo <- geom_logo(data  = logo_tidyData, font = logo_font, color = logo_color,
-                         adaptive = adaptive, top = top, custom_color = logo_custom_color, show.legend = show.legend)
+    ly_logo <- geom_logo(data  = logo_tidyData, 
+                         font = logo_font, 
+                         color = logo_color,
+                         adaptive = adaptive, 
+                         top = top, 
+                         custom_color = logo_custom_color, 
+                         show.legend = show.legend)
     ggplot_add(ly_logo, plot, object_name)
 }
 
@@ -66,20 +71,26 @@ ggplot_add.facet_msa <- function(object, plot, object_name){
 
     if (region %% field == 0) {
         plot + facet_wrap(.~facet, ncol = 1, scales = "free_x") +
-            scale_x_continuous(expand = c(0,0), breaks = xl_scale, labels = xl_scale) +
+            scale_x_continuous(expand = c(0,0), 
+                               breaks = xl_scale, 
+                               labels = xl_scale) +
             coord_cartesian()
     }else {
         max_pos <- facetData$position %>% max
         min_pos <- facetData$position %>% min
         max_facet <- facetData$facet %>% max
-        minpos_maxfacet <- facetData[facetData$facet == max_facet,"position"] %>% min
+        minpos_maxfacet <- facetData[facetData$facet == 
+                                         max_facet,"position"] %>% min
         expand_pos <-  (region %/% field + 1) * field + min_pos
 
-        dummy <- data.frame(x = c(minpos_maxfacet, expand_pos), facet = max_facet)
+        dummy <- data.frame(x = c(minpos_maxfacet, expand_pos), 
+                            facet = max_facet)
         plot +
             facet_wrap(.~facet, ncol = 1, scales = "free_x") +
             geom_blank(aes_(x = ~x), dummy, inherit.aes = FALSE) +
-            scale_x_continuous(expand = c(0,0), breaks = xl_scale, labels = xl_scale) +
+            scale_x_continuous(expand = c(0,0), 
+                               breaks = xl_scale, 
+                               labels = xl_scale) +
             coord_cartesian()
     }
 
@@ -116,6 +127,8 @@ ggplot_add.nucleotideeHelix <- function(object, plot, object_name){
     }else {
         helix_tidy <- tidy_list_helix(helix_data, color_by = color_by)
     }
-    ly <- layer_helix(helix_data = helix_tidy, overlap = overlap, seq_numbers = seq_numbers)
+    ly <- layer_helix(helix_data = helix_tidy, 
+                      overlap = overlap, 
+                      seq_numbers = seq_numbers)
     ggplot_add(ly, plot, object_name)
 }

@@ -1,4 +1,5 @@
-##' This function lists font families currently available that can be used by 'ggmsa'
+##' This function lists font families currently available 
+##' that can be used by 'ggmsa'
 ##'
 ##'
 ##' @title List Font Families currently available
@@ -8,10 +9,12 @@
 ##' @author Lang Zhou
 available_fonts <- function(){
     message("font families currently available:" )
-    cat(names(font_fam))
+    font <- paste(names(font_fam), collapse = ' ')
+    message(font, "\n")
 }
 
-##' This function lists color schemes currently available that can be used by 'ggmsa'
+##' This function lists color schemes currently available that
+##'  can be used by 'ggmsa'
 ##'
 ##'
 ##' @title List Color Schemes currently available
@@ -20,13 +23,17 @@ available_fonts <- function(){
 ##' @export
 ##' @author Lang Zhou
 available_colors <- function(){
-    message("color schemes for nucleotide sequences currently available:")
-    cat(names(scheme_NT), "\n")
-    message("color schemes for AA sequences currently available:")
-    cat("Clustal", names(scheme_AA))
+    message("1.color schemes for nucleotide sequences currently available:")
+    color_nt <- paste(names(scheme_NT), collapse = ' ')
+    message(color_nt, "\n")
+    
+    message("2.color schemes for AA sequences currently available:")
+    color_aa <- paste(names(scheme_AA), collapse = ' ')
+    message("Clustal", color_aa, "\n")
 }
 
-##' This function lists MSA objects currently available that can be used by 'ggmsa'
+##' This function lists MSA objects currently available that
+##'  can be used by 'ggmsa'
 ##'
 ##'
 ##' @title List MSA objects currently available
@@ -35,14 +42,18 @@ available_colors <- function(){
 ##' @export
 ##' @author Lang Zhou
 available_msa <- function(){
-    message("files currently available:")
-    cat(".fasta",'\n')
+    message("1.files currently available:")
+    message(".fasta",'\n')
 
-    message("XStringSet objects from 'Biostrings' package:")
-    cat(supported_msa_class[!grepl("bin", supported_msa_class)],'\n')
+    message("2.XStringSet objects from 'Biostrings' package:")
+    mes <- paste(supported_msa_class[!grepl("bin", supported_msa_class)],
+                 collapse = ' ')
+    message(mes, '\n')
 
-    message("bin objects:")
-    cat(supported_msa_class[grepl("bin", supported_msa_class)])
+    message("3.bin objects:")
+    mes_bin <- paste(supported_msa_class[grepl("bin", supported_msa_class)],
+                     collapse = ' ')
+    message(mes_bin, '\n')
 
 }
 

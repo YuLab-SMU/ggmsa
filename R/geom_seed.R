@@ -2,15 +2,19 @@
 ##'
 ##'
 ##' @title geom_seed
-##' @param seed a character string.Specifying the miRNA seed sequence like 'GAGGUAG'.
-##' @param star a logical value indicating whether asterisks should be disaplayed.
+##' @param seed a character string.Specifying the miRNA seed sequence
+##'  like 'GAGGUAG'.
+##' @param star a logical value indicating whether asterisks should 
+##' be displayed.
 ##' @return a ggplot layer
 ##' @author Lang Zhou
 ##' @examples
 ##' miRNA_sequences <- system.file("extdata/seedSample.fa", package="ggmsa")
-##' ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT", none_bg = TRUE) +
+##' ggmsa(miRNA_sequences, font = 'DroidSansMono', 
+##'       color = "Chemistry_NT", none_bg = TRUE) +
 ##' geom_seed(seed = "GAGGUAG", star = FALSE)
-##' ggmsa(miRNA_sequences, font = 'DroidSansMono', color = "Chemistry_NT") +
+##' ggmsa(miRNA_sequences, font = 'DroidSansMono', 
+##'       color = "Chemistry_NT") +
 ##' geom_seed(seed = "GAGGUAG", star = TRUE)
 ##' @export
 geom_seed <- function(seed, star = FALSE) {
@@ -23,8 +27,6 @@ geom_seed <- function(seed, star = FALSE) {
 ##' @importFrom stringr str_locate
 geom_seed1 <- function(tidyData, seed, star) {
     get_asteriskScale(tidyData)
-    #prepare <- prepare_msa(msa)
-    #seedResult <- vmatchPattern(pattern = seed, subject = prepare)
     tidyData$y <- as.numeric(tidyData$name)
     seq_first <- tidyData[tidyData$y == 1,]
     char <- seq_first$character
@@ -49,12 +51,15 @@ geom_seed1 <- function(tidyData, seed, star) {
                             star_y = rep(y, times = nchar(seed)))
 
     if(isTRUE(star)) {
-        ly_star <- geom_asterisk(data = starData, aes_(x = ~star_x, y = ~star_y))
+        ly_star <- geom_asterisk(data = starData, 
+                                 aes_(x = ~star_x, y = ~star_y))
         return(ly_star)
     }
 
     mapping <- aes_(x= ~x, y= ~y, group= ~t, fill = ~I('#bebebe'))
-    ly_seed <- geom_polygon(data = shadingData, mapping = mapping, alpha = shading_alpha)
+    ly_seed <- geom_polygon(data = shadingData, 
+                            mapping = mapping, 
+                            alpha = shading_alpha)
     return(ly_seed)
  }
 

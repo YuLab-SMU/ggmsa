@@ -7,9 +7,6 @@
 \format{
 A MSA fasta with 9 sequences and 456 positions.
 }
-\usage{
-system.file("extdata", "sample.fasta", package = "ggmsa")
-}
 \description{
 A dataset containing the alignment sequences of 
 the phenylalanine hydroxylase protein (PH4H) 

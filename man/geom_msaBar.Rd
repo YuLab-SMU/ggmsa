@@ -10,7 +10,8 @@ geom_msaBar()
 A list
 }
 \description{
-Multiple sequence alignment layer for ggplot2. It plot sequence conservation bar.
+Multiple sequence alignment layer for ggplot2.
+ It plot sequence conservation bar.
 }
 \examples{
 #plot multiple sequence alignment and conservation bar.

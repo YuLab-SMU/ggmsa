@@ -10,9 +10,6 @@ a folder
 \source{
 \url{https://link.springer.com/article/10.1007/s11540-015-9307-3}
 }
-\usage{
-list.files(system.file("extdata", "GVariation", package="ggmsa"))
-}
 \description{
 A folder containing 4 MAS files as a sample
 data set to identify the sequence recombination event.
@@ -22,7 +19,8 @@ data set to identify the sequence recombination event.
   \item A.Mont.fas MSA with sequences of 'Mont' and 'CF_YL21'
   \item B.Oz.fas MSA with sequences of 'Oz' and 'CF_YL21'
   \item C.Wilga5.fas MSA with sequences of 'Wilga5' and 'CF_YL21'
-  \item sample_alignment.fa MSA with sequences of 'Mont', 'CF_YL21', 'Oz', and 'Wilga5'
+  \item sample_alignment.fa MSA with sequences of 'Mont', 'CF_YL21', 
+  'Oz', and 'Wilga5'
 }
 }
 \keyword{datasets}

@@ -24,14 +24,20 @@ geom_GC1 <- function(tidyData, show.legend = FALSE){
     GC <-GC[GC$character == "GC",]
     col_num <- levels(factor(tidy$position))
     col_len <- length(col_num) + GC_pos
-    ly_GC <- geom_point(data = GC, mapping = aes_(x = ~col_len, y = ~ypos, size = ~fre),
-                        color = "#51a6e9", na.rm = TRUE, show.legend = show.legend)
+    ly_GC <- geom_point(data = GC,
+                        mapping = aes_(x = ~col_len, 
+                                       y = ~ypos, 
+                                       size = ~fre),
+                        color = "#51a6e9", 
+                        na.rm = TRUE, 
+                        show.legend = show.legend)
     return(ly_GC)
 }
 ##' get GC content
 
 ##' @title content_GC
-##' @param data  Multiple aligned sequence file or object for representing nucleotide sequences
+##' @param data  Multiple aligned sequence files or objects
+##'  for representing nucleotide sequences
 ##' @return A data frame
 ##' @noRd
 ##' @author Lang Zhou
@@ -39,7 +45,6 @@ content_GC<- function(data){
     tidy <- data
     tidy$name <- factor(tidy$name, levels = unique(tidy$name))
     tidy$ypos <- as.numeric(tidy$name)
-    #seq_num <- levels(factor(tidy$ypos)) # the sequence number
     seq_num <- unique(tidy$ypos)
     lchar_num <- lapply(seq_num, function(j){
         clo <- tidy[tidy$ypos == j, ]

@@ -8,7 +8,6 @@
 #' @docType data
 #' @keywords datasets
 #' @name sample.fasta
-#' @usage system.file("extdata", "sample.fasta", package = "ggmsa")
 #' @format A MSA fasta with 9 sequences and 456 positions.
 NULL
 
@@ -23,12 +22,12 @@ NULL
 #'   \item A.Mont.fas MSA with sequences of 'Mont' and 'CF_YL21'
 #'   \item B.Oz.fas MSA with sequences of 'Oz' and 'CF_YL21'
 #'   \item C.Wilga5.fas MSA with sequences of 'Wilga5' and 'CF_YL21'
-#'   \item sample_alignment.fa MSA with sequences of 'Mont', 'CF_YL21', 'Oz', and 'Wilga5'
+#'   \item sample_alignment.fa MSA with sequences of 'Mont', 'CF_YL21', 
+#'   'Oz', and 'Wilga5'
 #' }
 #' @docType data
 #' @keywords datasets
 #' @name GVariation
-#' @usage list.files(system.file("extdata", "GVariation", package="ggmsa"))
 #' @format a folder 
 #' @source \url{https://link.springer.com/article/10.1007/s11540-015-9307-3}
 NULL
@@ -41,15 +40,16 @@ NULL
 #' corresponding consensus RNA secondary structure. 
 #'
 #' \itemize{
-#'   \item RF00458.fasta seed alignment sequences of Cripavirus internal ribosome entry site (IRES)
+#'   \item RF00458.fasta seed alignment sequences of Cripavirus internal 
+#'   ribosome entry site (IRES)
 #'   \item RF03120.fasta seed alignment sequences of Sarbecovirus 5'UTR
-#'   \item RF03120_SS.txt consensus RNA secondary structure of Sarbecovirus 5'UTR
+#'   \item RF03120_SS.txt consensus RNA secondary structure of 
+#'   Sarbecovirus 5'UTR
 #'  
 #' }
 #' @docType data
 #' @keywords datasets
 #' @name Rfam
-#' @usage list.files(system.file("extdata", "Rfam", package="ggmsa"))
 #' @format a folder 
 #' @source \url{https://rfam.xfam.org/}
 NULL
@@ -64,7 +64,6 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @name Gram-negative_AKL.fasta
-#' @usage system.file("extdata", "Gram-negative_AKL.fasta", package="ggmsa")
 #' @format A MSA fasta with 100 sequences and 36 positions.
 #' @source \url{http://biovis.net/year/2013/info/redesign-contest}
 NULL
@@ -79,7 +78,6 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @name Gram-positive_AKL.fasta
-#' @usage system.file("extdata", "Gram-positive_AKL.fasta", package="ggmsa")
 #' @format A MSA fasta with 100 sequences and 36 positions.
 #' @source \url{http://biovis.net/year/2013/info/redesign-contest}
 NULL
@@ -94,7 +92,6 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @name LeaderRepeat_All.fa
-#' @usage system.file("extdata", "LeaderRepeat_All.fa", package = "ggmsa")
 #' @format A MSA fasta 
 NULL
 
@@ -109,7 +106,6 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @name seedSample.fa
-#' @usage system.file("extdata", "seedSample.fa", package = "ggmsa")
 #' @format A MSA fasta with 6 sequences and 22 positions.
 #' @source \url{https://www.mirbase.org/ftp.shtml}
 NULL
@@ -123,7 +119,6 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @name sequence-link-tree.fasta
-#' @usage system.file("extdata", "sequence-link-tree.fasta", package = "ggmsa")
 #' @format A MSA fasta with 28 sequences and 480 positions.
 NULL
 
@@ -136,7 +131,6 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @name tp53.fa
-#' @usage system.file("extdata", "tp53.fa", package = "ggmsa")
 #' @format A MSA fasta with 5 sequences and 404 positions.
 NULL
 
@@ -149,7 +143,6 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @name TP53_genes.xlsx
-#' @usage system.file("extdata", "TP53_genes.xlsx", package = "ggmsa")
 #' @format xlsx
 NULL
 

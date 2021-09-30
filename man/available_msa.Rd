@@ -10,7 +10,8 @@ available_msa()
 A character vector of available objects
 }
 \description{
-This function lists MSA objects currently available that can be used by 'ggmsa'
+This function lists MSA objects currently available that
+ can be used by 'ggmsa'
 }
 \examples{
 available_msa()

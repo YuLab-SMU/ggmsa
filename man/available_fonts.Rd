@@ -10,7 +10,8 @@ available_fonts()
 A character vector of available font family names
 }
 \description{
-This function lists font families currently available that can be used by 'ggmsa'
+This function lists font families currently available 
+that can be used by 'ggmsa'
 }
 \examples{
 available_fonts()

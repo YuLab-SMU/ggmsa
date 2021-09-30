@@ -10,9 +10,6 @@ A MSA fasta with 6 sequences and 22 positions.
 \source{
 \url{https://www.mirbase.org/ftp.shtml}
 }
-\usage{
-system.file("extdata", "seedSample.fa", package = "ggmsa")
-}
 \description{
 Fasta format sequences of mature miRNA sequences 
 from miRBase

@@ -10,18 +10,17 @@ a folder
 \source{
 \url{https://rfam.xfam.org/}
 }
-\usage{
-list.files(system.file("extdata", "Rfam", package="ggmsa"))
-}
 \description{
 A folder containing seed alignment sequences and 
 corresponding consensus RNA secondary structure.
 }
 \details{
 \itemize{
-  \item RF00458.fasta seed alignment sequences of Cripavirus internal ribosome entry site (IRES)
+  \item RF00458.fasta seed alignment sequences of Cripavirus internal 
+  ribosome entry site (IRES)
   \item RF03120.fasta seed alignment sequences of Sarbecovirus 5'UTR
-  \item RF03120_SS.txt consensus RNA secondary structure of Sarbecovirus 5'UTR
+  \item RF03120_SS.txt consensus RNA secondary structure of 
+  Sarbecovirus 5'UTR
  
 }
 }

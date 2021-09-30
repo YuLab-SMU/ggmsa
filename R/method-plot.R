@@ -36,10 +36,13 @@ setMethod("plot", signature(x="SeqDiff"),
               if (is.null(title) || is.na(title)) {
                   title <- ""
               } else if (title == "auto") {
-                  title <- paste(nn[-x@reference], "nucelotide differences relative to", nn[x@reference])
+                  title <- paste(nn[-x@reference], 
+                                 "nucelotide differences relative to", 
+                                 nn[x@reference])
               }
 
-              p1 <- plot_difference_count(x@diff, width, by=by, fill=fill) + ggtitle(title)
+              p1 <- plot_difference_count(x@diff, width, by=by, fill=fill) + 
+                  ggtitle(title)
               p2 <- plot_difference(x@diff, colors=colors, xlab)
 
               if (!is.null(xlim)) {
@@ -47,18 +50,6 @@ setMethod("plot", signature(x="SeqDiff"),
                   p2 <- p2 + xlim(xlim)
               }
 
-              # gp1<- ggplot_gtable(ggplot_build(p1))
-              # gp2<- ggplot_gtable(ggplot_build(p2))
-              # maxWidth = unit.pmax(gp1$widths[2:3], gp2$widths[2:3])
-              # gp1$widths[2:3] <- maxWidth
-              # gp2$widths[2:3] <- maxWidth
-
-              ## pushViewport(viewport(layout = grid.layout(2, 1, heights = unit(c(0.7, 0.7), "null"))))
-              ## gp2$vp = viewport(layout.pos.row = 2, layout.pos.col = 1)
-              ## grid.draw(gp2)
-              ## gp1$vp = viewport(layout.pos.row = 1, layout.pos.col = 1)
-              ## grid.draw(gp1)
-              ## plot_grid(gp1, gp2, ncol=1, rel_heights=c(.7, .4))
               plot_list(p1, p2, ncol=1, heights=c(.7, .4))
           }
           )
@@ -82,7 +73,8 @@ plot_difference <- function(x, colors, xlab="Nucleotide Position") {
     x$y <- yy[x$difference]
     n <- sum(is.na(x$y))
     if (n > 0) {
-        message(n, " sites contain deletions or ambiguous bases, which will be ignored in current implementation...")
+        message(n, " sites contain deletions or ambiguous bases, 
+                which will be ignored in current implementation...")
     }
     x <- x[!is.na(x$y),]
     p <- ggplot(x, aes_(x=~position, y=~y, color=~difference))

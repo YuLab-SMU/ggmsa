@@ -7,9 +7,6 @@
 \format{
 A MSA fasta with 5 sequences and 404 positions.
 }
-\usage{
-system.file("extdata", "tp53.fa", package = "ggmsa")
-}
 \description{
 Alignment sequences of used to show graphical combination
 }

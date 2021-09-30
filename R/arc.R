@@ -3,9 +3,12 @@
 ##' @title gghelix
 ##' @param helix_data a data frame. The file of nucleltide secondary structure
 ##' and then read by ggmsa::readSSfile.
-##' @param overlap Logicals. If TRUE, two structures data called predict and known must be given
-##' (eg:heilx_data = list(known = data1, predicted = data2)), plots the predicted helices that are known on top,
-##' predicted helices that are not known on the bottom, and finally plots unpredicted helices on top in black.
+##' @param overlap Logicals. If TRUE, two structures data called predict 
+##' and known must be given(eg:heilx_data = list(known = data1, 
+##'                                              predicted = data2)), 
+##' plots the predicted helices that are known on top, predicted helices that
+##'  are not known on the bottom, and finally plots unpredicted helices 
+##'  on top in black.
 ##' @param color_by generate colors for helices by various rules,
 ##' including integer counts and value ranges one of "length" and "value"
 ##' @return ggplot object
@@ -31,9 +34,12 @@ gghelix <- function(helix_data, color_by = "length",overlap = FALSE){
 ##' @title geom_helix
 ##' @param helix_data a data frame. The file of nucleltide secondary structure
 ##' and then read by ggmsa::readSSfile.
-##' @param overlap Logicals. If TRUE, two structures data called predict and known must be given
-##' (eg:heilx_data = list(known = data1, predicted = data2)), plots the predicted helices that are known on top,
-##' predicted helices that are not known on the bottom, and finally plots unpredicted helices on top in black.
+##' @param overlap Logicals. If TRUE, two structures data called predict 
+##' and known must be given(eg:heilx_data = list(known = data1, 
+##'                                              predicted = data2)), 
+##' plots the predicted helices that are known on top,
+##' predicted helices that are not known on the bottom, and finally plots 
+##' unpredicted helices on top in black.
 ##' @param color_by generate colors for helices by various rules,
 ##' including integer counts and value ranges one of "length" and "value"
 ##' @param ... additional parameter
@@ -43,7 +49,8 @@ gghelix <- function(helix_data, color_by = "length",overlap = FALSE){
 ##' RF03120 <- system.file("extdata/Rfam/RF03120_SS.txt", package="ggmsa")
 ##'RF03120_fas <- system.file("extdata/Rfam/RF03120.fasta", package="ggmsa")
 ##'SS <- readSSfile(RF03120, type = "Vienna")
-##'ggmsa(RF03120_fas, font = NULL,border = NA, color = "Chemistry_NT", seq_name = FALSE) +
+##'ggmsa(RF03120_fas, font = NULL,border = NA, 
+##'     color = "Chemistry_NT", seq_name = FALSE) +
 ##'geom_helix(SS)
 ##' @author Lang Zhou
 geom_helix <- function(helix_data, color_by = "length", overlap = FALSE,  ...) {
@@ -81,17 +88,7 @@ readSSfile <- function(file, type = NULL) {
 
     data <- collapseHelix(load_data)
     return(data)
-    #data <- expandHelix(load_data)
-    # if(!is.null(color_by)) {
-    #     color_by <- match.arg(color_by, c("Value", "Count", "BasepairFrequency"))
-    #     data <- switch(color_by,
-    #                    Value = colourByValue(data, get = TRUE, log = TRUE),
-    #                    Count = colourByCount(data, get = TRUE),
-    #                    BasepairFrequency = colourByBasepairFrequency(data, get = TRUE))
-    # }
-    #
-    # tidy_data <- tidy_helix(data)
-    # return(tidy_data)
+
 }
 
 tidy_list_helix <- function(helix_data, color_by = "length"){
@@ -133,8 +130,14 @@ colorBy_value <- function(helix_data){
 
 ##' @importFrom ggforce geom_arc
 layer_helix <- function(helix_data, overlap = FALSE, seq_numbers = 0){
-    mapping_above <- aes_(x0 = ~x0, y0 = ~(seq_numbers + 0.5), r = ~r, start = ~1.5*pi, end = ~2.5*pi)
-    mapping_below <- aes_(x0 = ~x0, y0 = ~(-0.5), r = ~r, start = ~pi/2, end = ~1.5*pi)
+    mapping_above <- aes_(x0 = ~x0, 
+                          y0 = ~(seq_numbers + 0.5), 
+                          r = ~r, start = ~1.5*pi, 
+                          end = ~2.5*pi)
+    mapping_below <- aes_(x0 = ~x0, 
+                          y0 = ~(-0.5), 
+                          r = ~r, start = ~pi/2, 
+                          end = ~1.5*pi)
     if(seq_numbers > 0) {
         mapping_below <- modifyList(mapping_below, aes_(y0 = ~0))
     }
@@ -145,44 +148,61 @@ layer_helix <- function(helix_data, overlap = FALSE, seq_numbers = 0){
 
     if(overlap) {
         if(!is.list(helix_data)| length(helix_data) != 2){
-            stop("Overlapping structures must input a list with 2 helix data.(eg: heilx_data = list(known = data1, predicted = data2)")
+            stop("Overlapping structures must input a list with
+                 2 helix data.
+                 (eg: heilx_data = list(known = data1, predicted = data2)")
         }
         if(!names(helix_data) %in% c("known", "predicted") %>% all) {
-            stop("helix_data names must be 'known' and 'predicted'. (eg: heilx_data = list(known = data1, predicted = data2)")
+            stop("helix_data names must be 'known' and 'predicted'. 
+                 (eg: heilx_data = list(known = data1, predicted = data2)")
         }
 
         overlap_data <- overlap_helix(known = helix_data[["known"]],
                                       predicted = helix_data[["predicted"]])
 
         if (overlap_data[["above_justknown"]] %>% nrow == 0){
-            ly_up <- geom_arc(data = overlap_data[["above_both"]], mapping = mapping_above)
-            ly_below <- geom_arc(data = overlap_data[["below"]], mapping = mapping_below)
+            ly_up <- geom_arc(data = overlap_data[["above_both"]],
+                              mapping = mapping_above)
+            ly_below <- geom_arc(data = overlap_data[["below"]], 
+                                 mapping = mapping_below)
             return(list(ly_up, ly_below))
 
         }else {
-            ly_up <- geom_arc(data = overlap_data[["above_both"]], mapping = mapping_above)
-            ly_up_justknown <- geom_arc(data = overlap_data[["above_justknown"]], mapping = mapping_above, color = "black")
-            ly_below <- geom_arc(data = overlap_data[["below"]], mapping = mapping_below)
+            ly_up <- geom_arc(data = overlap_data[["above_both"]],
+                              mapping = mapping_above)
+            ly_up_justknown <- 
+              geom_arc(data = overlap_data[["above_justknown"]], 
+                       mapping = mapping_above, 
+                       color = "black")
+            
+            ly_below <- geom_arc(data = overlap_data[["below"]], 
+                                 mapping = mapping_below)
             return(list(ly_up, ly_up_justknown, ly_below))
         }
 
     }else {#overlap = FALSE
         if(is.list(helix_data) & length(helix_data) == 2) {
             if(!"col" %in% names(helix_data[["known"]])) {
-                mapping_below <- modifyList(mapping_below, aes_(color = I("#8fce5e")))
+                mapping_below <- modifyList(mapping_below, 
+                                            aes_(color = I("#8fce5e")))
             }
-            ly_up <- geom_arc(data = helix_data[["known"]], mapping = mapping_below)
-            ly_below <- geom_arc(data = helix_data[["predicted"]], mapping = mapping_above)
+            ly_up <- geom_arc(data = helix_data[["known"]], 
+                              mapping = mapping_below)
+            ly_below <- geom_arc(data = helix_data[["predicted"]], 
+                                 mapping = mapping_above)
             return(list(ly_up, ly_below))
 
         }else if(is.data.frame(helix_data)){
             if("col" %in% names(helix_data)){
-                mapping_above <- modifyList(mapping_above, aes_(color = ~I(col)))
+                mapping_above <- modifyList(mapping_above, 
+                                            aes_(color = ~I(col)))
             }
             ly_arc <- geom_arc(data = helix_data, mapping = mapping_above)
             return(ly_arc)
         }else {
-            stop("Only a data frame or a list with 2 of helix data are allowed. eg: heilx_data = data or heilx_data = list(known = data1, predicted = data2)")
+            stop("Only a data frame or a list with 2 of helix data are allowed.
+                 eg: heilx_data = data or 
+                 heilx_data = list(known = data1, predicted = data2)")
         }
     }
 }

@@ -30,7 +30,8 @@ simplot(
 
 \item{sep}{separator to split sequence name; only works if group = TRUE}
 
-\item{sd}{whether display standard deviation of similarity among each group; only works if group=TRUE}
+\item{sd}{whether display standard deviation of 
+similarity among each group; only works if group=TRUE}
 }
 \value{
 ggplot object
@@ -39,7 +40,8 @@ ggplot object
 Sequence similarity plot
 }
 \examples{
-fas <- system.file("extdata/GVariation/sample_alignment.fa", package="ggmsa")
+fas <- system.file("extdata/GVariation/sample_alignment.fa", 
+                    package="ggmsa")
 simplot(fas, 'CF_YL21')
 }
 \author{

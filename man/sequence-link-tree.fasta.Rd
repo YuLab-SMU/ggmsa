@@ -7,9 +7,6 @@
 \format{
 A MSA fasta with 28 sequences and 480 positions.
 }
-\usage{
-system.file("extdata", "sequence-link-tree.fasta", package = "ggmsa")
-}
 \description{
 Alignment sequences used to demonstrate circular MSA layout
 }

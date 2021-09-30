@@ -13,9 +13,12 @@ and then read by ggmsa::readSSfile.}
 \item{color_by}{generate colors for helices by various rules,
 including integer counts and value ranges one of "length" and "value"}
 
-\item{overlap}{Logicals. If TRUE, two structures data called predict and known must be given
-(eg:heilx_data = list(known = data1, predicted = data2)), plots the predicted helices that are known on top,
-predicted helices that are not known on the bottom, and finally plots unpredicted helices on top in black.}
+\item{overlap}{Logicals. If TRUE, two structures data called predict 
+and known must be given(eg:heilx_data = list(known = data1, 
+                                             predicted = data2)), 
+plots the predicted helices that are known on top, predicted helices that
+ are not known on the bottom, and finally plots unpredicted helices 
+ on top in black.}
 }
 \value{
 ggplot object
