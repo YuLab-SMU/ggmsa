@@ -1,7 +1,8 @@
 # ggmsa 0.99.0 or 0.99.x (Prepare for submission to `Bioconductor`, 2021-09-22 Wed)
 
 + 0.99.1 update DESCRIPTION and NEWS files (2021-09-28, Tue)
-+ 0.99.2 documenting the dataset in extdata/inst (2021-09-29, Wed)
++ 0.99.2 add documentation for row data in extdata/inst and clean up code (2021-09-29, Wed)
++ 0.99.3 remove some  vignettes from master (build on the gh-pages branch) (2021-10-1, Fri)
 
 # ggmsa 0.0.10
 
@@ -35,7 +36,7 @@
 # ggmsa 0.0.5
 
 + added a new view called `by_conservation`.(2020-12-22, Tue)
-+ added a new color scheme `Hydrophobicity` and a new paramter `border`.(2020-12-21, Mon)
++ added a new color scheme `Hydrophobicity` and a new parameter `border`.(2020-12-21, Mon)
 + rewrite the function `facet_msa()`.(2020-12-03, Thu)
 + Debug: tree + geom_facet(geom_msa()) does not work.(2020-12-03, Thu)
 + added a new function `geom_msaBar()`.(2020-12-03, Thu)
