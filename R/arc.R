@@ -2,7 +2,7 @@
 ##'
 ##' @title gghelix
 ##' @param helix_data a data frame. The file of nucleltide secondary structure
-##' and then read by ggmsa::readSSfile.
+##' and then read by readSSfile().
 ##' @param overlap Logicals. If TRUE, two structures data called predict 
 ##' and known must be given(eg:heilx_data = list(known = data1, 
 ##'                                              predicted = data2)), 
@@ -33,7 +33,7 @@ gghelix <- function(helix_data, color_by = "length",overlap = FALSE){
 ##'
 ##' @title geom_helix
 ##' @param helix_data a data frame. The file of nucleltide secondary structure
-##' and then read by ggmsa::readSSfile.
+##' and then read by readSSfile().
 ##' @param overlap Logicals. If TRUE, two structures data called predict 
 ##' and known must be given(eg:heilx_data = list(known = data1, 
 ##'                                              predicted = data2)), 

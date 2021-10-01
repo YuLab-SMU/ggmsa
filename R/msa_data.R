@@ -99,7 +99,6 @@ msa_data <- function(tidymsa, font = "helvetical",
     ## To adapt to tree data
     if (!'name' %in% names(y) & !consensus_views) {
         if ('label' %in% names(y)) {
-            ## y <- dplyr::rename(y, name = label)
             names(y)[names(y) == 'label'] <- "name"
         }else {
             stop("unknown sequence name...")
@@ -205,6 +204,7 @@ msa_data <- function(tidymsa, font = "helvetical",
 tidy_msa <- function(msa, start = NULL, end = NULL) {
     aln <- prepare_msa(msa)
     alnmat <- lapply(seq_along(aln), function(i) {
+        ##Preventing function collisions
         base::strsplit(as.character(aln[[i]]), '')[[1]]
     }) %>% do.call('rbind', .)
     ## for DNAbin and AAbin

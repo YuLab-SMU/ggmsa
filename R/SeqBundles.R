@@ -12,7 +12,7 @@
 ##' @param line_high The high of bundles at each site, default is 0.
 ##' @param spline_shape A numeric vector of values between -1 and 1, which 
 ##' control the shape of the spline relative to the control points.
-##' From ggalt::geom_xspline().
+##' From geom_xspline() in ggalt package.
 ##' @param size A numeric vector of values between o and 1, 
 ##' which control the size of each lines.
 ##' @param alpha A numeric vector of values between o and 1, 

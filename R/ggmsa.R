@@ -62,15 +62,15 @@
 ##' ggmsa(fasta, 164, 213, color="Chemistry_AA")
 ##'
 ##' #XMultipleAlignment objects can be used as input in the 'ggmsa'
-##' #AAMultipleAlignment <- Biostrings::readAAMultipleAlignment(fasta)
+##' #AAMultipleAlignment <- readAAMultipleAlignment(fasta)
 ##' #ggmsa(AAMultipleAlignment, 164, 213, color="Chemistry_AA")
 ##'
 ##' #XStringSet objects can be used as input in the 'ggmsa'
-##' #AAStringSet <- Biostrings::readAAStringSet(fasta)
+##' #AAStringSet <- readAAStringSet(fasta)
 ##' #ggmsa(AAStringSet, 164, 213, color="Chemistry_AA")
 ##'
 ##' #Xbin objects from 'seqmagick' can be used as input in the 'ggmsa'
-##' #AAbin <- seqmagick::fa_read(fasta)
+##' #AAbin <- fa_read(fasta)
 ##' #ggmsa(AAbin, 164, 213, color="Chemistry_AA")
 ##' @export
 ##' @author Guangchuang Yu

@@ -9,14 +9,16 @@
 ##' @importFrom Biostrings DNAStringSet
 ##' @importFrom Biostrings RNAStringSet
 ##' @importFrom Biostrings AAStringSet
+##' @importFrom methods missingArg
+##' @importFrom seqmagick fa_read
 ## @export
 ##' @author Lang Zhou and Guangchuang Yu
 ##' @noRd
 prepare_msa <- function(msa) {
-    if (methods::missingArg(msa)) {
+    if (missingArg(msa)) {
         stop("no input...")
-    } else if (methods::is(msa, "character")) {
-        msa <- seqmagick::fa_read(msa)
+    } else if (inherits(msa, "character")) {
+        msa <- fa_read(msa)
     } else if (!class(msa) %in% supported_msa_class) {
         stop("multiple sequence alignment object no supported...")
     }

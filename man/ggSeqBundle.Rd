@@ -31,7 +31,7 @@ representing either nucleotide sequences or peptide sequences.Also receives
 
 \item{spline_shape}{A numeric vector of values between -1 and 1, which 
 control the shape of the spline relative to the control points.
-From ggalt::geom_xspline().}
+From geom_xspline() in ggalt package.}
 
 \item{size}{A numeric vector of values between o and 1, 
 which control the size of each lines.}

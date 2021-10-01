@@ -8,7 +8,7 @@ gghelix(helix_data, color_by = "length", overlap = FALSE)
 }
 \arguments{
 \item{helix_data}{a data frame. The file of nucleltide secondary structure
-and then read by ggmsa::readSSfile.}
+and then read by readSSfile().}
 
 \item{color_by}{generate colors for helices by various rules,
 including integer counts and value ranges one of "length" and "value"}
