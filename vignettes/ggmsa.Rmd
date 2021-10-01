@@ -157,6 +157,18 @@ knitr::kable(y, align = "l", booktabs = TRUE, escape = TRUE) %>%
   
 ```
 
+# Learn more
+
+Check out the guides for learning everything there is to know about all the different features:
+
+- [Getting Started](https://yulab-smu.github.io/ggmsa/articles/ggmsa.html)
+- [Annotations](https://yulab-smu.github.io/ggmsa/articles/Annotations.html)
+- [Color Schemes and Font Families](https://yulab-smu.github.io/ggmsa/articles/Color_schemes_And_Font_Families.html)
+- [Theme](https://yulab-smu.github.io/ggmsa/articles/guides/MSA_theme.html)
+- [Other Modules](https://yulab-smu.github.io/ggmsa/articles/Other_Modules.html)
+- [View Modes](https://yulab-smu.github.io/ggmsa/articles/View_modes.html)
+
+
 
 #  Session Info
 ```{r echo = FALSE}
