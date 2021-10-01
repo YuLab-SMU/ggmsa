@@ -4,7 +4,7 @@
 + 0.99.2 add documentation for row data in extdata/inst and clean up code (2021-09-29, Wed)
 + 0.99.3 remove some  vignettes from master (build on the gh-pages branch) (2021-10-1, Fri)
 
-# ggmsa 0.0.10
+# ggmsa 0.0.10 
 
 + update default color schemes in  lower part of the SeqDiff plot (2021-08-20, Fri)
 

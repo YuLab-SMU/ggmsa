@@ -14,7 +14,7 @@ Description: A visual exploration tool for multiple sequence alignment
     of sequence recombinations.
 Depends: R (>= 4.1.0)
 Imports:
-    Biostrings,
+    Biostrings, 
     ggplot2,
     magrittr,
     tidyr,
