@@ -20,7 +20,6 @@ Imports:
     tidyr,
     utils,
     stats,
-    stringr,
     aplot,
     RColorBrewer,
     ggalt,
@@ -50,6 +49,6 @@ Encoding: UTF-8
 URL: http://yulab-smu.top/ggmsa/
 BugReports: https://github.com/YuLab-SMU/ggmsa/issues
 biocViews: Software, Visualization, Alignment, Annotation, MultipleSequenceAlignment
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 Config/testthat/edition: 3

@@ -23,17 +23,17 @@ geom_seed <- function(seed, star = FALSE) {
               class = "seed")
 }
 
-##' @importFrom stringr str_c
-##' @importFrom stringr str_locate
+
 geom_seed1 <- function(tidyData, seed, star) {
     get_asteriskScale(tidyData)
     tidyData$y <- as.numeric(tidyData$name)
     seq_first <- tidyData[tidyData$y == 1,]
     char <- seq_first$character
-    char <- str_c(char, collapse = "")
-    locate <- str_locate(char, seed)
-    df_locate <- as.data.frame(locate)
-    seedPos <- df_locate$start # start position of seed region
+    char <- paste(char, collapse = "")
+    seedPos <- regexpr(seed,char)
+    #locate <- str_locate(char, seed)
+    #df_locate <- as.data.frame(locate)
+    #seedPos <- df_locate$start # start position of seed region
     seedLen <- nchar(seed) # length of seed region
     numSeq <- max(tidyData$y) # number of sequences
     shadingLen <- getOption("shadingLen") #shading width
