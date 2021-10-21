@@ -14,7 +14,12 @@ tidy_color <- function(y, consensus, disagreement, ref) {
     c <- lapply(unique(y$position), function(i) {
         msa_cloumn <- y[y$position == i, ]
         if(!is.null(ref)) {
-            msa_cloumn <- msa_cloumn[!msa_cloumn$name == ref, ]
+            if ('label' %in% names(msa_cloumn)) { ##work for ggtreeExtra
+                msa_cloumn <- msa_cloumn[!msa_cloumn$label == ref, ]
+            }else{
+                msa_cloumn <- msa_cloumn[!msa_cloumn$name == ref, ]
+                }
+           
         }
         #Get consensus char.
         cons_char <- consensus[consensus$position == i, "character"] 
@@ -51,8 +56,13 @@ get_consensus <- function(tidy, ignore_gaps = FALSE, ref = NULL) {
             warning("The argument 'ignore_gaps' is 
                     invalid when 'ref' is specified!")
         }
-        ref <- match.arg(ref, levels(tidy$name))
-        cons <- tidy[tidy$name == ref,]
+        if ('label' %in% names(tidy)) { ##work for ggtreeExtra
+            ref <- match.arg(ref, levels(factor(tidy$label)))
+            cons <- tidy[tidy$label == ref,]
+        }else {
+            ref <- match.arg(ref, levels(tidy$name))
+            cons <- tidy[tidy$name == ref,]
+        }
         return(cons)
     }
     #Iterate through each columns

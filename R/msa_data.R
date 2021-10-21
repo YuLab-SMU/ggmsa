@@ -60,13 +60,13 @@ msa_data <- function(tidymsa, font = "helvetical",
         y <- color_Clustal(y)
     }else {
         if (consensus_views) {
-            consensus <- get_consensus(y, 
+            consensus <- get_consensus(y, #extract a consensus/ref sequence
                                        ignore_gaps = ignore_gaps, 
                                        ref = ref)
-            tc <- color_scheme(y, color) %>% 
-                  tidy_color(consensus, disagreement, ref = ref) 
+            tc <- color_scheme(y, color) %>% #assigning color for other seq.
+                  tidy_color(consensus, disagreement, ref = ref)# tidy colors
             
-            y <- color_scheme(consensus, color) %>% 
+            y <- color_scheme(consensus, color) %>% #assigning color for con/ref
                  rbind(tc) #add consensus sequence
 
             if (use_dot){
@@ -74,6 +74,7 @@ msa_data <- function(tidymsa, font = "helvetical",
             }else {
                 y$font_color <- "#000000"
                 y[is.na(y$color), "font_color"] <- "#aaacaf"
+                y[is.na(y$color), "color"] <- "#ffffff"
             }
 
         }else {
