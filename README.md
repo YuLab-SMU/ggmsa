@@ -2,7 +2,7 @@
 
 # ggmsa:a visual exploration tool for multiple sequence alignment and associated data <img src="man/figures/logo.png" height="140" align="right" />
 
-[![](https://img.shields.io/badge/devel%20version-0.99.0-blue.svg)](https://github.com/YuLab-SMU/ggmsa)
+[![](https://img.shields.io/badge/devel%20version-0.99.4-blue.svg)](https://github.com/YuLab-SMU/ggmsa)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
@@ -55,19 +55,19 @@ the different features:
 
 -   [Getting
     Started](https://yulab-smu.github.io/ggmsa/articles/ggmsa.html)
--   [Annotations](https://yulab-smu.github.io/ggmsa/articles/guides/Annotations.html)
+-   [Annotations](https://yulab-smu.github.io/ggmsa/articles/Annotations.html)
 -   [Color Schemes and Font
-    Families](https://yulab-smu.github.io/ggmsa/articles/guides/Color_schemes_And_Font_Families.html)
--   [Theme](https://yulab-smu.github.io/ggmsa/articles/guides/guides/MSA_theme.html)
+    Families](https://yulab-smu.github.io/ggmsa/articles/Color_schemes_And_Font_Families.html)
+-   [Theme](https://yulab-smu.github.io/ggmsa/articles/guides/MSA_theme.html)
 -   [Other
-    Modules](https://yulab-smu.github.io/ggmsa/articles/guides/guides/Other_Modules.html)
+    Modules](https://yulab-smu.github.io/ggmsa/articles/Other_Modules.html)
 -   [View
-    Modes](https://yulab-smu.github.io/ggmsa/articles/guides/guides/View_modes.html)
+    Modes](https://yulab-smu.github.io/ggmsa/articles/View_modes.html)
 
 ## :runner: Author
 
 -   [Guangchuang Yu](https://guangchuangyu.github.io) Professor, PI
--   [Lang Zhou](https://github.com/nyzhoulang) Master's Student
+-   [Lang Zhou](https://github.com/nyzhoulang) Master’s Student
 -   [Shuangbin Xu](https://github.com/xiangpin) PhD Student
 
 **YuLab** <https://yulab-smu.top/>
@@ -79,4 +79,4 @@ Southern Medical University**
 
 We welcome any contributions! By participating in this project you agree
 to abide by the terms outlined in the [Contributor Code of
-Conduct](http://yulab-smu.top/ggmsa/articles/CONDUCT.html).
+Conduct](https://github.com/YuLab-SMU/ggmsa/blob/master/CONDUCT.md).

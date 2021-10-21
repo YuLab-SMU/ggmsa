@@ -3,6 +3,7 @@
 + 0.99.1 update DESCRIPTION and NEWS files (2021-09-28, Tue)
 + 0.99.2 add documentation for row data in extdata/inst and clean up code (2021-09-29, Wed)
 + 0.99.3 remove some  vignettes from master (build on the gh-pages branch) (2021-10-1, Fri)
++ 0.99.4 remove 'stringr' package from 'Imports' (2021-10-11, Mon)
 
 # ggmsa 0.0.10 
 
