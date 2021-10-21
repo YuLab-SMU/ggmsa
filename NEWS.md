@@ -4,6 +4,7 @@
 + 0.99.2 add documentation for row data in extdata/inst and clean up code (2021-09-29, Wed)
 + 0.99.3 remove some  vignettes from master (build on the gh-pages branch) (2021-10-1, Fri)
 + 0.99.4 remove 'stringr' package from 'Imports' (2021-10-11, Mon)
++ 0.99.5 make the consensus_views compatible ggtreeExtra and add package description. (2021-10-21, Thu)
 
 # ggmsa 0.0.10 
 
