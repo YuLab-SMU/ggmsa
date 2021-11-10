@@ -107,7 +107,7 @@ geom_msa <- function(data, font = "helvetical",
 
     #'seq_name' work
     if  (!isTRUE(seq_name)) {
-        if ('y' %in% colnames(data) | isFALSE(seq_name) ) {
+        if ('y' %in% colnames(data) || isFALSE(seq_name) ) {
             y <- as.numeric(bg_data$name)
             mapping <- modifyList(mapping, aes_(y = ~y))
         }
