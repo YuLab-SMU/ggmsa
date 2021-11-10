@@ -1,3 +1,8 @@
+
+# ggmsa 1.1.1 
+fixed error: using `||` instead of `|` on 110 lines in geom_msa.R
+
+
 # ggmsa 0.99.0 or 0.99.x (Prepare for submission to `Bioconductor`, 2021-09-22 Wed)
 
 + 0.99.1 update DESCRIPTION and NEWS files (2021-09-28, Tue)
