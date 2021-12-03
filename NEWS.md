@@ -1,4 +1,7 @@
 
+# ggmsa 1.1.2
+fixed the assignment error on line 155 'seqlogo.R'
+
 # ggmsa 1.1.1 
 fixed error: using `||` instead of `|` on 110 lines in geom_msa.R
 
