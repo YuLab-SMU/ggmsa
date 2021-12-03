@@ -128,7 +128,7 @@ seqlogo_data <- function(data, font = "DroidSansMono",
         ## total_heigh is overall hight, the height of each char is assigned.
         ywidth <- sort(total_heigh * fre ) 
         ## calling color scheme
-        column_char_color <- unique(clo[c("character", "color")]) 
+        column_char_color <- data.frame(unique(clo[c("character", "color")])) 
         font_f <- font_fam[[font]]
         motif_char <- font_f[names(ywidth)]
         ds_ <- lapply(seq_along(motif_char), function(i){
