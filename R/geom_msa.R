@@ -18,7 +18,7 @@
 ##'  the brightest colors.
 ##' @param none_bg a logical value indicating whether background 
 ##' should be displayed. Defaults is FALSE.
-##' @param posHighligthed A numeric vector of the position that
+##' @param position_highlight A numeric vector of the position that
 ##'  need to be highlighted.
 ##' @param seq_name a logical value indicating whether sequence names
 ##'  should be displayed. Defaults is 'NULL' which indicates that the 
@@ -58,7 +58,7 @@ geom_msa <- function(data, font = "helvetical",
                      char_width = 0.9,
                      none_bg = FALSE,
                      by_conservation = FALSE,
-                     posHighligthed = NULL,
+                     position_highlight = NULL,
                      seq_name = NULL,
                      border = NULL,
                      consensus_views = FALSE,
@@ -113,10 +113,10 @@ geom_msa <- function(data, font = "helvetical",
         }
     }
 
-    #'posHighligthed' work
-    if (!is.null(posHighligthed)) {
+    #'position_highlight' work
+    if (!is.null(position_highlight)) {
         none_bg = TRUE
-        bg_data <- bg_data[bg_data$position %in% posHighligthed,]
+        bg_data <- bg_data[bg_data$position %in% position_highlight,]
         bg_data$postion <- as.factor(bg_data$position)
         mapping <- modifyList(mapping, aes_(x = ~position, 
                                             fill = ~color, 
@@ -155,7 +155,7 @@ geom_msa <- function(data, font = "helvetical",
                              inherit.aes = FALSE, position = position)
 
     #'none_bg' work
-    if (none_bg & is.null(posHighligthed)) {
+    if (none_bg & is.null(position_highlight)) {
         return(ly_label)
     }
 

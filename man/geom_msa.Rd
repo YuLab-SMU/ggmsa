@@ -13,7 +13,7 @@ geom_msa(
   char_width = 0.9,
   none_bg = FALSE,
   by_conservation = FALSE,
-  posHighligthed = NULL,
+  position_highlight = NULL,
   seq_name = NULL,
   border = NULL,
   consensus_views = FALSE,
@@ -51,7 +51,7 @@ should be displayed. Defaults is FALSE.}
 \item{by_conservation}{a logical value. The most conserved regions have
 the brightest colors.}
 
-\item{posHighligthed}{A numeric vector of the position that
+\item{position_highlight}{A numeric vector of the position that
 need to be highlighted.}
 
 \item{seq_name}{a logical value indicating whether sequence names
@@ -101,7 +101,7 @@ ggplot() + geom_msa(data = tidy_aln, font = NULL) + coord_fixed()
 \author{
 Guangchuang Yu, Lang Zhou
 seq_name' work
-posHighligthed' work
+position_highlight' work
 border' work
 none_bg' work
 }

@@ -21,7 +21,7 @@
 ##' the brightest colors.
 ##' @param none_bg a logical value indicating whether background should be
 ##'  displayed. Defaults is FALSE.
-##' @param posHighligthed A numeric vector of the position that need to be
+##' @param position_highlight A numeric vector of the position that need to be
 ##'  highlighted.
 ##' @param seq_name a logical value indicating whether sequence names 
 ##' should be displayed. Defaults is 'NULL' which indicates that the 
@@ -83,7 +83,7 @@ ggmsa <- function(msa,
                   char_width = 0.9,
                   none_bg = FALSE,
                   by_conservation = FALSE,
-                  posHighligthed = NULL,
+                  position_highlight = NULL,
                   seq_name = NULL,
                   border = NULL,
                   consensus_views = FALSE,
@@ -101,7 +101,7 @@ ggmsa <- function(msa,
                         char_width = char_width,
                         none_bg = none_bg,
                         by_conservation = by_conservation,
-                        posHighligthed = posHighligthed,
+                        position_highlight = position_highlight,
                         seq_name = seq_name,
                         border = border,
                         consensus_views = consensus_views,

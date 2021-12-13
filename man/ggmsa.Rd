@@ -14,7 +14,7 @@ ggmsa(
   char_width = 0.9,
   none_bg = FALSE,
   by_conservation = FALSE,
-  posHighligthed = NULL,
+  position_highlight = NULL,
   seq_name = NULL,
   border = NULL,
   consensus_views = FALSE,
@@ -53,7 +53,7 @@ displayed. Defaults is FALSE.}
 \item{by_conservation}{a logical value. The most conserved regions have 
 the brightest colors.}
 
-\item{posHighligthed}{A numeric vector of the position that need to be
+\item{position_highlight}{A numeric vector of the position that need to be
 highlighted.}
 
 \item{seq_name}{a logical value indicating whether sequence names 
