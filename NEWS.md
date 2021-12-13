@@ -1,3 +1,7 @@
+# ggmsa 1.1.3
+fixed the typo in "posHighligthed", and changed it to 
+snake_case "position_highlight" from camelCase "posHighligthed" (2021-12-13, Mon)
+
 
 # ggmsa 1.1.2
 fixed the assignment error on line 155 'seqlogo.R'
