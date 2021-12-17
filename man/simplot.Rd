@@ -12,7 +12,9 @@ simplot(
   group = FALSE,
   id,
   sep,
-  sd = FALSE
+  sd = FALSE,
+  smooth = TRUE,
+  df = 20
 )
 }
 \arguments{
@@ -24,7 +26,9 @@ simplot(
 
 \item{step}{step size to slide the window (bp)}
 
-\item{group}{whether grouping sequence}
+\item{group}{whether grouping sequence.(eg. For "A-seq1,A-seq-2,B-seq1 and 
+B-seq2", using sep = "-" and id = 1 to divide sequences into groups A and 
+B)}
 
 \item{id}{position to extract id for grouping; only works if group = TRUE}
 
@@ -32,6 +36,11 @@ simplot(
 
 \item{sd}{whether display standard deviation of 
 similarity among each group; only works if group=TRUE}
+
+\item{smooth}{whether display smoothed spline.Smoothing method used 
+by mgcv::gln()}
+
+\item{df}{degrees of freedom.Formula"y~ns(x, df)" used in smoothing function.}
 }
 \value{
 ggplot object

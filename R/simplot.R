@@ -6,17 +6,23 @@
 ##' @param query query sequence
 ##' @param window sliding window size (bp)
 ##' @param step step size to slide the window (bp)
-##' @param group whether grouping sequence
+##' @param group whether grouping sequence.(eg. For "A-seq1,A-seq-2,B-seq1 and 
+##' B-seq2", using sep = "-" and id = 1 to divide sequences into groups A and 
+##' B)
 ##' @param id position to extract id for grouping; only works if group = TRUE
 ##' @param sep separator to split sequence name; only works if group = TRUE
 ##' @param sd whether display standard deviation of 
 ##' similarity among each group; only works if group=TRUE
+##' @param smooth whether display smoothed spline.Smoothing method used 
+##' by mgcv::gln() 
+##' @param df degrees of freedom.Formula"y~ns(x, df)" used in smoothing function.
 ##' @return ggplot object
 ##' @importFrom Biostrings readDNAStringSet
 ##' @importFrom ggplot2 aes_
 ##' @importFrom ggplot2 geom_line
 ##' @importFrom ggplot2 ggtitle
 ##' @importFrom ggplot2 geom_ribbon
+##' @importFrom ggplot2 geom_smooth
 ##' @importFrom magrittr %<>%
 ##' @importFrom dplyr group_by_
 ##' @importFrom dplyr summarize_
@@ -33,7 +39,9 @@ simplot <- function(file,
                     group=FALSE, 
                     id, 
                     sep, 
-                    sd=FALSE) {
+                    sd=FALSE,
+                    smooth = TRUE,
+                    df = 20) {
     aln <- readDNAStringSet(file)
     nn <- names(aln)
     if (group) {
@@ -71,10 +79,31 @@ simplot <- function(file,
         if (sd) p <- p + geom_ribbon(aes_(ymin=~msim-sd, 
                                           ymax=~msim+sd, 
                                           fill=~group), alpha=.25)
-        p <- p + geom_line(aes_(color=~group))
+        if (smooth) {
+            p <- p + geom_smooth(aes_(color=~group),
+                                 method = "glm", 
+                                 formula= y~ns(x, df),
+                                 se = FALSE) 
+        } else {
+            p <- p + geom_line(aes_(color=~group))
+        }
+        
+        
     } else {
-        p <- ggplot(res, aes_(x=~position, y=~similarity)) +
-            geom_line(aes_(group=~sequence, color=~sequence))
+        mapping = aes_(x=~position, 
+                       y=~similarity,
+                       group=~sequence, 
+                       color=~sequence)
+        p <- ggplot(res, mapping = mapping) 
+        
+        if (smooth) {
+            p <- p + geom_smooth(method = "glm", 
+                                 formula= y~ns(x, df),
+                                 se = FALSE,
+                                 size = .5) 
+        } else {
+            p <- p + geom_line()
+        }
     }
 
     p + xlab("Nucleotide Position") + ylab("Similarity (%)") +

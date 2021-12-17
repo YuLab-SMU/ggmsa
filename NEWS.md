@@ -1,3 +1,6 @@
+# ggmsa 1.1.4
+added smoothed curve on simplot.(2021-12-17, Fri)
+
 # ggmsa 1.1.3
 fixed the typo in "posHighligthed", and changed it to 
 snake_case "position_highlight" from camelCase "posHighligthed" (2021-12-13, Mon)
