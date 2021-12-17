@@ -29,7 +29,8 @@ Imports:
     grDevices,
     seqmagick,
     grid,
-    methods
+    methods,
+    splines
 Suggests:
     ggtreeExtra,
     ggtree (>= 1.17.1),

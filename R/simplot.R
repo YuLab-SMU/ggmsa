@@ -26,6 +26,7 @@
 ##' @importFrom magrittr %<>%
 ##' @importFrom dplyr group_by_
 ##' @importFrom dplyr summarize_
+##' @importFrom splines ns
 ##' @export
 ##' @author guangchuang yu
 ##' @examples
