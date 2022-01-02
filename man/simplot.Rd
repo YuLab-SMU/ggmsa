@@ -13,8 +13,8 @@ simplot(
   id,
   sep,
   sd = FALSE,
-  smooth = TRUE,
-  df = 20
+  smooth = FALSE,
+  smooth_params = list(method = "loess", se = FALSE)
 )
 }
 \arguments{
@@ -37,10 +37,10 @@ B)}
 \item{sd}{whether display standard deviation of 
 similarity among each group; only works if group=TRUE}
 
-\item{smooth}{whether display smoothed spline.Smoothing method used 
-by mgcv::gln()}
+\item{smooth}{FALSE(default)or TRUE; whether display smoothed spline.}
 
-\item{df}{degrees of freedom.Formula"y~ns(x, df)" used in smoothing function.}
+\item{smooth_params}{a list that add params for geom_smooth,
+(default: smooth_params = list(method = "loess", se = FALSE))}
 }
 \value{
 ggplot object

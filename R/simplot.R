@@ -13,9 +13,9 @@
 ##' @param sep separator to split sequence name; only works if group = TRUE
 ##' @param sd whether display standard deviation of 
 ##' similarity among each group; only works if group=TRUE
-##' @param smooth whether display smoothed spline.Smoothing method used 
-##' by mgcv::gln() 
-##' @param df degrees of freedom.Formula"y~ns(x, df)" used in smoothing function.
+##' @param smooth FALSE(default)or TRUE; whether display smoothed spline.
+##' @param smooth_params a list that add params for geom_smooth,
+##' (default: smooth_params = list(method = "loess", se = FALSE))
 ##' @return ggplot object
 ##' @importFrom Biostrings readDNAStringSet
 ##' @importFrom ggplot2 aes_
@@ -26,7 +26,6 @@
 ##' @importFrom magrittr %<>%
 ##' @importFrom dplyr group_by_
 ##' @importFrom dplyr summarize_
-##' @importFrom splines ns
 ##' @export
 ##' @author guangchuang yu
 ##' @examples
@@ -41,8 +40,9 @@ simplot <- function(file,
                     id, 
                     sep, 
                     sd=FALSE,
-                    smooth = TRUE,
-                    df = 20) {
+                    smooth = FALSE,
+                    smooth_params = list(method = "loess", 
+                                         se = FALSE)) {
     aln <- readDNAStringSet(file)
     nn <- names(aln)
     if (group) {
@@ -81,10 +81,9 @@ simplot <- function(file,
                                           ymax=~msim+sd, 
                                           fill=~group), alpha=.25)
         if (smooth) {
-            p <- p + geom_smooth(aes_(color=~group),
-                                 method = "glm", 
-                                 formula= y~ns(x, df),
-                                 se = FALSE) 
+            smooth_layer <- do.call(geom_smooth, 
+                                    smooth_params)
+            p <- p + smooth_layer
         } else {
             p <- p + geom_line(aes_(color=~group))
         }
@@ -98,10 +97,10 @@ simplot <- function(file,
         p <- ggplot(res, mapping = mapping) 
         
         if (smooth) {
-            p <- p + geom_smooth(method = "glm", 
-                                 formula= y~ns(x, df),
-                                 se = FALSE,
-                                 size = .5) 
+            smooth_layer <- do.call(geom_smooth, 
+                                    smooth_params)
+            p <- p + smooth_layer
+            
         } else {
             p <- p + geom_line()
         }

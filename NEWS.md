@@ -1,4 +1,7 @@
 # ggmsa 1.1.4
+updated the way smooth is invoked on simplot(2022-01-03, Mon)
+
+# ggmsa 1.1.4
 added smoothed curve on simplot.(2021-12-17, Fri)
 
 # ggmsa 1.1.3
