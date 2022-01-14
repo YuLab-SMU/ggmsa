@@ -42,8 +42,7 @@ Suggests:
     ggnewscale,
     kableExtra,
     gggenes,
-    testthat (>= 3.0.0),
-    phangorn
+    testthat (>= 3.0.0)
 License: Artistic-2.0
 Encoding: UTF-8
 URL: http://yulab-smu.top/ggmsa/

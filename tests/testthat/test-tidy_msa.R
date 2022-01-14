@@ -2,7 +2,6 @@
 
 library(ggmsa)
 library(Biostrings)
-library(phangorn)
 
 msa <- system.file("extdata", "sample.fasta", package = "ggmsa")
 tidy_names <- c("name", "position", "character")
@@ -35,7 +34,7 @@ test_that("tidy Biostrings objects by tidy_msa", {
 
 
 test_that("tidy AAbin objects by tidy_msa", {
-    AAbin <- read.aa(msa, "fasta")
+    AAbin <- ape::read.FASTA(msa, "AA")
     expect_s3_class(AAbin, "AAbin")
     
     AAbin_tidy <- tidy_msa(AAbin, 10, 20)
