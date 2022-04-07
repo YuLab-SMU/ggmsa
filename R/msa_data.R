@@ -203,7 +203,11 @@ msa_data <- function(tidymsa, font = "helvetical",
 ##' aln <- tidy_msa(msa = fasta, start = 10, end = 100)
 ##' @author Guangchuang Yu
 tidy_msa <- function(msa, start = NULL, end = NULL) {
-    aln <- prepare_msa(msa)
+    if(inherits(msa, "character") && length(msa) > 1) {
+        aln <- msa
+    }else {
+        aln <- prepare_msa(msa)
+    }
     alnmat <- lapply(seq_along(aln), function(i) {
         ##Preventing function collisions
         base::strsplit(as.character(aln[[i]]), '')[[1]]

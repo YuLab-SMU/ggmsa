@@ -23,6 +23,7 @@ geom_msa(
   ref = NULL,
   position = "identity",
   show.legend = FALSE,
+  mds = FALSE,
   ...
 )
 }
@@ -82,6 +83,8 @@ which should be one of input sequences when 'consensus_views' is TRUE.}
 default is 'identity' meaning 'position_identity()'.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?}
+
+\item{mds}{logical.}
 
 \item{...}{additional parameter}
 }
