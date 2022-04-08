@@ -17,6 +17,7 @@
 ##' 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 
 ##' 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
 ##' @param ... additional parameters for 'geom_msa'
+##' @export
 ##' @importFrom ggtree geom_facet
 ##' @return ggplot object 
 ##' @author Lang Zhou
