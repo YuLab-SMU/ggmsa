@@ -1,5 +1,10 @@
+##' Theme for ggmsa.
+##'
+##' @title theme_msa
 ##' @importFrom ggplot2 theme_minimal
 ##' @importFrom ggplot2 labs
+##' @export
+##' @author Lang Zhou
 theme_msa <- function(){
   list(
     xlab(NULL),
