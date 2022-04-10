@@ -40,7 +40,7 @@
 ##'  the result of a call to a position adjustment function,
 ##' default is 'identity' meaning 'position_identity()'.
 ##' @param show.legend logical. Should this layer be included in the legends?
-##' @param mds logical. 
+##' @param dms logical. 
 ##' @param ... additional parameter
 ##' @return A list
 ##' @importFrom ggplot2 scale_fill_manual
@@ -69,7 +69,7 @@ geom_msa <- function(data, font = "helvetical",
                      ref = NULL,
                      position = "identity",
                      show.legend = FALSE,
-                     mds = FALSE,
+                     dms = FALSE,
                      ... ) {
 
     data <- msa_data(data,
@@ -107,8 +107,8 @@ geom_msa <- function(data, font = "helvetical",
         mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
     }
     
-    #mds color work
-    if (mds) {
+    #dms color work
+    if (dms) {
         mapping <- modifyList(mapping, aes_(fill = ~bind_avg))
     }
     

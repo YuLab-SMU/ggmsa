@@ -23,7 +23,7 @@ geom_msa(
   ref = NULL,
   position = "identity",
   show.legend = FALSE,
-  mds = FALSE,
+  dms = FALSE,
   ...
 )
 }
@@ -84,7 +84,7 @@ default is 'identity' meaning 'position_identity()'.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?}
 
-\item{mds}{logical.}
+\item{dms}{logical.}
 
 \item{...}{additional parameter}
 }
