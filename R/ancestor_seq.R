@@ -49,34 +49,32 @@ treeMSA_plot <- function(p_tree,
 ##' @param tree ggtree object
 ##' @param node internal node in tree
 ##' @param sub logical value.
-##' @importFrom utils getFromNamespace
 ##' @importFrom ggtree geom_tiplab
 ##' @importFrom ggplot2 aes_
+##' @importFrom utils getFromNamespace
 ##' @return tree
 ##' @export
 ##' @author Lang Zhou
 
 adjust_ally <- function(tree, node, sub = FALSE) {
-  
   getSubtree <- getFromNamespace("getSubtree", "ggtree")
-  sub_tree <- getSubtree(tree,node = node)
-  sub_ancestor <- sub_tree[!sub_tree$isTip,]
-  if(sub) {
-    sub_ancestor_node <- sub_ancestor$node[order(sub_ancestor$y)]
-    for (i in sub_ancestor_node) {
-      tree <- adjust_treey(tree = tree, node = i)
-    }
+  if(sub){
+    ancestor_n <- lapply(node, function(i) {
+      sub_tree <- getSubtree(tree,node = i)
+      sub_ancestor <- sub_tree[!sub_tree$isTip,]
+      ancestor_n <- sub_ancestor$node
+      return(ancestor_n)
+    })%>% unlist %>% unique
   }else {
-    tree <- adjust_treey(tree = tree, node = node)
+    ancestor_n <- node
+  }
+  
+  for (i in ancestor_n) {
+    tree <- adjust_treey(tree = tree, node = i)
   }
   
   tree$data$node_color <- "black"
-  if(sub) {
-      tree$data[tree$data$node %in% sub_ancestor$node,"node_color"] <- "red"
-  }else {
-      tree$data[tree$data$node == node,"node_color"] <- "red"
-  }
-  
+  tree$data[tree$data$node %in% ancestor_n,"node_color"] <- "red"
   tree <- tree + geom_tiplab(aes_(color = ~I(node_color)),offset = 0.002)
   return(tree)
 }
@@ -109,6 +107,8 @@ adjust_treey <- function(tree, node) {
     tree$data$y[tree$data$node == node] %>% ceiling
   return(tree)
 }
+
+
 
 
 
