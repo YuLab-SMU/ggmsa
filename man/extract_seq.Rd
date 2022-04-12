@@ -4,10 +4,12 @@
 \alias{extract_seq}
 \title{extract_seq}
 \usage{
-extract_seq(tree_adjust)
+extract_seq(tree_adjust, seq_colname = "mol_seq")
 }
 \arguments{
 \item{tree_adjust}{ggtree object}
+
+\item{seq_colname}{the colname of MSA on tree$data}
 }
 \value{
 character

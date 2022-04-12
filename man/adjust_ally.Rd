@@ -4,7 +4,7 @@
 \alias{adjust_ally}
 \title{adjust_ally}
 \usage{
-adjust_ally(tree, node, sub = FALSE)
+adjust_ally(tree, node, sub = FALSE, seq_colname = "mol_seq")
 }
 \arguments{
 \item{tree}{ggtree object}
@@ -12,6 +12,8 @@ adjust_ally(tree, node, sub = FALSE)
 \item{node}{internal node in tree}
 
 \item{sub}{logical value.}
+
+\item{seq_colname}{the colname of MSA on tree$data}
 }
 \value{
 tree

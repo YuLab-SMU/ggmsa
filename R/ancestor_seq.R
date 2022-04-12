@@ -6,8 +6,10 @@
 ##' @title treeMSA_plot
 ##' @param p_tree tree view
 ##' @param tidymsa_df tidy MSA data 
-##' @param ancestral_node internal node in tree. Assigning a internal node to 
-##' display "ancestral sequences"
+##' @param ancestral_node vector, internal node in tree. Assigning a internal 
+##' node to display "ancestral sequences",If ancestral_node = "none" hides 
+##' all ancestral sequences, if ancestral_node = "all" shows all ancestral 
+##' sequences.
 ##' @param sub logical value. Displaying a subset of ancestral sequences or not.
 ##' @param panel panel name for plot of MSA data
 ##' @param font font families, possible values are 'helvetical', 'mono', and 
@@ -16,6 +18,7 @@
 ##' @param color a Color scheme. One of 'Clustal', 'Chemistry_AA', 
 ##' 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 
 ##' 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.
+##' @param seq_colname the colname of MSA on tree$data
 ##' @param ... additional parameters for 'geom_msa'
 ##' @export
 ##' @importFrom ggtree geom_facet
@@ -23,23 +26,40 @@
 ##' @author Lang Zhou
 treeMSA_plot <- function(p_tree, 
                          tidymsa_df, 
-                         ancestral_node = NULL, 
+                         ancestral_node = "none", 
                          sub = FALSE,
                          panel = "MSA",
                          font = NULL,
                          color = "Chemistry_AA",
+                         seq_colname = NULL,
                          ...) {
-  if(!is.null(ancestral_node)) {
-    p_tree <- adjust_ally(p_tree, node = ancestral_node, sub = sub)
-    tidymsa_df <- extract_seq(p_tree)
-  }
+  
+  if(!ancestral_node == "none" && is.null(seq_colname)) {
+    stop("pls assign the colname of MSA on tree$data by arguments 'seq_colname'!")
+  } 
+  
+  
+  if(!ancestral_node == "none") {
+    p_tree <- adjust_ally(p_tree, node = ancestral_node, 
+                          sub = sub,
+                          seq_colname = seq_colname)
     
-  p_tree + geom_facet(geom = geom_msa, 
+    tidymsa_df <- extract_seq(p_tree, 
+                              seq_colname = seq_colname)
+  }
+  
+  p <- p_tree + geom_facet(geom = geom_msa, 
                       data = tidymsa_df,  
                       panel = panel,
                       font = font, 
                       color = color,
-                      ...) 
+                      ...)
+  
+  if(ancestral_node == "none") {
+    p <- p  + geom_tiplab(offset = 0.002)
+  }
+  print(p)
+  
   
 }
 
@@ -49,6 +69,7 @@ treeMSA_plot <- function(p_tree,
 ##' @param tree ggtree object
 ##' @param node internal node in tree
 ##' @param sub logical value.
+##' @param seq_colname the colname of MSA on tree$data
 ##' @importFrom ggtree geom_tiplab
 ##' @importFrom ggplot2 aes_
 ##' @importFrom utils getFromNamespace
@@ -56,17 +77,25 @@ treeMSA_plot <- function(p_tree,
 ##' @export
 ##' @author Lang Zhou
 
-adjust_ally <- function(tree, node, sub = FALSE) {
+adjust_ally <- function(tree, node, sub = FALSE, seq_colname = "mol_seq") {
   getSubtree <- getFromNamespace("getSubtree", "ggtree")
-  if(sub){
-    ancestor_n <- lapply(node, function(i) {
-      sub_tree <- getSubtree(tree,node = i)
-      sub_ancestor <- sub_tree[!sub_tree$isTip,]
-      ancestor_n <- sub_ancestor$node
-      return(ancestor_n)
-    })%>% unlist %>% unique
+  
+  if(node == "all"){
+    d <- tree$data
+    ancestor_n <- d[!d$isTip & !is.na(d[,seq_colname][[1]]),"node"][[1]]
   }else {
-    ancestor_n <- node
+    
+    if(sub){
+      ancestor_n <- lapply(node, function(i) {
+        sub_tree <- getSubtree(tree,node = i)
+        sub_ancestor <- sub_tree[!sub_tree$isTip,]
+        ancestor_n <- sub_ancestor$node
+        return(ancestor_n)
+      })%>% unlist %>% unique
+    }else {
+      ancestor_n <- node
+    }
+    
   }
   
   for (i in ancestor_n) {
@@ -83,12 +112,13 @@ adjust_ally <- function(tree, node, sub = FALSE) {
 ##'
 ##' @title extract_seq
 ##' @param tree_adjust ggtree object
+##' @param seq_colname the colname of MSA on tree$data
 ##' @return character
 ##' @export
 ##' @author Lang Zhou
-extract_seq <- function(tree_adjust) {
+extract_seq <- function(tree_adjust, seq_colname = "mol_seq") {
   data <- tree_adjust$data
-  seq <- data[data$isTip,]$mol_seq
+  seq <- data[data$isTip,seq_colname][[1]]
   names(seq) <- data[data$isTip,]$label
   tidy <- tidy_msa(seq)
   return(tidy)

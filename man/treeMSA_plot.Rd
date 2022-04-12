@@ -7,11 +7,12 @@
 treeMSA_plot(
   p_tree,
   tidymsa_df,
-  ancestral_node = NULL,
+  ancestral_node = "none",
   sub = FALSE,
   panel = "MSA",
   font = NULL,
   color = "Chemistry_AA",
+  seq_colname = NULL,
   ...
 )
 }
@@ -20,8 +21,10 @@ treeMSA_plot(
 
 \item{tidymsa_df}{tidy MSA data}
 
-\item{ancestral_node}{internal node in tree. Assigning a internal node to 
-display "ancestral sequences"}
+\item{ancestral_node}{vector, internal node in tree. Assigning a internal 
+node to display "ancestral sequences",If ancestral_node = "none" hides 
+all ancestral sequences, if ancestral_node = "all" shows all ancestral 
+sequences.}
 
 \item{sub}{logical value. Displaying a subset of ancestral sequences or not.}
 
@@ -34,6 +37,8 @@ If font = NULL, only plot the background tile.}
 \item{color}{a Color scheme. One of 'Clustal', 'Chemistry_AA', 
 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 
 'Shapely_NT', 'Zappo_NT', 'Taylor_NT'. Defaults is 'Chemistry_AA'.}
+
+\item{seq_colname}{the colname of MSA on tree$data}
 
 \item{...}{additional parameters for 'geom_msa'}
 }
