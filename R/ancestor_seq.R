@@ -56,11 +56,10 @@ treeMSA_plot <- function(p_tree,
                       ...)
   
   if(ancestral_node == "none") {
-    p <- p  + geom_tiplab(offset = 0.002)
+    p <- p + geom_tiplab(offset = 0.002)
   }
-  print(p)
   
-  
+  p
 }
 
 ##' adjust the tree branch position after assigning ancestor node
