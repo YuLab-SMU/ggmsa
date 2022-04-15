@@ -2,7 +2,7 @@
 
 # ggmsa:a visual exploration tool for multiple sequence alignment and associated data <img src="man/figures/logo.png" height="140" align="right" />
 
-[![](https://img.shields.io/badge/devel%20version-1.1.5-blue.svg)](https://github.com/YuLab-SMU/ggmsa)
+[![](https://img.shields.io/badge/devel%20version-1.1.6-blue.svg)](https://github.com/YuLab-SMU/ggmsa)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License:
 Artistic-2.0](https://img.shields.io/badge/license-Artistic--2.0-blue.svg)](https://cran.r-project.org/web/licenses/Artistic-2.0)
