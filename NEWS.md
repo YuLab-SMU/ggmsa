@@ -16,7 +16,8 @@ fixed the assignment error on line 155 'seqlogo.R'
 fixed error: using `||` instead of `|` on 110 lines in geom_msa.R
 
 
-# ggmsa 0.99.0 or 0.99.x (Prepare for submission to `Bioconductor`, 2021-09-22 Wed)
+# ggmsa 0.99.0 or 0.99.x
+(Prepare for submission to `Bioconductor`, 2021-09-22 Wed)
 
 + 0.99.1 update DESCRIPTION and NEWS files (2021-09-28, Tue)
 + 0.99.2 add documentation for row data in extdata/inst and clean up code (2021-09-29, Wed)
