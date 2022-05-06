@@ -41,6 +41,7 @@
 ##' default is 'identity' meaning 'position_identity()'.
 ##' @param show.legend logical. Should this layer be included in the legends?
 ##' @param dms logical. 
+##' @param position_color logical. 
 ##' @param ... additional parameter
 ##' @return A list
 ##' @importFrom ggplot2 scale_fill_manual
@@ -70,6 +71,7 @@ geom_msa <- function(data, font = "helvetical",
                      position = "identity",
                      show.legend = FALSE,
                      dms = FALSE,
+                     position_color = FALSE,
                      ... ) {
 
     data <- msa_data(data,
@@ -95,8 +97,8 @@ geom_msa <- function(data, font = "helvetical",
 
     cols <- xx$color %>% unique()
     names(cols) <- cols
-    sacle_tile_cols <- scale_fill_manual(values = cols, 
-                                         breaks = cols, 
+    sacle_tile_cols <- scale_fill_manual(values = cols,
+                                         breaks = cols,
                                          labels = labs)
 
 
@@ -111,6 +113,10 @@ geom_msa <- function(data, font = "helvetical",
     if (dms) {
         mapping <- modifyList(mapping, aes_(fill = ~bind_avg))
     }
+    if (position_color) {
+        mapping <- modifyList(mapping, aes_(fill = ~I(pos_color)))
+    }
+    
     
     #'seq_name' work
     if (!isTRUE(seq_name)) {
@@ -142,7 +148,11 @@ geom_msa <- function(data, font = "helvetical",
     }
 
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
-        return(list(ly_bg, sacle_tile_cols))
+        if(position_color) {
+            return(list(ly_bg))
+        }else{
+            return(list(ly_bg, sacle_tile_cols))
+        }
     }
 
     if ('y' %in% colnames(data)) {
@@ -169,7 +179,11 @@ geom_msa <- function(data, font = "helvetical",
     if(consensus_views) {
         return(list(ly_bg, ly_label))
     }else {
-        return(list(ly_bg, ly_label, sacle_tile_cols))
+        if(position_color){
+            return(list(ly_bg, ly_label))
+        }else{
+            return(list(ly_bg, ly_label, sacle_tile_cols))
+        }
     }
 
 }

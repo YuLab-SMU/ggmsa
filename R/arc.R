@@ -106,11 +106,14 @@ tidy_helix <- function(helix_data, color_by = "length"){
 }
 
 color_helix <- function(helix_data, color){
-    color <- match.arg(color, c("length", "value"))
+    #color <- match.arg(color, c("length", "value"))
     if(color == "length"){
         data_color <- colorBy_length(helix_data)
-    }else {
+    }else if(color == "value") {
         data_color <- colorBy_value(helix_data)
+    }else {
+      helix_data$col <- color
+      data_color <- helix_data
     }
       data <- expandHelix(data_color)
       return(data)
