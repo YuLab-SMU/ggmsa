@@ -1,3 +1,6 @@
+# ggmsa 1.3.2
++ bugfix: `geom_msaBar` conservation layer incorrectly aligned issues#34(2022-5-13, Fri)
+
 # ggmsa 1.3.1
 
 + A new feature--selects ancestral sequence on Tree-MSA plot `treeMSA_plot` (2022-4-14, Thu)

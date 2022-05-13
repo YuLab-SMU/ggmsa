@@ -11,7 +11,7 @@ theme_msa <- function(){
     ylab(NULL),
     labs(fill = "Fills"),
     coord_fixed(),
-    scale_x_continuous(expand = c(0.01,0)),
+    scale_x_continuous(expand = c(0,0)),
     theme_minimal() +
         theme(
             strip.text = element_blank(),
@@ -34,7 +34,9 @@ bar_theme <- function(tidy){
     list(
         xlab(NULL),
         ylab("consensus"),
-        scale_x_continuous(breaks = data[[3]], labels = data[[1]]),
+        scale_x_continuous(breaks = data[[3]], 
+                           labels = data[[1]],
+                           expand = c(0,0)),
         scale_y_continuous(breaks = NULL),
         scale_fill_gradientn(colours = color_palettes(100)),
         theme_minimal() +
