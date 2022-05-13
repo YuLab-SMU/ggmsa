@@ -64,21 +64,6 @@ facet_scale <- function(facetData, field) {
     return(xl_scale)
 }
 
-#' @importFrom utils packageDescription
-.onAttach <- function(libname, pkgname){
-    #options(total_heigh = 4)
-    options(logo_width = 0.9)
-    options(asterisk_width = .03)
-    options(GC_pos = 2)
-    options(shadingLen = .5)
-    options(shading_alpha = .3)
-    
-    pkgVersion <- packageDescription(pkgname, fields="Version")
-    msg <- paste0(pkgname, " v", pkgVersion, "  ",
-                  "Document: http://yulab-smu.top/ggmsa/", "\n\n")
-    citation <- paste0("If you use ", pkgname,
-                       " in published research, please cite: DOI: ",
-                       "10.18129/B9.bioc.ggmsa ")
-    packageStartupMessage(paste0(msg, citation))
-                       
-}
+
+
+

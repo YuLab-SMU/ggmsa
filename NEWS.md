@@ -1,11 +1,9 @@
-# ggmsa 1.1.6
+# ggmsa 1.3.1
 
 + A new feature--selects ancestral sequence on Tree-MSA plot `treeMSA_plot` (2022-4-14, Thu)
 + A new feature--visualization of genome alignment `ggmaf` (2022-4-14, Thu)
 + A test feature--visualization protein-protein interactive (2022-4-14, Thu)
-
-# ggmsa 1.1.5
-updated the way smooth is invoked on simplot(2022-01-03, Mon)
++ updated the way smooth is invoked on simplot(2022-01-03, Mon)
 
 # ggmsa 1.1.4
 added smoothed curve on simplot.(2021-12-17, Fri)
