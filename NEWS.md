@@ -1,3 +1,6 @@
+# ggmsa 1.3.3
++ calling `\dontrun{}` for examples on `ggmsa()`
+
 # ggmsa 1.3.2
 + bugfix: `geom_msaBar` conservation layer incorrectly aligned issues#34(2022-5-13, Fri)
 

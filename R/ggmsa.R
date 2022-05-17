@@ -61,17 +61,19 @@
 ##' fasta <- system.file("extdata", "sample.fasta", package = "ggmsa")
 ##' ggmsa(fasta, 164, 213, color="Chemistry_AA")
 ##'
+##'\dontrun{
 ##' #XMultipleAlignment objects can be used as input in the 'ggmsa'
-##' #AAMultipleAlignment <- readAAMultipleAlignment(fasta)
-##' #ggmsa(AAMultipleAlignment, 164, 213, color="Chemistry_AA")
+##' AAMultipleAlignment <- readAAMultipleAlignment(fasta)
+##' ggmsa(AAMultipleAlignment, 164, 213, color="Chemistry_AA")
 ##'
 ##' #XStringSet objects can be used as input in the 'ggmsa'
-##' #AAStringSet <- readAAStringSet(fasta)
-##' #ggmsa(AAStringSet, 164, 213, color="Chemistry_AA")
+##' AAStringSet <- readAAStringSet(fasta)
+##' ggmsa(AAStringSet, 164, 213, color="Chemistry_AA")
 ##'
 ##' #Xbin objects from 'seqmagick' can be used as input in the 'ggmsa'
-##' #AAbin <- fa_read(fasta)
-##' #ggmsa(AAbin, 164, 213, color="Chemistry_AA")
+##' AAbin <- fa_read(fasta)
+##' ggmsa(AAbin, 164, 213, color="Chemistry_AA")
+##' }
 ##' @export
 ##' @author Guangchuang Yu
 ggmsa <- function(msa,
