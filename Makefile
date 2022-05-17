@@ -38,8 +38,36 @@ check2: build
 bioccheck:
 	cd ..;\
 	Rscript -e 'BiocCheck::BiocCheck("$(PKGNAME)_$(PKGVERS).tar.gz")'
+	
+gpcheck:
+	Rscript -e 'goodpractice::gp()'
 
 clean:
 	cd ..;\
 	$(RM) -r $(PKGNAME).Rcheck/
 
+gitmaintain:
+	git gc --auto;\
+	git prune -v;\
+	git fsck --full
+
+rmrelease:
+	git branch -D $(BIOCVER)
+
+release:
+	git checkout $(BIOCVER);\
+	git fetch --all
+
+update:
+	git fetch --all;\
+	git checkout master;\
+	git merge upstream/master;\
+	git merge origin/master
+
+push: 
+	git push upstream master;\
+	git push origin master
+
+biocinit:
+	git remote add upstream git@git.bioconductor.org:packages/$(PKGNAME).git;\
+	git fetch --all
