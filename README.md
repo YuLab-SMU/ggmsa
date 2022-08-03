@@ -55,14 +55,14 @@ the different features:
 
 -   [Getting
     Started](https://yulab-smu.github.io/ggmsa/articles/ggmsa.html)
--   [Annotations](https://yulab-smu.github.io/ggmsa/articles/Annotations.html)
+-   [Annotations](https://yulab-smu.github.io/ggmsa/articles/guides/Annotations.html)
 -   [Color Schemes and Font
-    Families](https://yulab-smu.github.io/ggmsa/articles/Color_schemes_And_Font_Families.html)
+    Families](https://yulab-smu.github.io/ggmsa/articles/guides/Color_schemes_And_Font_Families.html)
 -   [Theme](https://yulab-smu.github.io/ggmsa/articles/guides/MSA_theme.html)
 -   [Other
-    Modules](https://yulab-smu.github.io/ggmsa/articles/Other_Modules.html)
+    Modules](https://yulab-smu.github.io/ggmsa/articles/guides/Other_Modules.html)
 -   [View
-    Modes](https://yulab-smu.github.io/ggmsa/articles/View_modes.html)
+    Modes](https://yulab-smu.github.io/ggmsa/articles/guides/View_modes.html)
 
 ## :runner: Author
 
