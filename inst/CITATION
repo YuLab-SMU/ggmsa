@@ -1,0 +1,47 @@
+citHeader("To cite ggmsa in publications use:")
+
+citEntry(
+    entry  = "book",
+    title = "Data Integration, Manipulation and Visualization of Phylogenetic Treess",
+    author = person("Guangchuang", "Yu"),
+	publisher = "Chapman and Hall/{CRC}",
+    year = "2022",
+	edition = "1st edition",
+    url = "https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/",
+    textVersion = paste("Guangchuang Yu. (2022).",
+                        "Data Integration, Manipulation and Visualization of Phylogenetic Trees (1st edition).",
+                        "Chapman and Hall/CRC.")   
+)
+
+
+citEntry(
+    entry  = "article",
+    title  = "ggmsa: a visual exploration tool for multiple sequence alignment and associated data ",
+    author = personList(
+        as.person("Lang Zhou"),
+        as.person("Tingze Feng"),
+        as.person("Shuangbin Xu"),
+        as.person("Fangluan Gao"),
+        as.person("Tommy T Lam"),
+        as.person("Qianwen Wang"),
+        as.person("Tianzhi Wu"),
+        as.person("Huina Huang"),
+        as.person("Li Zhan"),
+        as.person("Lin Li"),
+        as.person("Yi Guan"),
+        as.person("Zehan Dai"),
+        as.person("Guangchuang Yu")
+        ),
+    journal = "BRIEFINGS IN BIOINFORMATICS",
+    volume  = "23",
+    issue   = "4",
+    year    = "2022",
+    month   = "06",
+    ISSN    = "1467-5463",
+    doi     = "10.1093/bib/bbac222",
+    PMID    = "35671504",
+    url     = "https://academic.oup.com/bib/article-abstract/23/4/bbac222/6603927",
+    textVersion = paste("L Zhou, T Feng, S Xu, F Gao, TT Lam, Q Wang, T Wu, H Huang, L Zhan, L Li, Y Guan, Z Dai, G Yu.",
+                        "ggmsa: a visual exploration tool for multiple sequence alignment and associated data.",
+                        "Bioinformatics. 2022, 23(4):bbac222. 10.1093/bib/bbac222")
+)

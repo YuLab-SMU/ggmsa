@@ -46,7 +46,7 @@ Suggests:
     testthat (>= 3.0.0)
 License: Artistic-2.0
 Encoding: UTF-8
-URL: http://yulab-smu.top/ggmsa/
+URL: https://doi.org/10.1093/bib/bbac222(paper), https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/ (book)
 BugReports: https://github.com/YuLab-SMU/ggmsa/issues
 biocViews: Software, Visualization, Alignment, Annotation, MultipleSequenceAlignment
 RoxygenNote: 7.1.2
