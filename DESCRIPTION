@@ -1,6 +1,6 @@
 Package: ggmsa
 Title: Plot Multiple Sequence Alignment using 'ggplot2'
-Version: 1.13.1
+Version: 1.14.0
 Authors@R: c(person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre","ths"), comment = c(ORCID = "0000-0002-6485-8781")),
              person("Lang", "Zhou",      email = "nyzhoulang@gmail.com",    role = "aut"),
              person("Shuangbin", "Xu",   email = "xshuangbin@163.com",      role = "ctb"),
