@@ -1,3 +1,7 @@
+# ggmsa 1.12.1
+
++ Bioconductor RELEASE_3_21 (2025-04-17, Thu)
+
 # ggmsa 1.3.3
 + calling `\dontrun{}` for examples on `ggmsa()`
 
