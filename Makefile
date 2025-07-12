@@ -1,6 +1,8 @@
 PKGNAME := $(shell sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGVERS := $(shell sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGSRC  := $(shell basename `pwd`)
+BIOCVER := RELEASE_3_21
+
 
 all: rd check clean
 
@@ -19,7 +21,7 @@ build:
 	# cd ..;\
 	# R CMD build $(PKGSRC)
 	Rscript -e 'devtools::build()'
-	
+
 build2:
 	cd ..;\
 	R CMD build --no-build-vignettes $(PKGSRC)
