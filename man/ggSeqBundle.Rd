@@ -13,8 +13,8 @@ ggSeqBundle(
   size = 0.5,
   alpha = 0.2,
   bundle_color = c("#2ba0f5", "#424242"),
-  lev_molecule = c("-", "A", "V", "L", "I", "P", "F", "W", "M", "G", "S", "T", "C",
-    "Y", "N", "Q", "D", "E", "K", "R", "H")
+  lev_molecule = c("-", "A", "V", "L", "I", "P", "F", "W", "M", "G", "S", "T", "C", "Y",
+    "N", "Q", "D", "E", "K", "R", "H")
 )
 }
 \arguments{
@@ -30,13 +30,12 @@ representing either nucleotide sequences or peptide sequences.Also receives
 \item{line_high}{The high of bundles at each site, default is 0.}
 
 \item{spline_shape}{A numeric vector of values between -1 and 1, which 
-control the shape of the spline relative to the control points.
-From geom_xspline() in ggalt package.}
+control the shape of the spline relative to the control points.}
 
-\item{size}{A numeric vector of values between o and 1, 
+\item{size}{A numeric vector of values between 0 and 1, 
 which control the size of each lines.}
 
-\item{alpha}{A numeric vector of values between o and 1, 
+\item{alpha}{A numeric vector of values between 0 and 1, 
 which control the alpha of each lines.}
 
 \item{bundle_color}{The colors of each sequence bundles.

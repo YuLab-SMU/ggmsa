@@ -16,9 +16,10 @@ readme2:
 	Rscript -e 'rmarkdown::render("README.Rmd", "html_document")'
 
 build:
-	cd ..;\
-	R CMD build $(PKGSRC)
-
+	# cd ..;\
+	# R CMD build $(PKGSRC)
+	Rscript -e 'devtools::build()'
+	
 build2:
 	cd ..;\
 	R CMD build --no-build-vignettes $(PKGSRC)
@@ -27,9 +28,10 @@ install:
 	cd ..;\
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
 
-check: build
-	cd ..;\
-	Rscript -e 'rcmdcheck::rcmdcheck("$(PKGNAME)_$(PKGVERS).tar.gz")'
+check: #build
+	#cd ..;\
+	#Rscript -e 'rcmdcheck::rcmdcheck("$(PKGNAME)_$(PKGVERS).tar.gz")'
+	Rscript -e 'devtools::check()'
 
 check2: build
 	cd ..;\

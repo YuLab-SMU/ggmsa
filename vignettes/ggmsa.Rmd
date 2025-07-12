@@ -1,13 +1,13 @@
 ---
 title: "ggmsa-Getting Started"
-author: "Lang Zhou and GuangChuang Yu"
+author: "GuangChuang Yu and Lang Zhou"
 output:
-  BiocStyle::html_document:
-    self_contained: yes
+  prettydoc::html_pretty:
+    toc: false
+    theme: cayman
+    highlight: github
+  pdf_document:
     toc: true
-    toc_float: true
-    toc_depth: 3
-    code_folding: show
 date: "`r Sys.Date()`"
 bibliography: ggmsa.bib
 vignette: >
@@ -22,18 +22,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-CRANpkg <- function(pkg) {
-    cran <- "https://cran.r-project.org/package"
-    fmt <- "[%s](%s=%s)"
-    sprintf(fmt, pkg, cran, pkg)
-}
-
-Biocpkg <- function(pkg) {
-    sprintf("[%s](http://bioconductor.org/packages/%s)", pkg, pkg)
-}
 # Packages -------------------------------------------------------------------
 library(ggmsa)
 library(ggplot2)
+library(yulab.utils)
 ```
 
 
@@ -161,12 +153,12 @@ knitr::kable(y, align = "l", booktabs = TRUE, escape = TRUE) %>%
 
 Check out the guides for learning everything there is to know about all the different features:
 
-- [Getting Started](https://yulab-smu.github.io/ggmsa/articles/ggmsa.html)
-- [Annotations](https://yulab-smu.github.io/ggmsa/articles/Annotations.html)
-- [Color Schemes and Font Families](https://yulab-smu.github.io/ggmsa/articles/Color_schemes_And_Font_Families.html)
-- [Theme](https://yulab-smu.github.io/ggmsa/articles/guides/MSA_theme.html)
-- [Other Modules](https://yulab-smu.github.io/ggmsa/articles/Other_Modules.html)
-- [View Modes](https://yulab-smu.github.io/ggmsa/articles/View_modes.html)
+- [Getting Started](https://yulab-smu.top/ggmsa/articles/ggmsa.html)
+- [Annotations](https://yulab-smu.top/ggmsa/articles/Annotations.html)
+- [Color Schemes and Font Families](https://yulab-smu.top/ggmsa/articles/Color_schemes_And_Font_Families.html)
+- [Theme](https://yulab-smu.top/ggmsa/articles/guides/MSA_theme.html)
+- [Other Modules](https://yulab-smu.top/ggmsa/articles/Other_Modules.html)
+- [View Modes](https://yulab-smu.top/ggmsa/articles/View_modes.html)
 
 
 

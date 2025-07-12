@@ -1,4 +1,9 @@
+# ggmsa 1.13.2
+
++ replace `ggalt::geom_xspline()` with `ggfun::geom_xspline()` (2017-07-12, Sat)
+
 # ggmsa 1.3.3
+
 + calling `\dontrun{}` for examples on `ggmsa()`
 
 # ggmsa 1.3.2

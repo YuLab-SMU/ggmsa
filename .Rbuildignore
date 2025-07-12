@@ -8,3 +8,4 @@ README.Rmd
 ^docs$
 ^pkgdown$
 logo.png
+CONDUCT.md

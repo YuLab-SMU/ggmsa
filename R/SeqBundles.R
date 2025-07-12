@@ -2,7 +2,7 @@
 ##'
 ##'
 ##' @title ggSeqBundle
-##' @importFrom ggalt geom_xspline
+##' @importFrom ggfun geom_xspline
 ##' @param msa Multiple sequence alignment file(FASTA) or object for 
 ##' representing either nucleotide sequences or peptide sequences.Also receives
 ##'  multiple MSA files.
@@ -12,10 +12,9 @@
 ##' @param line_high The high of bundles at each site, default is 0.
 ##' @param spline_shape A numeric vector of values between -1 and 1, which 
 ##' control the shape of the spline relative to the control points.
-##' From geom_xspline() in ggalt package.
-##' @param size A numeric vector of values between o and 1, 
+##' @param size A numeric vector of values between 0 and 1, 
 ##' which control the size of each lines.
-##' @param alpha A numeric vector of values between o and 1, 
+##' @param alpha A numeric vector of values between 0 and 1, 
 ##' which control the alpha of each lines.
 ##' @param bundle_color The colors of each sequence bundles.
 ##' eg: bundle_color = c("#2ba0f5","#424242").
@@ -65,7 +64,7 @@ ggSeqBundle <- function(msa,
     mapping <- aes(x = position_adj, y = y_adj, 
                    fill = name, color = I(bundle_color))
     ggplot(data = dd, mapping = mapping) +
-        geom_xspline(spline_shape = spline_shape, size = size, alpha = alpha) +
+        geom_xspline(shape = spline_shape, linewidth = size, alpha = alpha) +
             theme_bundles(df = df, lev_molecule = lev_molecule)
 
 }
