@@ -6,7 +6,7 @@
 \usage{
 ggSeqBundle(
   msa,
-  line_widch = 0.3,
+  line_width = 0.3,
   line_thickness = 0.3,
   line_high = 0,
   spline_shape = 0.3,
@@ -23,7 +23,7 @@ representing either nucleotide sequences or peptide sequences.Also receives
  multiple MSA files.
  eg:msa = c("Gram-negative_AKL.fasta", "Gram-positive_AKL.fasta").}
 
-\item{line_widch}{The width of bundles at each site, default is 0.3.}
+\item{line_width}{The width of bundles at each site, default is 0.3.}
 
 \item{line_thickness}{The thickness of bundles at each site, default is 0.3.}
 

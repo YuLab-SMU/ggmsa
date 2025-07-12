@@ -7,7 +7,7 @@
 ##' representing either nucleotide sequences or peptide sequences.Also receives
 ##'  multiple MSA files.
 ##'  eg:msa = c("Gram-negative_AKL.fasta", "Gram-positive_AKL.fasta").
-##' @param line_widch The width of bundles at each site, default is 0.3.
+##' @param line_width The width of bundles at each site, default is 0.3.
 ##' @param line_thickness The thickness of bundles at each site, default is 0.3.
 ##' @param line_high The high of bundles at each site, default is 0.
 ##' @param spline_shape A numeric vector of values between -1 and 1, which 
@@ -30,7 +30,7 @@
 ##' ggSeqBundle(aln)
 ##' @author Lang Zhou
 ggSeqBundle <- function(msa,
-                        line_widch = 0.3,
+                        line_width = 0.3,
                         line_thickness = 0.3,
                         line_high = 0,
                         spline_shape = 0.3,
@@ -55,14 +55,14 @@ ggSeqBundle <- function(msa,
 
     dd <- adjustMSA(df_msa = df,
                     lev_molecule = lev_molecule,
-                    line_widch = line_widch,
+                    line_width = line_width,
                     line_thickness = line_thickness,
                     line_high = line_high,
                     bundle_color = bundle_color
                     )
 
     mapping <- aes(x = position_adj, y = y_adj, 
-                   fill = name, color = I(bundle_color))
+                   group=name, color = I(bundle_color))
     ggplot(data = dd, mapping = mapping) +
         geom_xspline(shape = spline_shape, linewidth = size, alpha = alpha) +
             theme_bundles(df = df, lev_molecule = lev_molecule)
@@ -71,13 +71,13 @@ ggSeqBundle <- function(msa,
 
 
 
-adjustMSA <- function(df_msa, lev_molecule, line_widch, 
+adjustMSA <- function(df_msa, lev_molecule, line_width, 
                       line_thickness, bundle_color, line_high) {
     data_scale <- lapply(nrow(df_msa) %>% seq_len(), function(i) {
         d <- df_msa[i,]
         d[2,] <-  d[1,]
-        d[1,"position_adj"] <- d[1,"position"] - line_widch
-        d[2,"position_adj"] <- d[2,"position"] + line_widch
+        d[1,"position_adj"] <- d[1,"position"] - line_width
+        d[2,"position_adj"] <- d[2,"position"] + line_width
         d
     }) %>% do.call("rbind",.)
 
@@ -122,8 +122,8 @@ theme_bundles <- function(df, lev_molecule){
         scale_y_continuous(breaks = break_y, 
                            labels = lev_molecule, 
                            minor_breaks = minor_y),
-        theme(panel.grid.minor.y = element_line(color = "#e8e0e0", size = 0.4),
-              axis.line.x = element_line(color = "gray60", size = 0.8),
+        theme(panel.grid.minor.y = element_line(color = "#e8e0e0", linewidth = 0.4),
+              axis.line.x = element_line(color = "gray60", linewidth = 0.8),
               panel.grid.major = element_blank(),
               axis.ticks.y = element_blank(),
               panel.background = element_blank())
