@@ -1,4 +1,4 @@
-# ggmsa 1.13.2
+# ggmsa 1.15.1
 
 + replace `ggalt::geom_xspline()` with `ggfun::geom_xspline()` (2017-07-12, Sat)
 
