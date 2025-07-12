@@ -64,9 +64,10 @@ release:
 
 update:
 	git fetch --all;\
-	git checkout master;\
-	git merge upstream/master;\
-	git merge origin/master
+	git checkout devel;\
+	git merge upstream/devel;\
+	git merge origin/devel;\
+
 
 push: 
 	git push upstream master;\
