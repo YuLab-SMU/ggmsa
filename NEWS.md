@@ -1,3 +1,7 @@
+# ggmsa 1.16.0
+
++ Bioconductor RELEASE_3_22 (2025-11-01, Sat)
+
 # ggmsa 1.15.1
 
 + replace `ggalt::geom_xspline()` with `ggfun::geom_xspline()` (2017-07-12, Sat)
