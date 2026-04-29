@@ -1,3 +1,7 @@
+# ggmsa 1.18.0
+
++ Bioconductor RELEASE_3_23 (2026-04-29, Wed)
+
 # ggmsa 1.16.0
 
 + Bioconductor RELEASE_3_22 (2025-11-01, Sat)
