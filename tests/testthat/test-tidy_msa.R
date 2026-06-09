@@ -15,7 +15,7 @@ test_that("tidy FASTA format by tidy_msa", {
 
 
 test_that("tidy Biostrings objects by tidy_msa", {
-    AAMultipleAlignment <- readAAMultipleAlignment(msa)
+    AAMultipleAlignment <- MultipleAlignment::readAAMultipleAlignment(msa)
     expect_s4_class(AAMultipleAlignment, "AAMultipleAlignment")
     
     AAStringSet <- readAAStringSet(msa)

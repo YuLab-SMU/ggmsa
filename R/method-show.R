@@ -9,8 +9,7 @@
 ##' @return message
 ##' @importFrom methods show
 ##' @exportMethod show
-##' @aliases SeqDiff-class
-##'   show,SeqDiff-method
+##' @aliases SeqDiff-class show,SeqDiff-method
 ##' @usage show(object)
 ##' @examples
 ##' fas <- list.files(system.file("extdata", "GVariation", package="ggmsa"),

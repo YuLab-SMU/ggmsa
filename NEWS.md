@@ -1,3 +1,8 @@
+# ggmsa 1.19.1
+
++ `readAAMultipleAlignment` moved to the `MultipleAlignment` package in Bioc 3.24; updated tests to use `MultipleAlignment::readAAMultipleAlignment()` and added `MultipleAlignment` to Suggests (2026-06-09, Tue)
++ Fixed S3 generic/method consistency warning: all `ggplot_add.*` methods now include `...` in their signature to match the `ggplot_add` generic (2026-06-09, Tue)
+
 # ggmsa 1.18.0
 
 + Bioconductor RELEASE_3_23 (2026-04-29, Wed)

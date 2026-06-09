@@ -63,7 +63,7 @@
 ##'
 ##'\dontrun{
 ##' #XMultipleAlignment objects can be used as input in the 'ggmsa'
-##' AAMultipleAlignment <- Biostrings::readAAMultipleAlignment(fasta)
+##' AAMultipleAlignment <- MultipleAlignment::readAAMultipleAlignment(fasta)
 ##' ggmsa(AAMultipleAlignment, 164, 213, color="Chemistry_AA")
 ##'
 ##' #XStringSet objects can be used as input in the 'ggmsa'

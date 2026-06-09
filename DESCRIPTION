@@ -1,6 +1,6 @@
 Package: ggmsa
 Title: Plot Multiple Sequence Alignment using 'ggplot2'
-Version: 1.19.0
+Version: 1.19.1
 Authors@R: c(person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre","ths"), comment = c(ORCID = "0000-0002-6485-8781")),
              person("Lang", "Zhou",      email = "nyzhoulang@gmail.com",    role = "aut"),
              person("Shuangbin", "Xu",   email = "xshuangbin@163.com",      role = "ctb"),
@@ -43,6 +43,7 @@ Suggests:
     gggenes,
     statebins,
     prettydoc,
+    MultipleAlignment,
     testthat (>= 3.0.0),
     yulab.utils
 License: Artistic-2.0
@@ -50,6 +51,6 @@ Encoding: UTF-8
 URL: https://doi.org/10.1093/bib/bbac222(paper), https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/ (book)
 BugReports: https://github.com/YuLab-SMU/ggmsa/issues
 biocViews: Software, Visualization, Alignment, Annotation, MultipleSequenceAlignment
-RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

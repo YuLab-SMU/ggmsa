@@ -1,6 +1,6 @@
 ##' @method ggplot_add seqlogo
 ##' @export
-ggplot_add.seqlogo <- function(object, plot, object_name) {
+ggplot_add.seqlogo <- function(object, plot, ...) {
     msaData <- plot$layers[[1]]$data
     logo_tidyData <- msa2tidy(msaData)
     logo_font <- object$font
@@ -17,12 +17,12 @@ ggplot_add.seqlogo <- function(object, plot, object_name) {
                          top = top, 
                          custom_color = logo_custom_color, 
                          show.legend = show.legend)
-    ggplot_add(ly_logo, plot, object_name)
+    ggplot_add(ly_logo, plot, ...)
 }
 
 ##' @method ggplot_add seed
 ##' @export
-ggplot_add.seed <- function(object, plot, object_name) {
+ggplot_add.seed <- function(object, plot, ...) {
     msaData <- plot$layers[[1]]$data
     seed_tidyData <- msa2tidy(msaData)
     seed <- object$seed
@@ -30,21 +30,21 @@ ggplot_add.seed <- function(object, plot, object_name) {
 
     ly <- geom_seed1(seed_tidyData, seed, star)
 
-    ggplot_add(ly, plot, object_name)
+    ggplot_add(ly, plot, ...)
 }
 
 
 
 ##' @method ggplot_add GCcontent
 ##' @export
-ggplot_add.GCcontent <- function(object, plot, object_name) {
+ggplot_add.GCcontent <- function(object, plot, ...) {
     msaData <- plot$layers[[1]]$data
     show.legend <- object$show.legend
     GC_tidyData <- msa2tidy(msaData)
 
     ly <- geom_GC1(GC_tidyData, show.legend = show.legend )
 
-    ggplot_add(ly, plot, object_name)
+    ggplot_add(ly, plot, ...)
 }
 
 
@@ -55,7 +55,7 @@ ggplot_add.GCcontent <- function(object, plot, object_name) {
 ##' @importFrom ggplot2 geom_blank
 ##' @method ggplot_add facet_msa
 ##' @export
-ggplot_add.facet_msa <- function(object, plot, object_name){
+ggplot_add.facet_msa <- function(object, plot, ...){
     msaData <- plot$layers[[1]]$data
     field <- object$field
     facetData <- facet_data(msaData, field)
@@ -100,7 +100,7 @@ ggplot_add.facet_msa <- function(object, plot, object_name){
 ##' @importFrom aplot insert_top
 ##' @importFrom ggplot2 coord_cartesian
 ##' @export
-ggplot_add.msaBar <- function(object, plot, object_name){
+ggplot_add.msaBar <- function(object, plot, ...){
     msaData <- plot$layers[[1]]$data
     bar_tidyData <- msa2tidy(msaData)
     ly <- ly_bar(bar_tidyData)
@@ -113,7 +113,7 @@ ggplot_add.msaBar <- function(object, plot, object_name){
 
 ##' @method ggplot_add nucleotideeHelix
 ##' @export
-ggplot_add.nucleotideeHelix <- function(object, plot, object_name){
+ggplot_add.nucleotideeHelix <- function(object, plot, ...){
     msa_data <- plot$layers[[1]]$data
     tidy_data <- msa2tidy(msa_data)
     seq_numbers <- levels(tidy_data$name) %>% length
@@ -130,5 +130,5 @@ ggplot_add.nucleotideeHelix <- function(object, plot, object_name){
     ly <- layer_helix(helix_data = helix_tidy, 
                       overlap = overlap, 
                       seq_numbers = seq_numbers)
-    ggplot_add(ly, plot, object_name)
+    ggplot_add(ly, plot, ...)
 }
