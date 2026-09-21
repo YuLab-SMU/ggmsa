@@ -18,7 +18,7 @@ geom_msaBar <- function() {
 ##' @importFrom ggplot2 geom_col
 ly_bar <- function(tidy){
     data <- bar_data(tidy)
-    mapping <- aes_(x = ~pos, y = ~Freq, fill = ~Freq)
+    mapping <- aes_(x = ~position, y = ~Freq, fill = ~Freq)
     ly_bar <- geom_col(data = data, 
                        mapping = mapping, 
                        width = 1, 
@@ -49,6 +49,6 @@ bar_data <- function(tidy){
             max_frequency <- max_frequency[1,]
         }
 }) %>% do.call("rbind", .)
-    conservation_score["pos"] <- character_position
+    conservation_score["position"] <- character_position
     return(conservation_score)
 }

@@ -20,10 +20,10 @@ facet_msa <- function(field) {
               )
 }
 
-facet_data <- function(msaData, field) {
+facet_data <- function(msaData, field, origin = min(msaData$position)) {
 
-    if(min(msaData$position) > 1){
-        pos_reset <- msaData$position - min(msaData$position)
+    if(origin > 1){
+        pos_reset <- msaData$position - origin
         pos_reset[pos_reset == 0] <- 1
     }else {
         pos_reset <- msaData$position

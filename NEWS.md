@@ -1,3 +1,13 @@
+# ggmsa 1.19.2
+
++ Fixed `custom_color`: the color column was fetched with partial `$` name matching, so a data frame carrying an extra column (e.g. `column`) silently dropped the `color` column; candidate names are now matched explicitly and an unsupported column raises a clear error. `consensus_views = TRUE` also forgot to pass `custom_color` to the color scheme, so custom colors were silently ignored. issues#21 issues#54 issues#69 (2026-09-21, Mon)
++ Fixed the missing fill legend: `geom_msa()` mapped `fill = ~I(color)`, which prevented `scale_fill_manual` from training any level, so `show.legend = TRUE` produced nothing. It now maps `fill = ~color`; tile colors are unchanged. issues#68 (2026-09-21, Mon)
++ `position_highlight` no longer crops the alignment data. Highlighted columns are drawn as a separate `geom_tile` layer instead of being squeezed into the main layers, so `facet_msa()`, `geom_seqlogo()`, `geom_seed()`, `geom_GC()` and `geom_msaBar()` added afterwards still see the full alignment. issues#75 issues#76 (2026-09-21, Mon)
++ `facet_msa()` now iterates over all layers and facets each one with a shared origin, rather than assuming the alignment always lives in `layers[[1]]` and `layers[[2]]`. issues#75 issues#76 (2026-09-21, Mon)
++ Background tiles and highlight boxes are deduplicated per alignment cell, so each cell is drawn once instead of once per glyph vertex. A 3600-cell alignment drops from 392277 to 7260 `<path>` objects in SVG output, which is what made Illustrator crawl; rendered ink is unchanged. issues#74 (2026-09-21, Mon)
++ `geom_msaBar()` is composable again: it used to hand back an `<aplot>` object, which ggplot2 4.x has no `+` method for, so every later `+` either errored (`facet_msa()`) or silently returned `NULL` (`theme*()`, `labs()`, scales, further layers). It now returns a patchwork, and `geom_msaBar()` and `facet_msa()` work in either order — the conservation bar is split with the same `field`, so its columns stay aligned with the tiles. issues#49 issues#72 (2026-09-21, Mon)
++ Behavior changes from the above: the plot built by `geom_msaBar()` has class `patchwork` instead of `aplot`, its bar data column `pos` is renamed `position`, and `patchwork` is added to Imports (2026-09-21, Mon)
+
 # ggmsa 1.19.1
 
 + `readAAMultipleAlignment` moved to the `MultipleAlignment` package in Bioc 3.24; updated tests to use `MultipleAlignment::readAAMultipleAlignment()` and added `MultipleAlignment` to Suggests (2026-06-09, Tue)

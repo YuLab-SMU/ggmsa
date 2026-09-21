@@ -10,10 +10,7 @@
 ##' @noRd
 color_scheme <- function(y, color = "Chemistry_AA", custom_color = NULL) {
     if (!is.null(custom_color)){
-        #Elimination factor interference
-        custom_color[["names"]] <- as.character(custom_color[["names"]]) 
-        #Fuzzy matching the string "colors" or "colours"
-        custom_color[["color"]] <- as.character(custom_color$col)
+        custom_color <- normalize_custom_color(custom_color)
         row.names(custom_color) <- custom_color[["names"]]
         scheme_AA$custom_color <- 
             custom_color[row.names(scheme_AA), "color"] %>% as.character()
@@ -29,3 +26,27 @@ color_scheme <- function(y, color = "Chemistry_AA", custom_color = NULL) {
 }
 
 
+##' `$` partial matching used to resolve the color column, so a table like
+##' `data.frame(names, color, column)` returned NULL and dropped the column.
+##' Candidate spellings are now matched exactly, longest first.
+##'
+##' @noRd
+normalize_custom_color <- function(custom_color) {
+    if (!is.data.frame(custom_color)) {
+        stop("`custom_color` must be a data frame.", call. = FALSE)
+    }
+
+    color_col <- intersect(c("colors", "colours", "color", "colour", "col"),
+                           colnames(custom_color))
+
+    if (!"names" %in% colnames(custom_color) || length(color_col) == 0) {
+        stop("`custom_color` must have a `names` column and a `color` column.",
+             call. = FALSE)
+    }
+
+    data.frame(
+        names = as.character(custom_color[["names"]]),
+        color = as.character(custom_color[[color_col[1]]]),
+        stringsAsFactors = FALSE
+    )
+}

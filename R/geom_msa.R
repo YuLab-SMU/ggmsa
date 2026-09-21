@@ -102,11 +102,11 @@ geom_msa <- function(data, font = "helvetical",
                                          labels = labs)
 
 
-    bg_data <- data
+    bg_data <- tile_granularity(data)
 
     #work to ggtreeExtra
     if (is.null(mapping)) {
-        mapping <- aes_(x = ~position, y = ~name, fill = ~I(color))
+        mapping <- aes_(x = ~position, y = ~name, fill = ~color)
     }
     
     #dms color work
@@ -126,33 +126,38 @@ geom_msa <- function(data, font = "helvetical",
         }
     }
 
-    #'position_highlight' work
-    if (!is.null(position_highlight)) {
-        none_bg = TRUE
-        bg_data <- bg_data[bg_data$position %in% position_highlight,]
-        bg_data$postion <- as.factor(bg_data$position)
-        mapping <- modifyList(mapping, aes_(x = ~position, 
-                                            fill = ~color, 
-                                            width = 1))
-    }
+    bg_border <- if (is.null(border)) "grey" else border
+    ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = bg_border,
+                       inherit.aes = FALSE, position = position,
+                       show.legend = show.legend)
 
-    #'border' work
-    if(is.null(border)){
-        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = 'grey', 
-                           inherit.aes = FALSE, position = position, 
-                           show.legend = show.legend)
-    }else{
-        ly_bg <- geom_tile(mapping = mapping, data = bg_data, color = border,
-                           inherit.aes = FALSE, position = position, 
-                           show.legend = show.legend)
+    #'position_highlight' work. The boxes are a separate layer: the alignment
+    #'data handed to other layers (geom_msaBar, facet_msa, geom_seqlogo, ...)
+    #'must keep every position, see #75 and #76.
+    ly_hl <- NULL
+    if (!is.null(position_highlight)) {
+        none_bg <- TRUE
+        ly_hl <- geom_tile(
+            mapping = modifyList(mapping, aes_(width = 1)),
+            data = bg_data[bg_data$position %in% position_highlight, ],
+            color = bg_border, inherit.aes = FALSE, position = position,
+            show.legend = show.legend)
     }
+    ## the boxes belong behind the glyphs
+    hl <- if (is.null(ly_hl)) list() else list(ly_hl)
+    src <- list(msa_source(data))
 
     if (!all(c("yy", "order", "group") %in% colnames(data))) {
-        if(position_color) {
-            return(list(ly_bg))
-        }else{
-            return(list(ly_bg, sacle_tile_cols))
+        ## font = NULL: nothing else spans the alignment, so an empty layer keeps
+        ## the axis honest while only the highlighted columns get painted.
+        layers <- if (is.null(ly_hl)) {
+            list(ly_bg)
+        } else {
+            c(list(geom_blank(aes_(x = ~position, y = ~name), bg_data,
+                              inherit.aes = FALSE)), hl)
         }
+        return(c(layers,
+                 if (position_color) list() else list(sacle_tile_cols), src))
     }
 
     if ('y' %in% colnames(data)) {
@@ -172,19 +177,20 @@ geom_msa <- function(data, font = "helvetical",
                              inherit.aes = FALSE, position = position)
 
     #'none_bg' work
-    if (none_bg & is.null(position_highlight)) {
-        return(ly_label)
+    if (none_bg && is.null(position_highlight)) {
+        return(c(list(ly_label), src))
     }
 
-    if(consensus_views) {
-        return(list(ly_bg, ly_label))
-    }else {
-        if(position_color){
-            return(list(ly_bg, ly_label))
-        }else{
-            return(list(ly_bg, ly_label, sacle_tile_cols))
-        }
+    if (consensus_views || position_color) {
+        tile_cols <- list()
+    } else {
+        tile_cols <- list(sacle_tile_cols)
     }
+
+    if (none_bg) {
+        return(c(hl, list(ly_label), tile_cols, src))
+    }
+    return(c(list(ly_bg, ly_label), hl, tile_cols, src))
 
 }
 
