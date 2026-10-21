@@ -13,7 +13,7 @@
 ##' @param sub logical value. Displaying a subset of ancestral sequences or not.
 ##' @param panel panel name for plot of MSA data
 ##' @param font font families, possible values are 'helvetical', 'mono', and 
-##' 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. 
+##' 'DroidSansMono', 'TimesNewRoman', 'AlleleMono'.  Defaults is 'helvetical'. 
 ##' If font = NULL, only plot the background tile.
 ##' @param color a Color scheme. One of 'Clustal', 'Chemistry_AA', 
 ##' 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 
