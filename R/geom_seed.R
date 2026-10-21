@@ -51,12 +51,12 @@ geom_seed1 <- function(tidyData, seed, star) {
                             star_y = rep(y, times = nchar(seed)))
 
     if(isTRUE(star)) {
-        ly_star <- geom_asterisk(data = starData, 
-                                 aes_(x = ~star_x, y = ~star_y))
+        ly_star <- geom_asterisk(data = starData,
+                                 aes(x = star_x, y = star_y))
         return(ly_star)
     }
 
-    mapping <- aes_(x= ~x, y= ~y, group= ~t, fill = ~I('#bebebe'))
+    mapping <- aes(x = x, y = y, group = t, fill = I('#bebebe'))
     ly_seed <- geom_polygon(data = shadingData, 
                             mapping = mapping, 
                             alpha = shading_alpha)

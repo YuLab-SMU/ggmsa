@@ -87,24 +87,24 @@ order_aln <- function(tidy_df, ref) {
 }
 
 ##' @importFrom utils getFromNamespace
-##' @importFrom ggplot2 aes_
+##' @importFrom ggplot2 aes
 ##' @importFrom ggplot2 geom_text
 maf_plot <- function(d, ref, 
                      positive_color = "#a9c9d4",
                      negative_color = "#ffa389") {
   geom_rrect <- getFromNamespace("geom_rrect","statebins")
   ##plot down panel
-  p_maf_aln <- ggplot(data = d) + 
-    geom_rrect(mapping=aes_(xmin =~ ref_start,
-                            xmax =~ ref_end,
-                            ymin =~ y - 0.3,
-                            ymax =~ y + 0.3,
-                            fill =~ strand)) +
+  p_maf_aln <- ggplot(data = d) +
+    geom_rrect(mapping = aes(xmin = ref_start,
+                             xmax = ref_end,
+                             ymin = y - 0.3,
+                             ymax = y + 0.3,
+                             fill = strand)) +
     geom_rrect(data = d,
-               mapping=aes_(xmin =~ ref_start,
-                            xmax =~ ref_end,
-                            ymin =~ max(y) + 1 - 0.3,
-                            ymax =~ max(y) + 1 + 0.3),
+               mapping = aes(xmin = ref_start,
+                             xmax = ref_end,
+                             ymin = max(y) + 1 - 0.3,
+                             ymax = max(y) + 1 + 0.3),
                fill = "#a9c9d4",color = "black") +
     scale_y_continuous(breaks = c(d$y,max(d$y + 1)),labels = c(d$bs, ref)) +
     scale_fill_manual(breaks = c("+","-"),
@@ -117,12 +117,12 @@ maf_plot <- function(d, ref,
   
   ##plot upon panel
   aim <- d[d$src != ref, ]
-  p_maf_genomePos <- ggplot(data = aim) + 
-    geom_rrect(mapping = aes_(xmin =~ start,
-                              xmax =~ end_gap,
-                              ymin =~ merge_y - 0.3,
-                              ymax =~ merge_y + 0.3,
-                              fill =~ strand),
+  p_maf_genomePos <- ggplot(data = aim) +
+    geom_rrect(mapping = aes(xmin = start,
+                             xmax = end_gap,
+                             ymin = merge_y - 0.3,
+                             ymax = merge_y + 0.3,
+                             fill = strand),
                color = "black", 
                size = 0.5, 
                alpha = 0.8, 
@@ -135,8 +135,8 @@ maf_plot <- function(d, ref,
                          axis.text.x = element_text(),
                          axis.text.y = element_text(),
                          strip.text = element_blank()) + 
-    geom_text(aes_(x =~ (start + end_gap)/2, 
-                   y =~ merge_y,label =~ label), 
+    geom_text(aes(x = (start + end_gap)/2,
+                  y = merge_y, label = label),
               size = 3) +
     facet_wrap(~src, scales = "free", ncol = 1)
   return(list(p_maf_genomePos, p_maf_aln))

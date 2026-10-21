@@ -70,7 +70,7 @@ treeMSA_plot <- function(p_tree,
 ##' @param sub logical value.
 ##' @param seq_colname the colname of MSA on tree$data
 ##' @importFrom ggtree geom_tiplab
-##' @importFrom ggplot2 aes_
+##' @importFrom ggplot2 aes
 ##' @importFrom utils getFromNamespace
 ##' @return tree
 ##' @export
@@ -103,7 +103,7 @@ adjust_ally <- function(tree, node, sub = FALSE, seq_colname = "mol_seq") {
   
   tree$data$node_color <- "black"
   tree$data[tree$data$node %in% ancestor_n,"node_color"] <- "red"
-  tree <- tree + geom_tiplab(aes_(color = ~I(node_color)),offset = 0.002)
+  tree <- tree + geom_tiplab(aes(color = I(node_color)), offset = 0.002)
   return(tree)
 }
 

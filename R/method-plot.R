@@ -57,7 +57,7 @@ setMethod("plot", signature(x="SeqDiff"),
 
 
 ##' @importFrom ggplot2 ggplot
-##' @importFrom ggplot2 aes_
+##' @importFrom ggplot2 aes
 ##' @importFrom ggplot2 geom_segment
 ##' @importFrom ggplot2 xlab
 ##' @importFrom ggplot2 ylab
@@ -77,9 +77,9 @@ plot_difference <- function(x, colors, xlab="Nucleotide Position") {
                 which will be ignored in current implementation...")
     }
     x <- x[!is.na(x$y),]
-    p <- ggplot(x, aes_(x=~position, y=~y, color=~difference))
+    p <- ggplot(x, aes(x = position, y = y, color = difference))
 
-    p + geom_segment(aes_(x=~position, xend=~position, y=~y, yend=~y+.8)) +
+    p + geom_segment(aes(x = position, xend = position, y = y, yend = y + .8)) +
         xlab(xlab) + ylab(NULL) +
         scale_y_continuous(breaks=yy, labels=names(yy)) +
         theme_minimal() +
@@ -101,7 +101,7 @@ plot_difference_count <- function(x, width, by = 'bar', fill='red') {
         keep0 <- TRUE
     }
     d <- nucleotide_difference_count(x, width, keep0)
-    p <- ggplot(d, aes_(x=~position, y=~count))
+    p <- ggplot(d, aes(x = position, y = count))
     p + geom + xlab(NULL) + ylab("Difference") + theme_bw()
 }
 

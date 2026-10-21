@@ -133,20 +133,20 @@ colorBy_value <- function(helix_data){
 
 ##' @importFrom ggforce geom_arc
 layer_helix <- function(helix_data, overlap = FALSE, seq_numbers = 0){
-    mapping_above <- aes_(x0 = ~x0, 
-                          y0 = ~(seq_numbers + 0.5), 
-                          r = ~r, start = ~1.5*pi, 
-                          end = ~2.5*pi)
-    mapping_below <- aes_(x0 = ~x0, 
-                          y0 = ~(-0.5), 
-                          r = ~r, start = ~pi/2, 
-                          end = ~1.5*pi)
+    mapping_above <- aes(x0 = x0,
+                         y0 = seq_numbers + 0.5,
+                         r = r, start = 1.5 * pi,
+                         end = 2.5 * pi)
+    mapping_below <- aes(x0 = x0,
+                         y0 = -0.5,
+                         r = r, start = pi / 2,
+                         end = 1.5 * pi)
     if(seq_numbers > 0) {
-        mapping_below <- modifyList(mapping_below, aes_(y0 = ~0))
+        mapping_below$y0 <- quote(0)
     }
     if(is.list(helix_data) & "col" %in% names(helix_data[[2]])) {
-        mapping_above <- modifyList(mapping_above, aes_(color = ~I(col)))
-        mapping_below <- modifyList(mapping_below, aes_(color = ~I(col)))
+        mapping_above$colour <- quote(I(col))
+        mapping_below$colour <- quote(I(col))
       }
 
     if(overlap) {
@@ -186,8 +186,7 @@ layer_helix <- function(helix_data, overlap = FALSE, seq_numbers = 0){
     }else {#overlap = FALSE
         if(is.list(helix_data) & length(helix_data) == 2) {
             if(!"col" %in% names(helix_data[["known"]])) {
-                mapping_below <- modifyList(mapping_below, 
-                                            aes_(color = I("#8fce5e")))
+                mapping_below$colour <- quote(I("#8fce5e"))
             }
             ly_up <- geom_arc(data = helix_data[["known"]], 
                               mapping = mapping_below)
@@ -197,8 +196,7 @@ layer_helix <- function(helix_data, overlap = FALSE, seq_numbers = 0){
 
         }else if(is.data.frame(helix_data)){
             if("col" %in% names(helix_data)){
-                mapping_above <- modifyList(mapping_above, 
-                                            aes_(color = ~I(col)))
+                mapping_above$colour <- quote(I(col))
             }
             ly_arc <- geom_arc(data = helix_data, mapping = mapping_above)
             return(ly_arc)
