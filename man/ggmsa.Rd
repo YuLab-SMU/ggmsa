@@ -34,7 +34,7 @@ nucleotide sequences or AA sequences.}
 \item{end}{a numeric vector. End position to plot.}
 
 \item{font}{font families, possible values are 'helvetical', 'mono', and 
-'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. 
+'DroidSansMono', 'TimesNewRoman', 'AlleleMono'.  Defaults is 'helvetical'. 
 If font = NULL, only plot the background tile.}
 
 \item{color}{a Color scheme. One of 'Clustal', 'Chemistry_AA', 

@@ -24,7 +24,7 @@ either nucleotide sequences or peptide sequences.}
 \item{end}{End position to plot.}
 
 \item{font}{font families, possible values are 'helvetical', 'mono', and 
-'DroidSansMono', 'TimesNewRoman'.  Defaults is 'DroidSansMono'. 
+'DroidSansMono', 'TimesNewRoman', 'AlleleMono'.  Defaults is 'DroidSansMono'. 
 If font=NULL, only the background tiles is drawn.}
 
 \item{color}{A Color scheme. One of 'Clustal', 'Chemistry_AA', 

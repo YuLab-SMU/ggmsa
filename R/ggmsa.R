@@ -8,7 +8,7 @@
 ##' @param start a numeric vector. Start position to plot.
 ##' @param end a numeric vector. End position to plot.
 ##' @param font font families, possible values are 'helvetical', 'mono', and 
-##' 'DroidSansMono', 'TimesNewRoman'.  Defaults is 'helvetical'. 
+##' 'DroidSansMono', 'TimesNewRoman', 'AlleleMono'.  Defaults is 'helvetical'. 
 ##' If font = NULL, only plot the background tile.
 ##' @param color a Color scheme. One of 'Clustal', 'Chemistry_AA', 
 ##' 'Shapely_AA', 'Zappo_AA', 'Taylor_AA', 'LETTER', 'CN6', 'Chemistry_NT', 
