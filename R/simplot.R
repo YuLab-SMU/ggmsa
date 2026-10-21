@@ -18,14 +18,12 @@
 ##' (default: smooth_params = list(method = "loess", se = FALSE))
 ##' @return ggplot object
 ##' @importFrom Biostrings readDNAStringSet
-##' @importFrom ggplot2 aes_
+##' @importFrom ggplot2 aes
 ##' @importFrom ggplot2 geom_line
 ##' @importFrom ggplot2 ggtitle
 ##' @importFrom ggplot2 geom_ribbon
 ##' @importFrom ggplot2 geom_smooth
 ##' @importFrom magrittr %<>%
-##' @importFrom dplyr group_by_
-##' @importFrom dplyr summarize_
 ##' @export
 ##' @author guangchuang yu
 ##' @examples
@@ -70,31 +68,34 @@ simplot <- function(file,
     }) %>% do.call(rbind, .)
 
     if (group) {
-        res %<>% group_by_(~position, ~group) %>%
-            summarize_(msim=~mean(similarity), sd=~sd(similarity))
+        res <- aggregate(similarity ~ position + group, data = res,
+                         FUN = function(x) c(msim = mean(x), sd = sd(x)))
+        res$msim <- res$similarity[, "msim"]
+        res$sd <- res$similarity[, "sd"]
+        res$similarity <- NULL
     }
 
 
     if (group) {
-        p <- ggplot(res, aes_(x=~position, y=~msim, group=~group))
-        if (sd) p <- p + geom_ribbon(aes_(ymin=~msim-sd, 
-                                          ymax=~msim+sd, 
-                                          fill=~group), alpha=.25)
+        p <- ggplot(res, aes(x = position, y = msim, group = group))
+        if (sd) p <- p + geom_ribbon(aes(ymin = msim - sd,
+                                         ymax = msim + sd,
+                                         fill = group), alpha=.25)
         if (smooth) {
-            smooth_layer <- do.call(geom_smooth, 
+            smooth_layer <- do.call(geom_smooth,
                                     smooth_params)
             p <- p + smooth_layer
         } else {
-            p <- p + geom_line(aes_(color=~group))
+            p <- p + geom_line(aes(color = group))
         }
-        
-        
+
+
     } else {
-        mapping = aes_(x=~position, 
-                       y=~similarity,
-                       group=~sequence, 
-                       color=~sequence)
-        p <- ggplot(res, mapping = mapping) 
+        mapping = aes(x = position,
+                      y = similarity,
+                      group = sequence,
+                      color = sequence)
+        p <- ggplot(res, mapping = mapping)
         
         if (smooth) {
             smooth_layer <- do.call(geom_smooth, 

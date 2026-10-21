@@ -171,7 +171,7 @@ ggplot_add.facet_msa <- function(object, plot, ...){
                             facet = max_facet)
         plot +
             facet_wrap(.~facet, ncol = 1, scales = "free_x") +
-            geom_blank(aes_(x = ~x), dummy, inherit.aes = FALSE) +
+            geom_blank(aes(x = x), dummy, inherit.aes = FALSE) +
             scale_x_continuous(expand = c(0,0), 
                                breaks = xl_scale, 
                                labels = xl_scale) +

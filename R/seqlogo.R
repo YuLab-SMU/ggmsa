@@ -84,17 +84,17 @@ geom_seqlogo <- function(font = "DroidSansMono", color = "Chemistry_AA",
 
 
 geom_logo <- function(data, font = "DroidSansMono", color = "Chemistry_AA",
-                      adaptive = FALSE, top = TRUE, custom_color = NULL, 
+                      adaptive = FALSE, top = TRUE, custom_color = NULL,
                       show.legend = FALSE, ...) {
-    mapping  <- aes_(x = ~logo_x, 
-                     y = ~logo_y,  
-                     group = ~group, 
-                     fill = ~I(color))
-    logo_data <- seqlogo_data(data, font = font, color = color, 
-                              adaptive = adaptive, top = top, 
+    mapping  <- aes(x = logo_x,
+                    y = logo_y,
+                    group = group,
+                    fill = I(color))
+    logo_data <- seqlogo_data(data, font = font, color = color,
+                              adaptive = adaptive, top = top,
                               custom_color = custom_color)
 
-    ly_logo <- geom_polygon(mapping = mapping, data = logo_data, 
+    ly_logo <- geom_polygon(mapping = mapping, data = logo_data,
                             inherit.aes = FALSE, show.legend = show.legend)
     return(ly_logo)
 }
@@ -118,7 +118,7 @@ seqlogo_data <- function(data, font = "DroidSansMono",
     }
 
     #total_heigh <- getOption("total_heigh")
-    logo_width <- getOption("logo_width")
+    logo_width <- getOption("logo_width", 0.9)
     ## assign the start postion to the first label
     col_num <- as.numeric(levels(factor(tidy$position))) 
     moti_da <- lapply(col_num, function(j){

@@ -8,9 +8,10 @@
 ##' @export
 ##' @author Lang Zhou
 available_fonts <- function(){
+    font <- names(font_fam)
     message("font families currently available:" )
-    font <- paste(names(font_fam), collapse = ' ')
-    message(font, "\n")
+    message(paste(font, collapse = ' '), "\n")
+    invisible(font)
 }
 
 ##' This function lists color schemes currently available that
@@ -23,13 +24,16 @@ available_fonts <- function(){
 ##' @export
 ##' @author Lang Zhou
 available_colors <- function(){
+    color_nt <- names(scheme_NT)
+    color_aa <- c("Clustal", names(scheme_AA))
+
     message("1.color schemes for nucleotide sequences currently available:")
-    color_nt <- paste(names(scheme_NT), collapse = ' ')
-    message(color_nt, "\n")
-    
+    message(paste(color_nt, collapse = ' '), "\n")
+
     message("2.color schemes for AA sequences currently available:")
-    color_aa <- paste(names(scheme_AA), collapse = ' ')
-    message("Clustal", color_aa, "\n")
+    message(paste(color_aa, collapse = ' '), "\n")
+
+    invisible(c(color_nt, color_aa))
 }
 
 ##' This function lists MSA objects currently available that
@@ -42,18 +46,19 @@ available_colors <- function(){
 ##' @export
 ##' @author Lang Zhou
 available_msa <- function(){
+    files <- ".fasta"
+    xstring <- supported_msa_class[!grepl("bin", supported_msa_class)]
+    bin <- supported_msa_class[grepl("bin", supported_msa_class)]
+
     message("1.files currently available:")
-    message(".fasta",'\n')
+    message(files, '\n')
 
     message("2.XStringSet objects from 'Biostrings' package:")
-    mes <- paste(supported_msa_class[!grepl("bin", supported_msa_class)],
-                 collapse = ' ')
-    message(mes, '\n')
+    message(paste(xstring, collapse = ' '), '\n')
 
     message("3.bin objects:")
-    mes_bin <- paste(supported_msa_class[grepl("bin", supported_msa_class)],
-                     collapse = ' ')
-    message(mes_bin, '\n')
+    message(paste(bin, collapse = ' '), '\n')
 
+    invisible(c(files, xstring, bin))
 }
 

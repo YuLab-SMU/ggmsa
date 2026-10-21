@@ -9,7 +9,7 @@ test_that("check whether `ggmsa` create a `ggplot` object", {
                font = NULL)
     
     
-    expect_true(is.ggplot(p))
+    expect_true(is_ggplot(p))
 })
 
 

@@ -104,17 +104,31 @@ geom_msa <- function(data, font = "helvetical",
 
     bg_data <- tile_granularity(data)
 
+    if (consensus_views && show.legend) {
+        stop("legends catn't be shown in the consensus view!")
+    }
+
+    tile_cols <- if (dms) {
+        list(scale_fill_gradientn(colours = colorRampPalette(brewer.pal(n = 9,
+                                                                        name = "Blues")[c(4:7)])(100),
+                                  na.value = "grey90"))
+    } else if (consensus_views || position_color) {
+        list()
+    } else {
+        list(sacle_tile_cols)
+    }
+
     #work to ggtreeExtra
     if (is.null(mapping)) {
-        mapping <- aes_(x = ~position, y = ~name, fill = ~color)
+        mapping <- aes(x = position, y = name, fill = color)
     }
-    
+
     #dms color work
     if (dms) {
-        mapping <- modifyList(mapping, aes_(fill = ~bind_avg))
+        mapping$fill <- quote(bind_avg)
     }
     if (position_color) {
-        mapping <- modifyList(mapping, aes_(fill = ~I(pos_color)))
+        mapping$fill <- quote(I(pos_color))
     }
     
     
@@ -122,7 +136,7 @@ geom_msa <- function(data, font = "helvetical",
     if (!isTRUE(seq_name)) {
         if ('y' %in% colnames(data) || isFALSE(seq_name) ) {
             y <- as.numeric(bg_data$name)
-            mapping <- modifyList(mapping, aes_(y = ~y)) #"~y" is seq numbers
+            mapping$y <- quote(y) # "y" is seq numbers
         }
     }
 
@@ -137,8 +151,10 @@ geom_msa <- function(data, font = "helvetical",
     ly_hl <- NULL
     if (!is.null(position_highlight)) {
         none_bg <- TRUE
+        hl_mapping <- mapping
+        hl_mapping$width <- quote(1)
         ly_hl <- geom_tile(
-            mapping = modifyList(mapping, aes_(width = 1)),
+            mapping = hl_mapping,
             data = bg_data[bg_data$position %in% position_highlight, ],
             color = bg_border, inherit.aes = FALSE, position = position,
             show.legend = show.legend)
@@ -153,25 +169,21 @@ geom_msa <- function(data, font = "helvetical",
         layers <- if (is.null(ly_hl)) {
             list(ly_bg)
         } else {
-            c(list(geom_blank(aes_(x = ~position, y = ~name), bg_data,
+            c(list(geom_blank(aes(x = position, y = name), bg_data,
                               inherit.aes = FALSE)), hl)
         }
-        return(c(layers,
-                 if (position_color) list() else list(sacle_tile_cols), src))
+        return(c(layers, tile_cols, src))
     }
 
     if ('y' %in% colnames(data)) {
         data$yy = data$yy - as.numeric(data$name) + data$y
     }
 
-    label_mapping <- aes_(x = ~x, y = ~yy, group = ~group)
+    label_mapping <- aes(x = x, y = yy, group = group)
 
     # use_dot work
     if (consensus_views && !use_dot) {
-        if(show.legend) {
-            stop("legends catn't be shown in the consensus view!")
-        }
-        label_mapping <- modifyList(label_mapping, aes_(fill = ~I(font_color)))
+        label_mapping$fill <- quote(I(font_color))
     }
     ly_label <- geom_polygon(mapping = label_mapping, data = data, 
                              inherit.aes = FALSE, position = position)
@@ -179,12 +191,6 @@ geom_msa <- function(data, font = "helvetical",
     #'none_bg' work
     if (none_bg && is.null(position_highlight)) {
         return(c(list(ly_label), src))
-    }
-
-    if (consensus_views || position_color) {
-        tile_cols <- list()
-    } else {
-        tile_cols <- list(sacle_tile_cols)
     }
 
     if (none_bg) {
