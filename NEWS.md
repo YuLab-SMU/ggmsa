@@ -1,5 +1,6 @@
 # ggmsa 1.19.2
 
++ `seqlogo()`, `geom_seqlogo()`, `geom_seed()` and `geom_GC()` no longer error when ggmsa is loaded but not attached, e.g. when called as `ggmsa::seqlogo()` from another package. Options set before `library(ggmsa)` are now kept. issues#78 (2026-10-24, Sat)
 + added a monospaced font `AlleleMono` (`font = "AlleleMono"`), designed for reading DNA, RNA and protein sequences: easily confused letters such as C/G, H/M/N/W, D/Q and O/0 are drawn apart. The glyph polygons are generated from the Allele Mono font (SIL Open Font License 1.1, https://github.com/aistanbulresearch/allele-mono) (2026-10-21, Wed)
 + Fixed `custom_color`: the color column was fetched with partial `$` name matching, so a data frame carrying an extra column (e.g. `column`) silently dropped the `color` column; candidate names are now matched explicitly and an unsupported column raises a clear error. `consensus_views = TRUE` also forgot to pass `custom_color` to the color scheme, so custom colors were silently ignored. issues#21 issues#54 issues#69 (2026-09-21, Mon)
 + Fixed the missing fill legend: `geom_msa()` mapped `fill = ~I(color)`, which prevented `scale_fill_manual` from training any level, so `show.legend = TRUE` produced nothing. It now maps `fill = ~color`; tile colors are unchanged. issues#68 (2026-09-21, Mon)

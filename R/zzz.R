@@ -1,12 +1,16 @@
+.onLoad <- function(libname, pkgname){
+    #options(total_heigh = 4)
+    op <- list(logo_width = 0.9,
+               asterisk_width = .03,
+               GC_pos = 2,
+               shadingLen = .5,
+               shading_alpha = .3)
+    toset <- !(names(op) %in% names(options()))
+    if (any(toset)) options(op[toset])
+}
+
 #' @importFrom utils packageDescription
 .onAttach <- function(libname, pkgname){
-    #options(total_heigh = 4)
-    options(logo_width = 0.9)
-    options(asterisk_width = .03)
-    options(GC_pos = 2)
-    options(shadingLen = .5)
-    options(shading_alpha = .3)
-    
     pkgVersion <- packageDescription(pkgname, fields="Version")
     msg <- paste0(pkgname, " v", pkgVersion, "  ",
                   "Document: http://yulab-smu.top/ggmsa/", "\n\n")
