@@ -41,93 +41,111 @@ export(treeMSA_plot)
 exportMethods(plot)
 exportMethods(show)
 importClassesFrom(Biostrings,BStringSet)
-importFrom(Biostrings,AAStringSet)
-importFrom(Biostrings,DNAStringSet)
-importFrom(Biostrings,RNAStringSet)
-importFrom(Biostrings,readBStringSet)
-importFrom(Biostrings,readDNAStringSet)
-importFrom(Biostrings,toString)
-importFrom(Biostrings,width)
-importFrom(R4RNA,as.helix)
-importFrom(R4RNA,collapseHelix)
-importFrom(R4RNA,expandHelix)
-importFrom(R4RNA,readBpseq)
-importFrom(R4RNA,readConnect)
-importFrom(R4RNA,readHelix)
-importFrom(R4RNA,readVienna)
+importFrom(Biostrings,
+  AAStringSet,
+  DNAStringSet,
+  RNAStringSet,
+  readBStringSet,
+  readDNAStringSet,
+  toString,
+  width
+)
+importFrom(R4RNA,
+  as.helix,
+  collapseHelix,
+  expandHelix,
+  readBpseq,
+  readConnect,
+  readHelix,
+  readVienna
+)
 importFrom(RColorBrewer,brewer.pal)
-importFrom(aplot,as.patchwork)
-importFrom(aplot,insert_top)
-importFrom(aplot,plot_list)
-importFrom(dplyr,group_by)
-importFrom(dplyr,group_by_)
-importFrom(dplyr,n)
-importFrom(dplyr,select)
-importFrom(dplyr,summarize)
-importFrom(dplyr,summarize_)
+importFrom(aplot,
+  as.patchwork,
+  insert_top,
+  plot_list
+)
+importFrom(dplyr,
+  group_by,
+  n,
+  select,
+  summarize
+)
 importFrom(ggforce,geom_arc)
 importFrom(ggfun,geom_xspline)
-importFrom(ggplot2,Geom)
-importFrom(ggplot2,aes)
-importFrom(ggplot2,aes_)
-importFrom(ggplot2,coord_cartesian)
-importFrom(ggplot2,coord_fixed)
-importFrom(ggplot2,draw_key_polygon)
-importFrom(ggplot2,element_blank)
-importFrom(ggplot2,element_line)
-importFrom(ggplot2,element_text)
-importFrom(ggplot2,facet_wrap)
-importFrom(ggplot2,geom_area)
-importFrom(ggplot2,geom_blank)
-importFrom(ggplot2,geom_col)
-importFrom(ggplot2,geom_line)
-importFrom(ggplot2,geom_point)
-importFrom(ggplot2,geom_polygon)
-importFrom(ggplot2,geom_ribbon)
-importFrom(ggplot2,geom_segment)
-importFrom(ggplot2,geom_smooth)
-importFrom(ggplot2,geom_text)
-importFrom(ggplot2,geom_tile)
-importFrom(ggplot2,ggplot)
-importFrom(ggplot2,ggplot_add)
-importFrom(ggplot2,ggplot_build)
-importFrom(ggplot2,ggplot_gtable)
-importFrom(ggplot2,ggproto)
-importFrom(ggplot2,ggtitle)
-importFrom(ggplot2,labs)
-importFrom(ggplot2,layer)
-importFrom(ggplot2,scale_color_manual)
-importFrom(ggplot2,scale_fill_gradientn)
-importFrom(ggplot2,scale_fill_manual)
-importFrom(ggplot2,scale_x_continuous)
-importFrom(ggplot2,scale_y_continuous)
-importFrom(ggplot2,theme)
-importFrom(ggplot2,theme_bw)
-importFrom(ggplot2,theme_minimal)
-importFrom(ggplot2,theme_void)
-importFrom(ggplot2,xlab)
-importFrom(ggplot2,xlim)
-importFrom(ggplot2,ylab)
-importFrom(ggtree,geom_facet)
-importFrom(ggtree,geom_tiplab)
+importFrom(ggplot2,
+  Geom,
+  aes,
+  aes_,
+  coord_cartesian,
+  coord_fixed,
+  draw_key_polygon,
+  element_blank,
+  element_line,
+  element_text,
+  facet_wrap,
+  geom_area,
+  geom_blank,
+  geom_col,
+  geom_line,
+  geom_point,
+  geom_polygon,
+  geom_ribbon,
+  geom_segment,
+  geom_smooth,
+  geom_text,
+  geom_tile,
+  ggplot,
+  ggplot_add,
+  ggplot_build,
+  ggplot_gtable,
+  ggproto,
+  ggtitle,
+  labs,
+  layer,
+  scale_color_manual,
+  scale_fill_gradientn,
+  scale_fill_manual,
+  scale_x_continuous,
+  scale_y_continuous,
+  theme,
+  theme_bw,
+  theme_minimal,
+  theme_void,
+  xlab,
+  xlim,
+  ylab
+)
+importFrom(ggtree,
+  geom_facet,
+  geom_tiplab
+)
 importFrom(grDevices,colorRampPalette)
-importFrom(grid,arrow)
-importFrom(grid,gTree)
-importFrom(grid,gpar)
-importFrom(grid,polygonGrob)
-importFrom(grid,unit)
-importFrom(grid,unit.pmax)
-importFrom(magrittr,"%<>%")
-importFrom(magrittr,"%>%")
-importFrom(methods,missingArg)
-importFrom(methods,new)
-importFrom(methods,show)
+importFrom(grid,
+  arrow,
+  gTree,
+  gpar,
+  polygonGrob,
+  unit,
+  unit.pmax
+)
+importFrom(magrittr,
+  "%<>%",
+  "%>%"
+)
+importFrom(methods,
+  missingArg,
+  new,
+  show
+)
 importFrom(patchwork,wrap_plots)
 importFrom(seqmagick,fa_read)
 importFrom(stats,setNames)
 importFrom(tidyr,gather)
-importFrom(utils,getFromNamespace)
-importFrom(utils,globalVariables)
-importFrom(utils,modifyList)
-importFrom(utils,packageDescription)
-importFrom(utils,read.delim)
+importFrom(utils,
+  getFromNamespace,
+  globalVariables,
+  modifyList,
+  packageDescription,
+  read.delim
+)

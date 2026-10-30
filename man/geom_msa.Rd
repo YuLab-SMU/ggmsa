@@ -107,7 +107,8 @@ ggplot() + geom_msa(data = tidy_aln, font = NULL) + coord_fixed()
 \author{
 Guangchuang Yu, Lang Zhou
 seq_name' work
-position_highlight' work
-border' work
+position_highlight' work. The boxes are a separate layer: the alignment
+data handed to other layers (geom_msaBar, facet_msa, geom_seqlogo, ...)
+must keep every position, see #75 and #76.
 none_bg' work
 }
