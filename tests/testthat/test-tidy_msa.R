@@ -15,6 +15,9 @@ test_that("tidy FASTA format by tidy_msa", {
 
 
 test_that("tidy Biostrings objects by tidy_msa", {
+    skip_if_not(requireNamespace("MultipleAlignment", quietly = TRUE),
+                "MultipleAlignment is not installed")
+
     AAMultipleAlignment <- MultipleAlignment::readAAMultipleAlignment(msa)
     expect_s4_class(AAMultipleAlignment, "AAMultipleAlignment")
     

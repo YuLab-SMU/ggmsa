@@ -12,6 +12,21 @@ test_that("gghelix keeps a fixed coordinate system", {
 })
 
 
+test_that("geom_helix works on font = NULL ggmsa plots", {
+    ss_path <- system.file("extdata", "Rfam", "RF03120_SS.txt",
+                           package = "ggmsa")
+    fas_path <- system.file("extdata", "Rfam", "RF03120.fasta",
+                            package = "ggmsa")
+    ss <- readSSfile(ss_path, type = "Vienna")
+
+    p <- ggmsa(fas_path, font = NULL, border = NA,
+               color = "Chemistry_NT", seq_name = FALSE) +
+        geom_helix(ss)
+
+    expect_s3_class(ggplot_build(p), "ggplot_built")
+})
+
+
 test_that("geom_seed works in both shading and star modes", {
     msa <- system.file("extdata", "seedSample.fa", package = "ggmsa")
     shading <- ggmsa(msa, font = "DroidSansMono", color = "Chemistry_NT") +

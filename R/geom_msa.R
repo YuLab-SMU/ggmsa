@@ -135,7 +135,7 @@ geom_msa <- function(data, font = "helvetical",
     #'seq_name' work
     if (!isTRUE(seq_name)) {
         if ('y' %in% colnames(data) || isFALSE(seq_name) ) {
-            y <- as.numeric(bg_data$name)
+            bg_data$y <- as.numeric(bg_data$name)
             mapping$y <- quote(y) # "y" is seq numbers
         }
     }

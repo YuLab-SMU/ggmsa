@@ -86,7 +86,7 @@ readSSfile <- function(file, type = NULL) {
                         Vienna = readVienna(file),
                         Bpseq = expandHelix(file))
 
-    data <- collapseHelix(load_data)
+    data <- suppressWarnings(collapseHelix(load_data))
     return(data)
 
 }
@@ -235,8 +235,8 @@ theme_helix <- function(){
     list(theme_void(),
          scale_y_continuous(breaks = 0),
          coord_fixed(),
-         theme(panel.grid.major.y = element_line(size = 1, arrow = arrow(length = unit(0.3, 'cm'))),
-               panel.grid.major.x = element_line(color = "#eaeaea", size = 0.4),
+         theme(panel.grid.major.y = element_line(linewidth = 1, arrow = arrow(length = unit(0.3, 'cm'))),
+               panel.grid.major.x = element_line(color = "#eaeaea", linewidth = 0.4),
                axis.text.x = element_text())
          )
   }

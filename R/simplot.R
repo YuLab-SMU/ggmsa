@@ -68,7 +68,7 @@ simplot <- function(file,
     }) %>% do.call(rbind, .)
 
     if (group) {
-        res <- aggregate(similarity ~ position + group, data = res,
+        res <- stats::aggregate(similarity ~ position + group, data = res,
                          FUN = function(x) c(msim = mean(x), sd = sd(x)))
         res$msim <- res$similarity[, "msim"]
         res$sd <- res$similarity[, "sd"]

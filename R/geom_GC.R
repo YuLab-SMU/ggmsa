@@ -57,7 +57,10 @@ content_GC<- function(data){
     char_num <- do.call(rbind,lchar_num)
     char_num <- as.data.frame(char_num)
     char_num["ypos"] =  seq_num
-    char_num2 <- gather(char_num,character,fre, "A", "T", "C","G","GC")
+    char_num2 <- tidyr::pivot_longer(char_num,
+                                     cols = c("A", "T", "C", "G", "GC"),
+                                     names_to = "character",
+                                     values_to = "fre")
     return(char_num2)
 }
 

@@ -220,9 +220,10 @@ tidy_msa <- function(msa, start = NULL, end = NULL) {
     }else{
       stop("Sequences must have unique names")
     }
-    cn = colnames(alndf)
-    cn <- cn[!cn %in% "name"]
-    df <- gather(alndf, "position", "character", cn)
+    df <- tidyr::pivot_longer(alndf,
+                              cols = !dplyr::all_of("name"),
+                              names_to = "position",
+                              values_to = "character")
 
     y <- df
     y$position = as.numeric(sub("V", "", y$position))
