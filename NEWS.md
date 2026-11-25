@@ -1,3 +1,7 @@
+# ggmsa 1.20.0
+
++ Bioconductor RELEASE_3_24 (2026-11-25, Wed)
+
 # ggmsa 1.19.2
 
 + `AlleleMono` glyphs updated to Allele Mono 1.100: thinner horizontal strokes, overshoot on round letters, tapered diagonal vertices and optical centring in the cell. The character set and the `glyph_polygon` format are unchanged (2026-10-30, Fri)
